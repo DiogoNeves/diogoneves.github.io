@@ -18,7 +18,7 @@ with a newborn daughter!).
 
 ### Work
 
-* (currently) Developing the next gen of Music applications @
+* *(currently)* Developing the next gen of Music applications @
 [Muesly](http://muesly.com/)
 
 * Fitting bits in small places @ [Icomera](http://www.icomera.com/)
