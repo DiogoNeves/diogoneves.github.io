@@ -10,7 +10,7 @@ Diogo (see :point_up:) is a **Software Engineer @ Muesly**.
 He has helped improving **communications on public transport**, worked on
 (BAFTA award winning) **Little Big Planet PSP, Killzone Mercenary** and
 tried to dominate the world twice.  
-He is working on the **next generation of Music applications**.  
+He is currently working on the **next generation of Music applications**.  
 
 Diogo spends much of his free time with **wife and daughter** in happy Cambridge.  
 (Mostly talking about themselves in the third person, which is impressive
