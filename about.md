@@ -34,10 +34,12 @@ with a newborn daughter!).
 
 ### Curiosities
 
-* Won a BAFTA as part of the Little Big Planet Team
+* Thinking how to extend the [Human Capacity](http://en.wikipedia.org/wiki/Capacity_development#Defining_Capacity_Development)
+with technological solutions
+* Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html)
 * Can't burp
 * Speaks English and Portuguese
-* Loves busy cities
+* Loves busy [cities](http://en.wikipedia.org/wiki/London)
 * Doesn't like bullet point lists
 
 ### Contact me
