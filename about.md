@@ -19,28 +19,40 @@ with a newborn daughter!).
 ### Work
 
 * *(currently)* Developing the next gen of Music applications @
-[Muesly](http://muesly.com/)
+[Muesly](http://muesly.com/){:target="_blank"}
 
-* Fitting bits in small places @ [Icomera](http://www.icomera.com/)
+* Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
 * Developing Games, Concepts and Tools @
-[Guerrilla Cambridge](http://www.worldwidestudios.net/cambridge)
+[Guerrilla Cambridge](http://www.worldwidestudios.net/cambridge){:target="_blank"}
 (ex Sony Cambridge)
-* Developing Facebook applications @ [Wildbunny](http://wildbunny.co.uk/)
+* Developing Facebook applications @ [Wildbunny](http://wildbunny.co.uk/){:target="_blank"}
 (Founder)
 * Smashing bits, developing more games and general crazy person
-@ [Vortix Games Studios](http://blog.vortixgames.com/) (Founder)
+@ [Vortix Games Studios](http://blog.vortixgames.com/){:target="_blank"} (Founder)
 * Researching Motion Capture data formats for artistic body motion @
-[INESC-ID](http://www.inesc-id.pt/)
+[INESC-ID](http://www.inesc-id.pt/){:target="_blank"}  
+
+-----
 
 ### Curiosities
 
-* Interested in extending the [Human Capacity](http://en.wikipedia.org/wiki/Capacity_development#Defining_Capacity_Development)
+* Interested in extending the [Human Capacity](http://en.wikipedia.org/wiki/Capacity_development#Defining_Capacity_Development){:target="_blank"}
 with technological solutions
-* Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html)
+* Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
 * Can't burp
 * Speaks English and Portuguese
-* Loves busy [cities](http://en.wikipedia.org/wiki/London)
+* Loves busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
 * Doesn't like bullet point lists
+
+### My Current Stack
+
+* Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"}) 
+* Python
+* Octave
+* Some C++11
+* Books & Udacity
+
+-----
 
 ### Contact me
 
