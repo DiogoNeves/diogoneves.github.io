@@ -47,6 +47,7 @@ with technological solutions
 ### My Current Stack
 
 * Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"}) 
+* Git
 * Python
 * Octave
 * Some C++11
