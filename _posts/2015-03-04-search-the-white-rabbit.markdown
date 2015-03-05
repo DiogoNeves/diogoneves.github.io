@@ -7,6 +7,8 @@ date: "2015-03-04"
 
 “*Trinity: Follow the white rabbit… Knock, knock, Neo*.” [0]
 
+<iframe src="https://trinket.io/embed/python/f6ab9f296a" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
 That’s all good and well, but what’s the path? What are the actions you must
 take to find the White Rabbit?
 
