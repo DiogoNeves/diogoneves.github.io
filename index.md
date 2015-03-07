@@ -43,12 +43,10 @@ with technological solutions
 
 ### My Current Stack
 
-* Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"})
-* Git
-* Python
-* Octave
-* Some C++11
-* Books & Udacity
+* Atom, PyCharm, Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"}), Git
+* Python 2.7 (Yes, I want to upgrade...)
+* Books, Udacity & EdX
+* Other stuff not worth mentioning here
 
 -----
 
