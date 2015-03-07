@@ -1,7 +1,6 @@
 ---
 layout: page
 title: About
-permalink: /about/
 ---
 
 
@@ -9,17 +8,17 @@ Diogo (see :point_up:) is a **Software Engineer @ Muesly**.
 
 He has helped improving **communications on public transport**, worked on
 (BAFTA award winning) **Little Big Planet PSP, Killzone Mercenary** and
-tried to dominate the world twice.  
-He is currently working on the **next generation of Music applications**.  
+tried to dominate the world twice.
+He is currently working on the **next generation of Music applications**.
 
-Diogo spends much of his free time with **wife and daughter** in happy Cambridge.  
+Diogo spends much of his free time with **wife and daughter** in happy Cambridge.
 (Mostly talking about themselves in the third person, which is impressive
-with a newborn daughter!).  
+with a newborn daughter!).
 
 ### Work
 
 * *(currently)* Developing the next gen of Music applications @
-[Muesly](http://muesly.com/){:target="_blank"}
+[Lost](http://lostmusic.london/){:target="_blank"}
 
 * Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
 * Developing Games, Concepts and Tools @
@@ -30,7 +29,7 @@ with a newborn daughter!).
 * Smashing bits, developing more games and general crazy person
 @ [Vortix Games Studios](http://blog.vortixgames.com/){:target="_blank"} (Founder)
 * Researching Motion Capture data formats for artistic body motion @
-[INESC-ID](http://www.inesc-id.pt/){:target="_blank"}  
+[INESC-ID](http://www.inesc-id.pt/){:target="_blank"}
 
 -----
 
@@ -46,7 +45,7 @@ with technological solutions
 
 ### My Current Stack
 
-* Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"}) 
+* Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"})
 * Git
 * Python
 * Octave
@@ -57,6 +56,6 @@ with technological solutions
 
 ### Contact me
 
-[{{site.footer-links.email}}](mailto:{{site.footer-links.email}})  
+[{{site.footer-links.email}}](mailto:{{site.footer-links.email}})
 or find me on some local
 [meetup](http://www.meetup.com/members/11995734/){:target="_blank"}
