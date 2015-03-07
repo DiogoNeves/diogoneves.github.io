@@ -1,8 +1,6 @@
 ---
 layout: page
-title: About
 ---
-
 
 Diogo (see :point_up:) is a **Software Engineer @ Muesly**.
 
