@@ -2,7 +2,7 @@
 layout: page
 ---
 
-Diogo (see :point_up:) is a **Software Engineer @ Muesly**.
+Diogo (see :point_up:) is a **Software Engineer @ LOST**.
 
 He has helped improving **communications on public transport**, worked on
 (BAFTA award winning) **Little Big Planet PSP, Killzone Mercenary** and
@@ -16,7 +16,7 @@ with a newborn daughter!).
 ### Work
 
 * *(currently)* Developing the next gen of Music applications @
-[Lost](http://lostmusic.london/){:target="_blank"}
+[LOST](http://lostmusic.london/){:target="_blank"}
 
 * Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
 * Developing Games, Concepts and Tools @
