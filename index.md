@@ -55,5 +55,5 @@ with technological solutions
 ### Contact me
 
 [{{site.footer-links.email}}](mailto:{{site.footer-links.email}})
-or find me on some local
+or find me at some local
 [meetup](http://www.meetup.com/members/11995734/){:target="_blank"}
