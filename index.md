@@ -43,9 +43,11 @@ with technological solutions
 
 ### My Current Stack
 
-* Atom, PyCharm, Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"}), Git
-* Python 2.7 (Yes, I want to upgrade...)
-* Books, Udacity & EdX
+* Atom, PyCharm, Android Studio,
+ Vim ([my config](https://github.com/DiogoNeves/vim_config){:target="_blank"}), Git
+* Python 2.7 (Yes, I want to upgrade...)  
+* Java (on Android)  
+* [Books](https://www.goodreads.com/DiogoSnows), Udacity, EdX, Coursera  
 * Other stuff not worth mentioning here
 
 -----
