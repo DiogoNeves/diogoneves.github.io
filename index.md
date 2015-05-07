@@ -38,7 +38,7 @@ with technological solutions
 * Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
 * Can't burp
 * Speaks English and Portuguese
-* Loves busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
+* Loves to visit busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
 * Doesn't like bullet point lists
 
 ### My Current Stack
