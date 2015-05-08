@@ -51,6 +51,7 @@ baseurl: ""
 
 markdown: kramdown
 highlighter: pygments
+extensions: [fenced_code_blocks]
 # permalink: /:title/
 permalink: pretty
 
