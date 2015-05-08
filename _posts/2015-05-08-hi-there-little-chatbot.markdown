@@ -8,14 +8,14 @@ tags:
 - experiments
 ---
 
-Is this the first post on my new website? WOW it is :thumbsup:.  
-
 ### Summary:
 * Voice input and NLP service **Wit.ai**  
 * Simple conversation mechanics  
 * Chatbot on Android with RiveScript  
 
 ---
+
+Is this the first post on my new website? WOW it is :thumbsup:.  
 
 Last week I started exploring the different voice and language interfaces and
 decided to hack something.  
