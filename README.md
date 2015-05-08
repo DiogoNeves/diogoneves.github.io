@@ -1,5 +1,5 @@
 # Diogo Neves personal page
 
-# Kudos
+### Kudos
 
 * Tag support: http://charliepark.org/tags-in-jekyll/
