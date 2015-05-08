@@ -14,6 +14,7 @@ tags:
 * Chatbot on Android with RiveScript  
 
 ---
+_(This is part of a series of reports on my random experiments)_  
 
 Is this the first post on my new website? WOW it is :thumbsup:.  
 
