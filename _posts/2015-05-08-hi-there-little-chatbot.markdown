@@ -243,8 +243,8 @@ to execute based on the current conversation state.
 I hope any information on this page is of any help to anyone...  
 
 To be honest, my goal here really was to start writing and stop just talking
-about it. I recognise this one is very bland... but better ones will come
-:smile:.
+about it. I recognise this one is very bland and directionless... but better
+ones will come :smile:.
 
 Have a great day!  
 
