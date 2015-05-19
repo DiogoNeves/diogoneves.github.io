@@ -11,7 +11,8 @@ He is currently working on the **next generation of Music applications**.
 
 Diogo spends much of his free time with **wife and daughter** in happy Cambridge.
 (Mostly talking about themselves in the third person, which is impressive
-with a newborn daughter!).
+with a newborn daughter!), reading and learning more about Computer Science and
+Artificial Intelligence.
 
 ### Work
 
