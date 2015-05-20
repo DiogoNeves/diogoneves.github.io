@@ -26,7 +26,7 @@ I've set a simple goal: _"Create an Android application that accepts voice
 inputs from the user, about the weather and time, and can ask for any missing
 information needed to come up with the answer."_  
 
-Some googling took me to [Wit.ai](https://wit.ai/). What a great service!  
+Some googling took me to [Wit.ai](https://wit.ai/){:target="_blank"}. What a great service!  
 I'll let you see for yourself (the website explains it better than I could), but
 this meant the language and voice input of the problem was, partially, solved.  
 
@@ -153,7 +153,7 @@ flexibility you get from it, but I need to explore the conversation side of it.
 I'm now replacing the conversations with a standard chatbot implementation.  
 After some research I ended up more confused than not. There are more chat
 scripts, markup languages, etc. than I could image. In the end I chose to give
-[RiveScript](http://www.rivescript.com/) a trial.  
+[RiveScript](http://www.rivescript.com/){:target="_blank"} a trial.  
 
 I couldn't find any Android implementation, but there was a Java one (yes!).  
 (To help future developers, I submitted an already accepted pull request to
