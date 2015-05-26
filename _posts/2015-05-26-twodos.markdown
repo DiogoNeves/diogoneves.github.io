@@ -1,0 +1,158 @@
+---
+layout: post
+title: "Two-dos"
+date: "2015-05-26"
+tags:
+- productivity
+---
+
+I used to waste hours each week looking for the perfect productivity tool, to
+organise my day and life in general<sup>*</sup>. I used quite a few different
+task management tools, plain text, nothing, pen & paper, bla bla bla... and I
+would always go back to my disorganised, unproductive self.  
+&nbsp;  
+
+<blockquote>
+Progress happens when you get your hands dirty everyday
+</blockquote>
+
+Yes, I know, "I'm the problem" - you say - "the tools are just a quick fix, a
+distraction." - and I cannot disagree with you, but I can't agree either. That
+is a misnomer, that right there is a source of frustration, it implies
+something's broken and may be hard to fix and definitely can't be replaced.  
+I've finally fixed the problem (I hope), I've been consistent for longer than ever!
+(more than a year, but who's counting anyway?).  
+&nbsp;  
+Why do I agree with you? Because it wasn't a problem with the tools, to be honest,
+whatever frees me to type without interruptions and doesn't lose data
+in a stupid sync bug or a house fire, is great enough.  
+&nbsp;  
+Why don't I agree with you? Because it wasn't me either, not in the same sense your
+observation seemed to suggest.  
+&nbsp;  
+&nbsp;  
+
+## The Realisation
+
+It was a problem of observation! You read all this productivity porn and is easy
+to get carried away and believe there are right tools, right mindsets, right
+whatever-elses and wrong ones... It is true, there are groups of good and bad
+practices, but it's hardly well defined, not guarateed and rarely the subject of
+the assertive blog posts out there, the "10 things you must do with your life",
+"You must be a Zen master to be busier" (what?), all those contradictory
+self-indulging tutorials on how to **be like this successful type** that usually
+start or end (but certainly include) **"be yourself"**.  
+"What do I mean with observation?" Simple, observe yourself over time and
+experiment new things.  
+&nbsp;  
+There's this latent message that you need to do X to fix Y and as soon as you do
+X, results show overnight. That's misleading to say the least.  
+&nbsp;  
+
+<blockquote>
+Don't aim to fail, that's just an excuse for sloppiness
+</blockquote>
+&nbsp;  
+
+My realisation was simple, it is the process! It is the person you turn into when
+you join the quest for self-improvement, not the short-term victories, but the
+pleasure of observation of one-self (in a selfless way, note!), of looking inwards
+for the "machine" within the machine and turn the different knobs you find.  
+You don't need to change yourself in big ways, although that may naturally
+happen overtime, but you turn these knobs which slightly change your behaviour and
+observe which ones work and which ones don't (and why if you can).  
+
+Then it is important to realise, the "machine" has a life of it's own and the
+knobs will keep turning by themselves. You have to keep observing, sometimes your
+reality, your environment changed and you need to experiment a bit more, some
+other times your knobs just went into this crazy configuration, you need to
+experiment too! Yes, experimentation! You try, you fail, you try again!  
+
+**Don't aim to fail**, that's just an excuse for sloppiness, just **don't get
+too anxious when it happens**. It's a feedback loop which you want to be positive.  
+Sometimes you get it wrong, you know you're going to keep trying, and that's it.  
+&nbsp;  
+&nbsp;  
+The World out there keeps telling you there is a solution, and you
+keep getting frustrated you seem to be the only one of the people you care about
+that is missing the point!  
+
+Blog posts are a great source of ideas (and so are books, movies, people...),
+but that's about it. You truly are the only requirement to enter this
+self-improvement adventure! I'm not suggesting you do it alone, I'm just pointing out
+the final answers are between your ears (or the sockets if you lost them in a
+nasty accident), but to unlock them you have to listen to you and others.  
+&nbsp;  
+&nbsp;  
+
+---  
+
+## Some Tips on Organisation <small>(or lack of it)</small>
+
+And just so you don't come out of this rant saying "yah right, what about some
+practical tips then, some ideas, is this it?", here are three which helped me greatly:  
+&nbsp;  
+
+1. Some things are better left disorganised. Not everything is well defined. You
+can create a process that triggers creativity, but once it starts bearing some
+fruits, it's hard to have a process to harvest them, each case is different and
+you must be ready for it. Don't be strict, just harvest what you can, keep your
+eyes opened.  
+&nbsp;  
+&nbsp;  
+1. and that plugs nicely into this point. There are things you **must remember**
+which you don't care or don't want to see and there are those things you **don't
+want to forget** which you care a lot and aren't always visible. You need two
+separate systems<sup>†</sup>.  
+&nbsp;  
+The common tasks are usually in the first category, for this you need a simple
+tasklist with remainders, something you can forget about but you know it'll come
+up at the right moment, and this is important to be a guarantee!  
+&nbsp;  
+Then you have your ideas, your developments, your projects.
+Those are more disorganised in nature and I usually leave them in
+[Evernote](https://evernote.com/){:target="_blank"}. There's a generic _idea dumper_ note and _project
+notebooks_. _Project notebooks_ is where I drop everything I can about a... project.
+They also include a *next steps* note to keep track
+of where I left it and what I was thinking about when that happened
+(not a strict task list, just a lighthouse for future guidance).  
+&nbsp;  
+The things I really care about I just have to make sure they're easily searchable
+or visible (in shortcuts), but by the nature of caring about it, you'll get back
+there often, no need for reminders or to-dos (other than the occasional something
+you must remember, nothing's black & white).  
+&nbsp;  
+&nbsp;  
+1. Observe everyday and turn the knobs as soon as you notice something fishy.
+When you're not turning knobs you are **doing the stuff you care about**, but
+do not stress when you don't achieve much by the end of the day. I heard somewhere
+_"it is not what you do 10% of the time, it is what you do 90% of the time that
+matters"_, just try as hard as you can, but not harder.  
+&nbsp;  
+&nbsp;  
+
+## So, what's this all about?
+
+The main point is, you **do not want** to look at the _must-dos_ when you're
+working on the _interesting stuff_! It'll get confusing, busy and you'll stop
+looking at the things you care about. In the end you have to remember you're only
+organising yourself so you can achieve more of what you want, it is just a tool.  
+
+Progress happens when you get your hands dirty everyday, and keep observing
+and nudging yourself into the right direction, but **keep moving** or your muscles
+will atrophy!  
+&nbsp;  
+&nbsp;  
+As for tools, like you said, which ones you use isn't that important if you know
+what you have to do. Keep changing if that's what it takes to keep the spark on!  
+&nbsp;  
+&nbsp;  
+
+I guess this is enough for today... I'd love to hear what knobs you've been
+tweaking lately (is it me or this sounds weird?), leave some comments below.  
+
+<p>
+<small>* yes, that is a form of procrastination which I've stopped
+doing since.</small><br/>
+<small>† hence the post name.</small>  
+</p>

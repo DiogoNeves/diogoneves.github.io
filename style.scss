@@ -53,14 +53,17 @@ h1 {
 
 h2 {
   font-size: 26px;
+  font-style: italic;
 }
 
 h3 {
   font-size: 22px;
+  font-style: italic;
 }
 
 h4 {
   font-size: 20px;
+  font-style: italic;
   color: $gray;
 }
 
@@ -261,11 +264,12 @@ nav {
 .post {
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $gray;
+    // border-left: 2px solid $gray;
     padding: 0.1em 1em;
     color: $gray;
     font-size: 22px;
     font-style: italic;
+    text-align: right;
   }
 
   .comments {
