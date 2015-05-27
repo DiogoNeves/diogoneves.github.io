@@ -8,4 +8,4 @@ tags:
 
 [Published on Medium](https://medium.com/@diogosnows/3-ways-to-keep-yourself-productively-disorganised-589c7d1104a){:target="_blank"}
 
-I hope you enjoy the irony of the title :)  
+I hope you enjoy the irony of the title :smile:  
