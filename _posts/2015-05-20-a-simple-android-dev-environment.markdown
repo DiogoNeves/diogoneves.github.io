@@ -14,11 +14,11 @@ you're starting your Android Development quest.
 * Emulator - [Genymotion](https://www.genymotion.com/#!/){:target="_blank"}
 * Versioning - [GitHub](https://github.com/){:target="_blank"}
 * A Brain - [Motivation](http://en.wikipedia.org/wiki/Motivation){:target="_blank"}
+* UI Mockups & Prototyping - [Proto.io](https://proto.io/){:target="_blank"}
 
 
 What isn't here but I'd appreciate suggestions:  
 
-* Continuous Testing on multiple distributions
-* UI Mockups & Prototyping
+* Continuous Testing on multiple distributions  
 
 _Note: I may edit this post with more tools whenever I find them_  
