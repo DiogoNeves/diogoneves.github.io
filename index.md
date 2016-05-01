@@ -10,10 +10,11 @@ From improving **communications on public transport** to the _BAFTA award winnin
 
 Diogo spends much of his free time with **wife and daughter** enjoying life.
 
-### I want to know more about
+### Excited about
 
-AI, VR, AR, Life Experience Design, Functional Programming  
-How to give everyone more control over their lives, with the aid of technology
+:point_right: AI, VR, AR, Life Experience Design, Functional Programming  
+:point_right: How to give everyone more control over and enjoy their lives, with
+the aid of technology
 
 ### Work
 
