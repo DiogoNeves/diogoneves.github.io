@@ -15,11 +15,12 @@
 
 html {
   font-size: 100%;
+  font-weight: 400;
 }
 
 body {
 	background: $white;
-  font: 20px/1.5 $helvetica;
+  font: 20px/1.5 $bodyFont;
   color: $darkGray;
 }
 
@@ -31,9 +32,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $helveticaNeue;
+  font-family: $headerFont;
   color: $darkerGray;
-  font-weight: bold;
+  font-weight: 700;
 
   line-height: 1.9;
   margin: 1em 0 15px;
@@ -204,7 +205,7 @@ img {
   margin: 0;
   color: $darkGray;
   cursor: pointer;
-  font-family: $helveticaNeue;
+  font-family: $headerFont;
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
@@ -223,7 +224,7 @@ img {
 nav {
   float: right;
   margin-top: 23px; // @TODO: Vertically middle align
-  font-family: $helveticaNeue;
+  font-family: $headerFont;
   font-size: 18px;
 
   @include mobile {
