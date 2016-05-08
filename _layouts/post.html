@@ -17,11 +17,16 @@ layout: default
 
   <div class="tag_list">
     <p>
+      Tags:
       {% for tag in page.tags %}
         <a class="tag_list_link" href="/tag/{{ tag }}">{{ tag }}</a>;
       {% endfor %}
     </p>
   </div>
-
-  {% include disqus.html disqus_identifier=page.disqus_identifier %}
 </article>
+
+<hr />
+
+<comments>
+  {% include disqus.html disqus_identifier=page.disqus_identifier %}
+</comments>
