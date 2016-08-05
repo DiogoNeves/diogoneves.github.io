@@ -12,7 +12,7 @@ Diogo spends much of his free time with **wife and daughter** enjoying life.
 
 ### Excited about
 
-:point_right: AI, VR, AR, Life Experience Design, Empowering Communities  
+:point_right: AI, VR, AR, Life Experience Design  
 :point_right: Online (and other informal types of) Education  
 :point_right: How to give people more control over and enjoy their lives, with
 the aid of technology  
