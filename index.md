@@ -8,7 +8,7 @@ He is at his best when learning new subjects and has worked on varied applicatio
 From improving **communications on public transport** to the _BAFTA award winning_
 **Little Big Planet PSP** and later **Killzone Mercenary**.
 
-Diogo spends much of his free time with **wife and daughter** enjoying life.
+Diogo spends much of his free time with his **lovely family**, enjoying life.
 
 ### Excited about
 
