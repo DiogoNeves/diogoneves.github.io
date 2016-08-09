@@ -5,7 +5,7 @@ layout: page
 Diogo (see :point_up:) is a **Software Engineer @ LOST**.
 
 He is at his best when learning new subjects and has worked on varied applications.
-From improving **communications on public transport** to the _BAFTA award winning_
+From improving **communications on public transport** to the _BAFTA award-winning_
 **Little Big Planet PSP** and later **Killzone Mercenary**.
 
 Diogo spends much of his free time with his **lovely family**, enjoying life.
