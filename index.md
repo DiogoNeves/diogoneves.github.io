@@ -14,8 +14,7 @@ Diogo spends much of his free time with his **lovely family**, enjoying life.
 
 :point_right: AI, VR, AR, Life Experience Design  
 :point_right: Online (and other informal types of) Education  
-:point_right: Helping people stay in control of and enjoy their lives, with
-the aid of technology  
+:point_right: Helping people live better and achieve more, with the aid of technology  
 
 ### Work
 
