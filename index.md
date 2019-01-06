@@ -2,23 +2,23 @@
 layout: page
 ---
 
-Diogo (see :point_up:) is a **Software Engineer @ LOST**.
+Diogo (see :point_up:) is a **Software Engineer @ Apple**.
 
 He is at his best when learning new subjects and has worked on varied applications.
-From improving **communications on public transport** to the _BAFTA award-winning_
+From working on Siri to the _BAFTA award-winning_
 **Little Big Planet PSP** and later **Killzone Mercenary**.
 
 Diogo spends much of his free time with his **lovely family**, enjoying life.
 
 ### Excited about
 
-:point_right: AI, VR, AR, Life Experience Design  
+:point_right: GameDev, AI, VR, AR, Life Experience Design  
 :point_right: Online (and other informal types of) Education  
-:point_right: Helping people live better and achieve more, with the aid of technology  
 
 ### Work
 
-* *(currently)* Developing a new way to Discover Music @
+* *(currently)* Working on awesome stuff @ [Apple](https://www.apple.com/){:target="_blank"}
+* Developing a new way to Discover Music @
 [LOST](http://lost.am/){:target="_blank"}
 * Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
 * Developing Games, Experimental Concepts and Technology @
@@ -40,14 +40,6 @@ Diogo spends much of his free time with his **lovely family**, enjoying life.
 * Speaks English and Portuguese
 * Loves to visit busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
 * Doesn't like bullet point lists
-
-### My Current Stack
-
-* Atom, PyCharm, Git  
-* _At work:_ Python 2.7/Flask, Google App Engine
-* _Getting started:_ Elixir/Phoenix, JavaScript es2015  
-* [Books](https://www.goodreads.com/DiogoSnows), Udacity, EdX, Coursera  
-* and more...
 
 -----
 
