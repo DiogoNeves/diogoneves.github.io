@@ -12,12 +12,23 @@ Diogo spends much of his free time with his **lovely family**, enjoying life.
 
 ### Excited about
 
+:point_right: Music Production, Ableton, randomness (getting started)
 :point_right: GameDev, AI, VR, AR, Life Experience Design  
 :point_right: Online (and other informal types of) Education  
 
+### Curiosities
+
+* Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
+* Can't burp
+* Speaks English and Portuguese
+* Loves to visit busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
+* Doesn't like bullet point lists
+
+-----
+
 ### Work
 
-* *(currently)* Working on awesome stuff @ [Apple](https://www.apple.com/){:target="_blank"}
+* *(currently)* Working on awesome stuff @ Siri [Apple](https://www.apple.com/){:target="_blank"}
 * Developing a new way to Discover Music @
 [LOST](http://lost.am/){:target="_blank"}
 * Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
@@ -30,16 +41,6 @@ Diogo spends much of his free time with his **lovely family**, enjoying life.
 @ [Vortix Games Studios](http://blog.vortixgames.com/){:target="_blank"} (Founder)
 * Researching VR, AR and Motion Capture applications for artistic body motion @
 [INESC-ID](http://www.inesc-id.pt/){:target="_blank"}
-
------
-
-### Curiosities
-
-* Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
-* Can't burp
-* Speaks English and Portuguese
-* Loves to visit busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
-* Doesn't like bullet point lists
 
 -----
 
