@@ -8,7 +8,8 @@ He is at his best when learning new subjects and has worked on varied applicatio
 From working on Siri to the _BAFTA award-winning_
 **Little Big Planet PSP** and later **Killzone Mercenary**.
 
-Diogo spends much of his free time with his **lovely family**, enjoying life.
+Diogo spends much of his free time with his **lovely family**, enjoying life, or in a dark room at night,
+learning Music Production and pressing buttons.
 
 ### Excited about
 
@@ -48,4 +49,5 @@ Diogo spends much of his free time with his **lovely family**, enjoying life.
 
 [{{site.footer-links.email}}](mailto:{{site.footer-links.email}})
 or find me at some local
-[meetup](http://www.meetup.com/members/11995734/){:target="_blank"}
+[meetup](http://www.meetup.com/members/11995734/){:target="_blank"}  
+You can also check my [SoundCloud](https://soundcloud.com/user2026704/tracks)
