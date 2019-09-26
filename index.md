@@ -12,7 +12,7 @@ Diogo spends much of his free time with his **lovely family**, enjoying life.
 
 ### Excited about
 
-:point_right: Music Production, Ableton, randomness (getting started)
+:point_right: Music Production, Ableton, randomness (getting started)  
 :point_right: GameDev, AI, VR, AR, Life Experience Design  
 :point_right: Online (and other informal types of) Education  
 
