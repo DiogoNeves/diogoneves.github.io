@@ -2,7 +2,7 @@
 layout: page
 ---
 
-Diogo (see :point_up:) is an **Engineer Manager @ Apple**.
+Diogo (see :point_up:) is an **Engineering Manager @ Apple**.
 
 He is at his best when learning new subjects and has worked on varied applications.
 From working on Siri to the _BAFTA award-winning_
