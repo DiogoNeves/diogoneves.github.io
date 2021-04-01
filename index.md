@@ -2,32 +2,26 @@
 layout: page
 ---
 
-Diogo (see :point_up:) is an **Engineering Manager @ Apple**.
+I (see :point_up:) am a father of two amazing girls and an **Engineering Manager @ Apple**.  
 
-He is at his best when learning new subjects and has worked on varied applications.
-From working on Siri to the _BAFTA award-winning_
-**Little Big Planet PSP** and later **Killzone Mercenary**.
+I have worked as an engineer on a few different things, from Siri to the 
+_BAFTA award-winning_ **Little Big Planet PSP** and **Killzone Mercenary**, 
+venturing into smaller startups in-between.
 
-Diogo spends much of his free time with his **lovely family**, enjoying life, or in a dark room at night,
-learning Music Production and playing Overwatch.
+My free time goes mostly to my **lovely family**, enjoying life, or in a dark room at night,
+learning more about whatever is my most recent interest.
 
-### Excited about
-
-:point_right: Music Production, Ableton, randomness (getting started)  
-:point_right: GameDev, AI, VR, AR, Life Experience Design  
-:point_right: Online (and other informal types of) Education  
-
-### Curiosities
+### Curiosities 🌟
 
 * Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
 * Can't burp
-* Speaks English and Portuguese
-* Loves to visit busy [cities](http://en.wikipedia.org/wiki/London){:target="_blank"}
-* Doesn't like bullet point lists
+* Native Portuguese (🇵🇹) and fluent English (🇬🇧)
+* Don't like bullet point lists  
+* Always 🔴 💊  
 
 -----
 
-### Work
+### Work 💻
 
 * *(currently)* Working on awesome stuff @ Siri [Apple](https://www.apple.com/){:target="_blank"}
 * Developing a new way to Discover Music @
@@ -45,7 +39,7 @@ learning Music Production and playing Overwatch.
 
 -----
 
-### Contact me
+### Contact me ✉️
 
 [{{site.footer-links.email}}](mailto:{{site.footer-links.email}})
 or find me at some local
