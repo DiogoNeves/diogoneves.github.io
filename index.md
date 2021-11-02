@@ -2,17 +2,18 @@
 layout: page
 ---
 
-I (see :point_up:) am a father of two amazing girls and an **Engineering Manager @ Apple**.  
+I (see :point_up:) am a father of two amazing girls and was until recently an **Engineering Manager @ Apple**.  
 
 I have worked as an engineer on a few different things, from Siri to the 
 _BAFTA award-winning_ **Little Big Planet PSP** and **Killzone Mercenary**, 
 venturing into smaller startups in-between.
 
 My free time goes mostly to my **lovely family**, enjoying life, or in a dark room at night,
-learning more about whatever is my most recent interest.
+learning more about whatever is my current interest.
 
 ### Curiosities 🌟
 
+* Diving head first in VR/AR industry   
 * Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
 * Can't burp
 * Native Portuguese (🇵🇹) and fluent English (🇬🇧)
@@ -23,7 +24,7 @@ learning more about whatever is my most recent interest.
 
 ### Work 💻
 
-* *(currently)* Working on awesome stuff @ Siri [Apple](https://www.apple.com/){:target="_blank"}
+* Worked on awesome stuff @ Siri [Apple](https://www.apple.com/){:target="_blank"} (including getting Siri to run on device)  
 * Developing a new way to Discover Music @
 [LOST](http://lost.am/){:target="_blank"}
 * Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
