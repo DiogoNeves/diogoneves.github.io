@@ -2,7 +2,7 @@
 layout: page
 ---
 
-I (see :point_up:) am a father of two amazing girls and was, until recently, an **Engineering Manager @ Apple**.  
+I am a father of two amazing girls and was, until recently, an **Engineering Manager @ Apple**.  
 
 I have worked as an engineer on a few different things, from Siri to the 
 _BAFTA award-winning_ **Little Big Planet PSP** and **Killzone Mercenary**, 
