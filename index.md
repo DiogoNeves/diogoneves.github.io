@@ -37,12 +37,3 @@ learning more about whatever is my current interest.
 @ [Vortix Games Studios](http://blog.vortixgames.com/){:target="_blank"} (Founder)
 * Researching VR, AR and Motion Capture applications for artistic body motion @
 [INESC-ID](http://www.inesc-id.pt/){:target="_blank"}
-
------
-
-### Contact me ✉️
-
-[{{site.footer-links.email}}](mailto:{{site.footer-links.email}})
-or find me at some local
-[meetup](http://www.meetup.com/members/11995734/){:target="_blank"}  
-You can also check my [SoundCloud](https://soundcloud.com/user2026704/tracks)
