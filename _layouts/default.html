@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
-
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
-
-    <meta name="author" content="{{ site.name }}" />
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
     <meta name="description" content="{{ site.description }}">
+    
+    <!-- Minimal CSS -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/style.css">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.ico">
+</head>
+<body>
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <div class="container">
+        
+        <!-- 
+          MAIN CONTENT AREA 
+          The Hero Title comes from index.md 
+        -->
+        {{ content }}
+        
+        <!-- 
+          ANIMATED GLITCH TEXT
+          To edit the messages, open: assets/js/glitch.js
+        -->
+        <div id="glitch-text" class="glitch-container"></div>
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,700italic,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-  </head>
-
-  <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
-        </header>
-      </div>
-    </div>
-
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
-
-    <div class="wrapper-footer">
-      <div class="container">
+        <!-- 
+          FOOTER 
+        -->
         <footer class="footer">
-          {% include svg-icons.html %}
+            <a href="https://www.youtube.com/@DiogoSnows" class="footer-link" target="_blank">Watch on YouTube</a>
+            
+            <!-- 
+               DOCS LINK
+               Replace "#docs" below with your actual Notion URL when ready.
+            -->
+            <a href="#docs" class="footer-link">Video docs & notes</a>
+            
+            <a href="https://github.com/diogoneves" class="footer-link" target="_blank">GitHub</a>
         </footer>
-      </div>
+
     </div>
 
-    {% include analytics.html %}
-  </body>
+    <!-- Glitch Script -->
+    <script src="{{ site.baseurl }}/assets/js/glitch.js"></script>
+
+</body>
 </html>
