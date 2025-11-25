@@ -1,39 +1,27 @@
 ---
-layout: page
+layout: default
+title: Diogo Neves
 ---
 
-I am a father of two amazing girls and was, until recently, an **Engineering Manager @ Apple**.  
+<main class="landing" aria-labelledby="hero-text">
+  <section class="hero">
+    <h1 id="hero-text" class="hero-text">
+      Diogo is building on YouTube.
+      <!-- Update the hero sentence above to change the main statement. -->
+    </h1>
+  </section>
 
-I have worked as an engineer on a few different things, from Siri to the 
-_BAFTA award-winning_ **Little Big Planet PSP** and **Killzone Mercenary**, 
-venturing into smaller startups in-between.
+  <section class="glitch-area" aria-live="polite" aria-atomic="true">
+    <span class="mono-prefix">&gt;</span>
+    <span id="glitch-text" class="glitch-text">Loading...</span>
+  </section>
 
-My free time goes mostly to my **lovely family**, enjoying life, or in a dark room at night,
-learning more about whatever is my current interest.
-
-### Curiosities 🌟
-
-* Diving head first in VR/AR industry   
-* Won a [BAFTA as part of the Little Big Planet Team](http://www.bafta.org/games/awards/2010-winners-nominees,2475,BA.html){:target="_blank"}
-* Can't burp
-* Native Portuguese (🇵🇹) and fluent English (🇬🇧)
-* Don't like bullet point lists  
-* Always 🔴 💊  
-
------
-
-### Work 💻
-
-* Worked on awesome stuff @ Siri [Apple](https://www.apple.com/){:target="_blank"} (including getting Siri to run on device)  
-* Developing a new way to Discover Music @
-[LOST](http://lost.am/){:target="_blank"}
-* Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="_blank"}
-* Developing Games, Experimental Concepts and Technology @
-[Guerrilla Cambridge](http://www.worldwidestudios.net/cambridge){:target="_blank"}
-(ex Sony Cambridge)
-* Developing Facebook applications @ [Wildbunny](http://wildbunny.co.uk/){:target="_blank"}
-(Founder)
-* Smashing bits, developing more games and general crazy person
-@ [Vortix Games Studios](http://blog.vortixgames.com/){:target="_blank"} (Founder)
-* Researching VR, AR and Motion Capture applications for artistic body motion @
-[INESC-ID](http://www.inesc-id.pt/){:target="_blank"}
+  <footer class="footer-links">
+    <a href="https://www.youtube.com/@DiogoSnows" target="_blank" rel="noopener">Watch on YouTube</a>
+    <a href="#docs" target="_blank" rel="noopener">
+      Video docs &amp; notes
+      <!-- Replace #docs with your Notion URL when it's ready. -->
+    </a>
+    <a href="https://github.com/diogoneves" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+</main>
