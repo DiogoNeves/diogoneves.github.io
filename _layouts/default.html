@@ -1,52 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
-
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
-
-    <meta name="author" content="{{ site.name }}" />
-    <meta name="description" content="{{ site.description }}">
-
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,700italic,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title | default: site.name | default: "Diogo Neves" }}</title>
+    <meta name="description" content="{{ site.description | default: "Diogo is building on YouTube." }}" />
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}" />
   </head>
-
   <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
-        </header>
-      </div>
-    </div>
-
-    <div id="main" role="main" class="container">
+    <main class="page" id="page-root">
       {{ content }}
-    </div>
+    </main>
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Update the rotating status lines here.
+        const MESSAGES = [
+          'Analysing YouTube experiments...',
+          'Building tools I actually use...',
+          'Logging every video. Iterating forever...',
+          'Decrypting growth patterns...',
+          'Simulating the next 100 uploads...'
+        ];
 
-    {% include analytics.html %}
+        const glitchTarget = document.getElementById('glitch-text');
+        if (!glitchTarget || !MESSAGES.length) return;
+
+        const GLITCH_CHARACTERS = '!#$%&()*+,-./:;<=>?@[\\]^_{|}~█▓▒░01';
+        const GLITCH_DURATION = 650;
+        const GLITCH_STEP = 55;
+        const DISPLAY_INTERVAL = 3400;
+        let messageIndex = 0;
+
+        const getRandomChar = () => GLITCH_CHARACTERS[Math.floor(Math.random() * GLITCH_CHARACTERS.length)];
+
+        const scramble = (text, revealProgress) => {
+          const minLength = Math.max(text.length, 18);
+          return Array.from({ length: minLength }, (_, idx) => {
+            if (idx >= text.length) return getRandomChar();
+            const revealPoint = Math.max(0, Math.min(1, revealProgress - (idx / text.length) * 0.35));
+            const shouldReveal = Math.random() < revealPoint;
+            return shouldReveal ? text[idx] : getRandomChar();
+          }).join('');
+        };
+
+        const glitchToMessage = (nextMessage) => {
+          let elapsed = 0;
+          const intervalId = setInterval(() => {
+            elapsed += GLITCH_STEP;
+            const progress = Math.min(1, elapsed / GLITCH_DURATION);
+
+            if (progress >= 1) {
+              clearInterval(intervalId);
+              glitchTarget.textContent = nextMessage;
+              return;
+            }
+
+            glitchTarget.textContent = scramble(nextMessage, progress);
+          }, GLITCH_STEP);
+        };
+
+        const showNextMessage = () => {
+          glitchToMessage(MESSAGES[messageIndex]);
+          messageIndex = (messageIndex + 1) % MESSAGES.length;
+        };
+
+        showNextMessage();
+        setInterval(showNextMessage, GLITCH_DURATION + DISPLAY_INTERVAL);
+      });
+    </script>
   </body>
 </html>
