@@ -25,7 +25,7 @@ learning more about whatever is my current interest.
 
 - Worked on awesome stuff @ Siri [Apple](https://www.apple.com/){:target="\_blank"} (including getting Siri to run on device)
 - Developing a new way to Discover Music @
-  [LOST](http://lost.am/){:target="\_blank"}
+  LOST (defunct)
 - Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="\_blank"}
 - Developing Games, Experimental Concepts and Technology @
   [Guerrilla Cambridge](http://www.worldwidestudios.net/){:target="\_blank"}
