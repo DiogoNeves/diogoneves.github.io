@@ -28,11 +28,10 @@ learning more about whatever is my current interest.
   [LOST](http://lost.am/){:target="\_blank"}
 - Fitting bits in small places @ [Icomera](http://www.icomera.com/){:target="\_blank"}
 - Developing Games, Experimental Concepts and Technology @
-  [Guerrilla Cambridge](http://www.worldwidestudios.net/cambridge){:target="\_blank"}
-  (ex Sony Cambridge)
-- Developing Facebook applications @ [Wildbunny](http://wildbunny.co.uk/){:target="\_blank"}
-  (Founder)
+  [Guerrilla Cambridge](http://www.worldwidestudios.net/){:target="\_blank"}
+  (ex Sony Cambridge) (closed)
+- Developing Facebook applications @ Wildbunny (Founder) (defunct)
 - Smashing bits, developing more games and general crazy person
-  @ [Vortix Games Studios](http://blog.vortixgames.com/){:target="\_blank"} (Founder)
+  @ Vortix Games Studios (Founder) (defunct)
 - Researching VR, AR and Motion Capture applications for artistic body motion @
   [INESC-ID](http://www.inesc-id.pt/){:target="\_blank"}
