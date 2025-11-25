@@ -40,7 +40,7 @@ body {
 
 .hero__title {
   margin: 0;
-  font-size: clamp(2.8rem, 6vw + 1rem, 6.4rem);
+  font-size: clamp(2.8rem, calc(6vw + 1rem), 6.4rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -50,7 +50,7 @@ body {
 .glitch-line {
   margin: 0;
   font-family: 'SFMono-Regular', 'JetBrains Mono', 'Fira Code', 'Menlo', 'Consolas', monospace;
-  font-size: clamp(1rem, 2vw + 0.2rem, 1.35rem);
+  font-size: clamp(1rem, calc(2vw + 0.2rem), 1.35rem);
   color: #c9f5ff;
   display: inline-flex;
   align-items: center;
