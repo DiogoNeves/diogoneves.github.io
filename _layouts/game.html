@@ -61,10 +61,14 @@
                 <span class="status-turns" id="status-turns"></span>
               </div>
               
-              <!-- Text output area -->
-              <div class="text-output" id="text-output" role="log" aria-live="polite" aria-relevant="additions">
-                <!-- Game text will be rendered here -->
-              </div>
+          <!-- Text output area -->
+          <div class="text-output-wrapper">
+            <div class="scroll-indicator scroll-indicator-up" id="scroll-up" aria-hidden="true" title="Scroll up"></div>
+            <div class="text-output" id="text-output" role="log" aria-live="polite" aria-relevant="additions">
+              <!-- Game text will be rendered here -->
+            </div>
+            <div class="scroll-indicator scroll-indicator-down" id="scroll-down" aria-hidden="true" title="Scroll down"></div>
+          </div>
               
               <!-- Input area -->
               <div class="input-container">

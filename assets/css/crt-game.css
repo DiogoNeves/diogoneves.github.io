@@ -622,6 +622,14 @@ body.game-page {
 }
 
 /* Text Output Area */
+.text-output-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0; /* Important for flex children with overflow */
+  display: flex;
+  flex-direction: column;
+}
+
 .text-output {
   flex: 1;
   overflow-y: auto;
@@ -646,6 +654,88 @@ body.game-page {
 
 .text-output::-webkit-scrollbar-thumb:hover {
   background: var(--crt-green);
+}
+
+/* Scroll Indicators */
+.scroll-indicator {
+  position: absolute;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--crt-green);
+  font-size: 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+  
+  /* Pulsing glow effect */
+  text-shadow: 
+    0 0 8px var(--crt-green-glow),
+    0 0 16px var(--crt-green-glow);
+}
+
+.scroll-indicator.visible {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: scroll-pulse 1.5s ease-in-out infinite;
+}
+
+.scroll-indicator-up {
+  top: 4px;
+}
+
+.scroll-indicator-down {
+  bottom: 4px;
+}
+
+/* Arrow shapes using CSS */
+.scroll-indicator::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--crt-green);
+  border-bottom: 2px solid var(--crt-green);
+}
+
+.scroll-indicator-up::before {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+.scroll-indicator-down::before {
+  transform: rotate(45deg);
+  margin-bottom: 4px;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+}
+
+.scroll-indicator-up.visible {
+  animation: scroll-pulse-up 1.5s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse-up {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
 }
 
 /* Text Styling */

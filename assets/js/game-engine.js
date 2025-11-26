@@ -864,6 +864,8 @@ let outputElement = null;
 let inputElement = null;
 let statusLocationElement = null;
 let statusTurnsElement = null;
+let scrollUpIndicator = null;
+let scrollDownIndicator = null;
 let isShowingTitle = true;
 
 /**
@@ -874,11 +876,37 @@ function initGame() {
   inputElement = document.getElementById('command-input');
   statusLocationElement = document.getElementById('status-location');
   statusTurnsElement = document.getElementById('status-turns');
+  scrollUpIndicator = document.getElementById('scroll-up');
+  scrollDownIndicator = document.getElementById('scroll-down');
   
   // Set up input handler
   if (inputElement) {
     inputElement.addEventListener('keydown', handleInput);
     inputElement.focus();
+  }
+  
+  // Set up scroll indicator handlers
+  if (outputElement) {
+    outputElement.addEventListener('scroll', updateScrollIndicators);
+    // Also update on resize
+    window.addEventListener('resize', updateScrollIndicators);
+  }
+  
+  // Set up click handlers for scroll indicators
+  if (scrollUpIndicator) {
+    scrollUpIndicator.addEventListener('click', () => {
+      if (outputElement) {
+        outputElement.scrollBy({ top: -150, behavior: 'smooth' });
+      }
+    });
+  }
+  
+  if (scrollDownIndicator) {
+    scrollDownIndicator.addEventListener('click', () => {
+      if (outputElement) {
+        outputElement.scrollBy({ top: 150, behavior: 'smooth' });
+      }
+    });
   }
   
   // Create fresh game state
@@ -947,6 +975,8 @@ come to life. This is where I build things.`);
   addOutput('');
   
   scrollToBottom();
+  // Initial check for scroll indicators
+  setTimeout(updateScrollIndicators, 100);
 }
 
 /**
@@ -1048,6 +1078,49 @@ function clearOutput() {
 function scrollToBottom() {
   if (outputElement) {
     outputElement.scrollTop = outputElement.scrollHeight;
+    // Update indicators after scroll
+    setTimeout(updateScrollIndicators, 50);
+  }
+}
+
+/**
+ * Update scroll indicator visibility based on scroll position
+ */
+function updateScrollIndicators() {
+  if (!outputElement) return;
+  
+  const scrollTop = outputElement.scrollTop;
+  const scrollHeight = outputElement.scrollHeight;
+  const clientHeight = outputElement.clientHeight;
+  
+  // Threshold for considering "at top" or "at bottom" (in pixels)
+  const threshold = 20;
+  
+  // Check if content is scrollable at all
+  const isScrollable = scrollHeight > clientHeight + threshold;
+  
+  // Check if at top
+  const isAtTop = scrollTop <= threshold;
+  
+  // Check if at bottom
+  const isAtBottom = scrollTop + clientHeight >= scrollHeight - threshold;
+  
+  // Update up indicator
+  if (scrollUpIndicator) {
+    if (isScrollable && !isAtTop) {
+      scrollUpIndicator.classList.add('visible');
+    } else {
+      scrollUpIndicator.classList.remove('visible');
+    }
+  }
+  
+  // Update down indicator
+  if (scrollDownIndicator) {
+    if (isScrollable && !isAtBottom) {
+      scrollDownIndicator.classList.add('visible');
+    } else {
+      scrollDownIndicator.classList.remove('visible');
+    }
   }
 }
 
