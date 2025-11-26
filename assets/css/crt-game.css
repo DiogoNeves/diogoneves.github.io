@@ -108,7 +108,7 @@ body.game-page {
 }
 
 /* ================================================
-   SCREEN CONTAINER
+   SCREEN CONTAINER - CRT BARREL DISTORTION
    ================================================ */
 
 .screen-container {
@@ -116,25 +116,48 @@ body.game-page {
   width: 100%;
   height: 100%;
   background: var(--screen-bg-gradient);
-  border-radius: 12px;
   overflow: hidden;
+  
+  /* The classic CRT bulge - convex screen effect */
+  border-radius: 50px / 40px;
+  
+  /* Inner shadow creates depth and edge darkening */
   box-shadow: 
-    inset 0 0 100px rgba(0, 0, 0, 0.5),
-    inset 0 0 20px rgba(0, 0, 0, 0.8);
+    /* Deep vignette around edges */
+    inset 0 0 120px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(0, 0, 0, 0.9),
+    /* Subtle highlight on top edge like glass reflection */
+    inset 0 3px 8px rgba(255, 255, 255, 0.03),
+    /* Outer glow from screen */
+    0 0 30px rgba(51, 255, 51, 0.1);
 }
 
-/* CRT Curvature Effect */
+/* CRT Curvature/Barrel Distortion Overlay */
 .screen-container::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -5%;
+  
+  /* Creates the "bulging glass" illusion */
   background: radial-gradient(
-    ellipse 100% 100% at 50% 50%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.4) 100%
+    ellipse 70% 60% at 50% 50%,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.15) 65%,
+    rgba(0, 0, 0, 0.4) 80%,
+    rgba(0, 0, 0, 0.7) 100%
   );
+  
+  /* Curved highlight to simulate glass reflection */
+  mask-image: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    black 60%,
+    transparent 100%
+  );
+  
   pointer-events: none;
   z-index: 10;
+  border-radius: inherit;
 }
 
 /* Scanlines */
@@ -146,11 +169,31 @@ body.game-page {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.15) 2px,
-    rgba(0, 0, 0, 0.15) 4px
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
   );
   pointer-events: none;
   z-index: 11;
+  border-radius: inherit;
+}
+
+/* Glass reflection highlight - the curved shine on old CRTs */
+.screen-reflection {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 100%
+  );
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+  pointer-events: none;
+  z-index: 12;
+  transform: rotate(-2deg);
 }
 
 /* Phosphor Glow Effect */
@@ -171,6 +214,204 @@ body.game-page {
 @keyframes glow-flicker {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 0.48; }
+}
+
+/* ================================================
+   PROCEDURAL GLITCH RAIN EFFECT
+   ================================================ */
+
+.screen-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0.04;
+  mix-blend-mode: screen;
+}
+
+/* Primary rain layer - vertical streaks */
+.screen-rain::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(51, 255, 51, 0.8) 3px,
+    rgba(51, 255, 51, 0.8) 4px,
+    transparent 4px,
+    transparent 20px,
+    rgba(51, 255, 51, 0.4) 20px,
+    rgba(51, 255, 51, 0.4) 21px,
+    transparent 21px,
+    transparent 45px,
+    rgba(51, 255, 51, 0.6) 45px,
+    rgba(51, 255, 51, 0.6) 46px,
+    transparent 46px,
+    transparent 80px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 7px,
+    rgba(51, 255, 51, 0.3) 7px,
+    rgba(51, 255, 51, 0.3) 8px,
+    transparent 8px,
+    transparent 23px,
+    rgba(51, 255, 51, 0.2) 23px,
+    rgba(51, 255, 51, 0.2) 24px,
+    transparent 24px,
+    transparent 50px
+  );
+  animation: rain-fall 0.8s linear infinite;
+}
+
+/* Secondary rain layer - offset for density */
+.screen-rain::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 12px,
+    rgba(51, 255, 51, 0.5) 12px,
+    rgba(51, 255, 51, 0.5) 13px,
+    transparent 13px,
+    transparent 35px,
+    rgba(51, 255, 51, 0.7) 35px,
+    rgba(51, 255, 51, 0.7) 36px,
+    transparent 36px,
+    transparent 67px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 15px,
+    rgba(51, 255, 51, 0.25) 15px,
+    rgba(51, 255, 51, 0.25) 16px,
+    transparent 16px,
+    transparent 40px
+  );
+  animation: rain-fall 1.2s linear infinite;
+  animation-delay: -0.4s;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(33.33%);
+  }
+}
+
+/* Glitch/interference bars - horizontal noise */
+.screen-glitch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0;
+  animation: glitch-appear 8s ease-in-out infinite;
+}
+
+.screen-glitch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(51, 255, 51, 0.1) 45.5%,
+      rgba(51, 255, 51, 0.15) 46%,
+      transparent 47%,
+      transparent 100%
+    );
+  animation: glitch-bar 0.15s steps(2) infinite;
+}
+
+.screen-glitch::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 1px,
+      rgba(51, 255, 51, 0.03) 1px,
+      rgba(51, 255, 51, 0.03) 2px
+    );
+  animation: glitch-noise 0.05s steps(5) infinite;
+}
+
+@keyframes glitch-appear {
+  0%, 92%, 100% { opacity: 0; }
+  93%, 93.5% { opacity: 1; }
+  94%, 95% { opacity: 0; }
+  95.5%, 96% { opacity: 0.8; }
+  97%, 99% { opacity: 0; }
+}
+
+@keyframes glitch-bar {
+  0% { transform: translateY(-20%); }
+  25% { transform: translateY(60%); }
+  50% { transform: translateY(20%); }
+  75% { transform: translateY(80%); }
+  100% { transform: translateY(-20%); }
+}
+
+@keyframes glitch-noise {
+  0%, 100% { opacity: 0.5; transform: translateX(0); }
+  20% { opacity: 0.8; transform: translateX(-1px); }
+  40% { opacity: 0.3; transform: translateX(2px); }
+  60% { opacity: 0.7; transform: translateX(-2px); }
+  80% { opacity: 0.4; transform: translateX(1px); }
+}
+
+/* Static noise overlay - subtle TV static */
+.screen-static {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 7;
+  border-radius: inherit;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: static-shift 0.1s steps(10) infinite;
+}
+
+@keyframes static-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 1%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-0.5%, 0.5%); }
+  60% { transform: translate(0.5%, -0.5%); }
+  70% { transform: translate(-1%, -0.5%); }
+  80% { transform: translate(0.5%, 1%); }
+  90% { transform: translate(-0.5%, -1%); }
 }
 
 /* ================================================
