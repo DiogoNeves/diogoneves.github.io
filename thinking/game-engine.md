@@ -107,6 +107,28 @@ const gameState = {
     // more objects...
   },
 
+  npcs: {
+    // Optional: NPCs/characters can be stored separately or as special objects
+    // Example structure if implemented:
+    // guide: {
+    //   id: "guide",
+    //   name: "mysterious guide",
+    //   description: "A mysterious figure stands here, watching you.",
+    //   location: "room:west_of_house",
+    //   dialogue: {
+    //     default: "Hello, traveler.",
+    //     topics: {
+    //       help: "I can guide you if you need assistance.",
+    //       puzzle: "The key is hidden where light cannot reach.",
+    //     },
+    //   },
+    //   flags: {
+    //     hasMet: false,
+    //     hasHelped: false,
+    //   },
+    // },
+  },
+
   globals: {
     turn: 0,
     puzzleFlags: {
@@ -141,6 +163,7 @@ Each room has:
 - `exits` mapping directions to other room IDs
   - Directions: `"north"`, `"south"`, `"east"`, `"west"`, `"up"`, `"down"`, `"in"`, `"out"`
 - `objects` array listing object IDs that start in that room
+- `npcs` array (optional) listing NPC IDs present in that room
 
 ### Flags
 
@@ -256,6 +279,7 @@ When resolving an object:
 - Match against:
   - Objects in current room
   - Items in inventory
+  - NPCs/characters in current room (if NPCs are implemented)
 - Use aliases defined in object definitions
 - Handle multi-word object names (e.g., "brass lamp" should match even if user types "lamp")
 
@@ -293,6 +317,133 @@ Error messages should match the narrative style (see narrative style section for
   - Custom command handlers
   - Context-sensitive commands
   - Command history and undo functionality
+
+---
+
+## NPCs/Characters (Optional)
+
+NPCs (non-player characters) can be implemented as a separate category in `gameState.npcs` or treated as special objects with dialogue capabilities.
+
+### NPC Structure (if implemented)
+
+- `id`: Unique identifier
+- `name`: Display name
+- `description`: Description shown when examining or when NPC is present
+- `location`: Current location (same format as objects: `"room:<roomId>"`)
+- `dialogue`: Dialogue system (see Dialogue System below)
+- `flags`: NPC-specific state flags (e.g., `hasMet`, `hasHelped`, `interactionCount`)
+
+### Dialogue System
+
+NPCs are function-driven by default, but support simple string/list definitions for basic cases.
+
+#### Default Simple Speech
+
+- **Single string**: `dialogue: "Hello, traveler."`
+- **List of strings**: `dialogue: ["First greeting.", "Second greeting.", "Third greeting."]`
+  - On repeated interactions, iterate through the list
+  - After reaching the end, either loop back or use the last item
+
+#### Multiple Interactions
+
+Support different speech based on interaction count:
+
+```javascript
+dialogue: {
+  interactions: [
+    "First time we meet: Hello!",
+    "Second time: Oh, you're back.",
+    "Third time: We meet again.",
+    // After this, use the last item or loop
+  ];
+}
+```
+
+#### State-Dependent Speech
+
+Speech that changes based on user state (player flags, inventory, puzzle progress):
+
+```javascript
+dialogue: {
+  stateBased: [
+    {
+      condition: (gameState) => !gameState.player.flags.hasMet,
+      speech: "Hello, I haven't seen you before.",
+    },
+    {
+      condition: (gameState) => gameState.player.inventory.includes("key"),
+      speech: "I see you found the key!",
+    },
+    {
+      condition: (gameState) => gameState.globals.puzzleFlags.cellarUnlocked,
+      speech: "You've unlocked the cellar. Well done!",
+    },
+    {
+      condition: () => true, // Default fallback
+      speech: "How can I help you?",
+    },
+  ];
+}
+```
+
+The engine evaluates conditions in order and uses the first matching one.
+
+#### Function-Driven NPCs
+
+For complex dialogue logic, attach a JavaScript function:
+
+```javascript
+dialogue: (gameState) => {
+  // Custom logic based on gameState
+  if (gameState.player.flags.hasLight) {
+    return "I see you have a light source now.";
+  }
+  return "It's dark here. You might need a light.";
+};
+```
+
+The function receives the full `gameState` object and returns a string to display.
+
+#### Hybrid Approach
+
+NPCs can combine approaches:
+
+```javascript
+dialogue: {
+  // Simple list for basic interactions
+  interactions: ["Hello.", "Hi again.", "Back so soon?"],
+
+  // State-based responses override interaction list when conditions match
+  stateBased: [
+    {
+      condition: (gameState) => gameState.globals.turn < 10,
+      speech: "You're just starting out."
+    }
+  ],
+
+  // Function handler for complex cases (takes precedence)
+  handler: (gameState) => {
+    // Custom logic
+    return "Custom response";
+  }
+}
+```
+
+**Priority order**: Function handler > State-based conditions > Interaction list > Simple string
+
+### NPC Commands
+
+- **TALK TO <character>** (aliases: `TALK`, `SPEAK`, `CHAT`): Initiate dialogue with an NPC
+  - Increments interaction count
+  - Evaluates dialogue based on current state and interaction history
+- **EXAMINE <character>**: Get description of an NPC (same as examining objects)
+
+### NPC Resolution
+
+- NPCs should be included in room descriptions when present
+- NPCs can be matched by name or aliases in parser resolution
+- NPCs are typically not portable (cannot be taken/dropped)
+- Track interaction count in `flags.interactionCount` for list iteration
 
 ---
 
