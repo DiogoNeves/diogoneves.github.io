@@ -1,0 +1,505 @@
+/* ================================================
+   CRT MONITOR TEXT ADVENTURE GAME STYLES
+   A retro terminal experience with modern accessibility
+   ================================================ */
+
+/* CSS Custom Properties for easy theming */
+:root {
+  /* CRT Colors - Phosphor Green */
+  --crt-green: #33ff33;
+  --crt-green-dim: #1a8c1a;
+  --crt-green-glow: rgba(51, 255, 51, 0.4);
+  --crt-green-subtle: rgba(51, 255, 51, 0.1);
+  
+  /* Monitor Colors */
+  --monitor-bezel: #1a1a1a;
+  --monitor-bezel-light: #2a2a2a;
+  --monitor-bezel-dark: #0a0a0a;
+  --screen-bg: #0a0f0a;
+  --screen-bg-gradient: radial-gradient(ellipse at center, #0f1a0f 0%, #050805 100%);
+  
+  /* Background */
+  --room-bg: #0d0d0d;
+  --room-texture: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  
+  /* Typography */
+  --font-mono: 'IBM Plex Mono', 'Fira Code', 'Source Code Pro', 'Consolas', monospace;
+  
+  /* Sizing */
+  --monitor-padding: clamp(12px, 2vw, 24px);
+  --screen-padding: clamp(16px, 3vw, 32px);
+  --font-size-base: clamp(14px, 1.6vw, 18px);
+  --line-height: 1.6;
+}
+
+/* Global Reset for Game Page */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body.game-page {
+  font-family: var(--font-mono);
+  background: var(--room-bg);
+  background-image: var(--room-texture);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ================================================
+   CRT MONITOR CONTAINER
+   ================================================ */
+
+.crt-monitor {
+  position: relative;
+  width: min(95vw, 1000px);
+  height: min(85vh, 700px);
+  background: linear-gradient(145deg, var(--monitor-bezel-light), var(--monitor-bezel-dark));
+  border-radius: 20px;
+  padding: var(--monitor-padding);
+  box-shadow: 
+    0 0 0 3px var(--monitor-bezel-dark),
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+/* Monitor brand/label area */
+.crt-monitor::before {
+  content: 'NEUROLINK-7800';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #444;
+  text-transform: uppercase;
+}
+
+/* Power LED */
+.crt-monitor::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  right: 24px;
+  width: 8px;
+  height: 8px;
+  background: var(--crt-green);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 6px var(--crt-green),
+    0 0 12px var(--crt-green-glow);
+  animation: led-pulse 2s ease-in-out infinite;
+}
+
+@keyframes led-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ================================================
+   SCREEN CONTAINER
+   ================================================ */
+
+.screen-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--screen-bg-gradient);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 0 100px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* CRT Curvature Effect */
+.screen-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Scanlines */
+.screen-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* Phosphor Glow Effect */
+.screen-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    var(--crt-green-subtle) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
+  animation: glow-flicker 0.1s infinite;
+}
+
+@keyframes glow-flicker {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.48; }
+}
+
+/* ================================================
+   GAME CONTENT AREA
+   ================================================ */
+
+.game-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--screen-padding);
+  z-index: 1;
+}
+
+/* Status Bar */
+.status-bar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--crt-green-dim);
+  font-size: calc(var(--font-size-base) * 0.85);
+  color: var(--crt-green-dim);
+}
+
+.status-location {
+  font-weight: 600;
+  color: var(--crt-green);
+  text-shadow: 0 0 10px var(--crt-green-glow);
+}
+
+.status-turns {
+  opacity: 0.8;
+}
+
+/* Text Output Area */
+.text-output {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--crt-green-dim) transparent;
+}
+
+.text-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.text-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.text-output::-webkit-scrollbar-thumb {
+  background: var(--crt-green-dim);
+  border-radius: 3px;
+}
+
+.text-output::-webkit-scrollbar-thumb:hover {
+  background: var(--crt-green);
+}
+
+/* Text Styling */
+.output-line {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 8px var(--crt-green-glow);
+  animation: text-appear 0.05s ease-out;
+}
+
+@keyframes text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Room name styling */
+.output-line.room-name {
+  font-weight: 700;
+  font-size: calc(var(--font-size-base) * 1.1);
+  margin-top: 1em;
+  color: var(--crt-green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* System messages */
+.output-line.system {
+  color: var(--crt-green-dim);
+  font-style: italic;
+}
+
+/* Error messages */
+.output-line.error {
+  color: #ff6b6b;
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.4);
+}
+
+/* User input echo */
+.output-line.user-input {
+  color: var(--crt-green);
+  opacity: 0.7;
+}
+
+.output-line.user-input::before {
+  content: '> ';
+}
+
+/* Links in text */
+.output-line a,
+.game-link {
+  color: var(--crt-green);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.output-line a:hover,
+.output-line a:focus,
+.game-link:hover,
+.game-link:focus {
+  text-decoration-style: solid;
+  text-shadow: 
+    0 0 10px var(--crt-green),
+    0 0 20px var(--crt-green-glow);
+  outline: none;
+}
+
+/* ================================================
+   ASCII ART BANNER
+   ================================================ */
+
+.ascii-banner {
+  font-family: var(--font-mono);
+  font-size: clamp(6px, 1.2vw, 12px);
+  line-height: 1.1;
+  white-space: pre;
+  color: var(--crt-green);
+  text-shadow: 0 0 10px var(--crt-green-glow);
+  margin: 1em 0;
+  text-align: center;
+}
+
+.ascii-banner .youtube-link {
+  color: var(--crt-green);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ascii-banner .youtube-link:hover,
+.ascii-banner .youtube-link:focus {
+  color: #fff;
+  text-shadow: 
+    0 0 10px var(--crt-green),
+    0 0 20px var(--crt-green),
+    0 0 30px var(--crt-green);
+  outline: none;
+}
+
+/* ================================================
+   INPUT LINE
+   ================================================ */
+
+.input-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 1px solid var(--crt-green-dim);
+}
+
+.input-prompt {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  margin-right: 8px;
+  text-shadow: 0 0 10px var(--crt-green-glow);
+}
+
+.command-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  color: var(--crt-green);
+  text-shadow: 0 0 8px var(--crt-green-glow);
+  caret-color: var(--crt-green);
+}
+
+.command-input::placeholder {
+  color: var(--crt-green-dim);
+  opacity: 0.5;
+}
+
+/* Blinking cursor effect */
+.command-input:focus {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  50% { caret-color: transparent; }
+}
+
+/* ================================================
+   TITLE SCREEN SPECIFIC
+   ================================================ */
+
+.title-content {
+  text-align: center;
+  padding: 2em 0;
+}
+
+.system-info {
+  font-size: calc(var(--font-size-base) * 0.9);
+  color: var(--crt-green-dim);
+  margin: 1.5em 0;
+  text-align: left;
+  padding-left: 2em;
+}
+
+.system-info-line {
+  margin: 0.3em 0;
+}
+
+.intro-text {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  margin: 2em auto;
+  max-width: 60ch;
+  text-align: left;
+}
+
+.instructions {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  margin-top: 2em;
+}
+
+.instructions p {
+  margin: 0.5em 0;
+}
+
+/* ================================================
+   RESPONSIVE ADJUSTMENTS
+   ================================================ */
+
+@media (max-width: 768px) {
+  body.game-page {
+    padding: 10px;
+  }
+  
+  .crt-monitor {
+    width: 100%;
+    height: 95vh;
+    border-radius: 12px;
+  }
+  
+  .ascii-banner {
+    font-size: clamp(4px, 2vw, 8px);
+  }
+  
+  .status-bar {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-base: 14px;
+  }
+  
+  .ascii-banner {
+    font-size: 4px;
+    overflow-x: auto;
+  }
+}
+
+/* ================================================
+   ACCESSIBILITY
+   ================================================ */
+
+/* Focus indicators */
+*:focus-visible {
+  outline: 2px solid var(--crt-green);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .screen-glow {
+    animation: none;
+    opacity: 0.3;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --crt-green: #00ff00;
+    --screen-bg: #000;
+  }
+  
+  .screen-container::after {
+    display: none; /* Remove scanlines for better readability */
+  }
+}
+
