@@ -32,47 +32,56 @@
   </head>
 
   <body class="game-page">
-    <!-- CRT Monitor Container -->
-    <div class="crt-monitor" role="main" aria-label="Text Adventure Game">
-      <div class="screen-container">
-        <!-- Glass reflection highlight -->
-        <div class="screen-reflection" aria-hidden="true"></div>
-        <!-- Phosphor glow effect -->
-        <div class="screen-glow" aria-hidden="true"></div>
-        <!-- Static noise overlay -->
-        <div class="screen-static" aria-hidden="true"></div>
-        <!-- Procedural rain effect -->
-        <div class="screen-rain" aria-hidden="true"></div>
-        <!-- Glitch interference -->
-        <div class="screen-glitch" aria-hidden="true"></div>
-        
-        <!-- Game wrapper -->
-        <div class="game-wrapper">
-          <!-- Status bar -->
-          <div class="status-bar" role="status" aria-live="polite">
-            <span class="status-location" id="status-location">NEUROLINK-7800</span>
-            <span class="status-turns" id="status-turns"></span>
-          </div>
-          
-          <!-- Text output area -->
-          <div class="text-output" id="text-output" role="log" aria-live="polite" aria-relevant="additions">
-            <!-- Game text will be rendered here -->
-          </div>
-          
-          <!-- Input area -->
-          <div class="input-container">
-            <span class="input-prompt" aria-hidden="true">&gt;</span>
-            <input 
-              type="text" 
-              id="command-input" 
-              class="command-input" 
-              placeholder="Type a command..."
-              autocomplete="off"
-              autocapitalize="off"
-              autocorrect="off"
-              spellcheck="false"
-              aria-label="Command input. Type commands like LOOK, HELP, or directions like NORTH."
-            />
+    <!-- Dark Room Environment -->
+    <div class="room-environment">
+      <!-- Desk surface -->
+      <div class="desk-surface" aria-hidden="true"></div>
+      
+      <!-- Monitor sitting on desk -->
+      <div class="monitor-wrapper">
+        <!-- CRT Monitor Container -->
+        <div class="crt-monitor" role="main" aria-label="Text Adventure Game">
+          <div class="screen-container">
+            <!-- Glass reflection highlight -->
+            <div class="screen-reflection" aria-hidden="true"></div>
+            <!-- Phosphor glow effect -->
+            <div class="screen-glow" aria-hidden="true"></div>
+            <!-- Static noise overlay -->
+            <div class="screen-static" aria-hidden="true"></div>
+            <!-- Procedural rain effect -->
+            <div class="screen-rain" aria-hidden="true"></div>
+            <!-- Glitch interference -->
+            <div class="screen-glitch" aria-hidden="true"></div>
+            
+            <!-- Game wrapper -->
+            <div class="game-wrapper">
+              <!-- Status bar -->
+              <div class="status-bar" role="status" aria-live="polite">
+                <span class="status-location" id="status-location">NEUROLINK-7800</span>
+                <span class="status-turns" id="status-turns"></span>
+              </div>
+              
+              <!-- Text output area -->
+              <div class="text-output" id="text-output" role="log" aria-live="polite" aria-relevant="additions">
+                <!-- Game text will be rendered here -->
+              </div>
+              
+              <!-- Input area -->
+              <div class="input-container">
+                <span class="input-prompt" aria-hidden="true">&gt;</span>
+                <input 
+                  type="text" 
+                  id="command-input" 
+                  class="command-input" 
+                  placeholder="Type a command..."
+                  autocomplete="off"
+                  autocapitalize="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  aria-label="Command input. Type commands like LOOK, HELP, or directions like NORTH."
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

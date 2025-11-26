@@ -46,13 +46,184 @@ html, body {
 
 body.game-page {
   font-family: var(--font-mono);
-  background: var(--room-bg);
-  background-image: var(--room-texture);
+  background: #050505;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ================================================
+   DARK ROOM ENVIRONMENT
+   ================================================ */
+
+.room-environment {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  
+  /* Room atmosphere - very dark with subtle gradient */
+  background: 
+    /* Ceiling shadow gradient */
+    linear-gradient(180deg, 
+      #020202 0%, 
+      #050505 15%,
+      #080808 40%,
+      #0a0a0a 100%
+    );
+}
+
+/* Back wall with corner shadows */
+.room-environment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* Left wall corner shadow */
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 20%
+    ),
+    /* Right wall corner shadow */
+    linear-gradient(270deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 20%
+    ),
+    /* Subtle wall texture */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 100px,
+      rgba(255, 255, 255, 0.005) 100px,
+      rgba(255, 255, 255, 0.005) 101px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Monitor glow on ceiling/wall */
+.room-environment::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 50%;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 100%,
+    rgba(51, 255, 51, 0.03) 0%,
+    rgba(51, 255, 51, 0.01) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Desk surface */
+.desk-surface {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 18vh;
+  z-index: 1;
+  
+  /* Desk top surface */
+  background: 
+    /* Top edge highlight */
+    linear-gradient(180deg,
+      #1a1a1a 0px,
+      #141414 2px,
+      #0f0f0f 100%
+    );
+  
+  /* Desk edge */
+  border-top: 1px solid #222;
+  
+  /* Reflected glow from monitor */
+  box-shadow: 
+    inset 0 20px 60px -20px rgba(51, 255, 51, 0.05);
+}
+
+/* Desk front panel */
+.desk-surface::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg,
+    #0c0c0c 0%,
+    #080808 100%
+  );
+  border-top: 1px solid #151515;
+}
+
+/* Items on desk - silhouettes */
+.desk-surface::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  pointer-events: none;
+  
+  background:
+    /* Coffee mug silhouette - left side */
+    radial-gradient(
+      ellipse 25px 8px at 12% 100%,
+      #0a0a0a 0%,
+      #0a0a0a 100%
+    ),
+    /* Mug body */
+    linear-gradient(180deg, #0a0a0a, #0a0a0a) no-repeat 8% 60% / 35px 30px,
+    /* Mug handle */
+    radial-gradient(
+      ellipse 8px 12px at 15% 75%,
+      transparent 50%,
+      #0a0a0a 50%,
+      #0a0a0a 70%,
+      transparent 70%
+    ),
+    
+    /* Stack of books/papers - right side */
+    linear-gradient(180deg, #0c0c0c, #080808) no-repeat 85% 70% / 60px 20px,
+    linear-gradient(180deg, #0b0b0b, #090909) no-repeat 86% 55% / 55px 15px,
+    linear-gradient(180deg, #0a0a0a, #070707) no-repeat 84% 45% / 50px 12px,
+    
+    /* Small plant pot silhouette - far left */
+    radial-gradient(
+      ellipse 20px 25px at 4% 60%,
+      #0a0a0a 0%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, #0b0b0b, #0b0b0b) no-repeat 3% 85% / 20px 15px,
+    
+    /* Pen/pencil holder - right of monitor */
+    linear-gradient(180deg, #0a0a0a, #0a0a0a) no-repeat 70% 70% / 25px 35px,
+    /* Pens sticking out */
+    linear-gradient(185deg, #0c0c0c, #0c0c0c) no-repeat 69% 40% / 3px 25px,
+    linear-gradient(175deg, #0b0b0b, #0b0b0b) no-repeat 71% 45% / 2px 22px,
+    linear-gradient(182deg, #0c0c0c, #0c0c0c) no-repeat 73% 42% / 3px 24px;
+}
+
+/* Monitor desk position wrapper */
+.monitor-wrapper {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 12vh;
+  
+  /* Monitor casts shadow on desk */
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
 }
 
 /* ================================================
@@ -676,13 +847,17 @@ body.game-page {
    ================================================ */
 
 @media (max-width: 768px) {
-  body.game-page {
-    padding: 10px;
+  .desk-surface {
+    height: 12vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 8vh;
   }
   
   .crt-monitor {
-    width: 100%;
-    height: 95vh;
+    width: 95vw;
+    height: min(70vh, 500px);
     border-radius: 12px;
   }
   
@@ -695,11 +870,29 @@ body.game-page {
     gap: 4px;
     text-align: center;
   }
+  
+  /* Simplify desk items on mobile */
+  .desk-surface::after {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   :root {
     --font-size-base: 14px;
+  }
+  
+  .desk-surface {
+    height: 10vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 6vh;
+  }
+  
+  .crt-monitor {
+    width: 98vw;
+    height: min(75vh, 450px);
   }
   
   .ascii-banner {
