@@ -10,12 +10,12 @@ Outside
 
 The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
 
-State:
+==State==
 There is an NPC in this room that is extremely friendly and excited, but is warning the player that a storm seems to be coming, strange things have been happening in this town lately. (only disclose this information if talked to)
 
 There is an easy to miss quarter on the floor, near the store front.
 
-The player can read the neon sign and store name "Metaphora".
+The player can read the neon sign and store name "Metaphora" (don't disclose unless the user reads the signs).
 
 From this room the player can go to: the store (in front); house (across the road); train station; coast-line (near the store, opposite to the train)
 
@@ -25,6 +25,7 @@ Store
 
 A simple store
 
+==State==
 Nothing to see
 
 Can only go back
@@ -35,6 +36,7 @@ Home
 
 A simple home
 
+==State==
 Nothing to see
 
 Can only go back
@@ -45,6 +47,7 @@ Train station
 
 A simple train station
 
+==State==
 Nothing to see
 
 Can only go back
@@ -55,6 +58,7 @@ Coast line
 
 A simple coast
 
+==State==
 Nothing to see
 
 Can only go back

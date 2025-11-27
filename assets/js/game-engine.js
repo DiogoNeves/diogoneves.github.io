@@ -11,281 +11,308 @@
 
 const createInitialState = () => ({
   player: {
-    roomId: "office",
+    roomId: "outside",
     inventory: [],
     flags: {
       hasStarted: false,
       hasLight: true,
+      talkedToNPC: false,
+      foundQuarter: false,
     },
   },
 
   rooms: {
-    office: {
-      id: "office",
-      name: "The Office",
-      description: `You stand in a small, cluttered office. The walls are covered with sticky notes, each one bearing fragments of code and half-formed ideas. A desk dominates the room, buried under monitors and cables. The faint hum of cooling fans provides a constant backdrop.
+    outside: {
+      id: "outside",
+      name: "Outside the Store",
+      description: `You stand on a cracked pavement, facing a storefront cluttered with retro tech — cathode ray tubes, cassette players, and devices whose purposes have been lost to time. Above the entrance, a faded sign reads "METAPHORA" in letters that flicker between certainty and doubt. Neon tubes cast an amber glow across the street, buzzing with the kind of persistence that suggests they've forgotten how to stop.
 
-A window to the NORTH reveals the glow of a city at night. A doorway leads SOUTH into darkness. To the EAST, you notice a peculiar door that seems to shimmer slightly.`,
+The air tastes of petrichor and static. A storm's coming, though the sky can't quite decide when.
+
+You can head INSIDE the store, cross the STREET to a house, walk toward the TRAIN station, or follow the path to the COAST.`,
       exits: {
-        north: "window",
-        south: "corridor",
-        east: "workshop",
+        in: "store",
+        inside: "store",
+        street: "home",
+        train: "train_station",
+        coast: "coast_line",
       },
-      objects: ["desk", "sticky_notes", "coffee_mug"],
+      objects: ["quarter", "neon_signs", "retro_devices", "metaphora_sign"],
+      npcs: ["friendly_stranger"],
       flags: {
         visited: false,
-        lightsOn: true,
+        stormWarningGiven: false,
       },
     },
 
-    window: {
-      id: "window",
-      name: "By the Window",
-      description: `You stand before a large window overlooking a sprawling cityscape. Towers of glass and steel stretch toward a sky thick with clouds and the occasional drone. The city never sleeps, and neither, it seems, do its inhabitants.
+    store: {
+      id: "store",
+      name: "Metaphora — The Tech Shop",
+      description: `A cramped shop stuffed with shelves of obsolete technology. Dust motes drift in the weak light filtering through the grimy window. The shopkeeper's chair sits empty, as if they've just stepped out and might return any moment. Or never.
 
-From here you can see your reflection — tired eyes, questionable posture, the general air of someone who's been staring at screens for too long. The office lies to the SOUTH.`,
+Rows of CRT monitors stare blankly at you. One flickers to life occasionally, displaying static patterns that almost resemble faces. Almost.
+
+The exit leads back OUT to the street.`,
       exits: {
-        south: "office",
+        out: "outside",
+        outside: "outside",
       },
-      objects: ["city_view", "reflection"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    corridor: {
-      id: "corridor",
-      name: "The Dark Corridor",
-      description: `The corridor stretches before you, its walls a uniform grey that seems to absorb what little light filters in from the office to the NORTH. The air is cooler here, with a faint metallic taste.
-
-You could swear the corridor is longer than it was last time. But that's probably just your imagination. Probably.
-
-At the far end, a door marked "ARCHIVES" waits patiently. It leads SOUTH. A faint humming comes from somewhere WEST.`,
-      exits: {
-        north: "office",
-        south: "archives",
-        west: "server_room",
-      },
-      objects: ["fluorescent_light"],
-      flags: {
-        visited: false,
-        dark: false,
-      },
-    },
-
-    workshop: {
-      id: "workshop",
-      name: "The Workshop",
-      description: `You enter a workshop that feels larger on the inside than it should be. Workbenches line the walls, covered with half-assembled gadgets, circuit boards, and tools whose purposes you can only guess at.
-
-A brass telescope points toward a skylight that reveals an impossible starfield — you're quite certain there should be a ceiling there. The office lies to the WEST.
-
-A sign on the wall reads: "Where ideas become tangible. Or at least, where they try."`,
-      exits: {
-        west: "office",
-      },
-      objects: ["workbench", "brass_telescope", "mysterious_device"],
+      objects: ["crt_monitors", "dusty_shelf", "empty_chair"],
       flags: {
         visited: false,
       },
     },
 
-    server_room: {
-      id: "server_room",
-      name: "The Server Room",
-      description: `Banks of servers tower around you, their blinking lights creating a hypnotic pattern in the darkness. The temperature drops noticeably, and the hum of cooling systems is almost deafening.
+    home: {
+      id: "home",
+      name: "The House Across the Street",
+      description: `You stand before a modest house with peeling paint and a garden that's given up on formality. The windows are dark, but you sense someone inside, watching the storm clouds gather.
 
-In the centre of the room, a single terminal glows with an inviting light. Its screen displays scrolling text that seems to be... watching you back? No, that's ridiculous. Terminals don't watch. They merely observe.
+A mailbox leans at an angle, stuffed with unopened letters and what might be yesterday's dreams. The front door is closed but unlocked — the kind of place that trusts in the good nature of strangers.
 
-The corridor lies to the EAST.`,
+The STREET leads back to the storefront.`,
       exits: {
-        east: "corridor",
+        street: "outside",
+        out: "outside",
+        outside: "outside",
       },
-      objects: ["server_racks", "terminal", "cooling_unit"],
+      objects: ["mailbox", "garden", "dark_windows"],
       flags: {
         visited: false,
-        terminalActive: true,
+        doorUnlocked: true,
       },
     },
 
-    archives: {
-      id: "archives",
-      name: "The Archives",
-      description: `Rows upon rows of filing cabinets stretch into a darkness that seems almost deliberate. The air is thick with the smell of old paper and forgotten memories. Somewhere in the distance, you hear the soft rustle of pages turning on their own.
+    train_station: {
+      id: "train_station",
+      name: "The Train Station",
+      description: `An empty platform stretches before you, flanked by rusted rails that disappear into the fog. A timetable board displays departure times for trains that might never come. The last entry reads: "DELAYED INDEFINITELY."
 
-The cabinets are labelled with dates that don't quite make sense — some appear to be from the future. One drawer is slightly ajar, labelled "PROJECTS."
+Benches line the platform, their wood warped by weather and time. A single light flickers overhead, casting long shadows that move even when you don't.
 
-The corridor leads back NORTH. You feel like you're being catalogued.`,
+The exit leads back toward the STOREFRONT.`,
       exits: {
-        north: "corridor",
+        storefront: "outside",
+        back: "outside",
+        out: "outside",
       },
-      objects: ["filing_cabinets", "projects_drawer", "old_photograph"],
+      objects: ["timetable_board", "platform_bench", "rusted_rails"],
       flags: {
         visited: false,
-        drawerOpen: false,
+        trainExpected: false,
+      },
+    },
+
+    coast_line: {
+      id: "coast_line",
+      name: "The Coast",
+      description: `The ocean spreads before you, grey and restless. Waves crash against rocks with the patience of something that's been doing this long before you arrived and will continue long after you leave.
+
+Seagulls wheel overhead, their cries almost like laughter. The wind carries salt and the faint scent of something burning far away. The horizon blurs where sea meets sky, both refusing to commit to a definite boundary.
+
+The path BACK leads to the storefront.`,
+      exits: {
+        back: "outside",
+        storefront: "outside",
+        out: "outside",
+      },
+      objects: ["ocean_waves", "rocks", "seagulls"],
+      flags: {
+        visited: false,
+        tidalPattern: "low",
       },
     },
   },
 
   objects: {
-    // Office objects
-    desk: {
-      id: "desk",
-      name: "cluttered desk",
-      aliases: ["table"],
+    // Outside objects
+    quarter: {
+      id: "quarter",
+      name: "tarnished quarter",
+      aliases: ["quarter", "coin", "money"],
       description:
-        "A desk that has seen better days, and better organisational systems. Monitors perch precariously atop stacks of books and papers. There's a keyboard somewhere under there, presumably.",
-      location: "room:office",
-      portable: false,
-    },
-    sticky_notes: {
-      id: "sticky_notes",
-      name: "sticky notes",
-      aliases: ["notes", "stickies", "post-its"],
-      description:
-        'Dozens of sticky notes in various colours. Most contain cryptic reminders like "FIX THE THING" and "DON\'T FORGET" without specifying what thing or what not to forget. One simply reads: "HELLO, YOU."',
-      location: "room:office",
-      portable: true,
-    },
-    coffee_mug: {
-      id: "coffee_mug",
-      name: "coffee mug",
-      aliases: ["mug", "cup", "coffee"],
-      description:
-        "A well-worn mug bearing the legend \"World's Okayest Developer.\" It's empty, of course. It's always empty when you need it most.",
-      location: "room:office",
-      portable: true,
-    },
-
-    // Window objects
-    city_view: {
-      id: "city_view",
-      name: "city view",
-      aliases: ["city", "view", "cityscape"],
-      description:
-        "The city sprawls beneath you in a tapestry of light and shadow. Somewhere out there, people are shipping code, having meetings, and drinking coffee that isn't empty. You feel a strange kinship with them all.",
-      location: "room:window",
-      portable: false,
-    },
-    reflection: {
-      id: "reflection",
-      name: "reflection",
-      aliases: ["mirror", "self"],
-      description:
-        "Your reflection stares back at you from the window. It looks like someone who builds things. Someone who takes ideas from the ethereal realm of imagination and wrestles them into existence. Also someone who could probably use more sleep.",
-      location: "room:window",
-      portable: false,
-    },
-
-    // Corridor objects
-    fluorescent_light: {
-      id: "fluorescent_light",
-      name: "fluorescent light",
-      aliases: ["light", "lamp"],
-      description:
-        "The fluorescent light flickers occasionally, as if it's trying to communicate in some kind of electrical morse code. So far you've deciphered: \"I... AM... TIRED... TOO.\"",
-      location: "room:corridor",
-      portable: false,
-    },
-
-    // Workshop objects
-    workbench: {
-      id: "workbench",
-      name: "workbench",
-      aliases: ["bench", "table"],
-      description:
-        "A sturdy workbench covered with the detritus of creation: screws, wires, circuit boards, and what appears to be a half-eaten sandwich from an indeterminate era. Tools hang from pegs on the wall above, arranged with the precision of someone who knows exactly where chaos should go.",
-      location: "room:workshop",
-      portable: false,
-    },
-    brass_telescope: {
-      id: "brass_telescope",
-      name: "brass telescope",
-      aliases: ["telescope", "scope"],
-      description:
-        "An antique brass telescope pointed at the impossible skylight. When you peer through it, you see... yourself, typing at a computer. The view shifts. Now you see yourself reading this description. It's telescopes all the way down.",
-      location: "room:workshop",
-      portable: false,
-    },
-    mysterious_device: {
-      id: "mysterious_device",
-      name: "mysterious device",
-      aliases: ["device", "gadget", "thing"],
-      description:
-        'A peculiar device that defies easy categorisation. It has too many buttons, most of which are unlabelled. One is labelled "DO NOT PRESS" which is, of course, the most tempting button of all. A small screen displays: "READY FOR INPUT."',
-      location: "room:workshop",
+        'A quarter from 1984, tarnished and worn smooth at the edges. Someone\'s initials are scratched on one side: "D.N." It\'s warm to the touch, as if it\'s been in someone\'s pocket recently. Or perhaps it\'s just picking up heat from your hand.',
+      location: "room:outside",
       portable: true,
       onUse:
-        'The device whirs to life, emitting a pleasant chime. The screen displays: "THANK YOU FOR PRESSING BUTTONS. YOUR CURIOSITY HAS BEEN NOTED." Nothing else happens, but you feel slightly accomplished.',
+        "You flip the quarter. It spins in the air, catching the neon light, and lands in your palm. Heads. Or tails. Does it matter? The universe remains indifferent to your small gambles.",
     },
-
-    // Server Room objects
-    server_racks: {
-      id: "server_racks",
-      name: "server racks",
-      aliases: ["servers", "racks", "machines"],
+    neon_signs: {
+      id: "neon_signs",
+      name: "neon signs",
+      aliases: ["signs", "neon", "lights"],
       description:
-        "Towering racks of servers, their LEDs blinking in patterns that seem almost deliberate. The constant hum suggests they're thinking about something. Hopefully nothing sinister. Probably just running containers.",
-      location: "room:server_room",
+        'Flickering neon tubes spelling out words like "REPAIR," "CIRCUITS," and something that might be "REALITY" but the R and A have given up entirely. The buzz is almost hypnotic, a rhythm that suggests it\'s trying to communicate in morse code. So far you\'ve deciphered: "HELP... HELP... HELP..." Probably just interference.',
+      location: "room:outside",
       portable: false,
     },
-    terminal: {
-      id: "terminal",
-      name: "glowing terminal",
-      aliases: ["computer", "screen", "console"],
+    retro_devices: {
+      id: "retro_devices",
+      name: "retro devices",
+      aliases: ["devices", "tech", "equipment"],
       description:
-        'An old terminal with a green phosphor display. The screen shows scrolling logs that seem to be commenting on your adventure in real-time. One line reads: "USER EXAMINED TERMINAL. TYPICAL BEHAVIOUR DETECTED."',
-      location: "room:server_room",
+        "An array of obsolete technology displayed in the window: a Walkman with a broken hinge, a pager that's still somehow receiving messages, a Game Boy with a screen that displays only question marks. Each one tells a story of someone who once thought these were the future.",
+      location: "room:outside",
       portable: false,
-      onUse:
-        'You type something on the terminal. It responds: "I see you. I see what you\'re building. Keep going." Encouraging, if slightly unsettling.',
     },
-    cooling_unit: {
-      id: "cooling_unit",
-      name: "cooling unit",
-      aliases: ["ac", "cooler", "hvac"],
+    metaphora_sign: {
+      id: "metaphora_sign",
+      name: "Metaphora sign",
+      aliases: ["sign", "metaphora", "store sign", "shop sign"],
       description:
-        "A massive industrial cooling unit keeping the servers from achieving thermal enlightenment. It roars like a mechanical beast. You imagine it dreams of warmer places.",
-      location: "room:server_room",
+        'The shop sign reads "METAPHORA" in faded letters that flicker uncertainly. Some letters glow brighter than others, as if the sign itself can\'t quite commit to what it wants to say. Below, in smaller text that\'s barely visible: "Est. 1984 — Where Memory Meets Tomorrow."',
+      location: "room:outside",
       portable: false,
     },
 
-    // Archives objects
-    filing_cabinets: {
-      id: "filing_cabinets",
-      name: "filing cabinets",
-      aliases: ["cabinets", "files", "drawers"],
+    // Store objects
+    crt_monitors: {
+      id: "crt_monitors",
+      name: "CRT monitors",
+      aliases: ["monitors", "screens", "crts", "displays"],
       description:
-        "Endless rows of filing cabinets containing years of accumulated documentation. The labels are organised in a system that makes perfect sense to someone, presumably. Each drawer you open seems to contain exactly what you weren't looking for.",
-      location: "room:archives",
-      portable: false,
-    },
-    projects_drawer: {
-      id: "projects_drawer",
-      name: "projects drawer",
-      aliases: ["drawer", "projects", "project drawer"],
-      description:
-        'A drawer labelled "PROJECTS" sits slightly ajar. Inside, you find folders with names like "VR Experiments," "Game Prototypes," and "Ideas Too Wild For Production." Each one tells a story of ambition, learning, and the occasional spectacular failure that led to unexpected success.',
-      location: "room:archives",
+        'Stacks of cathode ray tube monitors, their convex screens covered in a film of dust. One flickers to life as you watch, displaying green text on black: "YOU ARE BEING WATCHED." Then it goes dark. Probably just residual charge. Probably.',
+      location: "room:store",
       portable: false,
       onUse:
-        "You rifle through the projects drawer. Each folder represents a different adventure, a different challenge overcome. You feel a sense of pride and a renewed urge to build something new.",
+        "You tap the screen of one monitor. It crackles to life, displays a cursor blinking expectantly, then fades back to black. Whatever it wanted to tell you, it's changed its mind.",
     },
-    old_photograph: {
-      id: "old_photograph",
-      name: "old photograph",
-      aliases: ["photograph", "photo", "picture"],
+    dusty_shelf: {
+      id: "dusty_shelf",
+      name: "dusty shelf",
+      aliases: ["shelf", "shelves"],
       description:
-        'A slightly faded photograph tucked between filing cabinets. It shows a team of people celebrating around a desk, confetti in the air. A banner in the background reads "SHIPPED!" The joy in their faces is palpable. Someone has written on the back: "This is what it\'s all about."',
-      location: "room:archives",
-      portable: true,
+        'Shelves crammed with ancient computer components: ISA cards, parallel cables, floppy disks in both 5.25" and 3.5" varieties. A box labelled "SPARE PARTS" contains items you\'re quite certain were never parts of anything recognisable.',
+      location: "room:store",
+      portable: false,
+    },
+    empty_chair: {
+      id: "empty_chair",
+      name: "shopkeeper's chair",
+      aliases: ["chair", "seat"],
+      description:
+        "A worn office chair, its padding compressed by years of patient sitting. A cup of coffee sits on the armrest, still steaming. The shopkeeper must have just stepped out. Any moment now they'll return. Any moment.",
+      location: "room:store",
+      portable: false,
+    },
+
+    // Home objects
+    mailbox: {
+      id: "mailbox",
+      name: "leaning mailbox",
+      aliases: ["mailbox", "mail", "letterbox"],
+      description:
+        'A metal mailbox tilted at an angle that defies stability. Inside: bills, flyers for events that have already passed, and a postcard from somewhere that might not exist. The postcard shows a beach at sunset with text reading: "Wish you were here (but we\'re glad you\'re there)."',
+      location: "room:home",
+      portable: false,
+      onUse:
+        'You check the mail. More of the same: past-due notices and advertisements for products no one needs. At the bottom, a letter addressed to "The Dreamer." You pocket it for later.',
+    },
+    garden: {
+      id: "garden",
+      name: "overgrown garden",
+      aliases: ["garden", "plants"],
+      description:
+        "What was once a carefully tended garden has become a wild tangle of growth. Flowers bloom in defiance of season. A tomato plant produces fruit that seems too perfect to be real. Everything grows with the determination of things that refuse to be forgotten.",
+      location: "room:home",
+      portable: false,
+    },
+    dark_windows: {
+      id: "dark_windows",
+      name: "dark windows",
+      aliases: ["windows", "window"],
+      description:
+        "The windows are dark, but not empty. Shadows move behind the glass — or perhaps it's just the reflection of clouds racing across the sky. You're almost certain you saw a face looking back at you. Almost.",
+      location: "room:home",
+      portable: false,
+    },
+
+    // Train Station objects
+    timetable_board: {
+      id: "timetable_board",
+      name: "timetable board",
+      aliases: ["board", "timetable", "schedule"],
+      description:
+        'A mechanical split-flap display that once showed arrival and departure times. Now it cycles through destinations that sound wrong: "MEMORY LANE," "POINT OF NO RETURN," "YESTERDAY," "TOMORROW (CANCELLED)." The clicking of the flaps is almost musical.',
+      location: "room:train_station",
+      portable: false,
+      onUse:
+        'You press the button to cycle through departures. The board whirrs, flaps spinning, and settles on: "NEXT TRAIN: WHEN YOU\'RE READY." Helpful.',
+    },
+    platform_bench: {
+      id: "platform_bench",
+      name: "weathered bench",
+      aliases: ["bench", "seat"],
+      description:
+        'A wooden bench worn smooth by countless patient waiters. Someone\'s carved their initials into the armrest: "D.N. + IDEAS = ∞". The equals sign looks more recent than the rest.',
+      location: "room:train_station",
+      portable: false,
+    },
+    rusted_rails: {
+      id: "rusted_rails",
+      name: "rusted rails",
+      aliases: ["rails", "tracks", "railway"],
+      description:
+        "Iron rails oxidising gracefully, their surface a tapestry of browns and oranges. They disappear into fog in both directions. You place your hand on one — it's vibrating, ever so slightly. Something's coming. Or perhaps something just left.",
+      location: "room:train_station",
+      portable: false,
+    },
+
+    // Coast objects
+    ocean_waves: {
+      id: "ocean_waves",
+      name: "ocean waves",
+      aliases: ["ocean", "waves", "water", "sea"],
+      description:
+        "The waves roll in with hypnotic regularity, each one slightly different from the last. They foam white against the rocks, retreat, and return, as if they're trying to remember something important but keep forgetting halfway through.",
+      location: "room:coast_line",
+      portable: false,
+    },
+    rocks: {
+      id: "rocks",
+      name: "coastal rocks",
+      aliases: ["rocks", "stone", "stones"],
+      description:
+        "Dark volcanic rocks worn smooth by the ocean's endless critique. Tidal pools form in their crevices, tiny worlds complete with their own ecosystems, unaware of the larger world around them. You feel a strange kinship.",
+      location: "room:coast_line",
+      portable: false,
+    },
+    seagulls: {
+      id: "seagulls",
+      name: "wheeling seagulls",
+      aliases: ["seagulls", "gulls", "birds"],
+      description:
+        "Seagulls circle overhead, riding the air currents with practiced ease. Their cries sound almost like words if you listen closely enough. Or perhaps you're just pattern-matching where no patterns exist. Either way, they seem to find it amusing.",
+      location: "room:coast_line",
+      portable: false,
+    },
+  },
+
+  npcs: {
+    friendly_stranger: {
+      id: "friendly_stranger",
+      name: "friendly stranger",
+      aliases: ["stranger", "person", "npc", "man"],
+      location: "room:outside",
+      description:
+        "A person of indeterminate age wearing a weatherproof jacket and an expression of perpetual enthusiasm. They lean against the storefront, watching the sky with the air of someone who's seen this before and knows what's coming. Their eyes are kind but knowing.",
+      dialogue: [
+        '"Lovely evening, isn\'t it? Well, it would be if not for the storm brewing. Strange things happening in this town lately."',
+        '"You look like someone who builds things. Am I right? Got that look about you. Creative chaos and all that."',
+        '"Storm\'s coming. Best get somewhere safe. Or somewhere interesting. Sometimes they\'re the same thing."',
+        '"Been standing here for... how long has it been? Time gets funny around here. You\'ll see."',
+        '"That quarter on the ground? Someone must\'ve dropped it. Finders keepers, I always say."',
+      ],
     },
   },
 
   globals: {
     turn: 0,
     gameStarted: false,
-    puzzleFlags: {},
+    puzzleFlags: {
+      stormWarningReceived: false,
+      exploredAllRooms: false,
+    },
   },
 });
 
@@ -507,6 +534,45 @@ function findObject(name) {
   return null;
 }
 
+/**
+ * Find an NPC by name/alias in the current room
+ * @param {string} name - NPC name to find
+ * @returns {Object|null} The NPC definition or null
+ */
+function findNPC(name) {
+  if (!name) return null;
+
+  const searchName = name.toLowerCase();
+  const currentRoom = gameState.rooms[gameState.player.roomId];
+
+  // Get NPCs in current room
+  const npcIds = currentRoom.npcs || [];
+
+  for (const npcId of npcIds) {
+    const npc = gameState.npcs[npcId];
+    if (!npc) continue;
+
+    // Check main name
+    if (
+      npc.name.toLowerCase().includes(searchName) ||
+      npc.id.toLowerCase() === searchName
+    ) {
+      return npc;
+    }
+
+    // Check aliases
+    if (npc.aliases) {
+      for (const alias of npc.aliases) {
+        if (alias.toLowerCase() === searchName) {
+          return npc;
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
 // ================================================
 // COMMAND HANDLERS
 // ================================================
@@ -564,6 +630,19 @@ function describeRoom(roomId, shortForm = false) {
     output.push({ text: room.description });
   }
 
+  // List NPCs in room
+  const roomNPCs = (room.npcs || [])
+    .map((id) => gameState.npcs[id])
+    .filter((npc) => npc && npc.location === `room:${roomId}`);
+
+  if (roomNPCs.length > 0) {
+    const npcNames = roomNPCs.map((n) => n.name).join(", ");
+    output.push({
+      text: `\nPresent: ${npcNames}.`,
+      className: "system",
+    });
+  }
+
   // List objects in room
   const roomObjects = (room.objects || [])
     .map((id) => gameState.objects[id])
@@ -571,7 +650,7 @@ function describeRoom(roomId, shortForm = false) {
 
   if (roomObjects.length > 0) {
     const objNames = roomObjects.map((o) => o.name).join(", ");
-    output.push({ text: `\nYou can see: ${objNames}.`, className: "system" });
+    output.push({ text: `You can see: ${objNames}.`, className: "system" });
   }
 
   // List exits
@@ -629,12 +708,19 @@ function handleExamine(objectName) {
     return "Examine what, exactly? The void stares back, unimpressed.";
   }
 
+  // Try to find an object first
   const obj = findObject(objectName);
-  if (!obj) {
-    return `You cannot see any "${objectName}" here. Perhaps it's in another room, or perhaps it never existed.`;
+  if (obj) {
+    return obj.description;
   }
 
-  return obj.description;
+  // Try to find an NPC
+  const npc = findNPC(objectName);
+  if (npc) {
+    return npc.description;
+  }
+
+  return `You cannot see any "${objectName}" here. Perhaps it's in another room, or perhaps it never existed.`;
 }
 
 /**
@@ -764,6 +850,29 @@ function handleRead(objectName) {
 
   // For now, reading is like examining
   return `You read the ${obj.name}.\n\n${obj.description}`;
+}
+
+/**
+ * Handle TALK command
+ */
+function handleTalk(npcName) {
+  if (!npcName) {
+    return "Talk to whom? The silence offers no suggestions.";
+  }
+
+  const npc = findNPC(npcName);
+  if (!npc) {
+    return `You cannot see any "${npcName}" here to talk to.`;
+  }
+
+  if (!npc.dialogue || npc.dialogue.length === 0) {
+    return `The ${npc.name} seems disinclined to conversation at the moment.`;
+  }
+
+  // Simple dialogue: pick a random line from the dialogue array
+  const randomLine =
+    npc.dialogue[Math.floor(Math.random() * npc.dialogue.length)];
+  return randomLine;
 }
 
 /**
@@ -906,6 +1015,8 @@ function executeCommand(parsed) {
     // Interaction
     case "use":
       return handleUse(object);
+    case "talk":
+      return handleTalk(object);
 
     // Meta
     case "help":

@@ -64,6 +64,7 @@ You are going to generate the intermediate `content/intermediate.json` file with
 
 - `content/game.txt` includes the list of all rooms in the game, it also hints at important objects and NPCs
 - You can create extra objects and NPCs to fill the world a bit, but stick to the defined rooms only!
+- DO NOT disclose all the information in each room. Most of the information in the State sections should be hinted at (at most) but require the user to explore!
 - I'm defining the map, navigation, style and vibe of the game, you must convert into high-quality content!
 - Rooms can define objects which should be converted into their final structure (see game-engine format)
 - Rooms must define exits, which will mention a different room
