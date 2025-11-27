@@ -193,3 +193,4 @@ The vibe (not the writing) takes inspiration from the following:
 - The Matrix (Neo's Room)
 - Mr Robot (computer store and psychotic scenes)
 - Mr. Nobody (existentialism and surrealism)
+- Control (the game, for the aesthetic as we get deep into the psyche)

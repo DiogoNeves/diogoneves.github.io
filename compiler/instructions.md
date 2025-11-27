@@ -40,6 +40,7 @@ Copy the following files into the respective system command functions, with only
 - We're going to be compiling the content in `content/game.txt` file
 - The content defines the rooms, some items and general goal and direction and links between rooms
 - You are expected to follow the general logic in the game file, but expand on it and make it follow the style direction in the narrative-style!
+- Understand the general flow of the game before compiling, so that you can create a coherent game progression
 - Please follow the instructions closely!
 
 1. The user state should always start in the room "outside"
@@ -50,6 +51,7 @@ Copy the following files into the respective system command functions, with only
 6. Copy the `content/intermediate.json` intermediate file into the game-engine code (you might need to do some small tweaks), replacing the existing game-engine state
 
 At the end, the game should be fully functional, complete and fun!
+Let me know if I mentioned being able to navigate to an area/room but didn't define it.
 WARN ME IF ANY CONTENT WAS SKIPPED!
 
 ### Compiling files
@@ -72,6 +74,7 @@ Read through the game-engine result and confirm everything is consistent, intere
 
 - The game should be fully playable
 - All rooms and objects are accessible
+- Make sure the player initial state is valid and in a valid room
 
 ## 5. Output to User
 
