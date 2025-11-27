@@ -18,6 +18,9 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - Don't touch game-engine areas that don't need changing!
 - The game should play similar to old Zork game
 - Don't use the object code names directly, in the narrative, use something more reader friendly!
+- Avoid describing the act of entering a place, as some rooms can be entered from different locations. Prefer to describe the area instead, unless it adds value or explicitly mentioned in `game.txt`
+- Show, don't tell!
+- Don't disclose locations of important objects unless the user explores a bit!!
 
 # INSTRUCTIONS:
 
@@ -26,8 +29,6 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - Warn the user of any issues with the content!
 - Each of steps below should be a planned task, it may require sub-tasks too.
 - I'm defining the map, navigation, style and vibe of the game, you must convert into high-quality content!
-- Avoid describing the act of entering a place, as some rooms can be entered from different locations. Prefer to describe the area instead, unless it adds value or explicitly mentioned in `game.txt`
-- Show, don't tell!
 
 ## 1. Understand the system
 
