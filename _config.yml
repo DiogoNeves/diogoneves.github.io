@@ -79,3 +79,4 @@ exclude:
     - README.md
     - vendor
     - thinking/
+    - content/
