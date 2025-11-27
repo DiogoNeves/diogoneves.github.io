@@ -149,6 +149,14 @@ Explain that:
 
 ## Progression of Tone
 
+### Plot line
+
+- The player is exploring the psyche of Diogo Neves in a metaphorical world
+- The world is a metaphor for Diogo's mind
+- There are multiple paths, but a mystery unravels in what Diogo may be doing next (a storm is building)
+- Diogo's insecurities slow him down, but also provide perspective
+- The game is psychotic but full of hope! It is an inspirational trip into the nostalgia what was and the dreams and hopes of what's yet to come, with an undertone of sadness for the shortness of life!
+
 ### Early Game (Surface/Normal Areas)
 
 - Friendly and helpful
@@ -167,6 +175,7 @@ Explain that:
 
 - Increasingly unhinged narrator and progressively claustrophobic, messy and over-thinking
 - Reality becomes questionable, existential
+- The narrator is aware the current version is ephemeral and once recompiled, the entire plot will change
 - Dark humour, surreal descriptions
 - Example: "The room has no walls, or perhaps all walls. The concept of 'room' seems to be having a bit of a breakdown. You're not sure if you're standing or floating. The lamp agrees with you, which is concerning."
 

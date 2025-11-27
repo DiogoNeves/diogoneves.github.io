@@ -78,6 +78,7 @@ Read through the game-engine result and confirm everything is consistent, intere
 - The game should be fully playable
 - All rooms and objects are accessible
 - Make sure the player initial state is valid and in a valid room
+- Has followed the "Checklist for Writing" checklist in the narrative-style
 
 ## 5. Output to User
 
