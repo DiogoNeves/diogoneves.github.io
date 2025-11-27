@@ -1,3 +1,13 @@
+=====
+General
+=====
+
+This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeveours. He thrives in freedom to think and explore.
+
+=====
+Outside
+=====
+
 The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
 
 There is an NPC in this room that is extremely friendly and excited, but is warning the player that a storm seems to be coming, strange things have been happening in this town lately.
@@ -5,3 +15,43 @@ There is an NPC in this room that is extremely friendly and excited, but is warn
 There is an easy to miss quarter on the floor, near the store front.
 
 From this room the player can go to: the store (in front); house (across the road); train station; coast-line (near the store, opposite to the train)
+
+=====
+Store
+=====
+
+A simple store
+
+Nothing to see
+
+Can only go back
+
+=====
+Home
+=====
+
+A simple home
+
+Nothing to see
+
+Can only go back
+
+=====
+Train station
+=====
+
+A simple train station
+
+Nothing to see
+
+Can only go back
+
+=====
+Coast line
+=====
+
+A simple coast
+
+Nothing to see
+
+Can only go back

@@ -11,6 +11,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 # RULES:
 
 - DO NOT CHANGE THE LOGIC IN GAME-ENGINE, ONLY THE CONTENT!
+- Do not change the Title Screen!
 - When copying text, try keep the line-breaks and spaces. Each line is an `addOutput` in the game engine.
 - You must follow the guide in the narrative-style.
 - The user always starts in the room "outside".
