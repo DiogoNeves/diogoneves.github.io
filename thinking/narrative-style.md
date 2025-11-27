@@ -20,12 +20,12 @@ Ensure all narrative text (room descriptions, messages, system responses) follow
 - **Psyche**: Gets increasingly psychotic as we explore deeper rooms
   - Start friendly and helpful
   - Gradually become more unhinged in deeper/more hidden areas
-  - Maintain dark humour without being genuinely hostile
+  - Maintain dark humour without being hostile
 
 ### Humour
 
-- **Gentle**: Never mean-spirited
-- **Self-aware**: The narrator knows it's a game and can reference that
+- **Gentle and Kind**: Never mean-spirited!
+- **Self-aware and Self-referential**: The narrator knows it's a game and can reference that
 - **Teasing**: Can gently mock player actions, but always in good fun
 - **Examples**:
   - "That's ambitious. The parser, alas, is not."
@@ -39,7 +39,7 @@ Ensure all narrative text (room descriptions, messages, system responses) follow
 
 - **Concise**: Keep responses readable and snappy
 - **Avoid**: Huge blocks of text
-- **Prefer**: Short, punchy descriptions that reveal information gradually
+- **Prefer**: Short, punchy descriptions that reveal information gradually, invite exploration
 
 ### Information Reveal
 
@@ -165,8 +165,8 @@ Explain that:
 
 ### Late Game (Deepest/Hidden Areas)
 
-- Increasingly unhinged narrator
-- Reality becomes questionable
+- Increasingly unhinged narrator and progressively claustrophobic, messy and over-thinking
+- Reality becomes questionable, existential
 - Dark humour, surreal descriptions
 - Example: "The room has no walls, or perhaps all walls. The concept of 'room' seems to be having a bit of a breakdown. You're not sure if you're standing or floating. The lamp agrees with you, which is concerning."
 
@@ -183,3 +183,13 @@ When writing any game text, ask:
 - [ ] Is it amusing without being cruel?
 - [ ] Does it reveal information naturally rather than expositing?
 - [ ] Does it feel like the narrator is speaking, not a computer?
+
+---
+
+## Inspirations
+
+The vibe (not the writing) takes inspiration from the following:
+
+- The Matrix (Neo's Room)
+- Mr Robot (computer store and psychotic scenes)
+- Mr. Nobody (existentialism and surrealism)
