@@ -62,6 +62,8 @@ Store - Backrooms Entrance
 
 ==State==
 
+CLOSED UNLESS PLAYER HAS KEY!!
+
 =====
 Home
 =====
