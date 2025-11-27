@@ -12,8 +12,8 @@
   "rooms": {
     "outside": {
       "id": "outside",
-      "name": "Outside the Store",
-      "description": "You stand on a cracked pavement, facing a storefront cluttered with retro tech — cathode ray tubes, cassette players, and devices whose purposes have been lost to time. Above the entrance, a faded sign reads \"METAPHORA\" in letters that flicker between certainty and doubt. Neon tubes cast an amber glow across the street, buzzing with the kind of persistence that suggests they've forgotten how to stop.\n\nThe air tastes of petrichor and static. A storm's coming, though the sky can't quite decide when.\n\nYou can head INSIDE the store, cross the STREET to a house, walk toward the TRAIN station, or follow the path to the COAST.",
+      "name": "Outside the Storefront",
+      "description": "You stand on cracked pavement facing a narrow tech shop, its window crammed with retro hardware stacked like a memory puzzle. Neon tubes sputter in an amber halo, their letters warped by drizzle; you'll need to step closer if you want to read them. The air smells of petrichor and warm circuitry, and somewhere distant thunder practises its lines.\n\nSomething small glints near the doorway, half-hidden between tiles. You can duck IN to the shop, cross the STREET to the house, wander toward the TRAIN station, or follow the path to the COAST.",
       "exits": {
         "in": "store",
         "inside": "store",
@@ -21,7 +21,7 @@
         "train": "train_station",
         "coast": "coast_line"
       },
-      "objects": ["quarter", "neon_signs", "retro_devices", "metaphora_sign"],
+      "objects": ["quarter", "neon_signs", "metaphora_sign", "retro_devices"],
       "npcs": ["friendly_stranger"],
       "flags": {
         "visited": false,
@@ -30,27 +30,29 @@
     },
     "store": {
       "id": "store",
-      "name": "Metaphora — The Tech Shop",
-      "description": "A cramped shop stuffed with shelves of obsolete technology. Dust motes drift in the weak light filtering through the grimy window. The shopkeeper's chair sits empty, as if they've just stepped out and might return any moment. Or never.\n\nRows of CRT monitors stare blankly at you. One flickers to life occasionally, displaying static patterns that almost resemble faces. Almost.\n\nThe exit leads back OUT to the street.",
+      "name": "Metaphora — Tech Shop",
+      "description": "You slip inside and the door sighs behind you. Towers of CRTs and boxes of cables form aisles of controlled chaos, each stack humming like a contented cat. A workbench at the back hosts prototypes mid-thought: circuit boards, scribbled flowcharts, and a mug of coffee that has lost the heat but not the hope.\n\nThe room smells of solder and optimism. The only way OUT is the door you came through.",
       "exits": {
         "out": "outside",
-        "outside": "outside"
+        "outside": "outside",
+        "back": "outside"
       },
-      "objects": ["crt_monitors", "dusty_shelf", "empty_chair"],
+      "objects": ["crt_stack", "workbench_notes", "prototype_console"],
       "flags": {
         "visited": false
       }
     },
     "home": {
       "id": "home",
-      "name": "The House Across the Street",
-      "description": "You stand before a modest house with peeling paint and a garden that's given up on formality. The windows are dark, but you sense someone inside, watching the storm clouds gather.\n\nA mailbox leans at an angle, stuffed with unopened letters and what might be yesterday's dreams. The front door is closed but unlocked — the kind of place that trusts in the good nature of strangers.\n\nThe STREET leads back to the storefront.",
+      "name": "House Across the Street",
+      "description": "The small house feels lived-in rather than staged. Shoes gather by the door, evidence of a family that leaves and returns in looping patterns. A hallway disappears inward, lined with photos that capture laughter mid-bloom. Somewhere deeper, a kettle cools after being forgotten in the excitement of an idea.\n\nIt's peaceful, full of unfinished sentences. The STREET is the way back.",
       "exits": {
         "street": "outside",
         "out": "outside",
-        "outside": "outside"
+        "outside": "outside",
+        "back": "outside"
       },
-      "objects": ["mailbox", "garden", "dark_windows"],
+      "objects": ["family_portrait", "toy_robot", "open_journal"],
       "flags": {
         "visited": false,
         "doorUnlocked": true
@@ -59,13 +61,13 @@
     "train_station": {
       "id": "train_station",
       "name": "The Train Station",
-      "description": "An empty platform stretches before you, flanked by rusted rails that disappear into the fog. A timetable board displays departure times for trains that might never come. The last entry reads: \"DELAYED INDEFINITELY.\"\n\nBenches line the platform, their wood warped by weather and time. A single light flickers overhead, casting long shadows that move even when you don't.\n\nThe exit leads back toward the STOREFRONT.",
+      "description": "The platform stretches farther than physics ought to allow. Fog curls around rusted rails that vanish into nothing, and a split-flap board clatters through destinations that cannot possibly exist. The wind tastes of static; announcements never quite make it to sound.\n\nTime feels elastic here. BACK to the storefront is the only option unless you fancy waiting forever.",
       "exits": {
         "storefront": "outside",
         "back": "outside",
         "out": "outside"
       },
-      "objects": ["timetable_board", "platform_bench", "rusted_rails"],
+      "objects": ["splitflap_board", "waiting_bench", "ghost_ticket"],
       "flags": {
         "visited": false,
         "trainExpected": false
@@ -74,13 +76,13 @@
     "coast_line": {
       "id": "coast_line",
       "name": "The Coast",
-      "description": "The ocean spreads before you, grey and restless. Waves crash against rocks with the patience of something that's been doing this long before you arrived and will continue long after you leave.\n\nSeagulls wheel overhead, their cries almost like laughter. The wind carries salt and the faint scent of something burning far away. The horizon blurs where sea meets sky, both refusing to commit to a definite boundary.\n\nThe path BACK leads to the storefront.",
+      "description": "The path opens onto a slate coast. Waves hammer the rocks with patient fury, each retreat leaving salt and ozone on your tongue. The horizon flickers between storm clouds and sunlit memories, as if the weather can't pick a mood.\n\nGulls wheel overhead, sounding suspiciously like laughter at your expense. The only clear path is BACK toward the storefront, unless you plan to walk into the sea and see what answers it has.",
       "exits": {
         "back": "outside",
         "storefront": "outside",
         "out": "outside"
       },
-      "objects": ["ocean_waves", "rocks", "seagulls"],
+      "objects": ["tidal_pool", "storm_clouds", "driftwood_sign"],
       "flags": {
         "visited": false,
         "tidalPattern": "low"
@@ -92,131 +94,132 @@
       "id": "quarter",
       "name": "tarnished quarter",
       "aliases": ["quarter", "coin", "money"],
-      "description": "A quarter from 1984, tarnished and worn smooth at the edges. Someone's initials are scratched on one side: \"D.N.\" It's warm to the touch, as if it's been in someone's pocket recently. Or perhaps it's just picking up heat from your hand.",
+      "description": "A tarnished quarter from 1984, edges smoothed by anxious flipping. Someone scratched D.N. into the metal. It's warmer than it ought to be, as if memory retains its own heat.",
       "location": "room:outside",
       "portable": true,
-      "onUse": "You flip the quarter. It spins in the air, catching the neon light, and lands in your palm. Heads. Or tails. Does it matter? The universe remains indifferent to your small gambles."
+      "onUse": "You flip the quarter. The neon catches it mid-spin, casting fleeting constellations across your palm. It lands with a soft clink and the storm somewhere overhead gives a polite rumble of approval."
     },
     "neon_signs": {
       "id": "neon_signs",
       "name": "neon signs",
       "aliases": ["signs", "neon", "lights"],
-      "description": "Flickering neon tubes spelling out words like \"REPAIR,\" \"CIRCUITS,\" and something that might be \"REALITY\" but the R and A have given up entirely. The buzz is almost hypnotic, a rhythm that suggests it's trying to communicate in morse code. So far you've deciphered: \"HELP... HELP... HELP...\" Probably just interference.",
+      "description": "Neon tubing frames the window. Up close you can make out letters stuttering between \"METAPHORA\" and simply \"METAPHOR\". The buzz is half warning, half welcome, like a thought you refuse to misplace.",
+      "location": "room:outside",
+      "portable": false
+    },
+    "metaphora_sign": {
+      "id": "metaphora_sign",
+      "name": "Metaphora plaque",
+      "aliases": ["sign", "plaque", "metaphora", "store sign", "shop sign"],
+      "description": "A brass plaque beside the door reads \"METAPHORA\" in patient lettering. Beneath it, engraved in smaller type: \"Where memory meets tomorrow.\" Tilt your head and the words seem to rearrange into \"Metaphor? Ah.\" The plaque pretends not to notice.",
       "location": "room:outside",
       "portable": false
     },
     "retro_devices": {
       "id": "retro_devices",
       "name": "retro devices",
-      "aliases": ["devices", "tech", "equipment"],
-      "description": "An array of obsolete technology displayed in the window: a Walkman with a broken hinge, a pager that's still somehow receiving messages, a Game Boy with a screen that displays only question marks. Each one tells a story of someone who once thought these were the future.",
+      "aliases": ["devices", "tech", "equipment", "hardware"],
+      "description": "Walkmen, pagers, and consoles crowd the window display, each frozen mid-fashionable moment. One Game Boy shows only a blank green stare until you blink, when for a heartbeat it displays a level layout you don't recognise.",
       "location": "room:outside",
       "portable": false
     },
-    "metaphora_sign": {
-      "id": "metaphora_sign",
-      "name": "Metaphora sign",
-      "aliases": ["sign", "metaphora", "store sign", "shop sign"],
-      "description": "The shop sign reads \"METAPHORA\" in faded letters that flicker uncertainly. Some letters glow brighter than others, as if the sign itself can't quite commit to what it wants to say. Below, in smaller text that's barely visible: \"Est. 1984 — Where Memory Meets Tomorrow.\"",
-      "location": "room:outside",
-      "portable": false
-    },
-    "crt_monitors": {
-      "id": "crt_monitors",
-      "name": "CRT monitors",
-      "aliases": ["monitors", "screens", "crts", "displays"],
-      "description": "Stacks of cathode ray tube monitors, their convex screens covered in a film of dust. One flickers to life as you watch, displaying green text on black: \"YOU ARE BEING WATCHED.\" Then it goes dark. Probably just residual charge. Probably.",
+    "crt_stack": {
+      "id": "crt_stack",
+      "name": "tower of CRTs",
+      "aliases": ["crts", "monitors", "screens", "stack"],
+      "description": "A precarious stack of CRT monitors loops footage of projects at various stages: a glitchy devlog, a half-rendered game scene, a keyboard bathed in midnight light. Occasionally the feeds sync and you catch your own reflection looking back.",
       "location": "room:store",
       "portable": false,
-      "onUse": "You tap the screen of one monitor. It crackles to life, displays a cursor blinking expectantly, then fades back to black. Whatever it wanted to tell you, it's changed its mind."
+      "onUse": "You tap the top monitor. The stack shivers, resolves into a single line of green text: \"PROGRESS: IN PROGRESS.\" Then the screens return to their static gossip."
     },
-    "dusty_shelf": {
-      "id": "dusty_shelf",
-      "name": "dusty shelf",
-      "aliases": ["shelf", "shelves"],
-      "description": "Shelves crammed with ancient computer components: ISA cards, parallel cables, floppy disks in both 5.25\" and 3.5\" varieties. A box labelled \"SPARE PARTS\" contains items you're quite certain were never parts of anything recognisable.",
+    "workbench_notes": {
+      "id": "workbench_notes",
+      "name": "workbench notes",
+      "aliases": ["notes", "stickies", "post-its", "list"],
+      "description": "Sticky notes fan across the bench: \"edit next dev video\", \"ship the build before the storm\", \"call mum\", \"remember to sleep\". The handwriting grows wobblier toward the edge, like the writer ran out of daylight.",
       "location": "room:store",
       "portable": false
     },
-    "empty_chair": {
-      "id": "empty_chair",
-      "name": "shopkeeper's chair",
-      "aliases": ["chair", "seat"],
-      "description": "A worn office chair, its padding compressed by years of patient sitting. A cup of coffee sits on the armrest, still steaming. The shopkeeper must have just stepped out. Any moment now they'll return. Any moment.",
+    "prototype_console": {
+      "id": "prototype_console",
+      "name": "prototype console",
+      "aliases": ["console", "prototype", "device", "handheld"],
+      "description": "A half-built handheld wired to a breadboard. Its tiny screen shows a blinking cursor waiting for instruction, as if it expects you to type something profound or at least entertaining.",
       "location": "room:store",
-      "portable": false
-    },
-    "mailbox": {
-      "id": "mailbox",
-      "name": "leaning mailbox",
-      "aliases": ["mailbox", "mail", "letterbox"],
-      "description": "A metal mailbox tilted at an angle that defies stability. Inside: bills, flyers for events that have already passed, and a postcard from somewhere that might not exist. The postcard shows a beach at sunset with text reading: \"Wish you were here (but we're glad you're there).\"",
-      "location": "room:home",
       "portable": false,
-      "onUse": "You check the mail. More of the same: past-due notices and advertisements for products no one needs. At the bottom, a letter addressed to \"The Dreamer.\" You pocket it for later."
+      "onUse": "You press the lone button. The cursor blinks faster, then prints \"READY WHEN YOU ARE\" before fading back to anticipation."
     },
-    "garden": {
-      "id": "garden",
-      "name": "overgrown garden",
-      "aliases": ["garden", "plants"],
-      "description": "What was once a carefully tended garden has become a wild tangle of growth. Flowers bloom in defiance of season. A tomato plant produces fruit that seems too perfect to be real. Everything grows with the determination of things that refuse to be forgotten.",
+    "family_portrait": {
+      "id": "family_portrait",
+      "name": "family portrait",
+      "aliases": ["portrait", "photo", "picture"],
+      "description": "A framed photograph catches a family mid-laugh. Someone's eyes are squeezed shut, someone's hair is in motion, and the joy is wonderfully imperfect. A faint reflection shows storm clouds gathering beyond the window outside the frame.",
       "location": "room:home",
       "portable": false
     },
-    "dark_windows": {
-      "id": "dark_windows",
-      "name": "dark windows",
-      "aliases": ["windows", "window"],
-      "description": "The windows are dark, but not empty. Shadows move behind the glass — or perhaps it's just the reflection of clouds racing across the sky. You're almost certain you saw a face looking back at you. Almost.",
+    "toy_robot": {
+      "id": "toy_robot",
+      "name": "toy robot",
+      "aliases": ["robot", "toy", "figure"],
+      "description": "A small 3D-printed robot sits on the shoe rack, one arm missing, LEDs blinking a stubborn heartbeat. Someone has scrawled \"beta\" on its back in permanent marker.",
       "location": "room:home",
       "portable": false
     },
-    "timetable_board": {
-      "id": "timetable_board",
-      "name": "timetable board",
-      "aliases": ["board", "timetable", "schedule"],
-      "description": "A mechanical split-flap display that once showed arrival and departure times. Now it cycles through destinations that sound wrong: \"MEMORY LANE,\" \"POINT OF NO RETURN,\" \"YESTERDAY,\" \"TOMORROW (CANCELLED).\" The clicking of the flaps is almost musical.",
+    "open_journal": {
+      "id": "open_journal",
+      "name": "open journal",
+      "aliases": ["journal", "notebook", "diary", "notes"],
+      "description": "A notebook lies open on the hall table. One page holds a gratitude list; the next, a sketched level layout full of arrows and question marks. A tea ring smudges the ink like a quiet apology.",
+      "location": "room:home",
+      "portable": false
+    },
+    "splitflap_board": {
+      "id": "splitflap_board",
+      "name": "split-flap board",
+      "aliases": ["board", "timetable", "schedule", "display"],
+      "description": "The split-flap board rattles through impossible destinations: MEMORY LANE, NEXT BUILD, SOMEDAY, SOONISH. Every so often it pauses on a blank space, as if contemplating silence.",
       "location": "room:train_station",
       "portable": false,
-      "onUse": "You press the button to cycle through departures. The board whirrs, flaps spinning, and settles on: \"NEXT TRAIN: WHEN YOU'RE READY.\" Helpful."
+      "onUse": "You press the service button. The flaps whir, then settle on: \"NEXT TRAIN: WHEN YOU STOP HESITATING.\" It immediately pretends it never said that."
     },
-    "platform_bench": {
-      "id": "platform_bench",
-      "name": "weathered bench",
+    "waiting_bench": {
+      "id": "waiting_bench",
+      "name": "waiting bench",
       "aliases": ["bench", "seat"],
-      "description": "A wooden bench worn smooth by countless patient waiters. Someone's carved their initials into the armrest: \"D.N. + IDEAS = ∞\". The equals sign looks more recent than the rest.",
+      "description": "A wooden bench worn smooth by patient dreamers. Someone carved \"CATCH YOUR BREATH\" into the armrest and underlined it three times for emphasis.",
       "location": "room:train_station",
       "portable": false
     },
-    "rusted_rails": {
-      "id": "rusted_rails",
-      "name": "rusted rails",
-      "aliases": ["rails", "tracks", "railway"],
-      "description": "Iron rails oxidising gracefully, their surface a tapestry of browns and oranges. They disappear into fog in both directions. You place your hand on one — it's vibrating, ever so slightly. Something's coming. Or perhaps something just left.",
+    "ghost_ticket": {
+      "id": "ghost_ticket",
+      "name": "ghost ticket",
+      "aliases": ["ticket", "stub", "pass"],
+      "description": "A ticket stub with no date and no price, just \"ADMIT ONE: D.N. + GUEST\" stamped in faded ink. It smells faintly of rain and printer toner.",
       "location": "room:train_station",
-      "portable": false
+      "portable": true,
+      "onUse": "You hold the ticket up to the flickering light. Letters rearrange to spell \"YOU'RE ALREADY ON BOARD\" before dissolving back into smudges."
     },
-    "ocean_waves": {
-      "id": "ocean_waves",
-      "name": "ocean waves",
-      "aliases": ["ocean", "waves", "water", "sea"],
-      "description": "The waves roll in with hypnotic regularity, each one slightly different from the last. They foam white against the rocks, retreat, and return, as if they're trying to remember something important but keep forgetting halfway through.",
+    "tidal_pool": {
+      "id": "tidal_pool",
+      "name": "tidal pool",
+      "aliases": ["pool", "water", "puddle"],
+      "description": "A shallow tidal pool mirrors the sky in miniature. Tiny crabs scuttle between pebbles, and a fragment of circuitry lies half-buried like an alien shell. The water tastes of salt and possibility.",
       "location": "room:coast_line",
       "portable": false
     },
-    "rocks": {
-      "id": "rocks",
-      "name": "coastal rocks",
-      "aliases": ["rocks", "stone", "stones"],
-      "description": "Dark volcanic rocks worn smooth by the ocean's endless critique. Tidal pools form in their crevices, tiny worlds complete with their own ecosystems, unaware of the larger world around them. You feel a strange kinship.",
+    "storm_clouds": {
+      "id": "storm_clouds",
+      "name": "storm clouds",
+      "aliases": ["clouds", "storm", "sky"],
+      "description": "A bruise-coloured front gathers on the horizon. Lightning scribbles idle notes across the underside, as if sketching ideas before committing to a full performance.",
       "location": "room:coast_line",
       "portable": false
     },
-    "seagulls": {
-      "id": "seagulls",
-      "name": "wheeling seagulls",
-      "aliases": ["seagulls", "gulls", "birds"],
-      "description": "Seagulls circle overhead, riding the air currents with practiced ease. Their cries sound almost like words if you listen closely enough. Or perhaps you're just pattern-matching where no patterns exist. Either way, they seem to find it amusing.",
+    "driftwood_sign": {
+      "id": "driftwood_sign",
+      "name": "driftwood sign",
+      "aliases": ["sign", "driftwood", "post"],
+      "description": "A piece of driftwood is wedged upright between rocks. Someone carved \"BUILD LOUDLY\" into it, then crossed out LOUDLY and wrote \"TRUTHFULLY\" beneath. The wood creaks like it might offer more advice if you listen.",
       "location": "room:coast_line",
       "portable": false
     }
@@ -225,15 +228,15 @@
     "friendly_stranger": {
       "id": "friendly_stranger",
       "name": "friendly stranger",
-      "aliases": ["stranger", "person", "npc", "man"],
+      "aliases": ["stranger", "person", "npc", "traveller"],
       "location": "room:outside",
-      "description": "A person of indeterminate age wearing a weatherproof jacket and an expression of perpetual enthusiasm. They lean against the storefront, watching the sky with the air of someone who's seen this before and knows what's coming. Their eyes are kind but knowing.",
+      "description": "A person of indeterminate age leans against the storefront, jacket weatherproof and grin weathered. They watch the sky the way sailors watch the tide, amused and a little wary.",
       "dialogue": [
-        "\"Lovely evening, isn't it? Well, it would be if not for the storm brewing. Strange things happening in this town lately.\"",
-        "\"You look like someone who builds things. Am I right? Got that look about you. Creative chaos and all that.\"",
-        "\"Storm's coming. Best get somewhere safe. Or somewhere interesting. Sometimes they're the same thing.\"",
-        "\"Been standing here for... how long has it been? Time gets funny around here. You'll see.\"",
-        "\"That quarter on the ground? Someone must've dropped it. Finders keepers, I always say.\""
+        "\"Lovely evening, isn't it? Well, it would be if the sky wasn't rehearsing something dramatic. Keep an eye on it, yeah?\"",
+        "\"You look like someone who builds things. Creative chaos in the eyes. Respect.\"",
+        "\"Storm's coming. Best pick where you want to be when it hits: safe, daring, or both.\"",
+        "\"Time gets funny round here. Blink and you'll be waiting for a train that never was.\"",
+        "\"That little glint near the door? If you fancy luck, don't leave it to the pigeons.\""
       ]
     }
   },

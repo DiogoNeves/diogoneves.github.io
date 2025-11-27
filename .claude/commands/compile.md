@@ -14,3 +14,5 @@ For each instruction:
 
 If the instructions file is empty or doesn't exist, inform the user.
 If you need clarification on a step, ask the user directly!
+
+Once completed, increment the version in \_layouts/game.html when importing the script.
