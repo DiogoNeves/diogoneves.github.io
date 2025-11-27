@@ -1,0 +1,7 @@
+The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
+
+There is an NPC in this room that is extremely friendly and excited, but is warning the player that a storm seems to be coming, strange things have been happening in this town lately.
+
+There is an easy to miss quarter on the floor, near the store front.
+
+From this room the player can go to: the store (in front); house (across the road); train station; coast-line (near the store, opposite to the train)
