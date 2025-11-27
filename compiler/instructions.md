@@ -17,6 +17,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - The user always starts in the room "outside".
 - Don't touch game-engine areas that don't need changing!
 - The game should play similar to old Zork game
+- Don't use the object code names directly, in the narrative, use something more reader friendly!
 
 # INSTRUCTIONS:
 
