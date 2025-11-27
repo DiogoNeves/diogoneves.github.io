@@ -12,6 +12,7 @@ Ensure all narrative text (room descriptions, messages, system responses) follow
 
 - **Second person**: Use "You stand...", "You pick up...", "You see..."
 - Always address the player directly
+- The narrator knows very little information unless it has been disclosed before. The narrator is creating the vibe and is the players eyes
 
 ### Voice
 
