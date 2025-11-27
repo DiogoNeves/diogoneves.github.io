@@ -770,52 +770,56 @@ function handleRead(objectName) {
  * Handle HELP command
  */
 function handleHelp() {
-  return `You type words. I try to understand them. We muddle through together.
-
-COMMANDS:
-  LOOK (L)         — Describe your surroundings
-  EXAMINE X (X X)  — Look closely at something
-  INVENTORY (I)    — Check what you're carrying
-  TAKE / GET       — Pick something up
-  DROP             — Put something down
-  USE              — Interact with an object
-  READ             — Read text on objects
-
-MOVEMENT:
-  NORTH (N), SOUTH (S), EAST (E), WEST (W)
-  UP (U), DOWN (D), IN, OUTe
-
-META:
-  HELP    — You're reading it
-  ABOUT   — Learn more about this place
-  CLEAR   — Clear the screen
-  QUIT    — A polite farewell
-
-Some objects here lead to real content — posts, videos, documentation.
-Interact with them and they'll open in new tabs. It's a small world,
-but it's got layers.`;
+  return [
+    "You type words. I try to understand them. We muddle through together.",
+    "",
+    "COMMANDS:",
+    "  LOOK (L)         — Describe your surroundings",
+    "  EXAMINE X (X X)  — Look closely at something",
+    "  INVENTORY (I)    — Check what you're carrying",
+    "  TAKE / GET       — Pick something up",
+    "  DROP             — Put something down",
+    "  USE              — Interact with an object",
+    "  READ             — Read text on objects",
+    "",
+    "MOVEMENT:",
+    "  NORTH (N), SOUTH (S), EAST (E), WEST (W)",
+    "  UP (U), DOWN (D), IN, OUT",
+    "",
+    "META:",
+    "  HELP    — You're reading it",
+    "  ABOUT   — Learn more about this place",
+    "  CLEAR   — Clear the screen",
+    "  QUIT    — A polite farewell",
+    "",
+    "Some objects here lead to real content — posts, videos, documentation.",
+    "Interact with them and they'll open in new tabs. It's a small world,",
+    "but it's got layers.",
+  ];
 }
 
 /**
  * Handle ABOUT command
  */
 function handleAbout() {
-  return `ABOUT THIS PLACE
-
-This is a personal website wearing a text adventure costume. Or perhaps
-it's a text adventure that happens to contain a personal website. The
-distinction blurs.
-
-I'm Diogo. I build things — games, systems, experiments. This place is
-a playful way to explore that. Some actions will open real content:
-blog posts, documentation, videos. Think of it as navigation through
-the medium of curiosity.
-
-The engine is entirely client-side JavaScript. No servers were harmed
-in the making of this adventure. The code is probably on GitHub,
-because where else would it be?
-
-Type LOOK to continue exploring.`;
+  return [
+    "ABOUT THIS PLACE",
+    "",
+    "This is a personal website wearing a text adventure costume. Or perhaps",
+    "it's a text adventure that happens to contain a personal website. The",
+    "distinction blurs.",
+    "",
+    "I'm Diogo. I build things — games, systems, experiments. This place is",
+    "a playful way to explore that. Some actions will open real content:",
+    "blog posts, documentation, videos. Think of it as navigation through",
+    "the medium of curiosity.",
+    "",
+    "The engine is entirely client-side JavaScript. No servers were harmed",
+    "in the making of this adventure. The code is probably on GitHub,",
+    "because where else would it be?",
+    "",
+    "Type LOOK to continue exploring.",
+  ];
 }
 
 /**
@@ -823,18 +827,21 @@ Type LOOK to continue exploring.`;
  */
 function handleClear() {
   clearOutput();
-  return null; // No output to add
+  // After clearing, show the current room (like LOOK)
+  return handleLook(null);
 }
 
 /**
  * Handle QUIT command
  */
 function handleQuit() {
-  return `You consider leaving, but where would you go? The real world
-awaits, certainly, with its meetings and deadlines. But you're always
-welcome back here. The terminal will remember you.
-
-(Refresh the page to start anew, or simply continue exploring.)`;
+  return [
+    "You consider leaving, but where would you go? The real world",
+    "awaits, certainly, with its meetings and deadlines. But you're always",
+    "welcome back here. The terminal will remember you.",
+    "",
+    "(Refresh the page to start anew, or simply continue exploring.)",
+  ];
 }
 
 /**
@@ -1111,9 +1118,9 @@ function handleInput(event) {
     // Check if they typed a command or just pressed enter
     const parsed = parseCommand(input);
     if (parsed.verb === "help") {
-      addOutput(handleHelp());
+      displayOutput(handleHelp());
     } else if (parsed.verb === "about") {
-      addOutput(handleAbout());
+      displayOutput(handleAbout());
     } else {
       // Show starting room
       const roomOutput = describeRoom(gameState.player.roomId);

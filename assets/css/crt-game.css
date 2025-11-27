@@ -747,6 +747,7 @@ body.game-page {
   margin-bottom: 0.5em;
   text-shadow: 0 0 8px var(--crt-green-glow);
   animation: text-appear 0.05s ease-out;
+  white-space: pre-wrap; /* Preserve line breaks and spaces */
 }
 
 @keyframes text-appear {
