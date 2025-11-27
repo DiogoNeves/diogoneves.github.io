@@ -22,6 +22,7 @@ Ensure all narrative text (room descriptions, messages, system responses) follow
   - Start friendly and helpful
   - Gradually become more unhinged in deeper/more hidden areas
   - Maintain dark humour without being hostile
+- **No Clichés**: Unless ironically, for humour, avoid cliches or amateur writing. **Show, don't tell**!
 
 ### Humour
 
