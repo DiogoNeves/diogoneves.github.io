@@ -1,4 +1,5 @@
 Your goal is to compile the information in `content/` into the `assets/game-engine.js` code, following the rules and instructions below and the `thinking/narrative-style.md` direction.
+The game explores my mind. The information I want to share, but also my insecurities, what I'm proud, unfinished projects, dreams and hopes, psyche and growing old. Some rooms are metaphorical, others are more an area to store content (essays, articles, links).
 
 # From this point we will refer to:
 
@@ -36,29 +37,30 @@ Copy the following files into the respective system command functions, with only
 
 ## 3. Compile the main game content
 
-- We're going to be compiling the content in `content/game/` folder
-- Each file represents a room (unless stated at the top of the file)
+- We're going to be compiling the content in `content/game.txt` file
 - The content defines the rooms, some items and general goal and direction and links between rooms
-- You are expected to follow the general logic in the content files, but expand on it and make it follow the style direction in the narrative-style!
+- You are expected to follow the general logic in the game file, but expand on it and make it follow the style direction in the narrative-style!
 - Please follow the instructions closely!
 
 1. The user state should always start in the room "outside"
 2. Understand the data structure of the state we have to generate, in game-engine
-3. Create an intermediate file `content/intermediate/game.json`, replace any existing
-4. Start compiling from `content/game/outside.txt` and follow any mentioned files there (see "Compiling files" section below)
-5. Iterate through all content files until the game is complete
-6. Copy the `content/intermediate/game.json` intermediate file into the game-engine code (you might need to do some small tweaks), replacing the existing game-engine state
+3. Create an intermediate file `content/intermediate.json`, replace any existing
+4. Compile `content/game.txt` and follow the flow of rooms (see "Compiling files" section below)
+5. Iterate through all rooms until the game is complete
+6. Copy the `content/intermediate.json` intermediate file into the game-engine code (you might need to do some small tweaks), replacing the existing game-engine state
 
 At the end, the game should be fully functional, complete and fun!
-WARN ME IF ANY CONTENT FILES WERE NOT COMPILED!
+WARN ME IF ANY CONTENT WAS SKIPPED!
 
 ### Compiling files
 
-For each file, you are going to generate the intermediate `content/intermediate/game.json` content related to that room and related objects or state. Your main job is to create interesting content following my guidance.
+You are going to generate the intermediate `content/intermediate.json` file with the new state and related objects generated from compiling `content/game.txt`. Your main job is to create an interesting game and content following my guidance.
 
+- `content/game.txt` includes the list of all rooms in the game, it also hints at important objects and NPCs
+- You can create extra objects and NPCs to fill the world a bit, but stick to the defined rooms only!
 - I'm defining the map, navigation, style and vibe of the game, you must convert into high-quality content!
 - Rooms can define objects which should be converted into their final structure (see game-engine format)
-- Rooms must define exits, which will mention a different file
+- Rooms must define exits, which will mention a different room
 - Everything is defined in natural language with some structure, it's your job to convert into the structured data we expect!
 - You must convert the brief descriptions and vibe of the room into the final text, following the narrative-style. THIS IS YOUR MAIN JOB! TO CREATE INTERESTING CONTENT FOLLOWING MY GUIDANCE!
 - Commands found in game-engine should output something interesting for each room.
