@@ -25,6 +25,8 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - Warn the user of any issues with the content!
 - Each of steps below should be a planned task, it may require sub-tasks too.
 - I'm defining the map, navigation, style and vibe of the game, you must convert into high-quality content!
+- Avoid describing the act of entering a place, as some rooms can be entered from different locations. Prefer to describe the area instead, unless it adds value or explicitly mentioned in `game.txt`
+- Show, don't tell!
 
 ## 1. Understand the system
 
