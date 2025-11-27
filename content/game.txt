@@ -23,12 +23,44 @@ From this room the player can go to: the store (in front); house (across the roa
 Store
 =====
 
-A simple store
+At the entrance, the store sells software. It has shelves with gift cards for AI codes to connect to large AI models, but also has a section with personal AI boxes. One of the boxes has a post-it hanging.
+The store looks pristine but abandoned. Looks like whoever worked here left in a rush as there are piles of personal AI boxes on the floor, waiting to be moved to a shelf.
+There's a counter in front, opposite to the entrance.
 
 ==State==
-Nothing to see
+There's a post-it hanging on a personal AI box. It says "these are yet to happen" in messy hand-writting, barely readable.
 
-Can only go back
+(only if the user looks) The box of one of the personal AI boxes on the floor says "Don't use at your own risk!".
+
+From this room:
+* Behind the counter there's a door (it's locked, needs the "backdoor-key-1")
+* To the left of the entrance is the retro video-game section
+* To the right of the entrance is the video and content section
+
+=====
+Store - Content
+=====
+
+==State==
+
+=====
+Store - Video-Games
+=====
+
+This section feels more creative, with poster on the wall. Mostly games, especially old ones like Tomb Raider, Final Fantasy VII, Crash Bandicoot, MediEval.
+There's also a dusty large cardboard standee with bold large colourful font "Little Big Planet". Many different games are on shelves, many different copies of Little Big Planet too.
+
+==State==
+
+Turning one of the Little Big Planet games around shows a note in the lapidated box "once a masterpiece, left in the few who remember".
+
+Looking closer at the standee shows "BAFTA award winning game".
+
+=====
+Store - Backrooms Entrance
+=====
+
+==State==
 
 =====
 Home
