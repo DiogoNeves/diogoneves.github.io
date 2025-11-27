@@ -1,6 +1,8 @@
 Your goal is to compile the information in `content/` into the `assets/game-engine.js` code, following the rules and instructions below and the `thinking/narrative-style.md` direction.
 The game explores my mind. The information I want to share, but also my insecurities, what I'm proud, unfinished projects, dreams and hopes, psyche and growing old. Some rooms are metaphorical, others are more an area to store content (essays, articles, links).
 
+SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
+
 # From this point we will refer to:
 
 - `assets/game-engine.js` as game-engine (case-insensitive).
