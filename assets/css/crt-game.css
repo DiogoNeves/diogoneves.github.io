@@ -132,7 +132,7 @@ body.game-page {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 18vh;
+  height: 12vh;
   z-index: 1;
   
   /* Desk top surface */
@@ -220,7 +220,7 @@ body.game-page {
 .monitor-wrapper {
   position: relative;
   z-index: 2;
-  margin-bottom: 12vh;
+  margin-bottom: 10vh;
   
   /* Monitor casts shadow on desk */
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
@@ -233,7 +233,8 @@ body.game-page {
 .crt-monitor {
   position: relative;
   width: min(95vw, 1000px);
-  height: min(85vh, 700px);
+  /* Allow taller monitor to fit initial content - use more of the available height */
+  height: min(calc(100vh - 14vh), 800px);
   background: linear-gradient(145deg, var(--monitor-bezel-light), var(--monitor-bezel-dark));
   border-radius: 20px;
   padding: var(--monitor-padding);
@@ -936,18 +937,35 @@ body.game-page {
    RESPONSIVE ADJUSTMENTS
    ================================================ */
 
-@media (max-width: 768px) {
+/* Large screens - maximize monitor height */
+@media (min-height: 800px) {
+  .crt-monitor {
+    height: min(calc(100vh - 12vh), 850px);
+  }
+  
   .desk-surface {
-    height: 12vh;
+    height: 10vh;
   }
   
   .monitor-wrapper {
     margin-bottom: 8vh;
   }
+}
+
+/* Medium screens */
+@media (max-width: 768px) {
+  .desk-surface {
+    height: 10vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 6vh;
+  }
   
   .crt-monitor {
     width: 95vw;
-    height: min(70vh, 500px);
+    height: calc(100vh - 12vh);
+    max-height: 600px;
     border-radius: 12px;
   }
   
@@ -967,27 +985,46 @@ body.game-page {
   }
 }
 
+/* Small screens - prioritize content visibility */
 @media (max-width: 480px) {
   :root {
     --font-size-base: 14px;
+    --screen-padding: 12px;
   }
   
   .desk-surface {
-    height: 10vh;
+    height: 8vh;
   }
   
   .monitor-wrapper {
-    margin-bottom: 6vh;
+    margin-bottom: 5vh;
   }
   
   .crt-monitor {
     width: 98vw;
-    height: min(75vh, 450px);
+    height: calc(100vh - 10vh);
+    max-height: none;
+    border-radius: 10px;
   }
   
   .ascii-banner {
     font-size: 4px;
     overflow-x: auto;
+  }
+}
+
+/* Very short screens - minimize desk to maximize monitor */
+@media (max-height: 600px) {
+  .desk-surface {
+    height: 6vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 4vh;
+  }
+  
+  .crt-monitor {
+    height: calc(100vh - 8vh);
   }
 }
 
