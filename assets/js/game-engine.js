@@ -909,7 +909,7 @@ function handleAbout() {
     "",
     "This is my website, or perhaps it's a text adventure in my mind. The distinction blurs.",
     "",
-    "I'm Diogo. I build things — games, systems, experiments. Code is a form of expression for me. A shapeshifter tool I play with not quite knowing where I'm going, half of the time.",
+    "I'm Diogo. I build things: games, systems, experiments. Code is a form of expression for me. A shapeshifter tool I play with not quite knowing where I'm going, half of the time.",
     "",
     "Feel free to explore. Some actions will open real content: blog posts, documentation, videos; just be careful not to get lost.",
     "",
