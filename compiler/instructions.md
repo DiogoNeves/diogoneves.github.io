@@ -49,7 +49,7 @@ Copy the following files into the respective system command functions, with only
 
 1. The user state should always start in the room "outside"
 2. Understand the data structure of the state we have to generate, in game-engine
-3. Create an intermediate file `content/intermediate.json`, replace any existing
+3. Create an intermediate file `content/intermediate.json`, delete the previous one!
 4. Compile `content/game.txt` and follow the flow of rooms (see "Compiling files" section below)
 5. Iterate through all rooms until the game is complete
 6. Copy the `content/intermediate.json` intermediate file into the game-engine code (you might need to do some small tweaks), replacing the existing game-engine state
