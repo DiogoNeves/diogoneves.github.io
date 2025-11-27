@@ -73,10 +73,11 @@ plugins:
 
 # Exclude these files from your production _site
 exclude:
-    - Gemfile
-    - Gemfile.lock
-    - LICENSE
-    - README.md
-    - vendor
-    - thinking/
-    - content/
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - vendor
+  - thinking/
+  - content/
+  - compiler/
