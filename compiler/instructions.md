@@ -77,6 +77,14 @@ You are going to generate the intermediate `content/intermediate.json` file with
 - Commands found in game-engine should output something interesting for each room.
 - Rooms can have NPCs and each NPC can have multiple lines. Some are just lists of lines that the game-engine will pick, some are conditional (see `thinking/game-engine.md` and game-engine code)
 
+Room Structure:
+Name in the title
+General description - explaining the vibe of the room and some of what's visible
+State section - any required state to enter the room or potential changes of state
+Objects - Objects found in the room (not everything will be visible upfront)
+NPCs - Any NPCs that may be in the room
+Exits - Where the player can navigate from here
+
 ## 4. Polishing
 
 Read through the game-engine result and confirm everything is consistent, interesting and logically works.

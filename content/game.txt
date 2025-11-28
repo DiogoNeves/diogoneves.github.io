@@ -11,16 +11,24 @@ Outside
 The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
 
 ==State==
-There is an NPC in this room that is extremely friendly and excited, but is warning the player that a storm seems to be coming, strange things have been happening in this town lately. (only disclose this information if talked to)
+No state changes
 
-There is an easy to miss quarter on the floor, near the store front.
+==Objects==
+An easy to miss quarter on the floor, near the store front.
 
 The player can read the neon sign and store name "Metaphora" (don't disclose unless the user reads the signs).
 
-From this room the player can go to: the store (in front); house (across the road); train station; coast-line (near the store, opposite to the train)
+==NPCs==
+There is an NPC that is extremely friendly and excited, but is warning the player that a storm seems to be coming, strange things have been happening in this town lately. (only disclose this information if talked to)
+
+==Exits==
+The tech shop (in front)
+The house (across the road)
+The train station
+The coast-line (near the shop, opposite to the train)
 
 =====
-Store
+Tech Shop
 =====
 
 At the entrance, the store sells software. It has shelves with gift cards for AI codes to connect to large AI models, but also has a section with personal AI boxes. One of the boxes has a post-it hanging.
@@ -28,14 +36,22 @@ The store looks pristine but abandoned. Looks like whoever worked here left in a
 There's a counter in front, opposite to the entrance.
 
 ==State==
+If the user inspects the Personal AI Box, set the state "knowsTheFuture" to true.
+
+The door behind the counter requires the "backdoor-key-1" but don't disclose to the user unless they try to open it!
+
+==Objects==
 There's a post-it hanging on a personal AI box. It says "these are yet to happen" in messy hand-writting, barely readable.
 
 (only if the user looks) The box of one of the personal AI boxes on the floor says "Don't use at your own risk!".
 
-From this room:
-* Behind the counter there's a door (it's locked, needs the "backdoor-key-1")
-* To the left of the entrance is the retro video-game section
-* To the right of the entrance is the video and content section
+==NPCs==
+None.
+
+==Exits==
+Behind the counter there's a door (it's locked, needs the "backdoor-key-1")
+To the left of the entrance is the retro video-game section
+To the right of the entrance is the video and content section
 
 =====
 Store - Content
