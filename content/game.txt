@@ -8,6 +8,7 @@ This game is about Diogo Neves, a creator/maker born in 1984 who loves his famil
 Outside
 =====
 
+==General description==
 The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
 
 ==State==
@@ -31,6 +32,7 @@ The coast-line (near the shop, opposite to the train)
 Tech Shop
 =====
 
+==General description==
 At the entrance, the store sells software. It has shelves with gift cards for AI codes to connect to large AI models, but also has a section with personal AI boxes. One of the boxes has a post-it hanging.
 The store looks pristine but abandoned. Looks like whoever worked here left in a rush as there are piles of personal AI boxes on the floor, waiting to be moved to a shelf.
 There's a counter in front, opposite to the entrance.
@@ -57,58 +59,115 @@ To the right of the entrance is the video and content section
 Store - Content
 =====
 
+==General description==
+The content section to the right of the entrance holds the video and creativity-focused side of the store, with tools for editing and production.
+
 ==State==
+No state changes
+
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+Back to the Tech Shop
 
 =====
 Store - Video-Games
 =====
 
+==General description==
 This section feels more creative, with poster on the wall. Mostly games, especially old ones like Tomb Raider, Final Fantasy VII, Crash Bandicoot, MediEval.
 There's also a dusty large cardboard standee with bold large colourful font "Little Big Planet". Many different games are on shelves, many different copies of Little Big Planet too.
 
 ==State==
-
 Turning one of the Little Big Planet games around shows a note in the lapidated box "once a masterpiece, left in the few who remember".
 
 Looking closer at the standee shows "BAFTA award winning game".
+
+==Objects==
+Posters on the wall celebrate nostalgic titles and a standee heralds Little Big Planet.
+
+==NPCs==
+None.
+
+==Exits==
+Back to the Tech Shop
 
 =====
 Store - Backrooms Entrance
 =====
 
-==State==
+==General description==
+The backrooms entrance sits hidden within the store and is currently sealed off.
 
+==State==
 CLOSED UNLESS PLAYER HAS KEY!!
+
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+Back to the Tech Shop
 
 =====
 Home
 =====
 
-A simple home
+==General description==
+A simple home across the road from the store.
 
 ==State==
 Nothing to see
 
-Can only go back
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+Back to the Outside
 
 =====
 Train station
 =====
 
-A simple train station
+==General description==
+A simple train station on the outskirts of town.
 
 ==State==
 Nothing to see
 
-Can only go back
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+Back to the Outside
 
 =====
 Coast line
 =====
 
-A simple coast
+==General description==
+A simple coastline near the shop, with waves lapping the shore.
 
 ==State==
 Nothing to see
 
-Can only go back
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+Back to the Outside
