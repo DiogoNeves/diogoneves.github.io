@@ -206,16 +206,18 @@ Train station
 =====
 
 ==General description==
-A simple train station on the outskirts of town.
+A small and clean train station. The screen shows that the next train is delayed. Expected time unknown. On the wall there are also old poster ads about a trip to from Portugal to the UK.
 
 ==State==
-Nothing to see
+The user can receive a coffee in the inventory.
 
 ==Objects==
-None.
+- There's some marker written on top of the Poster Ad saying "You do not understand what you're leaving behind!".
+- There's a notebook on the floor titled "All the memories that weren't". The first page says "You can feel nostalgic for stuff that never happened!"
+- The user can get a coffee.
 
 ==NPCs==
-None.
+- There's someone at the counter offering free coffee (which the user can get)
 
 ==Exits==
 Can only go back.
