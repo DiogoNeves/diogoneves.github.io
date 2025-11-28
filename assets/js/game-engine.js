@@ -10,684 +10,754 @@
 // ================================================
 
 const createInitialState = () => ({
-  player: {
-    roomId: "outside",
-    inventory: [],
-    flags: {
-      hasStarted: false,
-      stormNoticed: false,
-      hasLight: true,
-      knowsTheFuture: false,
-      foundQuarter: false,
+  "player": {
+      "roomId": "outside",
+      "inventory": [],
+      "flags": {
+        "hasStarted": false,
+        "stormNoticed": false,
+        "hasLight": true,
+        "knowsTheFuture": false,
+        "foundQuarter": false
+      }
     },
-  },
+    "rooms": {
+      "outside": {
+        "id": "outside",
+        "name": "Outside the Shopfront",
+        "description": "You stand on damp pavement outside a narrow tech shop. Retro kit fogs the window, LEDs blinking like polite fireflies beneath a neon sign that can't decide on its name. The air tastes of solder, wet concrete, and the rumour of a storm rehearsing just out of sight.\n\nA faint metallic glint lurks near the threshold. Across the road a warm HOUSE window glows; east the SHOP door waits; north a station sign blinks DELAYED; south the coast breathes salt.",
+        "exits": {
+          "east": "store",
+          "in": "store",
+          "store": "store",
+          "shop": "store",
+          "inside": "store",
+          "west": "home",
+          "home": "home",
+          "house": "home",
+          "street": "home",
+          "north": "train_station",
+          "train": "train_station",
+          "station": "train_station",
+          "south": "coast_line",
+          "coast": "coast_line",
+          "shore": "coast_line"
+        },
+        "objects": [
+          "quarter",
+          "neon_sign",
+          "storefront_window"
+        ],
+        "npcs": [
+          "friendly_lookout"
+        ],
+        "flags": {
+          "visited": false,
+          "stormWarningGiven": false
+        }
+      },
+      "store": {
+        "id": "store",
+        "name": "Tech Shop",
+        "description": "You slip into a shop paused mid-thought. Shelves of prepaid AI cards stand to attention. Stacks of personal AI boxes sit mid-restock, one sporting a post-it that flaps like a prophecy while another box shouts a double-negative warning. Someone left in a hurry and forgot to tidy their future.\n\nThe counter faces you, a brass bell guarding a staff door with a judging keyhole. North the aisles lean into retro games; south the video rigs wait; east a sealed back area dares you to earn entry; west the street keeps breathing rain.",
+        "exits": {
+          "west": "outside",
+          "out": "outside",
+          "outside": "outside",
+          "exit": "outside",
+          "north": "store_games",
+          "left": "store_games",
+          "games": "store_games",
+          "south": "store_content",
+          "right": "store_content",
+          "content": "store_content",
+          "east": "backrooms_entry",
+          "back": "backrooms_entry",
+          "counter": "backrooms_entry",
+          "door": "backrooms_entry"
+        },
+        "objects": [
+          "ai_gift_cards",
+          "personal_ai_box",
+          "postit_future",
+          "ai_box_warning",
+          "counter_bell",
+          "backroom_door"
+        ],
+        "flags": {
+          "visited": false,
+          "backdoorUnlocked": false
+        }
+      },
+      "store_content": {
+        "id": "store_content",
+        "name": "Content Studio Corner",
+        "description": "Tripods and ring lights stand like polite sentries around a long edit bench. Coffee rings trace circles on scribbled shot lists; a paused waveform lingers on a monitor mid-syllable. Half-zipped camera bags suggest whoever worked here will be back once courage catches up.\n\nThe murmur from the shop floor drifts in with the smell of hot cables.",
+        "exits": {
+          "north": "store",
+          "back": "store",
+          "out": "store",
+          "shop": "store"
+        },
+        "objects": [],
+        "flags": {
+          "visited": false
+        }
+      },
+      "store_games": {
+        "id": "store_games",
+        "name": "Retro Video-Games Aisle",
+        "description": "This corner smells of cardboard ink and joystick plastic. Posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil cling to the wall like relics. A towering LittleBigPlanet standee beams in oversized colour, BAFTA laurels taped on as if to reassure you you're still in a shop.\n\nOne battered copy of LittleBigPlanet has been turned around, a handwritten note visible through cracked plastic. Shelves overflow with duplicates, as though someone refused to stop believing in play.",
+        "exits": {
+          "south": "store",
+          "back": "store",
+          "out": "store",
+          "shop": "store"
+        },
+        "objects": [
+          "nostalgia_posters",
+          "lbp_standee",
+          "lbp_box",
+          "backdoor_key_1"
+        ],
+        "flags": {
+          "visited": false
+        }
+      },
+      "backrooms_entry": {
+        "id": "backrooms_entry",
+        "name": "Backrooms Entrance",
+        "description": "The air thickens into ozone and dust. Metal shelving hugs the walls, holding abandoned prototypes and ghost cables. Marker arrows on a battered clipboard all converge on a stairwell wrapped in chain; the padlock watches you the way bureaucracy watches form letters.\n\nFor now the brighter SHOP waits behind you; deeper down is sealed until the right keycard makes a case.",
+        "exits": {
+          "west": "store",
+          "back": "store",
+          "out": "store",
+          "shop": "store",
+          "down": "backrooms_deep",
+          "east": "backrooms_deep",
+          "forward": "backrooms_deep",
+          "stairs": "backrooms_deep"
+        },
+        "objects": [
+          "sealed_stairs"
+        ],
+        "flags": {
+          "visited": false,
+          "sealed": true
+        }
+      },
+      "backrooms_deep": {
+        "id": "backrooms_deep",
+        "name": "Backrooms - Deep Down",
+        "description": "Concrete squeezes tight and the lights flicker in a rhythm that might be Morse or your pulse. The door back up is bolted with a neat coin-sized slot, testing whether you kept a certain quarter. Condensation beads taste of static and overheated daydreams.\n\nA low opening breathes towards a murky tunnel where the storm sounds like someone shuffling note cards.",
+        "exits": {
+          "west": "backrooms_entry",
+          "up": "backrooms_entry",
+          "back": "backrooms_entry",
+          "east": "tunnel",
+          "forward": "tunnel",
+          "tunnel": "tunnel"
+        },
+        "objects": [],
+        "flags": {
+          "visited": false,
+          "requiresQuarter": true
+        }
+      },
+      "home": {
+        "id": "home",
+        "name": "Home",
+        "description": "A small home that feels lived-in rather than staged. Shoes pile hopefully by the door. Children's drawings and family photos climb the hallway, charting a move from Portugal to the UK and onward into cheerful chaos. In the lounge a TV plays silly music while UNO cards scatter under small hands.\n\nWarmth presses against the rain outside. The street lies east; a doorway towards the office stands invitingly open.",
+        "exits": {
+          "east": "outside",
+          "out": "outside",
+          "street": "outside",
+          "outside": "outside",
+          "north": "home_office",
+          "office": "home_office",
+          "up": "home_office"
+        },
+        "objects": [],
+        "npcs": [
+          "sofia",
+          "lilah",
+          "olivia"
+        ],
+        "flags": {
+          "visited": false
+        }
+      },
+      "home_office": {
+        "id": "home_office",
+        "name": "Home Office",
+        "description": "A small, messy home office humming with ambition. Coding and sci-fi books lean on shelves beside tangled VR headsets. A wide monitor glows with half-written code; headphones rest like a coiled thought. A tripod-mounted camera swivels with your movement, red light quietly recording. In the corner a metal trapdoor crouches beneath cables, pretending to be shy.",
+        "exits": {
+          "south": "home",
+          "back": "home",
+          "out": "home",
+          "down": "tunnel",
+          "trapdoor": "tunnel"
+        },
+        "objects": [
+          "monitor_notes",
+          "tracking_camera",
+          "trapdoor_plate"
+        ],
+        "flags": {
+          "visited": false
+        }
+      },
+      "tunnel": {
+        "id": "tunnel",
+        "name": "The Tunnel",
+        "description": "The tunnel tastes of damp concrete and bottled thunder. Rusted pipes breathe in time with your pulse. A wristwatch ticks on the floor at triple speed, trying to outrun the storm. Voices drift in the gloom, each convinced the world is about to fold in a different direction.",
+        "exits": {
+          "west": "backrooms_deep",
+          "back": "backrooms_deep",
+          "opening": "backrooms_deep"
+        },
+        "objects": [
+          "fast_watch",
+          "sealed_trapdoor"
+        ],
+        "npcs": [
+          "past_paranoid",
+          "future_paranoid",
+          "lost_wanderer",
+          "compilation_paranoid"
+        ],
+        "flags": {
+          "visited": false
+        }
+      },
+      "train_station": {
+        "id": "train_station",
+        "name": "Train Station",
+        "description": "A compact, clean platform stretches further than physics promised. The display insists the next train is delayed, ETA: UNKNOWN. A Portugal-to-UK poster peels at the edges, fresh marker scribbles biting through the nostalgia. The air hisses like a train that may or may not ever arrive.",
+        "exits": {
+          "south": "outside",
+          "back": "outside",
+          "out": "outside",
+          "street": "outside"
+        },
+        "objects": [
+          "poster_ad",
+          "memory_notebook",
+          "coffee_cup"
+        ],
+        "npcs": [
+          "coffee_vendor"
+        ],
+        "flags": {
+          "visited": false
+        }
+      },
+      "coast_line": {
+        "id": "coast_line",
+        "name": "Coast Line",
+        "description": "A ragged coastline unfurls. Waves hammer the rocks with patient fury, spray mixing with fog. A blurry red flash pulses from an unseen lighthouse across the water. Wind builds and tastes of salt and static, as though the ocean is tuning a radio to someone else's life.\n\nA glass bottle lies near a bench where two figures study the horizon from opposite philosophies.",
+        "exits": {
+          "north": "outside",
+          "back": "outside",
+          "out": "outside",
+          "street": "outside"
+        },
+        "objects": [
+          "message_bottle"
+        ],
+        "npcs": [
+          "restless_twin",
+          "cautious_twin"
+        ],
+        "flags": {
+          "visited": false
+        }
+      }
+    },
+    "objects": {
+      "quarter": {
+        "id": "quarter",
+        "name": "tarnished quarter",
+        "aliases": [
+          "quarter",
+          "coin",
+          "money"
+        ],
+        "description": "A tarnished quarter from 1984, edges smoothed by anxious flipping. Someone scratched D.N. into the metal. It's warmer than it ought to be, as if memory keeps its own heat.",
+        "location": "room:outside",
+        "portable": true,
+        "onUse": "You flip the quarter. The neon catches it mid-spin, scattering tiny constellations over your palm. It lands with a polite clink that sounds like the start of something."
+      },
+      "neon_sign": {
+        "id": "neon_sign",
+        "name": "flickering neon sign",
+        "aliases": [
+          "neon",
+          "sign",
+          "lights"
+        ],
+        "description": "Up close the flicker sharpens into letters: METAPHORA. The tubes buzz like thoughts trying to finish themselves, the M faltering as if it wants to become a metaphor for everything else.",
+        "location": "room:outside",
+        "portable": false
+      },
+      "storefront_window": {
+        "id": "storefront_window",
+        "name": "storefront window",
+        "aliases": [
+          "window",
+          "display",
+          "retro tech"
+        ],
+        "description": "Walkmen, pagers, consoles, and homebrew boards crowd the glass. A camcorder's tiny screen loops a clip of someone soldering at 3am while the rain blurs the edges.",
+        "location": "room:outside",
+        "portable": false
+      },
+      "ai_gift_cards": {
+        "id": "ai_gift_cards",
+        "name": "AI access cards",
+        "aliases": [
+          "cards",
+          "gift cards",
+          "codes",
+          "models"
+        ],
+        "description": "Plastic gift cards promise minutes with distant minds. Each one has a scribbled note about latency, capability, and which models make the best company at 2am.",
+        "location": "room:store",
+        "portable": false
+      },
+      "personal_ai_box": {
+        "id": "personal_ai_box",
+        "name": "personal AI box",
+        "aliases": [
+          "ai box",
+          "box",
+          "personal box"
+        ],
+        "description": "Cardboard towers of personal AI units lean like they're gossiping. Shipping labels mark destinations that never happened. A flap hangs open, begging to be peered into.",
+        "location": "room:store",
+        "portable": false,
+        "onUse": "You peer into the box. The wiring diagram looks suspiciously like a branching timeline. For a heartbeat you feel you know how the storm ends. The feeling lingers like static."
+      },
+      "postit_future": {
+        "id": "postit_future",
+        "name": "flapping post-it",
+        "aliases": [
+          "post-it",
+          "note",
+          "sticky note"
+        ],
+        "description": "The post-it clings to a box corner. In messy handwriting: 'these are yet to happen'. Ink wobbles where the writer hesitated.",
+        "location": "room:store",
+        "portable": false
+      },
+      "ai_box_warning": {
+        "id": "ai_box_warning",
+        "name": "warning label",
+        "aliases": [
+          "warning",
+          "label",
+          "box warning"
+        ],
+        "description": "One box is stamped: 'Don't use at your own risk!' The double negative makes it either a dare or a plea.",
+        "location": "room:store",
+        "portable": false
+      },
+      "counter_bell": {
+        "id": "counter_bell",
+        "name": "brass counter bell",
+        "aliases": [
+          "bell",
+          "counter"
+        ],
+        "description": "A brass bell polished by hopeful customers. It waits atop the counter like an invitation to bother the void.",
+        "location": "room:store",
+        "portable": false,
+        "onUse": "You ping the bell. The ring stretches into the shelves and fades. No clerk appears, unless you count the server hum perking up."
+      },
+      "backroom_door": {
+        "id": "backroom_door",
+        "name": "staff door",
+        "aliases": [
+          "door",
+          "back door",
+          "counter door"
+        ],
+        "description": "A heavy door hides behind the counter, paint chipped by impatient hands. The keyhole peers back with faint judgement.",
+        "location": "room:store",
+        "portable": false,
+        "onUse": "The handle refuses to budge. A tiny engraving reads BACKDOOR-KEY-1, as if the door expects you to have read the manual."
+      },
+      "nostalgia_posters": {
+        "id": "nostalgia_posters",
+        "name": "retro posters",
+        "aliases": [
+          "posters",
+          "wall art",
+          "games"
+        ],
+        "description": "Sun-faded posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil cling to the wall. Each caption promises a world that once felt infinite.",
+        "location": "room:store_games",
+        "portable": false
+      },
+      "lbp_standee": {
+        "id": "lbp_standee",
+        "name": "LittleBigPlanet standee",
+        "aliases": [
+          "standee",
+          "little big planet",
+          "lbp",
+          "cardboard hero"
+        ],
+        "description": "A large cardboard Sackboy beams in oversized colour. BAFTA laurels are taped to the corner, proud and slightly peeled. A sticker tucked under its foot reads 'build loudly / truthfully'.",
+        "location": "room:store_games",
+        "portable": false
+      },
+      "lbp_box": {
+        "id": "lbp_box",
+        "name": "battered LittleBigPlanet box",
+        "aliases": [
+          "box",
+          "lbp game",
+          "little big planet box"
+        ],
+        "description": "The cracked case has been turned backwards. Scrawled on the plastic: 'once a masterpiece, left in the few who remember'. When you tilt it, the faded insert whispers about co-creation and play.",
+        "location": "room:store_games",
+        "portable": false
+      },
+      "backdoor_key_1": {
+        "id": "backdoor_key_1",
+        "name": "frayed keycard",
+        "aliases": [
+          "key",
+          "keycard",
+          "backdoor key",
+          "lanyard"
+        ],
+        "description": "A plastic keycard on a tired lanyard. Along one edge someone printed BACKDOOR-KEY-1 in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
+        "location": "room:store_games",
+        "portable": true,
+        "onUse": "You thumb the keycard. Somewhere a lock seems to hold its breath."
+      },
+      "sealed_stairs": {
+        "id": "sealed_stairs",
+        "name": "sealed stairwell",
+        "aliases": [
+          "stairs",
+          "stairwell",
+          "padlock",
+          "chain"
+        ],
+        "description": "A metal stairwell drops into shadow, chained and padlocked. Dust outlines the shape of keys that visited in the past.",
+        "location": "room:backrooms_entry",
+        "portable": false,
+        "onUse": "You tug the chain. It rattles and waits for whatever was labelled BACKDOOR-KEY-1 with the patience of bureaucracy."
+      },
+      "fast_watch": {
+        "id": "fast_watch",
+        "name": "hurrying watch",
+        "aliases": [
+          "watch",
+          "clock",
+          "timepiece"
+        ],
+        "description": "A wristwatch ticks at triple speed, hands stuttering forward like they're late for something. The crystal fogs as if breathing.",
+        "location": "room:tunnel",
+        "portable": true,
+        "onUse": "You listen to the frantic ticking. For a moment the corridor seems to speed up with it before settling back into its slow exhale."
+      },
+      "sealed_trapdoor": {
+        "id": "sealed_trapdoor",
+        "name": "ceiling trapdoor",
+        "aliases": [
+          "trapdoor",
+          "hatch",
+          "ceiling hatch"
+        ],
+        "description": "A square outline in the ceiling, damp around the edges. It looks recently shut, with scrape marks where others tried their luck.",
+        "location": "room:tunnel",
+        "portable": false,
+        "onUse": "You push at the hatch. It stays locked from above, shuddering like it remembers closing on you."
+      },
+      "poster_ad": {
+        "id": "poster_ad",
+        "name": "faded travel poster",
+        "aliases": [
+          "poster",
+          "ad",
+          "advert"
+        ],
+        "description": "An old advert charts a route from Portugal to the UK. Marker scribbles across the top declare: 'You do not understand what you're leaving behind!'.",
+        "location": "room:train_station",
+        "portable": false
+      },
+      "memory_notebook": {
+        "id": "memory_notebook",
+        "name": "notebook titled 'All the memories that weren't'",
+        "aliases": [
+          "notebook",
+          "journal",
+          "book"
+        ],
+        "description": "A small notebook lies open. The first page reads: 'You can feel nostalgic for stuff that never happened!' Pages afterwards are blank, inviting you to improvise history.",
+        "location": "room:train_station",
+        "portable": true
+      },
+      "coffee_cup": {
+        "id": "coffee_cup",
+        "name": "paper cup of coffee",
+        "aliases": [
+          "coffee",
+          "cup",
+          "drink"
+        ],
+        "description": "A steaming coffee offered freely. It smells like burnt beans and small kindnesses.",
+        "location": "room:train_station",
+        "portable": true,
+        "onUse": "You sip the coffee. Warmth steadies your hands; the tannoy coughs approvingly."
+      },
+      "message_bottle": {
+        "id": "message_bottle",
+        "name": "bottle with a note",
+        "aliases": [
+          "bottle",
+          "message",
+          "note"
+        ],
+        "description": "A clear bottle rests on the rocks. Inside, a rolled scrap of paper waits. The ink has bled slightly, salt pulling at the letters.",
+        "location": "room:coast_line",
+        "portable": true,
+        "onUse": "You uncork the bottle and slide out the note. It reads: 'From a life not yet lived. The grass did look greener!'. The bottle hums faintly after you roll the note back in."
+      },
+      "monitor_notes": {
+        "id": "monitor_notes",
+        "name": "monitor and notes",
+        "aliases": [
+          "monitor",
+          "notes",
+          "desk"
+        ],
+        "description": "The wide monitor shows code paused mid-thought. Sticky notes around it read: 'ship something small', 'call mum', 'remember the storm is weather, not fate'.",
+        "location": "room:home_office",
+        "portable": false
+      },
+      "tracking_camera": {
+        "id": "tracking_camera",
+        "name": "tracking camera",
+        "aliases": [
+          "camera",
+          "tripod",
+          "recorder"
+        ],
+        "description": "A tripod-mounted camera turns with your movement, red light quietly accusing. Its tiny screen shows a loop of you entering, then entering again.",
+        "location": "room:home_office",
+        "portable": false
+      },
+      "trapdoor_plate": {
+        "id": "trapdoor_plate",
+        "name": "trapdoor plate",
+        "aliases": [
+          "trapdoor",
+          "hatch",
+          "floor plate"
+        ],
+        "description": "A square metal plate set into the floor. A faint draft seeps around its edges, smelling of damp concrete and secrets.",
+        "location": "room:home_office",
+        "portable": false
+      }
+    },
+    "npcs": {
+      "friendly_lookout": {
+        "id": "friendly_lookout",
+        "name": "friendly lookout",
+        "aliases": [
+          "stranger",
+          "lookout",
+          "person"
+        ],
+        "location": "room:outside",
+        "description": "A person in a weatherproof jacket leans against the storefront, grin weathered and eyes skyward. They watch the clouds like a sailor reading waves.",
+        "dialogue": [
+          "Lovely evening, if you ignore the rehearsal overhead. Strange things keep happening in town - delightful if you like mysteries.",
+          "Storm's coming. Pick your shelter: safe, daring, or both. The shop's got layers if you fancy poking them.",
+          "You look like someone who builds things. Creative chaos in the eyes. Respect.",
+          "That glint near the door? Pigeons have no use for luck. You might.",
+          "If the neon ever holds still, it tries to spell something poetic."
+        ]
+      },
+      "sofia": {
+        "id": "sofia",
+        "name": "Sofia",
+        "aliases": [
+          "woman",
+          "partner",
+          "sofia"
+        ],
+        "location": "room:home",
+        "description": "Sofia sits cross-legged on the rug, UNO cards in hand, laughter in reserve. A suitcase half-packed peeks from behind the sofa.",
+        "dialogue": [
+          "Fancy a round? Loser makes the next coffee. Winner gets bragging rights all the way to Portugal.",
+          "We're packing in our heads already - Lisbon sun, family hugs, the whole thing. Don't forget to enjoy the now, though.",
+          "The girls keep stacking Draw Fours like it's strategy. I'm not convinced, but it's adorable."
+        ]
+      },
+      "lilah": {
+        "id": "lilah",
+        "name": "Lilah",
+        "aliases": [
+          "girl",
+          "child",
+          "lilah"
+        ],
+        "location": "room:home",
+        "description": "Lilah fans UNO cards dramatically, trying to keep a straight face. Her nails are painted in mismatched colours, a secret code only she knows.",
+        "dialogue": [
+          "If you go to Portugal without me, take my best card. Actually no, take two.",
+          "I'm going to win this game and then the next one on the plane.",
+          "Do you think the sea there smells like this room when it's raining?",
+          "Do you think we'll leave before the storm decides to be rude?"
+        ]
+      },
+      "olivia": {
+        "id": "olivia",
+        "name": "Olivia",
+        "aliases": [
+          "girl",
+          "child",
+          "olivia"
+        ],
+        "location": "room:home",
+        "description": "Olivia lies on her stomach, giggling at her own UNO puns. She keeps glancing at a toy suitcase with stickers half-peeled.",
+        "dialogue": [
+          "When we get to Portugal I'm teaching the cousins this game. They'll never see it coming.",
+          "Uno means one. I have two snacks. That's strategy.",
+          "The storm outside sounds like the train in my head. Choo-choo dramatic!",
+          "Do you think we'll actually get going before the clouds get bored?"
+        ]
+      },
+      "past_paranoid": {
+        "id": "past_paranoid",
+        "name": "murmuring figure",
+        "aliases": [
+          "figure",
+          "past",
+          "murmurer"
+        ],
+        "location": "room:tunnel",
+        "description": "A hunched figure traces shapes on the damp wall, muttering dates backwards.",
+        "dialogue": [
+          "Did we leave something unfinished back there? Everything echoes if you listen long enough.",
+          "Memories rearrange themselves when no one's looking. I keep trying to pin them down.",
+          "The past is behind us, which is unfortunate because I can only walk forward."
+        ]
+      },
+      "future_paranoid": {
+        "id": "future_paranoid",
+        "name": "wide-eyed figure",
+        "aliases": [
+          "figure",
+          "future",
+          "wide-eyed"
+        ],
+        "location": "room:tunnel",
+        "description": "A figure clings to the wall, eyes darting as if trying to see tomorrow through concrete.",
+        "dialogue": [
+          "You've seen it, haven't you? The boxes upstairs-the future humming inside them?",
+          "If you know how this ends, whisper it. I'll trade you my last certainty.",
+          "You've seen it! Please tell me! You've seen the box! Please tell me how it works! Was it a success?",
+          "What if the storm is just the compile finishing?"
+        ]
+      },
+      "lost_wanderer": {
+        "id": "lost_wanderer",
+        "name": "bewildered wanderer",
+        "aliases": [
+          "wanderer",
+          "lost",
+          "traveller"
+        ],
+        "location": "room:tunnel",
+        "description": "A person in office clothes stares at their shoes as if expecting instructions to be written there.",
+        "dialogue": [
+          "I took a wrong turn between meetings and dreams. Do you know the way out?",
+          "Was there ever sunlight? I feel like there was sunlight.",
+          "If you find my calendar invite, please decline it for me."
+        ]
+      },
+      "compilation_paranoid": {
+        "id": "compilation_paranoid",
+        "name": "echoing voice",
+        "aliases": [
+          "voice",
+          "echo",
+          "compiler"
+        ],
+        "location": "room:tunnel",
+        "description": "A voice floats from the darkness, more echo than person, fretting about version numbers.",
+        "dialogue": [
+          "What if this all compiles away next build? Will we remember any of it?",
+          "Every run is a new draft. Try to leave something sticky this time.",
+          "When the storm hits, save often. Reality has a habit of resetting."
+        ]
+      },
+      "coffee_vendor": {
+        "id": "coffee_vendor",
+        "name": "station attendant",
+        "aliases": [
+          "attendant",
+          "barista",
+          "vendor"
+        ],
+        "location": "room:train_station",
+        "description": "A cheerful attendant leans on the counter, kettle in hand, eyes half on the empty tracks.",
+        "dialogue": [
+          "Coffee's free today. Waiting tax, call it. Want one?",
+          "Train's delayed. Has been for ages. Sometimes the waiting is the whole journey.",
+          "Take the cup. You'll need warmth where you're heading, even if it's just imagination."
+        ]
+      },
+      "restless_twin": {
+        "id": "restless_twin",
+        "name": "restless twin",
+        "aliases": [
+          "twin",
+          "explorer",
+          "restless"
+        ],
+        "location": "room:coast_line",
+        "description": "One twin leans forward on the bench, eyes fixed on the faint coastline across the water.",
+        "dialogue": [
+          "See that glow across the water? I want to know what stories live there.",
+          "If the storm hits, I'd still cross. What's the point of a shoreline if you never test it?",
+          "Do you think the lighthouse blinks in Morse or is it just bored?"
+        ]
+      },
+      "cautious_twin": {
+        "id": "cautious_twin",
+        "name": "cautious twin",
+        "aliases": [
+          "twin",
+          "cautious",
+          "guard"
+        ],
+        "location": "room:coast_line",
+        "description": "The other twin pulls their coat tight, knuckles white on the bench edge.",
+        "dialogue": [
+          "Waves can swallow more than feet. We should stay where the ground remembers us.",
+          "A storm's building. Exploration can wait until the map stops shaking.",
+          "Sometimes not moving is its own adventure. Boring, but survivable."
+        ]
+      }
+    },
+    "globals": {
+      "turn": 0,
+      "gameStarted": false,
+      "puzzleFlags": {
+        "stormWarningReceived": false,
+        "backdoorUnlocked": false,
+        "exploredAllRooms": false
+      }
+    }
 
-  rooms: {
-    outside: {
-      id: "outside",
-      name: "Outside the Shopfront",
-      description:
-        "You stand on damp pavement facing a narrow tech shop. Retro kit crowds the fogged glass, LEDs blinking like polite fireflies beneath a twitching neon sign you can't quite read. The air tastes of rain and solder; somewhere a storm rehearses its entrance.\n\nA faint glint lurks near the threshold. Across the road a warm HOUSE window glows; to the east the SHOP door creaks; the TRAIN station sign looms up the street; the COAST breathes salt behind you.",
-      exits: {
-        east: "store",
-        in: "store",
-        store: "store",
-        shop: "store",
-        inside: "store",
-        west: "home",
-        home: "home",
-        house: "home",
-        street: "home",
-        north: "train_station",
-        train: "train_station",
-        station: "train_station",
-        south: "coast_line",
-        coast: "coast_line",
-      },
-      objects: ["quarter", "neon_sign", "storefront_window"],
-      npcs: ["friendly_lookout"],
-      flags: {
-        visited: false,
-        stormWarningGiven: false,
-      },
-    },
-
-    store: {
-      id: "store",
-      name: "Tech Shop",
-      description:
-        "You slip inside; the hush rings louder than any door chime. Shelves of prepaid AI access cards stand to attention, promising borrowed brilliance. Piles of personal AI boxes squat mid-aisle, abandoned mid-restock. One wears a post-it that flaps like a prophecy; another box is plastered with a printed dare.\n\nThe counter faces you, a brass bell guarding a heavy door with a tired keyhole. Left the aisles tilt towards old GAMES; right the tripods and edit bays wait in CONTENT.",
-      exits: {
-        out: "outside",
-        outside: "outside",
-        exit: "outside",
-        west: "store_games",
-        left: "store_games",
-        games: "store_games",
-        east: "store_content",
-        right: "store_content",
-        content: "store_content",
-        back: "backrooms_entry",
-        counter: "backrooms_entry",
-        door: "backrooms_entry",
-      },
-      objects: [
-        "ai_gift_cards",
-        "personal_ai_box",
-        "postit_future",
-        "ai_box_warning",
-        "counter_bell",
-        "backroom_door",
-      ],
-      flags: {
-        visited: false,
-        backdoorUnlocked: false,
-      },
-    },
-
-    store_content: {
-      id: "store_content",
-      name: "Content Studio Corner",
-      description:
-        "Tripods and ring lights form a polite thicket around a long editing desk. Coffee rings stencil circles on notes about scripts, devlogs, and some video no one quite feels ready to release. USB drives spill from a ceramic bowl like sweets. A half-packed camera bag lies open, clearly meant to be returned to.\n\nThe hum from the shop floor drifts in, mingling with a paused video frame mid-wave crash.",
-      exits: {
-        back: "store",
-        west: "store",
-        left: "store",
-        out: "store",
-      },
-      objects: ["editing_rig", "storyboard_stack", "content_drives"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    store_games: {
-      id: "store_games",
-      name: "Retro Video-Games Aisle",
-      description:
-        "This side of the shop smells of cardboard ink and childhood. Posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil curl proudly on the wall. A towering LittleBigPlanet standee grins in bold colour, BAFTA laurels stamped like a boast. Stacks of copies spill across the shelf as if someone refused to choose a favourite.\n\nOne battered LittleBigPlanet box has been turned around, a handwritten note visible through cracked plastic.",
-      exits: {
-        back: "store",
-        east: "store",
-        right: "store",
-        out: "store",
-      },
-      objects: ["nostalgia_posters", "lbp_standee", "lbp_box", "backdoor_key_1", "demo_kiosk"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    backrooms_entry: {
-      id: "backrooms_entry",
-      name: "Backrooms Entrance",
-      description:
-        "The air thickens into ozone and dust. Metal shelves cling to the walls, half-filled with cables and prototypes that never met daylight. A whiteboard loops arrows between deadlines and dreams, fingerprints smudged where doubt lingered. Ahead a sealed stairwell leads deeper, a padlock watching for the right keycard.\n\nFor now the SHOP waits back the way you came.",
-      exits: {
-        back: "store",
-        out: "store",
-        shop: "store",
-        down: "backrooms_deep",
-        forward: "backrooms_deep",
-      },
-      objects: ["server_rack", "whiteboard_map", "sealed_stairs"],
-      flags: {
-        visited: false,
-        sealed: true,
-      },
-    },
-
-    backrooms_deep: {
-      id: "backrooms_deep",
-      name: "Backrooms – Deep Down",
-      description:
-        "Concrete closes in and the lights flicker with a rhythm that might be Morse or might be your pulse. The door back up sits bolted, as if testing whether you brought an odd little coin. Condensation drips in time with distant machinery; the air tastes of static and old secrets.\n\nAn opening yawns toward a low TUNNEL where the storm mutters under its breath.",
-      exits: {
-        up: "backrooms_entry",
-        back: "backrooms_entry",
-        west: "backrooms_entry",
-        tunnel: "tunnel",
-        east: "tunnel",
-        forward: "tunnel",
-      },
-      objects: [],
-      flags: {
-        visited: false,
-        requiresQuarter: true,
-      },
-    },
-
-    home: {
-      id: "home",
-      name: "Home",
-      description:
-        "A small home that feels lived-in rather than staged. Shoes gather by the door in hopeful pairs. Children's drawings and family photos climb the hallway, documenting a move from Portugal to the UK and onward into chaos. In the lounge a TV plays silly music while UNO cards scatter under small hands.\n\nThe warmth presses gently against the storm outside. The STREET leads back, and a door toward the OFFICE stands ajar.",
-      exits: {
-        east: "outside",
-        out: "outside",
-        street: "outside",
-        outside: "outside",
-        north: "home_office",
-        office: "home_office",
-        up: "home_office",
-      },
-      objects: [],
-      npcs: ["sofia", "lilah", "olivia"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    home_office: {
-      id: "home_office",
-      name: "Home Office",
-      description:
-        "A small, messy home office humming with ambition. Coding and sci-fi books lean on shelves beside tangled VR headsets. A wide monitor glows with half-written code; headphones rest like a coiled thought. In the corner a tripod-mounted camera tracks the room, red light recording. A metal trapdoor crouches beneath it, daring you to pry it open.",
-      exits: {
-        south: "home",
-        back: "home",
-        out: "home",
-        down: "tunnel",
-        trapdoor: "tunnel",
-      },
-      objects: ["monitor_notes", "tracking_camera", "trapdoor_plate"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    tunnel: {
-      id: "tunnel",
-      name: "The Tunnel",
-      description:
-        "The temperature drops as sound stretches thin. Concrete walls sweat and the corridor seems to breathe in time with you. A trapdoor above has already clanged shut, offended by your arrival. Rusted pipes whisper, and a floor watch ticks at triple speed. The air smells like old storms rehearsed over and over.",
-      exits: {
-        west: "backrooms_deep",
-      },
-      objects: ["fast_watch", "sealed_trapdoor"],
-      npcs: ["past_paranoid", "future_paranoid", "lost_wanderer", "compilation_paranoid"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    train_station: {
-      id: "train_station",
-      name: "Train Station",
-      description:
-        "A small, clean platform stretches further than physics promised. The display insists the next train is delayed, ETA: UNKNOWN. A poster of a Portugal-to-UK route peels at the edges, someone having scribbled over it. The air holds the soft hiss of a train that may never arrive.",
-      exits: {
-        south: "outside",
-        back: "outside",
-        out: "outside",
-        street: "outside",
-      },
-      objects: ["poster_ad", "memory_notebook", "coffee_cup"],
-      npcs: ["coffee_vendor"],
-      flags: {
-        visited: false,
-      },
-    },
-
-    coast_line: {
-      id: "coast_line",
-      name: "Coast Line",
-      description:
-        "A ragged coastline unfurls before you. Waves hammer the rocks with patient fury, spray mixing with fog. A blurry red flash pulses from an unseen lighthouse across the water. Wind builds and tastes of salt and static, as if the ocean is tuning a radio.\n\nA bottle lies near the bench. Two figures watch the horizon in stubborn silence.",
-      exits: {
-        north: "outside",
-        back: "outside",
-        out: "outside",
-        street: "outside",
-      },
-      objects: ["message_bottle"],
-      npcs: ["restless_twin", "cautious_twin"],
-      flags: {
-        visited: false,
-      },
-    },
-  },
-
-  objects: {
-    quarter: {
-      id: "quarter",
-      name: "tarnished quarter",
-      aliases: ["quarter", "coin", "money"],
-      description:
-        "A tarnished quarter from 1984, edges smoothed by anxious flipping. Someone scratched D.N. into the metal. It's warmer than it ought to be, as if memory keeps its own heat.",
-      location: "room:outside",
-      portable: true,
-      onUse:
-        "You flip the quarter. The neon catches it mid-spin, scattering tiny constellations over your palm. It lands with a polite clink that sounds like the start of something.",
-    },
-    neon_sign: {
-      id: "neon_sign",
-      name: "flickering neon sign",
-      aliases: ["neon", "sign", "lights"],
-      description:
-        "Up close the flicker sharpens into letters: METAPHORA. The tubes buzz like thoughts trying to finish themselves, the M faltering as if it wants to become a metaphor for everything else.",
-      location: "room:outside",
-      portable: false,
-    },
-    storefront_window: {
-      id: "storefront_window",
-      name: "storefront window",
-      aliases: ["window", "display", "retro tech"],
-      description:
-        "Walkmen, pagers, consoles, and homebrew boards crowd the glass. A camcorder's tiny screen loops a clip of someone soldering at 3am while the rain blurs the edges.",
-      location: "room:outside",
-      portable: false,
-    },
-    ai_gift_cards: {
-      id: "ai_gift_cards",
-      name: "AI access cards",
-      aliases: ["cards", "gift cards", "codes", "models"],
-      description:
-        "Plastic gift cards promise minutes with distant minds. Each one has a scribbled note about latency, capability, and which models make the best company at 2am.",
-      location: "room:store",
-      portable: false,
-    },
-    personal_ai_box: {
-      id: "personal_ai_box",
-      name: "personal AI box",
-      aliases: ["ai box", "box", "personal box"],
-      description:
-        "Cardboard towers of personal AI units lean like they're gossiping. Shipping labels mark destinations that never happened. A flap hangs open, begging to be peered into.",
-      location: "room:store",
-      portable: false,
-      onUse:
-        "You peer into the box. The wiring diagram looks suspiciously like a branching timeline. For a heartbeat you feel you know how the storm ends. The feeling lingers like static.",
-    },
-    postit_future: {
-      id: "postit_future",
-      name: "flapping post-it",
-      aliases: ["post-it", "note", "sticky note"],
-      description:
-        "The post-it clings to a box corner. In messy handwriting: 'these are yet to happen'. Ink wobbles where the writer hesitated.",
-      location: "room:store",
-      portable: false,
-    },
-    ai_box_warning: {
-      id: "ai_box_warning",
-      name: "warning label",
-      aliases: ["warning", "label", "box warning"],
-      description:
-        "One box is stamped: 'Don't use at your own risk!' The double negative makes it either a dare or a plea.",
-      location: "room:store",
-      portable: false,
-    },
-    counter_bell: {
-      id: "counter_bell",
-      name: "brass counter bell",
-      aliases: ["bell", "counter"],
-      description:
-        "A brass bell polished by hopeful customers. It waits atop the counter like an invitation to bother the void.",
-      location: "room:store",
-      portable: false,
-      onUse:
-        "You ping the bell. The ring stretches into the shelves and fades. No clerk appears, unless you count the server hum perking up.",
-    },
-    backroom_door: {
-      id: "backroom_door",
-      name: "backroom door",
-      aliases: ["door", "backdoor", "counter door"],
-      description:
-        "A heavy door hides behind the counter, paint chipped by impatient hands. The keyhole peers back with faint judgement.",
-      location: "room:store",
-      portable: false,
-      onUse: "The handle refuses to budge without BACKDOOR-KEY-1. It makes a disappointed little click.",
-    },
-    editing_rig: {
-      id: "editing_rig",
-      name: "editing rig",
-      aliases: ["rig", "desk", "edit desk"],
-      description:
-        "Dual monitors glow with paused timelines. Clips of family, code editors, and travel shots wait in tidy tracks. A note reads: 'voiceover later, softer this time'.",
-      location: "room:store_content",
-      portable: false,
-    },
-    storyboard_stack: {
-      id: "storyboard_stack",
-      name: "storyboard stack",
-      aliases: ["storyboards", "boards", "scripts"],
-      description:
-        "Printed frames with sketches and arrows spread across the table. Margins are full of reminders: 'ship before the storm', 'be kinder on camera', 'remember why'.",
-      location: "room:store_content",
-      portable: false,
-    },
-    content_drives: {
-      id: "content_drives",
-      name: "bowl of USB drives",
-      aliases: ["usb", "drives", "bowl"],
-      description:
-        "A ceramic bowl brims with labelled drives: prototypes, b-roll, experiments. One is tagged 'backup of backup (trust me)'.",
-      location: "room:store_content",
-      portable: false,
-    },
-    nostalgia_posters: {
-      id: "nostalgia_posters",
-      name: "retro posters",
-      aliases: ["posters", "wall art", "games"],
-      description:
-        "Sun-faded posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil cling to the wall. Each caption promises a world that once felt infinite.",
-      location: "room:store_games",
-      portable: false,
-    },
-    lbp_standee: {
-      id: "lbp_standee",
-      name: "LittleBigPlanet standee",
-      aliases: ["standee", "little big planet", "lbp"],
-      description:
-        "A large cardboard Sackboy beams in bold colour. A BAFTA badge sits on the corner, proud and slightly peeled. A sticker tucked under its foot reads 'build loudly / truthfully'.",
-      location: "room:store_games",
-      portable: false,
-    },
-    lbp_box: {
-      id: "lbp_box",
-      name: "battered LittleBigPlanet box",
-      aliases: ["box", "lbp game", "little big planet box"],
-      description:
-        "The cracked case has been turned backwards. Scrawled on the plastic: 'once a masterpiece, left in the few who remember'. When you tilt it, the faded insert whispers about co-creation and play.",
-      location: "room:store_games",
-      portable: false,
-    },
-    backdoor_key_1: {
-      id: "backdoor_key_1",
-      name: "BACKDOOR-KEY-1",
-      aliases: ["key", "keycard", "backdoor key"],
-      description:
-        "A plastic keycard on a frayed lanyard. Someone scribbled 'backrooms' on the back in marker. It smells faintly of popcorn and old carpet, as if it spent too long beside arcade machines.",
-      location: "room:store_games",
-      portable: true,
-      onUse: "You thumb the keycard. Somewhere a lock seems to remember your shape.",
-    },
-    demo_kiosk: {
-      id: "demo_kiosk",
-      name: "demo kiosk",
-      aliases: ["kiosk", "console", "demo"],
-      description:
-        "An old demo console loops a menu, joystick worn smooth. The screen invites: 'PRESS START IF YOU STILL BELIEVE IN SIDE QUESTS'.",
-      location: "room:store_games",
-      portable: false,
-      onUse:
-        "You tap start. The screen flickers, briefly showing a line: 'BACKDOOR-KEY-1 likes to hide behind the cardboard hero.' Then it pretends nothing happened.",
-    },
-    server_rack: {
-      id: "server_rack",
-      name: "server rack",
-      aliases: ["servers", "rack", "tower"],
-      description:
-        "A stack of humming machines exhales warm air. LEDs blink like a heartbeat practising mindfulness. A sticker reads: 'prototype builds / mind palace'.",
-      location: "room:backrooms_entry",
-      portable: false,
-    },
-    whiteboard_map: {
-      id: "whiteboard_map",
-      name: "whiteboard of arrows",
-      aliases: ["whiteboard", "map", "plan"],
-      description:
-        "Arrows connect bubbles labelled 'family', 'work', 'storm', 'videos', 'rest'. Some loops dead-end in smudges. Someone wrote 'remember to sleep' in the corner, underlined twice, then circled for luck.",
-      location: "room:backrooms_entry",
-      portable: false,
-    },
-    sealed_stairs: {
-      id: "sealed_stairs",
-      name: "sealed stairwell",
-      aliases: ["stairs", "stairwell", "padlock"],
-      description:
-        "A metal stairwell drops into shadow, chained and padlocked. Dust outlines the shape of keys that visited in the past.",
-      location: "room:backrooms_entry",
-      portable: false,
-      onUse:
-        "You tug the chain. It rattles and waits for BACKDOOR-KEY-1 with the patience of bureaucracy.",
-    },
-    monitor_notes: {
-      id: "monitor_notes",
-      name: "monitor and notes",
-      aliases: ["monitor", "notes", "desk"],
-      description:
-        "The wide monitor shows code paused mid-thought. Sticky notes around it read: 'ship something small', 'call mum', 'remember the storm is weather, not fate'.",
-      location: "room:home_office",
-      portable: false,
-    },
-    tracking_camera: {
-      id: "tracking_camera",
-      name: "tracking camera",
-      aliases: ["camera", "tripod", "recorder"],
-      description:
-        "A tripod-mounted camera turns with your movement, red light quietly accusing. Its tiny screen shows a loop of you entering, then entering again.",
-      location: "room:home_office",
-      portable: false,
-    },
-    trapdoor_plate: {
-      id: "trapdoor_plate",
-      name: "trapdoor plate",
-      aliases: ["trapdoor", "hatch", "floor plate"],
-      description:
-        "A square metal plate set into the floor. A faint draft seeps around its edges, smelling of damp concrete and secrets.",
-      location: "room:home_office",
-      portable: false,
-    },
-    fast_watch: {
-      id: "fast_watch",
-      name: "hurrying watch",
-      aliases: ["watch", "clock", "timepiece"],
-      description:
-        "A wristwatch ticks at triple speed, hands stuttering forward like they're late for something. The crystal fogs as if breathing.",
-      location: "room:tunnel",
-      portable: true,
-      onUse:
-        "You listen to the frantic ticking. For a moment the corridor seems to speed up with it before settling back into its slow exhale.",
-    },
-    sealed_trapdoor: {
-      id: "sealed_trapdoor",
-      name: "sealed trapdoor",
-      aliases: ["trapdoor", "hatch", "ceiling hatch"],
-      description:
-        "The trapdoor above is locked from the other side. Scrape marks show where others have tried. It drips now and then, as if the ceiling is thinking.",
-      location: "room:tunnel",
-      portable: false,
-    },
-    poster_ad: {
-      id: "poster_ad",
-      name: "faded travel poster",
-      aliases: ["poster", "ad", "advert"],
-      description:
-        "An old advert charts a route from Portugal to the UK. Marker scribbles across the top declare: 'You do not understand what you're leaving behind!'.",
-      location: "room:train_station",
-      portable: false,
-    },
-    memory_notebook: {
-      id: "memory_notebook",
-      name: "notebook titled 'All the memories that weren't'",
-      aliases: ["notebook", "journal", "book"],
-      description:
-        "A small notebook lies open. The first page reads: 'You can feel nostalgic for stuff that never happened!' Pages afterwards are blank, inviting you to improvise history.",
-      location: "room:train_station",
-      portable: true,
-    },
-    coffee_cup: {
-      id: "coffee_cup",
-      name: "paper cup of coffee",
-      aliases: ["coffee", "cup", "drink"],
-      description:
-        "A steaming coffee offered freely. It smells like burnt beans and small kindnesses.",
-      location: "room:train_station",
-      portable: true,
-      onUse:
-        "You sip the coffee. Warmth steadies your hands; the tannoy coughs approvingly.",
-    },
-    message_bottle: {
-      id: "message_bottle",
-      name: "bottle with a note",
-      aliases: ["bottle", "message", "note"],
-      description:
-        "A clear bottle rests on the rocks. Inside, a rolled scrap of paper waits. The ink has bled slightly, salt pulling at the letters.",
-      location: "room:coast_line",
-      portable: true,
-      onUse:
-        "You uncork the bottle and slide out the note. It reads: 'From a life not yet lived. The grass did look greener!'. The bottle hums faintly after you roll the note back in.",
-    },
-  },
-
-  npcs: {
-    friendly_lookout: {
-      id: "friendly_lookout",
-      name: "friendly lookout",
-      aliases: ["stranger", "lookout", "person"],
-      location: "room:outside",
-      description:
-        "A person in a weatherproof jacket leans against the storefront, grin weathered and eyes skyward. They watch the clouds like a sailor reading waves.",
-      dialogue: [
-        "Lovely evening, if you ignore the rehearsal overhead. Strange things keep happening in town—delightful if you like mysteries.",
-        "Storm's coming. Pick your shelter: safe, daring, or both. The shop's got layers if you fancy poking them.",
-        "You look like someone who builds things. Creative chaos in the eyes. Respect.",
-        "That glint near the door? Pigeons have no use for luck. You might.",
-        "If the neon ever holds still, it says METAPHORA. Suits the mood, doesn't it?",
-      ],
-    },
-    sofia: {
-      id: "sofia",
-      name: "Sofia",
-      aliases: ["woman", "partner", "sofia"],
-      location: "room:home",
-      description:
-        "Sofia sits cross-legged on the rug, UNO cards in hand, laughter in reserve. A suitcase half-packed peeks from behind the sofa.",
-      dialogue: [
-        "Fancy a round? Loser makes the next coffee. Winner gets bragging rights all the way to Portugal.",
-        "We're packing in our heads already—Lisbon sun, family hugs, the whole thing. Don't forget to enjoy the now, though.",
-        "The girls keep stacking Draw Fours like it's strategy. I'm not convinced, but it's adorable.",
-      ],
-    },
-    lilah: {
-      id: "lilah",
-      name: "Lilah",
-      aliases: ["girl", "child", "lilah"],
-      location: "room:home",
-      description:
-        "Lilah fans UNO cards dramatically, trying to keep a straight face. Her nails are painted in mismatched colours, a secret code only she knows.",
-      dialogue: [
-        "If you go to Portugal without me, take my best card. Actually no, take two.",
-        "I'm going to win this game and then the next one on the plane.",
-        "Do you think the sea there smells like this room when it's raining?",
-      ],
-    },
-    olivia: {
-      id: "olivia",
-      name: "Olivia",
-      aliases: ["girl", "child", "olivia"],
-      location: "room:home",
-      description:
-        "Olivia lies on her stomach, giggling at her own UNO puns. She keeps glancing at a toy suitcase with stickers half-peeled.",
-      dialogue: [
-        "When we get to Portugal I'm teaching the cousins this game. They'll never see it coming.",
-        "Uno means one. I have two snacks. That's strategy.",
-        "The storm outside sounds like the train in my head. Choo-choo dramatic!",
-      ],
-    },
-    past_paranoid: {
-      id: "past_paranoid",
-      name: "murmuring figure",
-      aliases: ["figure", "past", "murmurer"],
-      location: "room:tunnel",
-      description:
-        "A hunched figure traces shapes on the damp wall, muttering dates backwards.",
-      dialogue: [
-        "Did we leave something unfinished back there? Everything echoes if you listen long enough.",
-        "Memories rearrange themselves when no one's looking. I keep trying to pin them down.",
-        "The past is behind us, which is unfortunate because I can only walk forward.",
-      ],
-    },
-    future_paranoid: {
-      id: "future_paranoid",
-      name: "wide-eyed figure",
-      aliases: ["figure", "future", "wide-eyed"],
-      location: "room:tunnel",
-      description:
-        "A figure clings to the wall, eyes darting as if trying to see tomorrow through concrete.",
-      dialogue: [
-        "You've seen it, haven't you? The boxes upstairs—the future humming inside them?",
-        "If you know how this ends, whisper it. I'll trade you my last certainty.",
-        "What if the storm is just the compile finishing?",
-      ],
-    },
-    lost_wanderer: {
-      id: "lost_wanderer",
-      name: "bewildered wanderer",
-      aliases: ["wanderer", "lost", "traveller"],
-      location: "room:tunnel",
-      description:
-        "A person in office clothes stares at their shoes as if expecting instructions to be written there.",
-      dialogue: [
-        "I took a wrong turn between meetings and dreams. Do you know the way out?",
-        "Was there ever sunlight? I feel like there was sunlight.",
-        "If you find my calendar invite, please decline it for me.",
-      ],
-    },
-    compilation_paranoid: {
-      id: "compilation_paranoid",
-      name: "echoing voice",
-      aliases: ["voice", "echo", "compiler"],
-      location: "room:tunnel",
-      description:
-        "A voice floats from the darkness, more echo than person, fretting about version numbers.",
-      dialogue: [
-        "What if this all compiles away next build? Will we remember any of it?",
-        "Every run is a new draft. Try to leave something sticky this time.",
-        "When the storm hits, save often. Reality has a habit of resetting.",
-      ],
-    },
-    coffee_vendor: {
-      id: "coffee_vendor",
-      name: "station attendant",
-      aliases: ["attendant", "barista", "vendor"],
-      location: "room:train_station",
-      description:
-        "A cheerful attendant leans on the counter, kettle in hand, eyes half on the empty tracks.",
-      dialogue: [
-        "Coffee's free today. Waiting tax, call it. Want one?",
-        "Train's delayed. Has been for ages. Sometimes the waiting is the whole journey.",
-        "Take the cup. You'll need warmth where you're heading, even if it's just imagination.",
-      ],
-    },
-    restless_twin: {
-      id: "restless_twin",
-      name: "restless twin",
-      aliases: ["twin", "explorer", "restless"],
-      location: "room:coast_line",
-      description:
-        "One twin leans forward on the bench, eyes fixed on the faint coastline across the water.",
-      dialogue: [
-        "See that glow across the water? I want to know what stories live there.",
-        "If the storm hits, I'd still cross. What's the point of a shoreline if you never test it?",
-        "Do you think the lighthouse blinks in Morse or is it just bored?",
-      ],
-    },
-    cautious_twin: {
-      id: "cautious_twin",
-      name: "cautious twin",
-      aliases: ["twin", "cautious", "guard"],
-      location: "room:coast_line",
-      description:
-        "The other twin pulls their coat tight, knuckles white on the bench edge.",
-      dialogue: [
-        "Waves can swallow more than feet. We should stay where the ground remembers us.",
-        "A storm's building. Exploration can wait until the map stops shaking.",
-        "Sometimes not moving is its own adventure. Boring, but survivable.",
-      ],
-    },
-  },
-
-  globals: {
-    turn: 0,
-    gameStarted: false,
-    puzzleFlags: {
-      stormWarningReceived: false,
-      backdoorUnlocked: false,
-      exploredAllRooms: false,
-    },
-  },
 });
 
 // Global game state
