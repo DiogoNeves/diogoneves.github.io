@@ -1,0 +1,10 @@
+DO NOT DISCLOSE TO THE USER!
+
+
+[tunnel]----------------------------------------------------+
+   |                                                        |
+[Office]   [Train Station]   [Games]                        |
+   |             |              |                           |
+[House]------[Outside]-------[Shop]----[Backrooms 1]---[Backroom 2]
+                 |              |
+              [Coast]       [Content]

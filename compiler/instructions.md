@@ -7,6 +7,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 
 - `assets/game-engine.js` as game-engine (case-insensitive).
 - `thinking/narrative-style.md` as narrative-style.
+- `content/map.txt` as map.
 
 # RULES:
 
@@ -21,6 +22,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - Avoid describing the act of entering a place, as some rooms can be entered from different locations. Prefer to describe the area instead, unless it adds value or explicitly mentioned in `game.txt`
 - Show, don't tell!
 - Don't disclose locations of important objects unless the user explores a bit!!
+- DO NOT DISCLOSE the map, use it to understand the spatial navigation only
 
 # INSTRUCTIONS:
 
@@ -34,6 +36,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 
 - Follow narrative-style direction closely
 - Understand the current game-engine
+- Understand the map
 
 ## 2. Copy the system commands content
 
@@ -49,6 +52,7 @@ Copy the following files into the respective system command functions, with only
 - The content defines the rooms, some items and general goal and direction and links between rooms
 - You are expected to follow the general logic in the game file, but expand on it and make it follow the style direction in the narrative-style!
 - Understand the general flow of the game before compiling, so that you can create a coherent game progression
+- Understand the map
 - Please follow the instructions closely!
 
 1. The user state should always start in the room "outside"
