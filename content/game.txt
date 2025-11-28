@@ -149,7 +149,8 @@ Nothing to see
 None.
 
 ==NPCs==
-None.
+There's a woman (Sofia) and two girls (Lilah and Olivia) all playing together.
+Talking to them mentions that they're excited about the Uno game they're playing and/or the coming trip to Portugal, to visit family.
 
 ==Exits==
 A door to a small home office.
@@ -187,10 +188,11 @@ If coming from the home office, the trapdoor has closed behind! Don't mention un
 None.
 
 ==NPCs==
-There are three NPCs
-- one is paranoid about the past
-- one is paranoid about the future
-- the other can't understand how it got lost in this place!
+There are four NPCs
+- one is paranoid about the past.
+- one is paranoid about the future.
+- one can't understand how it got lost in this place!
+- the other is paranoid that this world will all be gone next time it is compiled.
 
 ==Exits==
 - There's a locked trapdoor into the home office (never opens from the tunnel, but the user can try!)
