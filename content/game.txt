@@ -56,7 +56,7 @@ To the left of the entrance is the retro video-game section
 To the right of the entrance is the video and content section
 
 =====
-Store - Content
+Shop - Content
 =====
 
 ==General description==
@@ -72,10 +72,10 @@ None.
 None.
 
 ==Exits==
-Back to the Tech Shop
+Can only go back.
 
 =====
-Store - Video-Games
+Shop - Video-Games
 =====
 
 ==General description==
@@ -94,10 +94,10 @@ Posters on the wall celebrate nostalgic titles and a standee heralds Little Big 
 None.
 
 ==Exits==
-Back to the Tech Shop
+Can only go back.
 
 =====
-Store - Backrooms Entrance
+Backrooms Entrance
 =====
 
 ==General description==
@@ -113,7 +113,27 @@ None.
 None.
 
 ==Exits==
-Back to the Tech Shop
+Stairs going down to a door leading to the Backrooms room 2 (Deep Down)
+
+=====
+Backrooms - Deep Down
+=====
+
+==General description==
+Coming soon.
+
+==State==
+The door back to backroom 1 is locked. It can open if the user collected the quarter from the ground outside.
+
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+- The door back to backroom 1 is now locked! (the user can try, but only opens if the user has the quarter collected outside)
+- An opening, leading to the tunnel.
 
 =====
 Home
@@ -132,7 +152,49 @@ None.
 None.
 
 ==Exits==
-Back to the Outside
+A door to a small home office.
+
+=====
+Home Office
+=====
+
+==General description==
+A small, messy home office. Full of coding and sci-fi books, games, hanging VR headsets, a wide monitor and some headphones on the desk. Lots of notes on the desk and in the corner of the room there's a tripod with a camera that has the red recording light on. The camera turns with movement, someone's watching!
+
+==State==
+Nothing to see
+
+==Objects==
+None.
+
+==NPCs==
+None.
+
+==Exits==
+A strange trapdoor in the corner of the office leading to the tunnel.
+
+=====
+The Tunnel
+=====
+
+==General description==
+Dark and cold.
+
+==State==
+If coming from the home office, the trapdoor has closed behind! Don't mention unless the user tries to open!
+
+==Objects==
+None.
+
+==NPCs==
+There are three NPCs
+- one is paranoid about the past
+- one is paranoid about the future
+- the other can't understand how it got lost in this place!
+
+==Exits==
+- There's a locked trapdoor into the home office (never opens from the tunnel, but the user can try!)
+- Can go into the backroom 2 (deep down)
 
 =====
 Train station
@@ -151,7 +213,7 @@ None.
 None.
 
 ==Exits==
-Back to the Outside
+Can only go back.
 
 =====
 Coast line
@@ -170,4 +232,4 @@ None.
 None.
 
 ==Exits==
-Back to the Outside
+Can only go back.
