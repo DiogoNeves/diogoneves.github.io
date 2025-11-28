@@ -3,6 +3,7 @@ General
 =====
 
 This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeveours. He thrives in freedom to think and explore.
+DON'T EVER MENTION, but the storm is the reset of the world, as it completely changes every time this story gets compiled.
 
 =====
 Outside
@@ -152,6 +153,7 @@ None.
 ==NPCs==
 There's a woman (Sofia) and two girls (Lilah and Olivia) all playing together.
 Talking to them mentions that they're excited about the Uno game they're playing and/or the coming trip to Portugal, to visit family.
+The girls sometimes ask "do you think we will be able to leave before the storm?"
 
 ==Exits==
 A door to a small home office.
