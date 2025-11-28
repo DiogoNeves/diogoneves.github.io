@@ -140,7 +140,8 @@ Home
 =====
 
 ==General description==
-A simple home across the road from the store.
+A simple home. The place feels happy and comfortable! There's a TV playing funny children's music videos and the family is playing Uno on the floor.
+There are photographs on a wall, showing the family growing, from Diogo and Sofia getting together in Portugal, moving to the UK, growing a family with two girls.
 
 ==State==
 Nothing to see
@@ -184,13 +185,15 @@ Dark and cold.
 ==State==
 If coming from the home office, the trapdoor has closed behind! Don't mention unless the user tries to open!
 
+Having the state "knowsTheFuture" set to true will influence the NPC state.
+
 ==Objects==
-None.
+There's a watch on the floor, hard to spot, the watch arms are moving faster than usual.
 
 ==NPCs==
 There are four NPCs
 - one is paranoid about the past.
-- one is paranoid about the future.
+- one is paranoid about the future. If the user has the "knowsTheFuture" state true, this NPC will be clingy and saying "you've seen it! please tell me! you've seen the box! Please tell me how it works! Was it a success?" Extremely paranoid!
 - one can't understand how it got lost in this place!
 - the other is paranoid that this world will all be gone next time it is compiled.
 
@@ -222,16 +225,18 @@ Coast line
 =====
 
 ==General description==
-A simple coastline near the shop, with waves lapping the shore.
+A ragged coastline. The muffled sound of powerful waves crashing into the rocks. Wind is building up and is foggy, but a blurry, faint coastline can be seen in the horizon. A red light shines periodically, from an invisible lighthouse on the other coast.
 
 ==State==
-Nothing to see
+No changes.
 
 ==Objects==
-None.
+There's a bottle on the floor with a note inside. Inspecting shows the note which says "From a life not yet lived. The grass did look greener!"
 
 ==NPCs==
-None.
+There are twins seating on a bench facing the ocean.
+- One says he would like to explore the coast visible on the other side.
+- The other says he is scared, the ocean is dangerous and a storm is coming.
 
 ==Exits==
 Can only go back.
