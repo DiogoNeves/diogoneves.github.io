@@ -86,6 +86,7 @@ Read through the game-engine result and confirm everything is consistent, intere
 - Make sure the player initial state is valid and in a valid room
 - Has followed the "Checklist for Writing" checklist in the narrative-style
 - Unless clearly stated (e.g. "door closed"), the player can always navigate back from where they came from
+- Make sure the room descriptions aren't disclosing too much upfront, and follow the instructions in `content/game.txt`
 
 ## 5. Output to User
 
