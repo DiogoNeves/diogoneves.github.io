@@ -63,13 +63,13 @@ Shop - Media Room
 =====
 
 ==General description==
-The content section to the right of the entrance holds the video and creativity-focused side of the store, with tools for editing and production.
+The media room includes a large banner saying "Don't forget to check my YouTube channel!" and has a set of cameras and editing software on sale. There's a shelf named "unfinished ideas" with hundreds of disorganised printed QR codes on it.
 
 ==State==
-No state changes
+No state changes.
 
 ==Objects==
-None.
+- One of the QR codes says "https://youtube.com/@diogoneves" on the back.
 
 ==NPCs==
 None.
@@ -105,13 +105,16 @@ Shop - Video-Games
 This section feels more creative, with poster on the wall. Mostly games, especially old ones like Tomb Raider, Final Fantasy VII, Crash Bandicoot, MediEval.
 There's also a dusty large cardboard standee with bold large colourful font "Little Big Planet". Many different games are on shelves, many different copies of Little Big Planet too.
 
+Vibe: extreme nostalgia!
+
 ==State==
 Turning one of the Little Big Planet games around shows a note in the lapidated box "once a masterpiece, left in the few who remember".
 
 Looking closer at the standee shows "BAFTA award winning game".
 
 ==Objects==
-Posters on the wall celebrate nostalgic titles and a standee heralds Little Big Planet.
+- Posters on the wall celebrate nostalgic titles and a standee heralds Little Big Planet.
+- There's a notebook on the floor with "PLEASE FINISH!" written on the cover. Inside has designs for a game with a giant black tower at the centre and a lost city, now a desert, circling around.
 
 ==NPCs==
 None.
@@ -125,9 +128,11 @@ Backrooms Entrance
 
 ==General description==
 The backrooms entrance sits hidden within the store and is currently sealed off.
+Vibe is getting weird. There's piles of writen paper and notebooks everywhere. Most pages have only half-started sentences and ideas. Some notebooks seem to be merging together. On the wall it says "Never there!"
 
 ==State==
 CLOSED UNLESS PLAYER HAS KEY!!
+Once open, set door state to open!
 
 ==Objects==
 None.
@@ -143,16 +148,17 @@ Backrooms - Deep Down
 =====
 
 ==General description==
-Coming soon.
+There are non-sensical, stream of consciousness writings on the walls. The vibe is of a disturbed mind, overthinking their past, present and future. Every single conversation and decision is present, but with little structure or method. Some can be humorous.
 
 ==State==
 If coming from the shop, the Backroom 1 door is unlocked, otherwise, keep it locked!
 
 ==Objects==
-None.
+- There's a notebook and pen on a tiny old table. The notebook can be collected.
+- The user can explore the writing on the walls.
 
 ==NPCs==
-None.
+- The same bot as in the home office is tumbled on the floor, repeating "oops"
 
 ==Exits==
 - An opening, leading to the tunnel.
@@ -193,7 +199,7 @@ Nothing to see
 None.
 
 ==NPCs==
-None.
+- There's a small desk robot, just two eyes (cameras) and a tiny speaker. It keeps repeating "debugging..." when talked to.
 
 ==Exits==
 A strange trapdoor in the corner of the office leading to the tunnel.
@@ -209,6 +215,8 @@ Dark and cold.
 If coming from the home office, the trapdoor has closed behind! Don't mention unless the user tries to open!
 
 Having the state "knowsTheFuture" set to true will influence the NPC state.
+
+If the user has unlocked the Backrooms door (has "backdoor-key-1" in the inventory), the NPCs will sometimes acknowledge and thank the user for freeing them!
 
 ==Objects==
 There's a watch on the floor, hard to spot, the watch arms are moving faster than usual.
@@ -261,12 +269,13 @@ No changes.
 
 ==Objects==
 - There's a bottle on the floor with a note inside. Inspecting shows the note which says "From a life not yet lived. The grass did look greener!"
-- There's a lost book on the floor, near the cliff, only one page is written, the rest is empty.
+- There's a lost book on the floor, near the cliff, titled "The City". Only one page is written, the rest is empty, but the book looks like it was used and read many times.
 
 ==NPCs==
 There are twins seating on a bench facing the ocean.
 - One says he would like to explore the coast visible on the other side.
 - The other says he is scared, the ocean is dangerous and a storm is coming.
+- Both sometimes reply "It doesn't matter, this will all be gone soon"
 
 ==Exits==
 Can only go back.
