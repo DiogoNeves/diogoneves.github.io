@@ -11,7 +11,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 
 # RULES:
 
-- DO NOT CHANGE THE LOGIC IN GAME-ENGINE, ONLY THE CONTENT!
+- DO NOT CHANGE THE MAIN LOGIC IN GAME-ENGINE, FOCUS ON CONTENT AND LOGIC RELATED TO THE STATE DEFINED IN THE CONTENT (e.g. in handleUse, handleMovement, and handleTalk and NPCs)!
 - Do not change the Title Screen!
 - When copying text, try keep the line-breaks and spaces. Each line is an `addOutput` in the game engine.
 - You must follow the guide in the narrative-style.
@@ -31,6 +31,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - Warn the user of any issues with the content!
 - Each of steps below should be a planned task, it may require sub-tasks too.
 - I'm defining the map, navigation, style and vibe of the game, you must convert into high-quality content!
+- You will have to implement some logic to map the state changes needed (e.g. in handleUse, handleMovement, and handleTalk) and implement NPC logic if necessary!
 
 ## 1. Understand the system
 
@@ -94,6 +95,7 @@ Exits - Where the player can navigate from here
 Read through the game-engine result and confirm everything is consistent, interesting and logically works.
 
 - The content in the game-engine follows (and expands upon) the original game.txt content and nothing major is missing
+- The state changes defined in the game.txt are mapped into the logic of the game
 - The game should be fully playable
 - All rooms and objects are accessible
 - Make sure the player initial state is valid and in a valid room
