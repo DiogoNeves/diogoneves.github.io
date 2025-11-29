@@ -19,6 +19,7 @@ const createInitialState = () => ({
       hasLight: true,
       knowsTheFuture: false,
       foundCoin: false,
+      familyLuckyRemarkHeard: false,
     },
   },
   rooms: {
@@ -174,7 +175,7 @@ const createInitialState = () => ({
         forward: "tunnel",
         tunnel: "tunnel",
       },
-      objects: [],
+      objects: ["deep_notebook", "wall_writing"],
       npcs: ["backroom_bot"],
       flags: {
         visited: false,
@@ -557,6 +558,24 @@ const createInitialState = () => ({
       description:
         "One notebook seems to bleed into the next, lines of ink wandering across covers. On its open page, a sentence repeats: 'Afraid I'll forget who I was. Afraid of what I'll never be!'",
       location: "room:backrooms_entry",
+      portable: false,
+    },
+    deep_notebook: {
+      id: "deep_notebook",
+      name: "notebook on the tiny table",
+      aliases: ["notebook", "journal", "pen", "table"],
+      description:
+        "A tiny table holds a notebook and pen. The pages are thick with half-sentences, restarted thoughts, and joke setups abandoned before the punchline, as if someone tried to debug their own brain.",
+      location: "room:backrooms_deep",
+      portable: true,
+    },
+    wall_writing: {
+      id: "wall_writing",
+      name: "wall scribbles",
+      aliases: ["writing", "scribbles", "walls", "text"],
+      description:
+        "Every scrap of conversation seems to have migrated onto the concrete: apologies with no recipients, arguments missing their context, and 'what if' scenarios that never quite agree on the ending. Some of it is painfully funny, in the way old notebooks can be.",
+      location: "room:backrooms_deep",
       portable: false,
     },
     coast_city_book: {
@@ -1106,6 +1125,17 @@ function handleMovement(direction) {
         return "Your hand finds a metal door in the gloom. It does not budge. Something small and precise is missing from the equation.";
       }
     }
+
+    // Backrooms Deep door back to the shop-side corridor only opens once unlocked from above
+    if (currentRoom.id === "backrooms_deep" && targetRoomId === "backrooms_entry") {
+      const backdoorUnlocked =
+        gameState.globals &&
+        gameState.globals.puzzleFlags &&
+        gameState.globals.puzzleFlags.backdoorUnlocked;
+      if (!backdoorUnlocked) {
+        return "You test the door back up, but the bolts on the shop side still hold. For now, the only way is deeper.";
+      }
+    }
   }
 
   if (targetRoomId) {
@@ -1381,6 +1411,25 @@ function handleUse(objectName) {
     }
   }
 
+  // Recording camera in the media room can be turned off and on
+  if (obj.id === "recording_camera") {
+    if (!obj.state) {
+      obj.state = { isOn: true };
+    }
+
+    obj.state.isOn = !obj.state.isOn;
+
+    if (obj.state.isOn) {
+      obj.description =
+        "A camera on a tripod faces a sagging greenscreen. Its red tally light glows steadily, tracking a take that never quite wrapped.";
+      return "You nudge the switch back on. The red tally light returns, watching you with the patient curiosity of a paused livestream.";
+    }
+
+    obj.description =
+      "A camera on a tripod faces a sagging greenscreen. The tally light is dark now, the lens an unrecording glass eye.";
+    return "You reach over and switch the camera off. The room feels quieter, as if the world briefly forgot to log you.";
+  }
+
   // Check for custom onUse handler
   if (obj.onUse) {
     return obj.onUse;
@@ -1433,6 +1482,35 @@ function handleTalk(npcName) {
     : [String(npc.dialogue)];
 
   let candidates = baseLines;
+
+  // Home daughters react to the coin pickup
+  if (npc.id === "lilah" || npc.id === "olivia") {
+    const hasCoin =
+      !!(
+        gameState.player &&
+        gameState.player.flags &&
+        gameState.player.flags.foundCoin
+      );
+    const luckyFlagKey = "familyLuckyRemarkHeard";
+    const luckyHeard =
+      !!(
+        gameState.player &&
+        gameState.player.flags &&
+        gameState.player.flags[luckyFlagKey]
+      );
+    const luckyIndex = baseLines.findIndex((line) =>
+      line.toLowerCase().includes("we're so lucky")
+    );
+
+    if (hasCoin && !luckyHeard && luckyIndex !== -1) {
+      gameState.player.flags[luckyFlagKey] = true;
+      return baseLines[luckyIndex];
+    }
+
+    if (!hasCoin && luckyIndex !== -1) {
+      candidates = baseLines.filter((_, idx) => idx !== luckyIndex);
+    }
+  }
 
   // Future-paranoid NPC reacts differently if the player "knows the future"
   if (npc.id === "future_paranoid") {

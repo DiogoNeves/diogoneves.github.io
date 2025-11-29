@@ -7,7 +7,8 @@
       "stormNoticed": false,
       "hasLight": true,
       "knowsTheFuture": false,
-      "foundCoin": false
+      "foundCoin": false,
+      "familyLuckyRemarkHeard": false
     }
   },
   "rooms": {
@@ -156,7 +157,7 @@
         "forward": "tunnel",
         "tunnel": "tunnel"
       },
-      "objects": [],
+      "objects": ["deep_notebook", "wall_writing"],
       "npcs": ["backroom_bot"],
       "flags": {
         "visited": false,
@@ -496,6 +497,22 @@
       "location": "room:backrooms_entry",
       "portable": false
     },
+    "deep_notebook": {
+      "id": "deep_notebook",
+      "name": "notebook on the tiny table",
+      "aliases": ["notebook", "journal", "pen", "table"],
+      "description": "A tiny table holds a notebook and pen. The pages are thick with half-sentences, restarted thoughts, and joke setups abandoned before the punchline, as if someone tried to debug their own brain.",
+      "location": "room:backrooms_deep",
+      "portable": true
+    },
+    "wall_writing": {
+      "id": "wall_writing",
+      "name": "wall scribbles",
+      "aliases": ["writing", "scribbles", "walls", "text"],
+      "description": "Every scrap of conversation seems to have migrated onto the concrete: apologies with no recipients, arguments missing their context, and 'what if' scenarios that never quite agree on the ending. Some of it is painfully funny, in the way old notebooks can be.",
+      "location": "room:backrooms_deep",
+      "portable": false
+    },
     "coast_city_book": {
       "id": "coast_city_book",
       "name": "weathered copy of 'The City'",
@@ -574,7 +591,8 @@
         "If you go to Portugal without me, take my best card. Actually no, take two.",
         "I'm going to win this game and then the next one on the plane.",
         "Do you think the sea there smells like this room when it's raining?",
-        "Do you think we'll leave before the storm decides to be rude?"
+        "Do you think we'll leave before the storm decides to be rude?",
+        "We're so lucky, Daddy! It feels like the universe saved this hand just for us."
       ]
     },
     "olivia": {
