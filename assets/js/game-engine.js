@@ -252,7 +252,7 @@ const createInitialState = () => ({
         out: "outside",
         street: "outside",
       },
-      objects: ["poster_ad", "memory_notebook", "coffee_cup"],
+      objects: ["poster_ad", "memory_notebook", "coffee_cup", "station_family_photo"],
       npcs: ["coffee_vendor"],
       flags: {
         visited: false,
@@ -521,6 +521,15 @@ const createInitialState = () => ({
       portable: true,
       onUse:
         "You sip the coffee. Warmth steadies your hands; the tannoy coughs approvingly.",
+    },
+    station_family_photo: {
+      id: "station_family_photo",
+      name: "family photo",
+      aliases: ["photo", "picture", "family photo"],
+      description:
+        "A framed photograph hangs slightly askew: two adults, three boys, and a little girl in the Portuguese sun, all squinting and grinning at something just beyond the camera. It looks like a moment that never expected to be left behind on a station wall.",
+      location: "room:train_station",
+      portable: false,
     },
     message_bottle: {
       id: "message_bottle",

@@ -255,6 +255,7 @@ The user can receive a coffee in the inventory.
 - There's some marker written on top of the Poster Ad saying "You do not understand what you're leaving behind!".
 - There's a notebook on the floor titled "All the memories that weren't". The first page says "You can feel nostalgic for stuff that never happened!"
 - The user can get a coffee.
+- There's a photo of a family, in Portugal, 2 adults, 3 boys and a little girl. All smiling.
 
 ==NPCs==
 - There's someone at the counter offering free coffee (which the user can get)
