@@ -1962,6 +1962,7 @@ function showTitleScreen() {
     "BIOSYNTHETIC PROCESSOR v3.14.159 | NEURAL-RAM: 640K (SHOULD BE ENOUGH)",
     "system"
   );
+  addOutput("GPT Compiler x128 | QUANTUM OPTIMIZED", "system");
   addOutput("CONSCIOUSNESS LINK: ACTIVE | REALITY ANCHOR: STABLE", "system");
   addOutput("");
   addOutput(
