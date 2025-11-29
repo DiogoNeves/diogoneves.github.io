@@ -1957,12 +1957,14 @@ function showTitleScreen() {
     "system"
   );
   addOutput("");
-  addOutput("NEUROLINK-7800 PERSONAL COMPUTING SYSTEM", "system");
+  addOutput(
+    "NEUROLINK-7800 PERSONAL COMPUTING SYSTEM | GPT COMPILER QUANTUM128",
+    "system"
+  );
   addOutput(
     "BIOSYNTHETIC PROCESSOR v3.14.159 | NEURAL-RAM: 640K (SHOULD BE ENOUGH)",
     "system"
   );
-  addOutput("GPT Compiler x128 | QUANTUM OPTIMIZED", "system");
   addOutput("CONSCIOUSNESS LINK: ACTIVE | REALITY ANCHOR: STABLE", "system");
   addOutput("");
   addOutput(
