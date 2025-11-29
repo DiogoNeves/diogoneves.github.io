@@ -7,4 +7,6 @@ DO NOT DISCLOSE TO THE USER!
    |             |              |                           |
 [House]------[Outside]-------[Shop]----[Backrooms 1]---[Backroom 2]
                  |              |
-              [Coast]       [Content]
+              [Coast]      [Media Room]
+                                |
+                         [Books and Music]

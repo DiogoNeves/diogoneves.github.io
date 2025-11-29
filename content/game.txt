@@ -2,8 +2,10 @@
 General
 =====
 
-This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeveours. He thrives in freedom to think and explore.
+This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeveours. He thrives in freedom to think and explore. The map is a cross-section between who I was, what could have been, what might be and where I am.
 DON'T EVER MENTION, but the storm is the reset of the world, as it completely changes every time this story gets compiled.
+
+Note that if the user gets into the Tunnel via the Trapdoor, without the key from the shop, they will be locked. This is required! DON'T EVER MENTION! Let the user figure out.
 
 =====
 Outside
@@ -54,10 +56,10 @@ None.
 ==Exits==
 Behind the counter there's a door (it's locked, needs the "backdoor-key-1")
 To the left of the entrance is the retro video-game section
-To the right of the entrance is the video and content section
+To the right of the entrance is the media room section
 
 =====
-Shop - Content
+Shop - Media Room
 =====
 
 ==General description==
@@ -68,6 +70,26 @@ No state changes
 
 ==Objects==
 None.
+
+==NPCs==
+None.
+
+==Exits==
+Can continue forward to the Books and Music section
+
+=====
+Shop - Books and Music
+=====
+
+==General description==
+The content section to the right of the entrance holds the video and creativity-focused side of the store, with tools for editing and production.
+
+==State==
+No state changes
+
+==Objects==
+- There's a book on a pedestal, with an LED shining from below, titled "The City".
+- The "backdoor-key-1" is hidden inside "The City" book.
 
 ==NPCs==
 None.
@@ -124,7 +146,7 @@ Backrooms - Deep Down
 Coming soon.
 
 ==State==
-The door back to backroom 1 is locked. It can open if the user collected the quarter from the ground outside.
+If coming from the shop, the Backroom 1 door is unlocked, otherwise, keep it locked!
 
 ==Objects==
 None.
@@ -133,7 +155,6 @@ None.
 None.
 
 ==Exits==
-- The door back to backroom 1 is now locked! (the user can try, but only opens if the user has the quarter collected outside)
 - An opening, leading to the tunnel.
 
 =====
@@ -210,6 +231,8 @@ Train station
 ==General description==
 A small and clean train station. The screen shows that the next train is delayed. Expected time unknown. On the wall there are also old poster ads about a trip to from Portugal to the UK.
 
+Vibe (please integrate with the description): The life not lived of moving away from my family, distance.
+
 ==State==
 The user can receive a coffee in the inventory.
 
@@ -231,11 +254,14 @@ Coast line
 ==General description==
 A ragged coastline. The muffled sound of powerful waves crashing into the rocks. Wind is building up and is foggy, but a blurry, faint coastline can be seen in the horizon. A red light shines periodically, from an invisible lighthouse on the other coast.
 
+Vibe (please integrate with the description): the places I didn't move to or the opportunities I didn't explore.
+
 ==State==
 No changes.
 
 ==Objects==
-There's a bottle on the floor with a note inside. Inspecting shows the note which says "From a life not yet lived. The grass did look greener!"
+- There's a bottle on the floor with a note inside. Inspecting shows the note which says "From a life not yet lived. The grass did look greener!"
+- There's a lost book on the floor, near the cliff, only one page is written, the rest is empty.
 
 ==NPCs==
 There are twins seating on a bench facing the ocean.
