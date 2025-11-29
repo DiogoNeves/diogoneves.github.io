@@ -80,15 +80,40 @@
     },
     "store_content": {
       "id": "store_content",
-      "name": "Content Studio Corner",
-      "description": "Tripods and ring lights stand like polite sentries around a long edit bench. Coffee rings trace circles on scribbled shot lists; a paused waveform lingers on a monitor mid-syllable. Half-zipped camera bags suggest whoever worked here will be back once courage catches up.\n\nThe murmur from the shop floor drifts in with the smell of hot cables.",
+      "name": "Media Room",
+      "description": "Tripods and ring lights stand like polite sentries around a long edit bench. A banner above the racks whispers: 'Don't forget to check my YouTube channel!' Shelves labelled UNFINISHED IDEAS sag under tangled piles of printed QR codes.\n\nIn one corner a greenscreen sags slightly while a camera blinks its tally light, still recording as if the take never ended. The murmur from the shop floor drifts in with the smell of hot cables. A doorway leads deeper into the books and music section.",
       "exits": {
         "north": "store",
         "back": "store",
         "out": "store",
-        "shop": "store"
+        "shop": "store",
+        "east": "store_books",
+        "forward": "store_books",
+        "books": "store_books"
       },
-      "objects": [],
+      "objects": [
+        "youtube_banner",
+        "unfinished_qr_shelf",
+        "recording_camera"
+      ],
+      "flags": {
+        "visited": false
+      }
+    },
+    "store_books": {
+      "id": "store_books",
+      "name": "Books and Music Section",
+      "description": "This quieter corner smells of paper, dust, and half-finished melodies. A pedestal book titled THE CITY glows from below with a small LED, pages thick with crossings-out and restarts. Nearby, a radio plays songs that cut off just before the chorus, as if the world keeps changing stations mid-sentence.\n\nPost-it notes cling to a crooked music shelf; one reads 'misguided' in affectionate frustration. Something weighty shifts inside THE CITY when you tilt it, like a key that has been waiting for the right page.",
+      "exits": {
+        "west": "store_content",
+        "back": "store_content",
+        "out": "store_content"
+      },
+      "objects": [
+        "city_book",
+        "music_radio",
+        "misguided_postit"
+      ],
       "flags": {
         "visited": false
       }
@@ -107,7 +132,7 @@
         "nostalgia_posters",
         "lbp_standee",
         "lbp_box",
-        "backdoor_key_1"
+        "unfinished_game_notebook"
       ],
       "flags": {
         "visited": false
@@ -128,7 +153,9 @@
         "stairs": "backrooms_deep"
       },
       "objects": [
-        "sealed_stairs"
+        "sealed_stairs",
+        "scattered_notebooks",
+        "merging_notebook"
       ],
       "flags": {
         "visited": false,
@@ -148,6 +175,9 @@
         "tunnel": "tunnel"
       },
       "objects": [],
+      "npcs": [
+        "backroom_bot"
+      ],
       "flags": {
         "visited": false,
         "requiresQuarter": true
@@ -166,7 +196,9 @@
         "office": "home_office",
         "up": "home_office"
       },
-      "objects": [],
+      "objects": [
+        "family_photos"
+      ],
       "npcs": [
         "sofia",
         "lilah",
@@ -191,6 +223,9 @@
         "monitor_notes",
         "tracking_camera",
         "trapdoor_plate"
+      ],
+      "npcs": [
+        "desk_bot"
       ],
       "flags": {
         "visited": false
@@ -252,7 +287,8 @@
         "street": "outside"
       },
       "objects": [
-        "message_bottle"
+        "message_bottle",
+        "coast_city_book"
       ],
       "npcs": [
         "restless_twin",
@@ -413,6 +449,79 @@
       "location": "room:store_games",
       "portable": false
     },
+    "youtube_banner": {
+      "id": "youtube_banner",
+      "name": "YouTube channel banner",
+      "aliases": [
+        "banner",
+        "youtube",
+        "sign"
+      ],
+      "description": "A large banner stretches above the demo rigs: 'Don't forget to check my YouTube channel!' Someone has underlined the handle three times, then added a shy smiley face.",
+      "location": "room:store_content",
+      "portable": false
+    },
+    "unfinished_qr_shelf": {
+      "id": "unfinished_qr_shelf",
+      "name": "unfinished ideas shelf",
+      "aliases": [
+        "shelf",
+        "qr codes",
+        "ideas"
+      ],
+      "description": "Hundreds of printed QR codes lean in untidy stacks, labelled UNFINISHED IDEAS. One code, slightly straighter than the rest, has 'https://youtube.com/@diogoneves' scribbled on the back in biro.",
+      "location": "room:store_content",
+      "portable": false
+    },
+    "recording_camera": {
+      "id": "recording_camera",
+      "name": "recording camera",
+      "aliases": [
+        "camera",
+        "greenscreen camera",
+        "rig"
+      ],
+      "description": "A camera on a tripod faces a sagging greenscreen. Its red tally light glows steadily, tracking a take that never quite wrapped.",
+      "location": "room:store_content",
+      "portable": false
+    },
+    "city_book": {
+      "id": "city_book",
+      "name": "book titled 'The City'",
+      "aliases": [
+        "book",
+        "the city",
+        "city"
+      ],
+      "description": "A hardback book rests on a lit pedestal. Embossed on the cover: THE CITY. Most pages are dense with crossings-out and fresh beginnings. When you lift it, something inside shifts with a quiet clink.",
+      "location": "room:store_books",
+      "portable": false,
+      "onUse": "You thumb through THE CITY. Tucked between two chapters you find a frayed keycard and the outline of a story that keeps almost starting."
+    },
+    "music_radio": {
+      "id": "music_radio",
+      "name": "stuttering radio",
+      "aliases": [
+        "radio",
+        "music",
+        "speaker"
+      ],
+      "description": "A small shop radio plays songs that cut out just before the chorus, as if commitment issues were a setting on the dial.",
+      "location": "room:store_books",
+      "portable": false
+    },
+    "misguided_postit": {
+      "id": "misguided_postit",
+      "name": "post-it marked 'misguided'",
+      "aliases": [
+        "post-it",
+        "note",
+        "misguided"
+      ],
+      "description": "A yellow post-it clings to the music shelf. In quick handwriting: 'misguided'. The arrow it once pointed to has been smudged away.",
+      "location": "room:store_books",
+      "portable": false
+    },
     "backdoor_key_1": {
       "id": "backdoor_key_1",
       "name": "frayed keycard",
@@ -423,7 +532,7 @@
         "lanyard"
       ],
       "description": "A plastic keycard on a tired lanyard. Along one edge someone printed BACKDOOR-KEY-1 in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
-      "location": "room:store_games",
+      "location": "inside:city_book",
       "portable": true,
       "onUse": "You thumb the keycard. Somewhere a lock seems to hold its breath."
     },
@@ -516,6 +625,70 @@
       "location": "room:coast_line",
       "portable": true,
       "onUse": "You uncork the bottle and slide out the note. It reads: 'From a life not yet lived. The grass did look greener!'. The bottle hums faintly after you roll the note back in."
+    },
+    "unfinished_game_notebook": {
+      "id": "unfinished_game_notebook",
+      "name": "notebook marked 'PLEASE FINISH!'",
+      "aliases": [
+        "notebook",
+        "please finish",
+        "game notebook",
+        "designs"
+      ],
+      "description": "A dog-eared notebook lies by the game shelf. On the cover, in all caps, someone wrote 'PLEASE FINISH!'. Inside are sketches of a vast black tower and a lost city swallowed by desert, mechanics half-scribbled between coffee stains.",
+      "location": "room:store_games",
+      "portable": true
+    },
+    "scattered_notebooks": {
+      "id": "scattered_notebooks",
+      "name": "scattered notebooks and pages",
+      "aliases": [
+        "notebooks",
+        "pages",
+        "paper",
+        "notes"
+      ],
+      "description": "Piles of notebooks and loose pages carpet the floor. Most hold half-started sentences and abandoned ideas, merging into one another like a brain with too many tabs open. On the wall above, someone has scratched 'Never there!' as if arguing with reality.",
+      "location": "room:backrooms_entry",
+      "portable": false
+    },
+    "merging_notebook": {
+      "id": "merging_notebook",
+      "name": "merging notebook",
+      "aliases": [
+        "notebook",
+        "journal",
+        "merging"
+      ],
+      "description": "One notebook seems to bleed into the next, lines of ink wandering across covers. On its open page, a sentence repeats: 'Afraid I'll forget who I was. Afraid of what I'll never be!'",
+      "location": "room:backrooms_entry",
+      "portable": false
+    },
+    "coast_city_book": {
+      "id": "coast_city_book",
+      "name": "weathered copy of 'The City'",
+      "aliases": [
+        "book",
+        "the city",
+        "city",
+        "lost book"
+      ],
+      "description": "A damp, well-thumbed copy of THE CITY lies near the cliff edge. Only the first page holds words; the rest is blank, corners softened by rereads. It feels like a life paused mid-sentence.",
+      "location": "room:coast_line",
+      "portable": true
+    },
+    "family_photos": {
+      "id": "family_photos",
+      "name": "wall of family photos",
+      "aliases": [
+        "photos",
+        "photographs",
+        "pictures",
+        "frames"
+      ],
+      "description": "Frames climb the hallway wall, charting a journey from Portugal to the UK: awkward first selfies, wedding smiles, newborn squints, two girls growing taller and sillier in each shot. Every photo looks unapologetically happy.",
+      "location": "room:home",
+      "portable": false
     },
     "monitor_notes": {
       "id": "monitor_notes",
@@ -621,6 +794,22 @@
         "Uno means one. I have two snacks. That's strategy.",
         "The storm outside sounds like the train in my head. Choo-choo dramatic!",
         "Do you think we'll actually get going before the clouds get bored?"
+      ]
+    },
+    "desk_bot": {
+      "id": "desk_bot",
+      "name": "desk robot",
+      "aliases": [
+        "desk bot",
+        "robot",
+        "bot"
+      ],
+      "location": "room:home_office",
+      "description": "A small desk robot peers from beside the monitor, two camera-eyes and a single tiny speaker perched on a plastic base.",
+      "dialogue": [
+        "\"Debugging...\" the little robot chirps, as if stuck between logs.",
+        "The robot whirs and announces, \"Debugging...\" in a tone that suggests this may take a while.",
+        "Lights blink across the robot's face. \"Debugging...\" it repeats, cheerfully resigned."
       ]
     },
     "past_paranoid": {
@@ -734,6 +923,22 @@
         "Waves can swallow more than feet. We should stay where the ground remembers us.",
         "A storm's building. Exploration can wait until the map stops shaking.",
         "Sometimes not moving is its own adventure. Boring, but survivable."
+      ]
+    },
+    "backroom_bot": {
+      "id": "backroom_bot",
+      "name": "fallen desk robot",
+      "aliases": [
+        "robot",
+        "bot",
+        "desk robot"
+      ],
+      "location": "room:backrooms_deep",
+      "description": "The same style of desk robot from the home office lies on its side here, lenses scuffed and speaker crackling with static.",
+      "dialogue": [
+        "\"oops,\" it crackles, as if rerunning the same stack trace.",
+        "\"oops...\" The word drags out, then cuts, then restarts.",
+        "The robot judders, managing only a glitchy \"o-o-oops.\""
       ]
     }
   },

@@ -91,15 +91,40 @@ const createInitialState = () => ({
       },
       "store_content": {
         "id": "store_content",
-        "name": "Content Studio Corner",
-        "description": "Tripods and ring lights stand like polite sentries around a long edit bench. Coffee rings trace circles on scribbled shot lists; a paused waveform lingers on a monitor mid-syllable. Half-zipped camera bags suggest whoever worked here will be back once courage catches up.\n\nThe murmur from the shop floor drifts in with the smell of hot cables.",
+        "name": "Media Room",
+        "description": "Tripods and ring lights stand like polite sentries around a long edit bench. A banner above the racks whispers: 'Don't forget to check my YouTube channel!' Shelves labelled UNFINISHED IDEAS sag under tangled piles of printed QR codes.\n\nIn one corner a greenscreen sags slightly while a camera blinks its tally light, still recording as if the take never ended. The murmur from the shop floor drifts in with the smell of hot cables. A doorway leads deeper into the books and music section.",
         "exits": {
           "north": "store",
           "back": "store",
           "out": "store",
-          "shop": "store"
+          "shop": "store",
+          "east": "store_books",
+          "forward": "store_books",
+          "books": "store_books"
         },
-        "objects": [],
+        "objects": [
+          "youtube_banner",
+          "unfinished_qr_shelf",
+          "recording_camera"
+        ],
+        "flags": {
+          "visited": false
+        }
+      },
+      "store_books": {
+        "id": "store_books",
+        "name": "Books and Music Section",
+        "description": "This quieter corner smells of paper, dust, and half-finished melodies. A pedestal book titled THE CITY glows from below with a small LED, pages thick with crossings-out and restarts. Nearby, a radio plays songs that cut off just before the chorus, as if the world keeps changing stations mid-sentence.\n\nPost-it notes cling to a crooked music shelf; one reads 'misguided' in affectionate frustration. Something weighty shifts inside THE CITY when you tilt it, like a key that has been waiting for the right page.",
+        "exits": {
+          "west": "store_content",
+          "back": "store_content",
+          "out": "store_content"
+        },
+        "objects": [
+          "city_book",
+          "music_radio",
+          "misguided_postit"
+        ],
         "flags": {
           "visited": false
         }
@@ -118,7 +143,7 @@ const createInitialState = () => ({
           "nostalgia_posters",
           "lbp_standee",
           "lbp_box",
-          "backdoor_key_1"
+          "unfinished_game_notebook"
         ],
         "flags": {
           "visited": false
@@ -139,7 +164,9 @@ const createInitialState = () => ({
           "stairs": "backrooms_deep"
         },
         "objects": [
-          "sealed_stairs"
+          "sealed_stairs",
+          "scattered_notebooks",
+          "merging_notebook"
         ],
         "flags": {
           "visited": false,
@@ -159,6 +186,9 @@ const createInitialState = () => ({
           "tunnel": "tunnel"
         },
         "objects": [],
+        "npcs": [
+          "backroom_bot"
+        ],
         "flags": {
           "visited": false,
           "requiresQuarter": true
@@ -177,7 +207,9 @@ const createInitialState = () => ({
           "office": "home_office",
           "up": "home_office"
         },
-        "objects": [],
+        "objects": [
+          "family_photos"
+        ],
         "npcs": [
           "sofia",
           "lilah",
@@ -202,6 +234,9 @@ const createInitialState = () => ({
           "monitor_notes",
           "tracking_camera",
           "trapdoor_plate"
+        ],
+        "npcs": [
+          "desk_bot"
         ],
         "flags": {
           "visited": false
@@ -263,7 +298,8 @@ const createInitialState = () => ({
           "street": "outside"
         },
         "objects": [
-          "message_bottle"
+          "message_bottle",
+          "coast_city_book"
         ],
         "npcs": [
           "restless_twin",
@@ -424,6 +460,79 @@ const createInitialState = () => ({
         "location": "room:store_games",
         "portable": false
       },
+      "youtube_banner": {
+        "id": "youtube_banner",
+        "name": "YouTube channel banner",
+        "aliases": [
+          "banner",
+          "youtube",
+          "sign"
+        ],
+        "description": "A large banner stretches above the demo rigs: 'Don't forget to check my YouTube channel!' Someone has underlined the handle three times, then added a shy smiley face.",
+        "location": "room:store_content",
+        "portable": false
+      },
+      "unfinished_qr_shelf": {
+        "id": "unfinished_qr_shelf",
+        "name": "unfinished ideas shelf",
+        "aliases": [
+          "shelf",
+          "qr codes",
+          "ideas"
+        ],
+        "description": "Hundreds of printed QR codes lean in untidy stacks, labelled UNFINISHED IDEAS. One code, slightly straighter than the rest, has 'https://youtube.com/@diogoneves' scribbled on the back in biro.",
+        "location": "room:store_content",
+        "portable": false
+      },
+      "recording_camera": {
+        "id": "recording_camera",
+        "name": "recording camera",
+        "aliases": [
+          "camera",
+          "greenscreen camera",
+          "rig"
+        ],
+        "description": "A camera on a tripod faces a sagging greenscreen. Its red tally light glows steadily, tracking a take that never quite wrapped.",
+        "location": "room:store_content",
+        "portable": false
+      },
+      "city_book": {
+        "id": "city_book",
+        "name": "book titled 'The City'",
+        "aliases": [
+          "book",
+          "the city",
+          "city"
+        ],
+        "description": "A hardback book rests on a lit pedestal. Embossed on the cover: THE CITY. Most pages are dense with crossings-out and fresh beginnings. When you lift it, something inside shifts with a quiet clink.",
+        "location": "room:store_books",
+        "portable": false,
+        "onUse": "You thumb through THE CITY. Tucked between two chapters you find a frayed keycard and the outline of a story that keeps almost starting."
+      },
+      "music_radio": {
+        "id": "music_radio",
+        "name": "stuttering radio",
+        "aliases": [
+          "radio",
+          "music",
+          "speaker"
+        ],
+        "description": "A small shop radio plays songs that cut out just before the chorus, as if commitment issues were a setting on the dial.",
+        "location": "room:store_books",
+        "portable": false
+      },
+      "misguided_postit": {
+        "id": "misguided_postit",
+        "name": "post-it marked 'misguided'",
+        "aliases": [
+          "post-it",
+          "note",
+          "misguided"
+        ],
+        "description": "A yellow post-it clings to the music shelf. In quick handwriting: 'misguided'. The arrow it once pointed to has been smudged away.",
+        "location": "room:store_books",
+        "portable": false
+      },
       "backdoor_key_1": {
         "id": "backdoor_key_1",
         "name": "frayed keycard",
@@ -432,12 +541,12 @@ const createInitialState = () => ({
           "keycard",
           "backdoor key",
           "lanyard"
-        ],
-        "description": "A plastic keycard on a tired lanyard. Along one edge someone printed BACKDOOR-KEY-1 in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
-        "location": "room:store_games",
-        "portable": true,
-        "onUse": "You thumb the keycard. Somewhere a lock seems to hold its breath."
-      },
+      ],
+      "description": "A plastic keycard on a tired lanyard. Along one edge someone printed BACKDOOR-KEY-1 in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
+      "location": "inside:city_book",
+      "portable": true,
+      "onUse": "You thumb the keycard. Somewhere a lock seems to hold its breath."
+    },
       "sealed_stairs": {
         "id": "sealed_stairs",
         "name": "sealed stairwell",
@@ -528,6 +637,70 @@ const createInitialState = () => ({
         "portable": true,
         "onUse": "You uncork the bottle and slide out the note. It reads: 'From a life not yet lived. The grass did look greener!'. The bottle hums faintly after you roll the note back in."
       },
+      "unfinished_game_notebook": {
+        "id": "unfinished_game_notebook",
+        "name": "notebook marked 'PLEASE FINISH!'",
+        "aliases": [
+          "notebook",
+          "please finish",
+          "game notebook",
+          "designs"
+        ],
+        "description": "A dog-eared notebook lies by the game shelf. On the cover, in all caps, someone wrote 'PLEASE FINISH!'. Inside are sketches of a vast black tower and a lost city swallowed by desert, mechanics half-scribbled between coffee stains.",
+        "location": "room:store_games",
+        "portable": true
+      },
+      "scattered_notebooks": {
+        "id": "scattered_notebooks",
+        "name": "scattered notebooks and pages",
+        "aliases": [
+          "notebooks",
+          "pages",
+          "paper",
+          "notes"
+        ],
+        "description": "Piles of notebooks and loose pages carpet the floor. Most hold half-started sentences and abandoned ideas, merging into one another like a brain with too many tabs open. On the wall above, someone has scratched 'Never there!' as if arguing with reality.",
+        "location": "room:backrooms_entry",
+        "portable": false
+      },
+      "merging_notebook": {
+        "id": "merging_notebook",
+        "name": "merging notebook",
+        "aliases": [
+          "notebook",
+          "journal",
+          "merging"
+        ],
+        "description": "One notebook seems to bleed into the next, lines of ink wandering across covers. On its open page, a sentence repeats: 'Afraid I'll forget who I was. Afraid of what I'll never be!'",
+        "location": "room:backrooms_entry",
+        "portable": false
+      },
+      "coast_city_book": {
+        "id": "coast_city_book",
+        "name": "weathered copy of 'The City'",
+        "aliases": [
+          "book",
+          "the city",
+          "city",
+          "lost book"
+        ],
+        "description": "A damp, well-thumbed copy of THE CITY lies near the cliff edge. Only the first page holds words; the rest is blank, corners softened by rereads. It feels like a life paused mid-sentence.",
+        "location": "room:coast_line",
+        "portable": true
+      },
+      "family_photos": {
+        "id": "family_photos",
+        "name": "wall of family photos",
+        "aliases": [
+          "photos",
+          "photographs",
+          "pictures",
+          "frames"
+        ],
+        "description": "Frames climb the hallway wall, charting a journey from Portugal to the UK: awkward first selfies, wedding smiles, newborn squints, two girls growing taller and sillier in each shot. Every photo looks unapologetically happy.",
+        "location": "room:home",
+        "portable": false
+      },
       "monitor_notes": {
         "id": "monitor_notes",
         "name": "monitor and notes",
@@ -614,7 +787,8 @@ const createInitialState = () => ({
           "If you go to Portugal without me, take my best card. Actually no, take two.",
           "I'm going to win this game and then the next one on the plane.",
           "Do you think the sea there smells like this room when it's raining?",
-          "Do you think we'll leave before the storm decides to be rude?"
+          "Do you think we'll leave before the storm decides to be rude?",
+          "We're so lucky, Daddy! It feels like the universe saved this hand just for us."
         ]
       },
       "olivia": {
@@ -632,6 +806,22 @@ const createInitialState = () => ({
           "Uno means one. I have two snacks. That's strategy.",
           "The storm outside sounds like the train in my head. Choo-choo dramatic!",
           "Do you think we'll actually get going before the clouds get bored?"
+        ]
+      },
+      "desk_bot": {
+        "id": "desk_bot",
+        "name": "desk robot",
+        "aliases": [
+          "desk bot",
+          "robot",
+          "bot"
+        ],
+        "location": "room:home_office",
+        "description": "A small desk robot peers from beside the monitor, two camera-eyes and a single tiny speaker perched on a plastic base.",
+        "dialogue": [
+          "\"Debugging...\" the little robot chirps, as if stuck between logs.",
+          "The robot whirs and announces, \"Debugging...\" in a tone that suggests this may take a while.",
+          "Lights blink across the robot's face. \"Debugging...\" it repeats, cheerfully resigned."
         ]
       },
       "past_paranoid": {
@@ -745,6 +935,22 @@ const createInitialState = () => ({
           "Waves can swallow more than feet. We should stay where the ground remembers us.",
           "A storm's building. Exploration can wait until the map stops shaking.",
           "Sometimes not moving is its own adventure. Boring, but survivable."
+        ]
+      },
+      "backroom_bot": {
+        "id": "backroom_bot",
+        "name": "fallen desk robot",
+        "aliases": [
+          "robot",
+          "bot",
+          "desk robot"
+        ],
+        "location": "room:backrooms_deep",
+        "description": "The same style of desk robot from the home office lies on its side here, lenses scuffed and speaker crackling with static.",
+        "dialogue": [
+          "\"oops,\" it crackles, as if rerunning the same stack trace.",
+          "\"oops...\" The word drags out, then cuts, then restarts.",
+          "The robot judders, managing only a glitchy \"o-o-oops.\""
         ]
       }
     },
@@ -1038,9 +1244,45 @@ function handleMovement(direction) {
     d: "down",
   };
   const dir = dirMap[direction] || direction;
+  const targetRoomId = exits[dir];
 
-  if (exits[dir]) {
-    const newRoomId = exits[dir];
+  // Special movement rules for puzzles
+  if (targetRoomId) {
+    // Locked staff door from Tech Shop to Backrooms Entrance
+    if (currentRoom.id === "store" && targetRoomId === "backrooms_entry") {
+      const hasKey = gameState.player.inventory.includes("backdoor_key_1");
+      if (!hasKey) {
+        return "You try the staff door, but the lock stares back, unimpressed. Whatever opens it isn't in your hands yet.";
+      }
+
+      // First time opening: remember that the back area is unlocked
+      if (
+        gameState.globals &&
+        gameState.globals.puzzleFlags &&
+        !gameState.globals.puzzleFlags.backdoorUnlocked
+      ) {
+        gameState.globals.puzzleFlags.backdoorUnlocked = true;
+        if (currentRoom.flags) {
+          currentRoom.flags.backdoorUnlocked = true;
+        }
+        const entryRoom = gameState.rooms["backrooms_entry"];
+        if (entryRoom && entryRoom.flags) {
+          entryRoom.flags.sealed = false;
+        }
+      }
+    }
+
+    // Tunnel side of the Backrooms door – requires the keycard
+    if (currentRoom.id === "tunnel" && targetRoomId === "backrooms_deep") {
+      const hasKey = gameState.player.inventory.includes("backdoor_key_1");
+      if (!hasKey) {
+        return "Your hand finds a metal door in the gloom. It does not budge. Something small and precise is missing from the equation.";
+      }
+    }
+  }
+
+  if (targetRoomId) {
+    const newRoomId = targetRoomId;
     gameState.player.roomId = newRoomId;
 
     const newRoom = gameState.rooms[newRoomId];
@@ -1226,6 +1468,11 @@ function handleTake(objectName) {
     currentRoom.objects.splice(idx, 1);
   }
 
+  // Track notable pickups
+  if (obj.id === "quarter") {
+    gameState.player.flags.foundQuarter = true;
+  }
+
   return `You pick up the ${obj.name}. It's yours now, for better or worse.`;
 }
 
@@ -1271,6 +1518,42 @@ function handleUse(objectName) {
     return `You cannot see any "${objectName}" here.`;
   }
 
+  // Personal AI box grants a glimpse of the future
+  if (obj.id === "personal_ai_box") {
+    if (gameState.player && gameState.player.flags) {
+      gameState.player.flags.knowsTheFuture = true;
+    }
+    if (obj.onUse) {
+      return obj.onUse;
+    }
+  }
+
+  // THE CITY pedestal book reveals the hidden keycard
+  if (obj.id === "city_book") {
+    const keyObj = gameState.objects["backdoor_key_1"];
+    let extraText = "";
+
+    if (keyObj && !gameState.player.inventory.includes("backdoor_key_1")) {
+      gameState.player.inventory.push("backdoor_key_1");
+      keyObj.location = "player";
+
+      const booksRoom = gameState.rooms["store_books"];
+      if (booksRoom && Array.isArray(booksRoom.objects)) {
+        const keyIndex = booksRoom.objects.indexOf("backdoor_key_1");
+        if (keyIndex !== -1) {
+          booksRoom.objects.splice(keyIndex, 1);
+        }
+      }
+
+      extraText =
+        " You slip the frayed keycard you find between the pages into your pocket.";
+    }
+
+    if (obj.onUse) {
+      return obj.onUse + extraText;
+    }
+  }
+
   // Check for custom onUse handler
   if (obj.onUse) {
     return obj.onUse;
@@ -1309,14 +1592,69 @@ function handleTalk(npcName) {
     return `You cannot see any "${npcName}" here to talk to.`;
   }
 
-  if (!npc.dialogue || npc.dialogue.length === 0) {
+  if (!npc.dialogue) {
     return `The ${npc.name} seems disinclined to conversation at the moment.`;
   }
 
-  // Simple dialogue: pick a random line from the dialogue array
-  const randomLine =
-    npc.dialogue[Math.floor(Math.random() * npc.dialogue.length)];
-  return randomLine;
+  // Function-based dialogue (advanced NPCs)
+  if (typeof npc.dialogue === "function") {
+    return npc.dialogue(gameState, npc);
+  }
+
+  const baseLines = Array.isArray(npc.dialogue)
+    ? npc.dialogue.slice()
+    : [String(npc.dialogue)];
+
+  let candidates = baseLines;
+
+  // Future-paranoid NPC reacts differently if the player "knows the future"
+  if (npc.id === "future_paranoid") {
+    const knows = !!(gameState.player && gameState.player.flags.knowsTheFuture);
+    const manicIndex = baseLines.findIndex((line) =>
+      line.includes("You've seen it! Please tell me! You've seen the box!")
+    );
+
+    if (knows && manicIndex !== -1 && Math.random() < 0.5) {
+      return baseLines[manicIndex];
+    }
+
+    if (!knows && manicIndex !== -1) {
+      // Before the player has glimpsed the future, avoid the most clingy line
+      candidates = baseLines.filter((_, idx) => idx !== manicIndex);
+    }
+  }
+
+  if (candidates.length === 0) {
+    return `The ${npc.name} seems disinclined to conversation at the moment.`;
+  }
+
+  let line =
+    candidates[Math.floor(Math.random() * candidates.length)];
+
+  // Tunnel NPCs occasionally thank the player after the back door is opened
+  const tunnelNpcIds = [
+    "past_paranoid",
+    "future_paranoid",
+    "lost_wanderer",
+    "compilation_paranoid",
+  ];
+  const isTunnelNpc = tunnelNpcIds.includes(npc.id);
+  const backdoorOpen =
+    (gameState.globals &&
+      gameState.globals.puzzleFlags &&
+      gameState.globals.puzzleFlags.backdoorUnlocked) ||
+    gameState.player.inventory.includes("backdoor_key_1");
+
+  if (isTunnelNpc && backdoorOpen && Math.random() < 0.3) {
+    const thanksLines = [
+      "Whatever you unchained above us, thank you. The air moves differently down here now.",
+      "We felt a lock sigh open somewhere overhead. It's easier to breathe when doors remember how.",
+      "For a moment the corridor widened, as if the world remembered another exit. That was you, wasn't it?",
+    ];
+    line = thanksLines[Math.floor(Math.random() * thanksLines.length)];
+  }
+
+  return line;
 }
 
 /**
