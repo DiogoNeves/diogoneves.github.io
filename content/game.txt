@@ -2,7 +2,7 @@
 General
 =====
 
-This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeveours. He thrives in freedom to think and explore. The map is a cross-section between who I was, what could have been, what might be and where I am.
+This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeavours. He thrives in freedom to think and explore. The map is a cross-section between who I was, what could have been, what might be and where I am.
 DON'T EVER MENTION, but the storm is the reset of the world, as it completely changes every time this story gets compiled.
 
 Note that if the user gets into the Tunnel via the Trapdoor, without the key from the shop, they will be locked. This is required! DON'T EVER MENTION! Let the user figure out.
@@ -15,10 +15,10 @@ Outside
 The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
 
 ==State==
-No state changes
+No changes in state.
 
 ==Objects==
-An easy to miss quarter on the floor, near the store front.
+An easy to miss coin on the pavement, near the store front.
 
 The player can read the neon sign and store name "Metaphora" (don't disclose unless the user reads the signs).
 
@@ -46,7 +46,7 @@ If the user inspects the Personal AI Box, set the state "knowsTheFuture" to true
 The door behind the counter requires the "backdoor-key-1" but don't disclose to the user unless they try to open it!
 
 ==Objects==
-There's a post-it hanging on a personal AI box. It says "these are yet to happen" in messy hand-writting, barely readable.
+There's a post-it hanging on a personal AI box. It says "these are yet to happen" in messy handwriting, barely readable.
 
 (only if the user looks) The box of one of the personal AI boxes on the floor says "Don't use at your own risk!".
 
@@ -105,13 +105,13 @@ Shop - Video-Games
 =====
 
 ==General description==
-This section feels more creative, with poster on the wall. Mostly games, especially old ones like Tomb Raider, Final Fantasy VII, Crash Bandicoot, MediEval.
+This section feels more creative, with poster on the wall. Mostly games, especially old ones like Tomb Raider, Final Fantasy VII, Crash Bandicoot, MediEvil.
 There's also a dusty large cardboard standee with bold large colourful font "Little Big Planet". Many different games are on shelves, many different copies of Little Big Planet too.
 
 Vibe: extreme nostalgia!
 
 ==State==
-Turning one of the Little Big Planet games around shows a note in the lapidated box "once a masterpiece, left in the few who remember".
+Turning one of the Little Big Planet games around shows a note in the dilapidated box "once a masterpiece, left in the few who remember".
 
 Looking closer at the standee shows "BAFTA award winning game".
 
@@ -131,7 +131,7 @@ Backrooms Entrance
 
 ==General description==
 The backrooms entrance sits hidden within the store and is currently sealed off.
-Vibe is getting weird. There's piles of writen paper and notebooks everywhere. Most pages have only half-started sentences and ideas. Some notebooks seem to be merging together. On the wall it says "Never there!"
+Vibe is getting weird. There's piles of written paper and notebooks everywhere. Most pages have only half-started sentences and ideas. Some notebooks seem to be merging together. On the wall it says "Never there!"
 
 ==State==
 CLOSED UNLESS PLAYER HAS KEY!!
@@ -176,7 +176,7 @@ A simple home. The place feels happy and comfortable! There's a TV playing funny
 There are photographs on a wall, showing the family growing, from Diogo and Sofia getting together in Portugal, moving to the UK, growing a family with two girls.
 
 ==State==
-No changes in state.
+- If the user has the coin in the inventory, the girls will say "We're so lucky daddy!", before the other speech lines.
 
 ==Objects==
 - The user can look at photos. All happy.
@@ -197,7 +197,7 @@ Home Office
 A small, messy home office. Full of coding and sci-fi books, games, hanging VR headsets, a wide monitor and some headphones on the desk. Lots of notes on the desk and in the corner of the room there's a tripod with a camera that has the red recording light on. The camera turns with movement, someone's watching!
 
 ==State==
-No state changes.
+No changes in state.
 
 ==Objects==
 - The desk bot.
@@ -237,7 +237,7 @@ There are four NPCs
 
 ==Exits==
 - There's a locked trapdoor into the home office (never opens from the tunnel, but the user can try!)
-- Can go into the backroom 2 (deep down)
+- Can go into the Backroom - Deep Down.
 
 =====
 Train station
@@ -267,7 +267,7 @@ Coast line
 =====
 
 ==General description==
-A ragged coastline. The muffled sound of powerful waves crashing into the rocks. Wind is building up and is foggy, but a blurry, faint coastline can be seen in the horizon. A red light shines periodically, from an invisible lighthouse on the other coast.
+A ragged coastline. The muffled sound of powerful waves crashing into the rocks. The wind is building and the air is foggy, but a blurry, faint coastline can be seen in the horizon. A red light shines periodically, from an invisible lighthouse on the other coast.
 
 Vibe (please integrate with the description): the places I didn't move to or the opportunities I didn't explore.
 
@@ -279,7 +279,7 @@ No changes.
 - There's a lost book on the floor, near the cliff, titled "The City". Only one page is written, the rest is empty, but the book looks like it was used and read many times.
 
 ==NPCs==
-There are twins seating on a bench facing the ocean.
+There are twins sitting on a bench facing the ocean.
 - One says he would like to explore the coast visible on the other side.
 - The other says he is scared, the ocean is dangerous and a storm is coming.
 - Both sometimes reply "It doesn't matter, this will all be gone soon"
