@@ -28,6 +28,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 
 - Follow these in order.
 - Understand the structure and needs of the game-engine before copying!
+- From the game-engine, only use the structure as inspiration, the content can (and usually will) be completely replaced!
 - Warn the user of any issues with the content!
 - Each of steps below should be a planned task, it may require sub-tasks too.
 - I'm defining the map, navigation, style and vibe of the game, you must convert into high-quality content!

@@ -7,7 +7,7 @@
       "stormNoticed": false,
       "hasLight": true,
       "knowsTheFuture": false,
-      "foundQuarter": false
+      "foundCoin": false
     }
   },
   "rooms": {
@@ -32,14 +32,8 @@
         "coast": "coast_line",
         "shore": "coast_line"
       },
-      "objects": [
-        "quarter",
-        "neon_sign",
-        "storefront_window"
-      ],
-      "npcs": [
-        "friendly_lookout"
-      ],
+      "objects": ["coin", "neon_sign", "storefront_window"],
+      "npcs": ["friendly_lookout"],
       "flags": {
         "visited": false,
         "stormWarningGiven": false
@@ -91,11 +85,7 @@
         "forward": "store_books",
         "books": "store_books"
       },
-      "objects": [
-        "youtube_banner",
-        "unfinished_qr_shelf",
-        "recording_camera"
-      ],
+      "objects": ["youtube_banner", "unfinished_qr_shelf", "recording_camera"],
       "flags": {
         "visited": false
       }
@@ -109,11 +99,7 @@
         "back": "store_content",
         "out": "store_content"
       },
-      "objects": [
-        "city_book",
-        "music_radio",
-        "misguided_postit"
-      ],
+      "objects": ["city_book", "music_radio", "misguided_postit"],
       "flags": {
         "visited": false
       }
@@ -152,11 +138,7 @@
         "forward": "backrooms_deep",
         "stairs": "backrooms_deep"
       },
-      "objects": [
-        "sealed_stairs",
-        "scattered_notebooks",
-        "merging_notebook"
-      ],
+      "objects": ["sealed_stairs", "scattered_notebooks", "merging_notebook"],
       "flags": {
         "visited": false,
         "sealed": true
@@ -165,7 +147,7 @@
     "backrooms_deep": {
       "id": "backrooms_deep",
       "name": "Backrooms - Deep Down",
-      "description": "Concrete squeezes tight and the lights flicker in a rhythm that might be Morse or your pulse. The door back up is bolted with a neat coin-sized slot, testing whether you kept a certain quarter. Condensation beads taste of static and overheated daydreams.\n\nA low opening breathes towards a murky tunnel where the storm sounds like someone shuffling note cards.",
+      "description": "Concrete squeezes tight and the lights flicker in a rhythm that might be Morse or your pulse. The door back up is bolted with a neat coin-sized slot, testing whether you kept a certain coin. Condensation beads taste of static and overheated daydreams.\n\nA low opening breathes towards a murky tunnel where the storm sounds like someone shuffling note cards.",
       "exits": {
         "west": "backrooms_entry",
         "up": "backrooms_entry",
@@ -175,12 +157,10 @@
         "tunnel": "tunnel"
       },
       "objects": [],
-      "npcs": [
-        "backroom_bot"
-      ],
+      "npcs": ["backroom_bot"],
       "flags": {
         "visited": false,
-        "requiresQuarter": true
+        "requiresCoin": true
       }
     },
     "home": {
@@ -196,14 +176,8 @@
         "office": "home_office",
         "up": "home_office"
       },
-      "objects": [
-        "family_photos"
-      ],
-      "npcs": [
-        "sofia",
-        "lilah",
-        "olivia"
-      ],
+      "objects": ["family_photos"],
+      "npcs": ["sofia", "lilah", "olivia"],
       "flags": {
         "visited": false
       }
@@ -219,14 +193,8 @@
         "down": "tunnel",
         "trapdoor": "tunnel"
       },
-      "objects": [
-        "monitor_notes",
-        "tracking_camera",
-        "trapdoor_plate"
-      ],
-      "npcs": [
-        "desk_bot"
-      ],
+      "objects": ["monitor_notes", "tracking_camera", "trapdoor_plate"],
+      "npcs": ["desk_bot"],
       "flags": {
         "visited": false
       }
@@ -240,10 +208,7 @@
         "back": "backrooms_deep",
         "opening": "backrooms_deep"
       },
-      "objects": [
-        "fast_watch",
-        "sealed_trapdoor"
-      ],
+      "objects": ["fast_watch", "sealed_trapdoor"],
       "npcs": [
         "past_paranoid",
         "future_paranoid",
@@ -264,14 +229,8 @@
         "out": "outside",
         "street": "outside"
       },
-      "objects": [
-        "poster_ad",
-        "memory_notebook",
-        "coffee_cup"
-      ],
-      "npcs": [
-        "coffee_vendor"
-      ],
+      "objects": ["poster_ad", "memory_notebook", "coffee_cup"],
+      "npcs": ["coffee_vendor"],
       "flags": {
         "visited": false
       }
@@ -286,41 +245,27 @@
         "out": "outside",
         "street": "outside"
       },
-      "objects": [
-        "message_bottle",
-        "coast_city_book"
-      ],
-      "npcs": [
-        "restless_twin",
-        "cautious_twin"
-      ],
+      "objects": ["message_bottle", "coast_city_book"],
+      "npcs": ["restless_twin", "cautious_twin"],
       "flags": {
         "visited": false
       }
     }
   },
   "objects": {
-    "quarter": {
-      "id": "quarter",
-      "name": "tarnished quarter",
-      "aliases": [
-        "quarter",
-        "coin",
-        "money"
-      ],
-      "description": "A tarnished quarter from 1984, edges smoothed by anxious flipping. Someone scratched D.N. into the metal. It's warmer than it ought to be, as if memory keeps its own heat.",
+    "coin": {
+      "id": "coin",
+      "name": "tarnished coin",
+      "aliases": ["coin", "coin", "money"],
+      "description": "A tarnished coin from 1984, edges smoothed by anxious flipping. Someone scratched D.N. into the metal. It's warmer than it ought to be, as if memory keeps its own heat.",
       "location": "room:outside",
       "portable": true,
-      "onUse": "You flip the quarter. The neon catches it mid-spin, scattering tiny constellations over your palm. It lands with a polite clink that sounds like the start of something."
+      "onUse": "You flip the coin. The neon catches it mid-spin, scattering tiny constellations over your palm. It lands with a polite clink that sounds like the start of something."
     },
     "neon_sign": {
       "id": "neon_sign",
       "name": "flickering neon sign",
-      "aliases": [
-        "neon",
-        "sign",
-        "lights"
-      ],
+      "aliases": ["neon", "sign", "lights"],
       "description": "Up close the flicker sharpens into letters: METAPHORA. The tubes buzz like thoughts trying to finish themselves, the M faltering as if it wants to become a metaphor for everything else.",
       "location": "room:outside",
       "portable": false
@@ -328,11 +273,7 @@
     "storefront_window": {
       "id": "storefront_window",
       "name": "storefront window",
-      "aliases": [
-        "window",
-        "display",
-        "retro tech"
-      ],
+      "aliases": ["window", "display", "retro tech"],
       "description": "Walkmen, pagers, consoles, and homebrew boards crowd the glass. A camcorder's tiny screen loops a clip of someone soldering at 3am while the rain blurs the edges.",
       "location": "room:outside",
       "portable": false
@@ -340,12 +281,7 @@
     "ai_gift_cards": {
       "id": "ai_gift_cards",
       "name": "AI access cards",
-      "aliases": [
-        "cards",
-        "gift cards",
-        "codes",
-        "models"
-      ],
+      "aliases": ["cards", "gift cards", "codes", "models"],
       "description": "Plastic gift cards promise minutes with distant minds. Each one has a scribbled note about latency, capability, and which models make the best company at 2am.",
       "location": "room:store",
       "portable": false
@@ -353,11 +289,7 @@
     "personal_ai_box": {
       "id": "personal_ai_box",
       "name": "personal AI box",
-      "aliases": [
-        "ai box",
-        "box",
-        "personal box"
-      ],
+      "aliases": ["ai box", "box", "personal box"],
       "description": "Cardboard towers of personal AI units lean like they're gossiping. Shipping labels mark destinations that never happened. A flap hangs open, begging to be peered into.",
       "location": "room:store",
       "portable": false,
@@ -366,11 +298,7 @@
     "postit_future": {
       "id": "postit_future",
       "name": "flapping post-it",
-      "aliases": [
-        "post-it",
-        "note",
-        "sticky note"
-      ],
+      "aliases": ["post-it", "note", "sticky note"],
       "description": "The post-it clings to a box corner. In messy handwriting: 'these are yet to happen'. Ink wobbles where the writer hesitated.",
       "location": "room:store",
       "portable": false
@@ -378,11 +306,7 @@
     "ai_box_warning": {
       "id": "ai_box_warning",
       "name": "warning label",
-      "aliases": [
-        "warning",
-        "label",
-        "box warning"
-      ],
+      "aliases": ["warning", "label", "box warning"],
       "description": "One box is stamped: 'Don't use at your own risk!' The double negative makes it either a dare or a plea.",
       "location": "room:store",
       "portable": false
@@ -390,10 +314,7 @@
     "counter_bell": {
       "id": "counter_bell",
       "name": "brass counter bell",
-      "aliases": [
-        "bell",
-        "counter"
-      ],
+      "aliases": ["bell", "counter"],
       "description": "A brass bell polished by hopeful customers. It waits atop the counter like an invitation to bother the void.",
       "location": "room:store",
       "portable": false,
@@ -402,11 +323,7 @@
     "backroom_door": {
       "id": "backroom_door",
       "name": "staff door",
-      "aliases": [
-        "door",
-        "back door",
-        "counter door"
-      ],
+      "aliases": ["door", "back door", "counter door"],
       "description": "A heavy door hides behind the counter, paint chipped by impatient hands. The keyhole peers back with faint judgement.",
       "location": "room:store",
       "portable": false,
@@ -415,11 +332,7 @@
     "nostalgia_posters": {
       "id": "nostalgia_posters",
       "name": "retro posters",
-      "aliases": [
-        "posters",
-        "wall art",
-        "games"
-      ],
+      "aliases": ["posters", "wall art", "games"],
       "description": "Sun-faded posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil cling to the wall. Each caption promises a world that once felt infinite.",
       "location": "room:store_games",
       "portable": false
@@ -427,12 +340,7 @@
     "lbp_standee": {
       "id": "lbp_standee",
       "name": "LittleBigPlanet standee",
-      "aliases": [
-        "standee",
-        "little big planet",
-        "lbp",
-        "cardboard hero"
-      ],
+      "aliases": ["standee", "little big planet", "lbp", "cardboard hero"],
       "description": "A large cardboard Sackboy beams in oversized colour. BAFTA laurels are taped to the corner, proud and slightly peeled. A sticker tucked under its foot reads 'build loudly / truthfully'.",
       "location": "room:store_games",
       "portable": false
@@ -440,11 +348,7 @@
     "lbp_box": {
       "id": "lbp_box",
       "name": "battered LittleBigPlanet box",
-      "aliases": [
-        "box",
-        "lbp game",
-        "little big planet box"
-      ],
+      "aliases": ["box", "lbp game", "little big planet box"],
       "description": "The cracked case has been turned backwards. Scrawled on the plastic: 'once a masterpiece, left in the few who remember'. When you tilt it, the faded insert whispers about co-creation and play.",
       "location": "room:store_games",
       "portable": false
@@ -452,11 +356,7 @@
     "youtube_banner": {
       "id": "youtube_banner",
       "name": "YouTube channel banner",
-      "aliases": [
-        "banner",
-        "youtube",
-        "sign"
-      ],
+      "aliases": ["banner", "youtube", "sign"],
       "description": "A large banner stretches above the demo rigs: 'Don't forget to check my YouTube channel!' Someone has underlined the handle three times, then added a shy smiley face.",
       "location": "room:store_content",
       "portable": false
@@ -464,11 +364,7 @@
     "unfinished_qr_shelf": {
       "id": "unfinished_qr_shelf",
       "name": "unfinished ideas shelf",
-      "aliases": [
-        "shelf",
-        "qr codes",
-        "ideas"
-      ],
+      "aliases": ["shelf", "qr codes", "ideas"],
       "description": "Hundreds of printed QR codes lean in untidy stacks, labelled UNFINISHED IDEAS. One code, slightly straighter than the rest, has 'https://youtube.com/@diogoneves' scribbled on the back in biro.",
       "location": "room:store_content",
       "portable": false
@@ -476,11 +372,7 @@
     "recording_camera": {
       "id": "recording_camera",
       "name": "recording camera",
-      "aliases": [
-        "camera",
-        "greenscreen camera",
-        "rig"
-      ],
+      "aliases": ["camera", "greenscreen camera", "rig"],
       "description": "A camera on a tripod faces a sagging greenscreen. Its red tally light glows steadily, tracking a take that never quite wrapped.",
       "location": "room:store_content",
       "portable": false
@@ -488,11 +380,7 @@
     "city_book": {
       "id": "city_book",
       "name": "book titled 'The City'",
-      "aliases": [
-        "book",
-        "the city",
-        "city"
-      ],
+      "aliases": ["book", "the city", "city"],
       "description": "A hardback book rests on a lit pedestal. Embossed on the cover: THE CITY. Most pages are dense with crossings-out and fresh beginnings. When you lift it, something inside shifts with a quiet clink.",
       "location": "room:store_books",
       "portable": false,
@@ -501,11 +389,7 @@
     "music_radio": {
       "id": "music_radio",
       "name": "stuttering radio",
-      "aliases": [
-        "radio",
-        "music",
-        "speaker"
-      ],
+      "aliases": ["radio", "music", "speaker"],
       "description": "A small shop radio plays songs that cut out just before the chorus, as if commitment issues were a setting on the dial.",
       "location": "room:store_books",
       "portable": false
@@ -513,11 +397,7 @@
     "misguided_postit": {
       "id": "misguided_postit",
       "name": "post-it marked 'misguided'",
-      "aliases": [
-        "post-it",
-        "note",
-        "misguided"
-      ],
+      "aliases": ["post-it", "note", "misguided"],
       "description": "A yellow post-it clings to the music shelf. In quick handwriting: 'misguided'. The arrow it once pointed to has been smudged away.",
       "location": "room:store_books",
       "portable": false
@@ -525,12 +405,7 @@
     "backdoor_key_1": {
       "id": "backdoor_key_1",
       "name": "frayed keycard",
-      "aliases": [
-        "key",
-        "keycard",
-        "backdoor key",
-        "lanyard"
-      ],
+      "aliases": ["key", "keycard", "backdoor key", "lanyard"],
       "description": "A plastic keycard on a tired lanyard. Along one edge someone printed BACKDOOR-KEY-1 in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
       "location": "inside:city_book",
       "portable": true,
@@ -539,12 +414,7 @@
     "sealed_stairs": {
       "id": "sealed_stairs",
       "name": "sealed stairwell",
-      "aliases": [
-        "stairs",
-        "stairwell",
-        "padlock",
-        "chain"
-      ],
+      "aliases": ["stairs", "stairwell", "padlock", "chain"],
       "description": "A metal stairwell drops into shadow, chained and padlocked. Dust outlines the shape of keys that visited in the past.",
       "location": "room:backrooms_entry",
       "portable": false,
@@ -553,11 +423,7 @@
     "fast_watch": {
       "id": "fast_watch",
       "name": "hurrying watch",
-      "aliases": [
-        "watch",
-        "clock",
-        "timepiece"
-      ],
+      "aliases": ["watch", "clock", "timepiece"],
       "description": "A wristwatch ticks at triple speed, hands stuttering forward like they're late for something. The crystal fogs as if breathing.",
       "location": "room:tunnel",
       "portable": true,
@@ -566,11 +432,7 @@
     "sealed_trapdoor": {
       "id": "sealed_trapdoor",
       "name": "ceiling trapdoor",
-      "aliases": [
-        "trapdoor",
-        "hatch",
-        "ceiling hatch"
-      ],
+      "aliases": ["trapdoor", "hatch", "ceiling hatch"],
       "description": "A square outline in the ceiling, damp around the edges. It looks recently shut, with scrape marks where others tried their luck.",
       "location": "room:tunnel",
       "portable": false,
@@ -579,11 +441,7 @@
     "poster_ad": {
       "id": "poster_ad",
       "name": "faded travel poster",
-      "aliases": [
-        "poster",
-        "ad",
-        "advert"
-      ],
+      "aliases": ["poster", "ad", "advert"],
       "description": "An old advert charts a route from Portugal to the UK. Marker scribbles across the top declare: 'You do not understand what you're leaving behind!'.",
       "location": "room:train_station",
       "portable": false
@@ -591,11 +449,7 @@
     "memory_notebook": {
       "id": "memory_notebook",
       "name": "notebook titled 'All the memories that weren't'",
-      "aliases": [
-        "notebook",
-        "journal",
-        "book"
-      ],
+      "aliases": ["notebook", "journal", "book"],
       "description": "A small notebook lies open. The first page reads: 'You can feel nostalgic for stuff that never happened!' Pages afterwards are blank, inviting you to improvise history.",
       "location": "room:train_station",
       "portable": true
@@ -603,11 +457,7 @@
     "coffee_cup": {
       "id": "coffee_cup",
       "name": "paper cup of coffee",
-      "aliases": [
-        "coffee",
-        "cup",
-        "drink"
-      ],
+      "aliases": ["coffee", "cup", "drink"],
       "description": "A steaming coffee offered freely. It smells like burnt beans and small kindnesses.",
       "location": "room:train_station",
       "portable": true,
@@ -616,11 +466,7 @@
     "message_bottle": {
       "id": "message_bottle",
       "name": "bottle with a note",
-      "aliases": [
-        "bottle",
-        "message",
-        "note"
-      ],
+      "aliases": ["bottle", "message", "note"],
       "description": "A clear bottle rests on the rocks. Inside, a rolled scrap of paper waits. The ink has bled slightly, salt pulling at the letters.",
       "location": "room:coast_line",
       "portable": true,
@@ -629,12 +475,7 @@
     "unfinished_game_notebook": {
       "id": "unfinished_game_notebook",
       "name": "notebook marked 'PLEASE FINISH!'",
-      "aliases": [
-        "notebook",
-        "please finish",
-        "game notebook",
-        "designs"
-      ],
+      "aliases": ["notebook", "please finish", "game notebook", "designs"],
       "description": "A dog-eared notebook lies by the game shelf. On the cover, in all caps, someone wrote 'PLEASE FINISH!'. Inside are sketches of a vast black tower and a lost city swallowed by desert, mechanics half-scribbled between coffee stains.",
       "location": "room:store_games",
       "portable": true
@@ -642,12 +483,7 @@
     "scattered_notebooks": {
       "id": "scattered_notebooks",
       "name": "scattered notebooks and pages",
-      "aliases": [
-        "notebooks",
-        "pages",
-        "paper",
-        "notes"
-      ],
+      "aliases": ["notebooks", "pages", "paper", "notes"],
       "description": "Piles of notebooks and loose pages carpet the floor. Most hold half-started sentences and abandoned ideas, merging into one another like a brain with too many tabs open. On the wall above, someone has scratched 'Never there!' as if arguing with reality.",
       "location": "room:backrooms_entry",
       "portable": false
@@ -655,11 +491,7 @@
     "merging_notebook": {
       "id": "merging_notebook",
       "name": "merging notebook",
-      "aliases": [
-        "notebook",
-        "journal",
-        "merging"
-      ],
+      "aliases": ["notebook", "journal", "merging"],
       "description": "One notebook seems to bleed into the next, lines of ink wandering across covers. On its open page, a sentence repeats: 'Afraid I'll forget who I was. Afraid of what I'll never be!'",
       "location": "room:backrooms_entry",
       "portable": false
@@ -667,12 +499,7 @@
     "coast_city_book": {
       "id": "coast_city_book",
       "name": "weathered copy of 'The City'",
-      "aliases": [
-        "book",
-        "the city",
-        "city",
-        "lost book"
-      ],
+      "aliases": ["book", "the city", "city", "lost book"],
       "description": "A damp, well-thumbed copy of THE CITY lies near the cliff edge. Only the first page holds words; the rest is blank, corners softened by rereads. It feels like a life paused mid-sentence.",
       "location": "room:coast_line",
       "portable": true
@@ -680,12 +507,7 @@
     "family_photos": {
       "id": "family_photos",
       "name": "wall of family photos",
-      "aliases": [
-        "photos",
-        "photographs",
-        "pictures",
-        "frames"
-      ],
+      "aliases": ["photos", "photographs", "pictures", "frames"],
       "description": "Frames climb the hallway wall, charting a journey from Portugal to the UK: awkward first selfies, wedding smiles, newborn squints, two girls growing taller and sillier in each shot. Every photo looks unapologetically happy.",
       "location": "room:home",
       "portable": false
@@ -693,11 +515,7 @@
     "monitor_notes": {
       "id": "monitor_notes",
       "name": "monitor and notes",
-      "aliases": [
-        "monitor",
-        "notes",
-        "desk"
-      ],
+      "aliases": ["monitor", "notes", "desk"],
       "description": "The wide monitor shows code paused mid-thought. Sticky notes around it read: 'ship something small', 'call mum', 'remember the storm is weather, not fate'.",
       "location": "room:home_office",
       "portable": false
@@ -705,11 +523,7 @@
     "tracking_camera": {
       "id": "tracking_camera",
       "name": "tracking camera",
-      "aliases": [
-        "camera",
-        "tripod",
-        "recorder"
-      ],
+      "aliases": ["camera", "tripod", "recorder"],
       "description": "A tripod-mounted camera turns with your movement, red light quietly accusing. Its tiny screen shows a loop of you entering, then entering again.",
       "location": "room:home_office",
       "portable": false
@@ -717,11 +531,7 @@
     "trapdoor_plate": {
       "id": "trapdoor_plate",
       "name": "trapdoor plate",
-      "aliases": [
-        "trapdoor",
-        "hatch",
-        "floor plate"
-      ],
+      "aliases": ["trapdoor", "hatch", "floor plate"],
       "description": "A square metal plate set into the floor. A faint draft seeps around its edges, smelling of damp concrete and secrets.",
       "location": "room:home_office",
       "portable": false
@@ -731,11 +541,7 @@
     "friendly_lookout": {
       "id": "friendly_lookout",
       "name": "friendly lookout",
-      "aliases": [
-        "stranger",
-        "lookout",
-        "person"
-      ],
+      "aliases": ["stranger", "lookout", "person"],
       "location": "room:outside",
       "description": "A person in a weatherproof jacket leans against the storefront, grin weathered and eyes skyward. They watch the clouds like a sailor reading waves.",
       "dialogue": [
@@ -749,11 +555,7 @@
     "sofia": {
       "id": "sofia",
       "name": "Sofia",
-      "aliases": [
-        "woman",
-        "partner",
-        "sofia"
-      ],
+      "aliases": ["woman", "partner", "sofia"],
       "location": "room:home",
       "description": "Sofia sits cross-legged on the rug, UNO cards in hand, laughter in reserve. A suitcase half-packed peeks from behind the sofa.",
       "dialogue": [
@@ -765,11 +567,7 @@
     "lilah": {
       "id": "lilah",
       "name": "Lilah",
-      "aliases": [
-        "girl",
-        "child",
-        "lilah"
-      ],
+      "aliases": ["girl", "child", "lilah"],
       "location": "room:home",
       "description": "Lilah fans UNO cards dramatically, trying to keep a straight face. Her nails are painted in mismatched colours, a secret code only she knows.",
       "dialogue": [
@@ -782,11 +580,7 @@
     "olivia": {
       "id": "olivia",
       "name": "Olivia",
-      "aliases": [
-        "girl",
-        "child",
-        "olivia"
-      ],
+      "aliases": ["girl", "child", "olivia"],
       "location": "room:home",
       "description": "Olivia lies on her stomach, giggling at her own UNO puns. She keeps glancing at a toy suitcase with stickers half-peeled.",
       "dialogue": [
@@ -799,11 +593,7 @@
     "desk_bot": {
       "id": "desk_bot",
       "name": "desk robot",
-      "aliases": [
-        "desk bot",
-        "robot",
-        "bot"
-      ],
+      "aliases": ["desk bot", "robot", "bot"],
       "location": "room:home_office",
       "description": "A small desk robot peers from beside the monitor, two camera-eyes and a single tiny speaker perched on a plastic base.",
       "dialogue": [
@@ -815,11 +605,7 @@
     "past_paranoid": {
       "id": "past_paranoid",
       "name": "murmuring figure",
-      "aliases": [
-        "figure",
-        "past",
-        "murmurer"
-      ],
+      "aliases": ["figure", "past", "murmurer"],
       "location": "room:tunnel",
       "description": "A hunched figure traces shapes on the damp wall, muttering dates backwards.",
       "dialogue": [
@@ -831,11 +617,7 @@
     "future_paranoid": {
       "id": "future_paranoid",
       "name": "wide-eyed figure",
-      "aliases": [
-        "figure",
-        "future",
-        "wide-eyed"
-      ],
+      "aliases": ["figure", "future", "wide-eyed"],
       "location": "room:tunnel",
       "description": "A figure clings to the wall, eyes darting as if trying to see tomorrow through concrete.",
       "dialogue": [
@@ -848,11 +630,7 @@
     "lost_wanderer": {
       "id": "lost_wanderer",
       "name": "bewildered wanderer",
-      "aliases": [
-        "wanderer",
-        "lost",
-        "traveller"
-      ],
+      "aliases": ["wanderer", "lost", "traveller"],
       "location": "room:tunnel",
       "description": "A person in office clothes stares at their shoes as if expecting instructions to be written there.",
       "dialogue": [
@@ -864,11 +642,7 @@
     "compilation_paranoid": {
       "id": "compilation_paranoid",
       "name": "echoing voice",
-      "aliases": [
-        "voice",
-        "echo",
-        "compiler"
-      ],
+      "aliases": ["voice", "echo", "compiler"],
       "location": "room:tunnel",
       "description": "A voice floats from the darkness, more echo than person, fretting about version numbers.",
       "dialogue": [
@@ -880,11 +654,7 @@
     "coffee_vendor": {
       "id": "coffee_vendor",
       "name": "station attendant",
-      "aliases": [
-        "attendant",
-        "barista",
-        "vendor"
-      ],
+      "aliases": ["attendant", "barista", "vendor"],
       "location": "room:train_station",
       "description": "A cheerful attendant leans on the counter, kettle in hand, eyes half on the empty tracks.",
       "dialogue": [
@@ -896,11 +666,7 @@
     "restless_twin": {
       "id": "restless_twin",
       "name": "restless twin",
-      "aliases": [
-        "twin",
-        "explorer",
-        "restless"
-      ],
+      "aliases": ["twin", "explorer", "restless"],
       "location": "room:coast_line",
       "description": "One twin leans forward on the bench, eyes fixed on the faint coastline across the water.",
       "dialogue": [
@@ -912,11 +678,7 @@
     "cautious_twin": {
       "id": "cautious_twin",
       "name": "cautious twin",
-      "aliases": [
-        "twin",
-        "cautious",
-        "guard"
-      ],
+      "aliases": ["twin", "cautious", "guard"],
       "location": "room:coast_line",
       "description": "The other twin pulls their coat tight, knuckles white on the bench edge.",
       "dialogue": [
@@ -928,11 +690,7 @@
     "backroom_bot": {
       "id": "backroom_bot",
       "name": "fallen desk robot",
-      "aliases": [
-        "robot",
-        "bot",
-        "desk robot"
-      ],
+      "aliases": ["robot", "bot", "desk robot"],
       "location": "room:backrooms_deep",
       "description": "The same style of desk robot from the home office lies on its side here, lenses scuffed and speaker crackling with static.",
       "dialogue": [
