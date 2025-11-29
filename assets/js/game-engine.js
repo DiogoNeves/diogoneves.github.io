@@ -1877,12 +1877,13 @@ function showTitleScreen() {
     "system"
   );
   addOutput("");
-  addOutput(`Welcome, traveller. You've found your way to a small corner of the
-digital realm — a personal space where ideas take shape and projects
-come to life. This is where I build things.`);
-  addOutput("");
-  addOutput("Feel free to explore. Poke around. Break things (gently).");
-  addOutput("The world responds to your curiosity.");
+  addOutput(
+    "You've drifted into a stubborn corner of the internet that would rather be a text adventure than a sensible website."
+  );
+  addOutput(
+    "On the surface it's my personal site; underneath it's a small, rewritable model of my mind."
+  );
+  addOutput("You explore it by typing, and it pretends it was expecting you.");
   addOutput("");
   addOutput("Type HELP for commands. Type LOOK to begin.");
   addOutput("");
