@@ -64,9 +64,10 @@ Shop - Media Room
 
 ==General description==
 The media room includes a large banner saying "Don't forget to check my YouTube channel!" and has a set of cameras and editing software on sale. There's a shelf named "unfinished ideas" with hundreds of disorganised printed QR codes on it.
+There's a corner with a recording setup and a greenscreen. One of the cameras is still on.
 
 ==State==
-No state changes.
+- The user can turn the camera off and on.
 
 ==Objects==
 - One of the QR codes says "https://youtube.com/@diogoneves" on the back.
@@ -82,14 +83,16 @@ Shop - Books and Music
 =====
 
 ==General description==
-The content section to the right of the entrance holds the video and creativity-focused side of the store, with tools for editing and production.
+This section of the shop sells unfinished books and music. There's a book on a pedestal, titled "The City".
+There's a radio playing songs, but the songs cut before they finish.
 
 ==State==
-No state changes
+Interacting with the book "The City" will add the "backdoor-key-1" to the inventory, this is very important!
 
 ==Objects==
 - There's a book on a pedestal, with an LED shining from below, titled "The City".
 - The "backdoor-key-1" is hidden inside "The City" book.
+- There's a post-it on the music shelf saying "misguided".
 
 ==NPCs==
 None.
