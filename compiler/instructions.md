@@ -93,6 +93,7 @@ Exits - Where the player can navigate from here
 
 Read through the game-engine result and confirm everything is consistent, interesting and logically works.
 
+- The content in the game-engine follows (and expands upon) the original game.txt content and nothing major is missing
 - The game should be fully playable
 - All rooms and objects are accessible
 - Make sure the player initial state is valid and in a valid room
