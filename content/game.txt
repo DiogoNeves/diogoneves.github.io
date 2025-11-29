@@ -138,7 +138,8 @@ CLOSED UNLESS PLAYER HAS KEY!!
 Once open, set door state to open!
 
 ==Objects==
-None.
+- The player can interact with notebooks and pages.
+- The merging notebook says "Afraid I'll forget who I was. Afraid of what I'll never be!"
 
 ==NPCs==
 None.
@@ -175,10 +176,10 @@ A simple home. The place feels happy and comfortable! There's a TV playing funny
 There are photographs on a wall, showing the family growing, from Diogo and Sofia getting together in Portugal, moving to the UK, growing a family with two girls.
 
 ==State==
-Nothing to see
+No changes in state.
 
 ==Objects==
-None.
+- The user can look at photos. All happy.
 
 ==NPCs==
 There's a woman (Sofia) and two girls (Lilah and Olivia) all playing together.
@@ -196,10 +197,13 @@ Home Office
 A small, messy home office. Full of coding and sci-fi books, games, hanging VR headsets, a wide monitor and some headphones on the desk. Lots of notes on the desk and in the corner of the room there's a tripod with a camera that has the red recording light on. The camera turns with movement, someone's watching!
 
 ==State==
-Nothing to see
+No state changes.
 
 ==Objects==
-None.
+- The desk bot.
+- Blueprints for new AI architectures and designs for new games and websites.
+- A long list of todos
+- A notebook with notes about an unspecified current project
 
 ==NPCs==
 - There's a small desk robot, just two eyes (cameras) and a tiny speaker. It keeps repeating "debugging..." when talked to.
