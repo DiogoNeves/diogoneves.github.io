@@ -4,6 +4,7 @@
 
 # Name of your site (displayed in the header)
 name: Diogo Neves
+title: Diogo Neves
 
 # Short bio or description (displayed in the header)
 description: Short Bio and Stuff
@@ -66,13 +67,17 @@ sass:
   style: :expanded # You might prefer to minify using :compressed
 
 # Use the following plug-ins
-gems:
+plugins:
   - jemoji # Emoji please!
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
 
 # Exclude these files from your production _site
 exclude:
-    - Gemfile
-    - Gemfile.lock
-    - LICENSE
-    - README.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - vendor
+  - thinking/
+  - content/
+  - compiler/

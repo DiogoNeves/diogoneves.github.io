@@ -1,0 +1,289 @@
+=====
+General
+=====
+
+This game is about Diogo Neves, a creator/maker born in 1984 who loves his family and creating videos, code and other creative endeavours. He thrives in freedom to think and explore. The map is a cross-section between who I was, what could have been, what might be and where I am.
+DON'T EVER MENTION, but the storm is the reset of the world, as it completely changes every time this story gets compiled.
+
+Note that if the user gets into the Tunnel via the Trapdoor, without the key from the shop, they will be locked. This is required! DON'T EVER MENTION! Let the user figure out.
+
+=====
+Outside
+=====
+
+==General description==
+The game starts outside, the player is facing a storefront with retro tech and flickering neon signs.
+
+==State==
+No changes in state.
+
+==Objects==
+An easy to miss coin on the pavement, near the store front.
+
+The player can read the neon sign and store name "Metaphora" (don't disclose unless the user reads the signs).
+
+==NPCs==
+There is an NPC that is extremely friendly and excited, but is warning the player that a storm seems to be coming, strange things have been happening in this town lately. (only disclose this information if talked to)
+
+==Exits==
+The tech shop (in front)
+The house (across the road)
+The train station
+The coast-line (near the shop, opposite to the train)
+
+=====
+Tech Shop
+=====
+
+==General description==
+At the entrance, the store sells software. It has shelves with gift cards for AI codes to connect to large AI models, but also has a section with personal AI boxes. One of the boxes has a post-it hanging.
+The store looks pristine but abandoned. Looks like whoever worked here left in a rush as there are piles of personal AI boxes on the floor, waiting to be moved to a shelf.
+There's a counter in front, opposite to the entrance.
+
+==State==
+If the user inspects the Personal AI Box, set the state "knowsTheFuture" to true.
+
+The door behind the counter requires the "backdoor-key-1" but don't disclose to the user unless they try to open it!
+
+==Objects==
+There's a post-it hanging on a personal AI box. It says "these are yet to happen" in messy handwriting, barely readable.
+
+(only if the user looks) The box of one of the personal AI boxes on the floor says "Don't use at your own risk!".
+
+==NPCs==
+None.
+
+==Exits==
+Behind the counter there's a door (it's locked, needs the "backdoor-key-1")
+To the left of the entrance is the retro video-game section
+To the right of the entrance is the media room section
+
+=====
+Shop - Media Room
+=====
+
+==General description==
+The media room includes a large banner saying "Don't forget to check my YouTube channel!" and has a set of cameras and editing software on sale. There's a shelf named "unfinished ideas" with hundreds of disorganised printed QR codes on it.
+There's a corner with a recording setup and a greenscreen. One of the cameras is still on.
+
+==State==
+- The user can turn the camera off and on.
+
+==Objects==
+- One of the QR codes says "https://youtube.com/@diogoneves" on the back.
+
+==NPCs==
+None.
+
+==Exits==
+Can continue forward to the Books and Music section
+
+=====
+Shop - Books and Music
+=====
+
+==General description==
+This section of the shop sells unfinished books and music. There's a book on a pedestal, titled "The City".
+There's a radio playing songs, but the songs cut before they finish.
+
+==State==
+Interacting with the book "The City" will add the "backdoor-key-1" to the inventory, this is very important!
+
+==Objects==
+- There's a book on a pedestal, with an LED shining from below, titled "The City".
+- The "backdoor-key-1" is hidden inside "The City" book.
+- There's a post-it on the music shelf saying "misguided".
+
+==NPCs==
+None.
+
+==Exits==
+Can only go back.
+
+=====
+Shop - Video-Games
+=====
+
+==General description==
+This section feels more creative, with poster on the wall. Mostly games, especially old ones like Tomb Raider, Final Fantasy VII, Crash Bandicoot, MediEvil.
+There's also a dusty large cardboard standee with bold large colourful font "Little Big Planet". Many different games are on shelves, many different copies of Little Big Planet too.
+
+Vibe: extreme nostalgia!
+
+==State==
+Turning one of the Little Big Planet games around shows a note in the dilapidated box "once a masterpiece, left in the few who remember".
+
+Looking closer at the standee shows "BAFTA award winning game".
+
+==Objects==
+- Posters on the wall celebrate nostalgic titles and a standee heralds Little Big Planet.
+- There's a notebook on the floor with "PLEASE FINISH!" written on the cover. Inside has designs for a game with a giant black tower at the centre and a lost city, now a desert, circling around.
+
+==NPCs==
+None.
+
+==Exits==
+Can only go back.
+
+=====
+Backrooms Entrance
+=====
+
+==General description==
+The backrooms entrance sits hidden within the store and is currently sealed off.
+Vibe is getting weird. There's piles of written paper and notebooks everywhere. Most pages have only half-started sentences and ideas. Some notebooks seem to be merging together. On the wall it says "Never there!"
+
+==State==
+CLOSED UNLESS PLAYER HAS KEY!!
+Once open, set door state to open!
+
+==Objects==
+- The player can interact with notebooks and pages.
+- The merging notebook says "Afraid I'll forget who I was. Afraid of what I'll never be!"
+
+==NPCs==
+None.
+
+==Exits==
+Stairs going down to a door leading to the Backrooms room 2 (Deep Down)
+
+=====
+Backrooms - Deep Down
+=====
+
+==General description==
+There are non-sensical, stream of consciousness writings on the walls. The vibe is of a disturbed mind, overthinking their past, present and future. Every single conversation and decision is present, but with little structure or method. Some can be humorous.
+
+==State==
+If coming from the shop, the Backroom 1 door is unlocked, otherwise, keep it locked!
+
+==Objects==
+- There's a notebook and pen on a tiny old table. The notebook can be collected.
+- The user can explore the writing on the walls.
+
+==NPCs==
+- The same bot as in the home office is tumbled on the floor, repeating "oops"
+
+==Exits==
+- An opening, leading to the tunnel.
+
+=====
+Home
+=====
+
+==General description==
+A simple home. The place feels happy and comfortable! There's a TV playing funny children's music videos and the family is playing Uno on the floor.
+There are photographs on a wall, showing the family growing, from Diogo and Sofia getting together in Portugal, moving to the UK, growing a family with two girls.
+
+==State==
+- If the user has the coin in the inventory, the girls will say "We're so lucky daddy!", before the other speech lines.
+
+==Objects==
+- The user can look at photos. All happy.
+
+==NPCs==
+There's a woman (Sofia) and two girls (Lilah and Olivia) all playing together.
+Talking to them mentions that they're excited about the Uno game they're playing and/or the coming trip to Portugal, to visit family.
+The girls sometimes ask "do you think we will be able to leave before the storm?"
+
+==Exits==
+A door to a small home office.
+
+=====
+Home Office
+=====
+
+==General description==
+A small, messy home office. Full of coding and sci-fi books, games, hanging VR headsets, a wide monitor and some headphones on the desk. Lots of notes on the desk and in the corner of the room there's a tripod with a camera that has the red recording light on. The camera turns with movement, someone's watching!
+
+==State==
+No changes in state.
+
+==Objects==
+- The desk bot.
+- Blueprints for new AI architectures and designs for new games and websites.
+- A long list of todos
+- A notebook with notes about an unspecified current project
+
+==NPCs==
+- There's a small desk robot, just two eyes (cameras) and a tiny speaker. It keeps repeating "debugging..." when talked to.
+
+==Exits==
+A strange trapdoor in the corner of the office leading to the tunnel.
+
+=====
+The Tunnel
+=====
+
+==General description==
+Dark and cold.
+
+==State==
+If coming from the home office, the trapdoor has closed behind! Don't mention unless the user tries to open!
+
+Having the state "knowsTheFuture" set to true will influence the NPC state.
+
+If the user has unlocked the Backrooms door (has "backdoor-key-1" in the inventory), the NPCs will sometimes acknowledge and thank the user for freeing them!
+
+==Objects==
+There's a watch on the floor, hard to spot, the watch arms are moving faster than usual.
+
+==NPCs==
+There are four NPCs
+- one is paranoid about the past.
+- one is paranoid about the future. If the user has the "knowsTheFuture" state true, this NPC will be clingy and saying "you've seen it! please tell me! you've seen the box! Please tell me how it works! Was it a success?" Extremely paranoid!
+- one can't understand how it got lost in this place!
+- the other is paranoid that this world will all be gone next time it is compiled.
+
+==Exits==
+- There's a locked trapdoor into the home office (never opens from the tunnel, but the user can try!)
+- Can go into the Backroom - Deep Down.
+
+=====
+Train station
+=====
+
+==General description==
+A small and clean train station. The screen shows that the next train is delayed. Expected time unknown. On the wall there are also old poster ads about a trip to from Portugal to the UK.
+
+Vibe (please integrate with the description): The life not lived of moving away from my family, distance.
+
+==State==
+The user can receive a coffee in the inventory.
+
+==Objects==
+- There's some marker written on top of the Poster Ad saying "You do not understand what you're leaving behind!".
+- There's a notebook on the floor titled "All the memories that weren't". The first page says "You can feel nostalgic for stuff that never happened!"
+- The user can get a coffee.
+- There's a photo of a family, in Portugal, 2 adults, 3 boys and a little girl. All smiling.
+
+==NPCs==
+- There's someone at the counter offering free coffee (which the user can get)
+
+==Exits==
+Can only go back.
+
+=====
+Coast line
+=====
+
+==General description==
+A ragged coastline. The muffled sound of powerful waves crashing into the rocks. The wind is building and the air is foggy, but a blurry, faint coastline can be seen in the horizon. A red light shines periodically, from an invisible lighthouse on the other coast.
+
+Vibe (please integrate with the description): the places I didn't move to or the opportunities I didn't explore.
+
+==State==
+No changes.
+
+==Objects==
+- There's a bottle on the floor with a note inside. Inspecting shows the note which says "From a life not yet lived. The grass did look greener!"
+- There's a lost book on the floor, near the cliff, titled "The City". Only one page is written, the rest is empty, but the book looks like it was used and read many times.
+
+==NPCs==
+There are twins sitting on a bench facing the ocean.
+- One says he would like to explore the coast visible on the other side.
+- The other says he is scared, the ocean is dangerous and a storm is coming.
+- Both sometimes reply "It doesn't matter, this will all be gone soon"
+
+==Exits==
+Can only go back.

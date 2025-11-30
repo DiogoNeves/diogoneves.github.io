@@ -1,0 +1,1067 @@
+/* ================================================
+   CRT MONITOR TEXT ADVENTURE GAME STYLES
+   A retro terminal experience with modern accessibility
+   ================================================ */
+
+/* CSS Custom Properties for easy theming */
+:root {
+  /* CRT Colors - Phosphor Green */
+  --crt-green: #33ff33;
+  --crt-green-dim: #1a8c1a;
+  --crt-green-glow: rgba(51, 255, 51, 0.4);
+  --crt-green-subtle: rgba(51, 255, 51, 0.1);
+  
+  /* Monitor Colors */
+  --monitor-bezel: #1a1a1a;
+  --monitor-bezel-light: #2a2a2a;
+  --monitor-bezel-dark: #0a0a0a;
+  --screen-bg: #0a0f0a;
+  --screen-bg-gradient: radial-gradient(ellipse at center, #0f1a0f 0%, #050805 100%);
+  
+  /* Background */
+  --room-bg: #0d0d0d;
+  --room-texture: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  
+  /* Typography */
+  --font-mono: 'IBM Plex Mono', 'Fira Code', 'Source Code Pro', 'Consolas', monospace;
+  
+  /* Sizing */
+  --monitor-padding: clamp(12px, 2vw, 24px);
+  --screen-padding: clamp(16px, 3vw, 32px);
+  --font-size-base: clamp(14px, 1.6vw, 18px);
+  --line-height: 1.6;
+}
+
+/* Global Reset for Game Page */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body.game-page {
+  font-family: var(--font-mono);
+  background: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ================================================
+   DARK ROOM ENVIRONMENT
+   ================================================ */
+
+.room-environment {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  
+  /* Room atmosphere - very dark with subtle gradient */
+  background: 
+    /* Ceiling shadow gradient */
+    linear-gradient(180deg, 
+      #020202 0%, 
+      #050505 15%,
+      #080808 40%,
+      #0a0a0a 100%
+    );
+}
+
+/* Back wall with corner shadows */
+.room-environment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* Left wall corner shadow */
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 20%
+    ),
+    /* Right wall corner shadow */
+    linear-gradient(270deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 20%
+    ),
+    /* Subtle wall texture */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 100px,
+      rgba(255, 255, 255, 0.005) 100px,
+      rgba(255, 255, 255, 0.005) 101px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Monitor glow on ceiling/wall */
+.room-environment::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 50%;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 100%,
+    rgba(51, 255, 51, 0.03) 0%,
+    rgba(51, 255, 51, 0.01) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Desk surface */
+.desk-surface {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 12vh;
+  z-index: 1;
+  
+  /* Desk top surface */
+  background: 
+    /* Top edge highlight */
+    linear-gradient(180deg,
+      #1a1a1a 0px,
+      #141414 2px,
+      #0f0f0f 100%
+    );
+  
+  /* Desk edge */
+  border-top: 1px solid #222;
+  
+  /* Reflected glow from monitor */
+  box-shadow: 
+    inset 0 20px 60px -20px rgba(51, 255, 51, 0.05);
+}
+
+/* Desk front panel */
+.desk-surface::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg,
+    #0c0c0c 0%,
+    #080808 100%
+  );
+  border-top: 1px solid #151515;
+}
+
+/* Items on desk - silhouettes */
+.desk-surface::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  pointer-events: none;
+  
+  background:
+    /* Coffee mug silhouette - left side */
+    radial-gradient(
+      ellipse 25px 8px at 12% 100%,
+      #0a0a0a 0%,
+      #0a0a0a 100%
+    ),
+    /* Mug body */
+    linear-gradient(180deg, #0a0a0a, #0a0a0a) no-repeat 8% 60% / 35px 30px,
+    /* Mug handle */
+    radial-gradient(
+      ellipse 8px 12px at 15% 75%,
+      transparent 50%,
+      #0a0a0a 50%,
+      #0a0a0a 70%,
+      transparent 70%
+    ),
+    
+    /* Stack of books/papers - right side */
+    linear-gradient(180deg, #0c0c0c, #080808) no-repeat 85% 70% / 60px 20px,
+    linear-gradient(180deg, #0b0b0b, #090909) no-repeat 86% 55% / 55px 15px,
+    linear-gradient(180deg, #0a0a0a, #070707) no-repeat 84% 45% / 50px 12px,
+    
+    /* Small plant pot silhouette - far left */
+    radial-gradient(
+      ellipse 20px 25px at 4% 60%,
+      #0a0a0a 0%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, #0b0b0b, #0b0b0b) no-repeat 3% 85% / 20px 15px,
+    
+    /* Pen/pencil holder - right of monitor */
+    linear-gradient(180deg, #0a0a0a, #0a0a0a) no-repeat 70% 70% / 25px 35px,
+    /* Pens sticking out */
+    linear-gradient(185deg, #0c0c0c, #0c0c0c) no-repeat 69% 40% / 3px 25px,
+    linear-gradient(175deg, #0b0b0b, #0b0b0b) no-repeat 71% 45% / 2px 22px,
+    linear-gradient(182deg, #0c0c0c, #0c0c0c) no-repeat 73% 42% / 3px 24px;
+}
+
+/* Monitor desk position wrapper */
+.monitor-wrapper {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 10vh;
+  
+  /* Monitor casts shadow on desk */
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+}
+
+/* ================================================
+   CRT MONITOR CONTAINER
+   ================================================ */
+
+.crt-monitor {
+  position: relative;
+  width: min(95vw, 1000px);
+  /* Allow taller monitor to fit initial content - use more of the available height */
+  height: min(calc(100vh - 14vh), 800px);
+  background: linear-gradient(145deg, var(--monitor-bezel-light), var(--monitor-bezel-dark));
+  border-radius: 20px;
+  padding: var(--monitor-padding);
+  box-shadow: 
+    0 0 0 3px var(--monitor-bezel-dark),
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+/* Monitor brand/label area */
+.crt-monitor::before {
+  content: 'NEUROLINK-7800';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #444;
+  text-transform: uppercase;
+}
+
+/* Power LED */
+.crt-monitor::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  right: 24px;
+  width: 8px;
+  height: 8px;
+  background: var(--crt-green);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 6px var(--crt-green),
+    0 0 12px var(--crt-green-glow);
+  animation: led-pulse 2s ease-in-out infinite;
+}
+
+@keyframes led-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ================================================
+   SCREEN CONTAINER - CRT BARREL DISTORTION
+   ================================================ */
+
+.screen-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--screen-bg-gradient);
+  overflow: hidden;
+  
+  /* The classic CRT bulge - convex screen effect */
+  border-radius: 50px / 40px;
+  
+  /* Inner shadow creates depth and edge darkening */
+  box-shadow: 
+    /* Deep vignette around edges */
+    inset 0 0 120px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(0, 0, 0, 0.9),
+    /* Subtle highlight on top edge like glass reflection */
+    inset 0 3px 8px rgba(255, 255, 255, 0.03),
+    /* Outer glow from screen */
+    0 0 30px rgba(51, 255, 51, 0.1);
+}
+
+/* CRT Curvature/Barrel Distortion Overlay */
+.screen-container::before {
+  content: '';
+  position: absolute;
+  inset: -5%;
+  
+  /* Creates the "bulging glass" illusion */
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.15) 65%,
+    rgba(0, 0, 0, 0.4) 80%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  
+  /* Curved highlight to simulate glass reflection */
+  mask-image: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    black 60%,
+    transparent 100%
+  );
+  
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+/* Scanlines */
+.screen-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 11;
+  border-radius: inherit;
+}
+
+/* Glass reflection highlight - the curved shine on old CRTs */
+.screen-reflection {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 100%
+  );
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+  pointer-events: none;
+  z-index: 12;
+  transform: rotate(-2deg);
+}
+
+/* Phosphor Glow Effect */
+.screen-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    var(--crt-green-subtle) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
+  animation: glow-flicker 0.1s infinite;
+}
+
+@keyframes glow-flicker {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.48; }
+}
+
+/* ================================================
+   PROCEDURAL GLITCH RAIN EFFECT
+   ================================================ */
+
+.screen-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0.04;
+  mix-blend-mode: screen;
+}
+
+/* Primary rain layer - vertical streaks */
+.screen-rain::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(51, 255, 51, 0.8) 3px,
+    rgba(51, 255, 51, 0.8) 4px,
+    transparent 4px,
+    transparent 20px,
+    rgba(51, 255, 51, 0.4) 20px,
+    rgba(51, 255, 51, 0.4) 21px,
+    transparent 21px,
+    transparent 45px,
+    rgba(51, 255, 51, 0.6) 45px,
+    rgba(51, 255, 51, 0.6) 46px,
+    transparent 46px,
+    transparent 80px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 7px,
+    rgba(51, 255, 51, 0.3) 7px,
+    rgba(51, 255, 51, 0.3) 8px,
+    transparent 8px,
+    transparent 23px,
+    rgba(51, 255, 51, 0.2) 23px,
+    rgba(51, 255, 51, 0.2) 24px,
+    transparent 24px,
+    transparent 50px
+  );
+  animation: rain-fall 0.8s linear infinite;
+}
+
+/* Secondary rain layer - offset for density */
+.screen-rain::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 12px,
+    rgba(51, 255, 51, 0.5) 12px,
+    rgba(51, 255, 51, 0.5) 13px,
+    transparent 13px,
+    transparent 35px,
+    rgba(51, 255, 51, 0.7) 35px,
+    rgba(51, 255, 51, 0.7) 36px,
+    transparent 36px,
+    transparent 67px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 15px,
+    rgba(51, 255, 51, 0.25) 15px,
+    rgba(51, 255, 51, 0.25) 16px,
+    transparent 16px,
+    transparent 40px
+  );
+  animation: rain-fall 1.2s linear infinite;
+  animation-delay: -0.4s;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(33.33%);
+  }
+}
+
+/* Glitch/interference bars - horizontal noise */
+.screen-glitch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0;
+  animation: glitch-appear 8s ease-in-out infinite;
+}
+
+.screen-glitch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(51, 255, 51, 0.1) 45.5%,
+      rgba(51, 255, 51, 0.15) 46%,
+      transparent 47%,
+      transparent 100%
+    );
+  animation: glitch-bar 0.15s steps(2) infinite;
+}
+
+.screen-glitch::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 1px,
+      rgba(51, 255, 51, 0.03) 1px,
+      rgba(51, 255, 51, 0.03) 2px
+    );
+  animation: glitch-noise 0.05s steps(5) infinite;
+}
+
+@keyframes glitch-appear {
+  0%, 92%, 100% { opacity: 0; }
+  93%, 93.5% { opacity: 1; }
+  94%, 95% { opacity: 0; }
+  95.5%, 96% { opacity: 0.8; }
+  97%, 99% { opacity: 0; }
+}
+
+@keyframes glitch-bar {
+  0% { transform: translateY(-20%); }
+  25% { transform: translateY(60%); }
+  50% { transform: translateY(20%); }
+  75% { transform: translateY(80%); }
+  100% { transform: translateY(-20%); }
+}
+
+@keyframes glitch-noise {
+  0%, 100% { opacity: 0.5; transform: translateX(0); }
+  20% { opacity: 0.8; transform: translateX(-1px); }
+  40% { opacity: 0.3; transform: translateX(2px); }
+  60% { opacity: 0.7; transform: translateX(-2px); }
+  80% { opacity: 0.4; transform: translateX(1px); }
+}
+
+/* Static noise overlay - subtle TV static */
+.screen-static {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 7;
+  border-radius: inherit;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: static-shift 0.1s steps(10) infinite;
+}
+
+@keyframes static-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 1%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-0.5%, 0.5%); }
+  60% { transform: translate(0.5%, -0.5%); }
+  70% { transform: translate(-1%, -0.5%); }
+  80% { transform: translate(0.5%, 1%); }
+  90% { transform: translate(-0.5%, -1%); }
+}
+
+/* ================================================
+   GAME CONTENT AREA
+   ================================================ */
+
+.game-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--screen-padding);
+  z-index: 1;
+}
+
+/* Status Bar */
+.status-bar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--crt-green-dim);
+  font-size: calc(var(--font-size-base) * 0.85);
+  color: var(--crt-green-dim);
+}
+
+.status-location {
+  font-weight: 600;
+  color: var(--crt-green);
+  text-shadow: 0 0 10px var(--crt-green-glow);
+}
+
+.status-turns {
+  opacity: 0.8;
+}
+
+/* Text Output Area */
+.text-output-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0; /* Important for flex children with overflow */
+  display: flex;
+  flex-direction: column;
+}
+
+.text-output {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--crt-green-dim) transparent;
+}
+
+.text-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.text-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.text-output::-webkit-scrollbar-thumb {
+  background: var(--crt-green-dim);
+  border-radius: 3px;
+}
+
+.text-output::-webkit-scrollbar-thumb:hover {
+  background: var(--crt-green);
+}
+
+/* Scroll Indicators */
+.scroll-indicator {
+  position: absolute;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--crt-green);
+  font-size: 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+  
+  /* Pulsing glow effect */
+  text-shadow: 
+    0 0 8px var(--crt-green-glow),
+    0 0 16px var(--crt-green-glow);
+}
+
+.scroll-indicator.visible {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: scroll-pulse 1.5s ease-in-out infinite;
+}
+
+.scroll-indicator-up {
+  top: 4px;
+}
+
+.scroll-indicator-down {
+  bottom: 4px;
+}
+
+/* Arrow shapes using CSS */
+.scroll-indicator::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--crt-green);
+  border-bottom: 2px solid var(--crt-green);
+}
+
+.scroll-indicator-up::before {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+.scroll-indicator-down::before {
+  transform: rotate(45deg);
+  margin-bottom: 4px;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+}
+
+.scroll-indicator-up.visible {
+  animation: scroll-pulse-up 1.5s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse-up {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* Text Styling */
+.output-line {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 8px var(--crt-green-glow);
+  animation: text-appear 0.05s ease-out;
+  white-space: pre-wrap; /* Preserve line breaks and spaces */
+}
+
+@keyframes text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Room name styling */
+.output-line.room-name {
+  font-weight: 700;
+  font-size: calc(var(--font-size-base) * 1.1);
+  margin-top: 1em;
+  color: var(--crt-green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* System messages */
+.output-line.system {
+  color: var(--crt-green-dim);
+  font-style: italic;
+}
+
+/* Error messages */
+.output-line.error {
+  color: #ff6b6b;
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.4);
+}
+
+/* User input echo */
+.output-line.user-input {
+  color: var(--crt-green);
+  opacity: 0.7;
+}
+
+.output-line.user-input::before {
+  content: '> ';
+}
+
+/* Links in text */
+.output-line a,
+.game-link {
+  color: var(--crt-green);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.output-line a:hover,
+.output-line a:focus,
+.game-link:hover,
+.game-link:focus {
+  text-decoration-style: solid;
+  text-shadow: 
+    0 0 10px var(--crt-green),
+    0 0 20px var(--crt-green-glow);
+  outline: none;
+}
+
+/* ================================================
+   ASCII ART BANNER
+   ================================================ */
+
+.ascii-banner {
+  font-family: var(--font-mono);
+  font-size: clamp(6px, 1.2vw, 12px);
+  line-height: 1.1;
+  white-space: pre;
+  color: var(--crt-green);
+  text-shadow: 0 0 10px var(--crt-green-glow);
+  margin: 1em 0;
+  text-align: center;
+}
+
+.ascii-banner .youtube-link {
+  color: var(--crt-green);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ascii-banner .youtube-link:hover,
+.ascii-banner .youtube-link:focus {
+  color: #fff;
+  text-shadow: 
+    0 0 10px var(--crt-green),
+    0 0 20px var(--crt-green),
+    0 0 30px var(--crt-green);
+  outline: none;
+}
+
+/* ================================================
+   INPUT LINE
+   ================================================ */
+
+.input-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 1px solid var(--crt-green-dim);
+}
+
+.input-prompt {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  margin-right: 8px;
+  text-shadow: 0 0 10px var(--crt-green-glow);
+}
+
+.command-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  color: var(--crt-green);
+  text-shadow: 0 0 8px var(--crt-green-glow);
+  caret-color: var(--crt-green);
+}
+
+.command-input::placeholder {
+  color: var(--crt-green-dim);
+  opacity: 0.5;
+}
+
+/* Blinking cursor effect */
+.command-input:focus {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  50% { caret-color: transparent; }
+}
+
+/* ================================================
+   TITLE SCREEN SPECIFIC
+   ================================================ */
+
+.title-content {
+  text-align: center;
+  padding: 2em 0;
+}
+
+.system-info {
+  font-size: calc(var(--font-size-base) * 0.9);
+  color: var(--crt-green-dim);
+  margin: 1.5em 0;
+  text-align: left;
+  padding-left: 2em;
+}
+
+.system-info-line {
+  margin: 0.3em 0;
+}
+
+.intro-text {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  margin: 2em auto;
+  max-width: 60ch;
+  text-align: left;
+}
+
+.instructions {
+  color: var(--crt-green);
+  font-size: var(--font-size-base);
+  margin-top: 2em;
+}
+
+.instructions p {
+  margin: 0.5em 0;
+}
+
+/* ================================================
+   RESPONSIVE ADJUSTMENTS
+   ================================================ */
+
+/* Large screens - maximize monitor height */
+@media (min-height: 800px) {
+  .crt-monitor {
+    height: min(calc(100vh - 12vh), 850px);
+  }
+  
+  .desk-surface {
+    height: 10vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 8vh;
+  }
+}
+
+/* Medium screens */
+@media (max-width: 768px) {
+  .desk-surface {
+    height: 10vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 6vh;
+  }
+  
+  .crt-monitor {
+    width: 95vw;
+    height: calc(100vh - 12vh);
+    max-height: 600px;
+    border-radius: 12px;
+  }
+  
+  .ascii-banner {
+    font-size: clamp(4px, 2vw, 8px);
+  }
+  
+  .status-bar {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+  
+  /* Simplify desk items on mobile */
+  .desk-surface::after {
+    display: none;
+  }
+}
+
+/* Small screens - prioritize content visibility */
+@media (max-width: 480px) {
+  :root {
+    --font-size-base: 14px;
+    --screen-padding: 12px;
+  }
+  
+  .desk-surface {
+    height: 8vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 5vh;
+  }
+  
+  .crt-monitor {
+    width: 98vw;
+    height: calc(100vh - 10vh);
+    max-height: none;
+    border-radius: 10px;
+  }
+  
+  .ascii-banner {
+    font-size: 4px;
+    overflow-x: auto;
+  }
+}
+
+/* Very short screens - minimize desk to maximize monitor */
+@media (max-height: 600px) {
+  .desk-surface {
+    height: 6vh;
+  }
+  
+  .monitor-wrapper {
+    margin-bottom: 4vh;
+  }
+  
+  .crt-monitor {
+    height: calc(100vh - 8vh);
+  }
+}
+
+/* ================================================
+   ACCESSIBILITY
+   ================================================ */
+
+/* Focus indicators */
+*:focus-visible {
+  outline: 2px solid var(--crt-green);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .screen-glow {
+    animation: none;
+    opacity: 0.3;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --crt-green: #00ff00;
+    --screen-bg: #000;
+  }
+  
+  .screen-container::after {
+    display: none; /* Remove scanlines for better readability */
+  }
+}
+
