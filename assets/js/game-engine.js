@@ -636,8 +636,8 @@ const createInitialState = () => ({
   npcs: {
     friendly_lookout: {
       id: "friendly_lookout",
-      name: "friendly lookout",
-      aliases: ["stranger", "lookout", "person"],
+      name: "Lookout",
+      aliases: ["stranger", "lookout", "person", "friendly lookout"],
       location: "room:outside",
       description:
         "A person in a weatherproof jacket leans against the storefront, grin weathered and eyes skyward. They watch the clouds like a sailor reading waves.",
@@ -693,8 +693,8 @@ const createInitialState = () => ({
     },
     desk_bot: {
       id: "desk_bot",
-      name: "desk robot",
-      aliases: ["desk bot", "robot", "bot"],
+      name: "Deskbot",
+      aliases: ["desk bot", "robot", "bot", "desk robot"],
       location: "room:home_office",
       description:
         "A small desk robot peers from beside the monitor, two camera-eyes and a single tiny speaker perched on a plastic base.",
@@ -706,8 +706,8 @@ const createInitialState = () => ({
     },
     past_paranoid: {
       id: "past_paranoid",
-      name: "murmuring figure",
-      aliases: ["figure", "past", "murmurer"],
+      name: "Past",
+      aliases: ["figure", "past", "murmurer", "murmuring figure"],
       location: "room:tunnel",
       description:
         "A hunched figure traces shapes on the damp wall, muttering dates backwards.",
@@ -719,8 +719,8 @@ const createInitialState = () => ({
     },
     future_paranoid: {
       id: "future_paranoid",
-      name: "wide-eyed figure",
-      aliases: ["figure", "future", "wide-eyed"],
+      name: "Future",
+      aliases: ["figure", "future", "wide-eyed", "wide-eyed figure"],
       location: "room:tunnel",
       description:
         "A figure clings to the wall, eyes darting as if trying to see tomorrow through concrete.",
@@ -733,8 +733,8 @@ const createInitialState = () => ({
     },
     lost_wanderer: {
       id: "lost_wanderer",
-      name: "bewildered wanderer",
-      aliases: ["wanderer", "lost", "traveller"],
+      name: "Wanderer",
+      aliases: ["wanderer", "lost", "traveller", "bewildered wanderer"],
       location: "room:tunnel",
       description:
         "A person in office clothes stares at their shoes as if expecting instructions to be written there.",
@@ -746,8 +746,8 @@ const createInitialState = () => ({
     },
     compilation_paranoid: {
       id: "compilation_paranoid",
-      name: "echoing voice",
-      aliases: ["voice", "echo", "compiler"],
+      name: "Echo",
+      aliases: ["voice", "echo", "compiler", "echoing voice"],
       location: "room:tunnel",
       description:
         "A voice floats from the darkness, more echo than person, fretting about version numbers.",
@@ -759,8 +759,8 @@ const createInitialState = () => ({
     },
     coffee_vendor: {
       id: "coffee_vendor",
-      name: "station attendant",
-      aliases: ["attendant", "barista", "vendor"],
+      name: "Barista",
+      aliases: ["attendant", "barista", "vendor", "station attendant"],
       location: "room:train_station",
       description:
         "A cheerful attendant leans on the counter, kettle in hand, eyes half on the empty tracks.",
@@ -772,8 +772,8 @@ const createInitialState = () => ({
     },
     restless_twin: {
       id: "restless_twin",
-      name: "restless twin",
-      aliases: ["twin", "explorer", "restless"],
+      name: "Restless",
+      aliases: ["twin", "explorer", "restless", "restless twin"],
       location: "room:coast_line",
       description:
         "One twin leans forward on the bench, eyes fixed on the faint coastline across the water.",
@@ -785,8 +785,8 @@ const createInitialState = () => ({
     },
     cautious_twin: {
       id: "cautious_twin",
-      name: "cautious twin",
-      aliases: ["twin", "cautious", "guard"],
+      name: "Cautious",
+      aliases: ["twin", "cautious", "guard", "cautious twin"],
       location: "room:coast_line",
       description:
         "The other twin pulls their coat tight, knuckles white on the bench edge.",
@@ -798,8 +798,8 @@ const createInitialState = () => ({
     },
     backroom_bot: {
       id: "backroom_bot",
-      name: "fallen desk robot",
-      aliases: ["robot", "bot", "desk robot"],
+      name: "Backbot",
+      aliases: ["robot", "bot", "desk robot", "fallen desk robot"],
       location: "room:backrooms_deep",
       description:
         "The same style of desk robot from the home office lies on its side here, lenses scuffed and speaker crackling with static.",

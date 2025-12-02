@@ -23,6 +23,7 @@ SKIP THIS FILE IF YOU ARE NOT COMPILING THE CONTENT!
 - Show, don't tell!
 - Don't disclose locations of important objects unless the user explores a bit!!
 - DO NOT DISCLOSE the map, use it to understand the spatial navigation only
+- NPCs must have single word names for easy access!
 
 # INSTRUCTIONS:
 
