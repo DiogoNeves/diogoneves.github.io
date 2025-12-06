@@ -12,6 +12,8 @@ I built this to explore the limits of my collaboration with AI. It feels mine an
 
 It treats the LLM as a creative compiler, I still edit the source.
 
+Watch the video at https://youtu.be/vTG43yrjtUo
+
 Have fun!
 
 Type LOOK to continue exploring.

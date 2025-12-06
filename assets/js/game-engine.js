@@ -1621,6 +1621,8 @@ function handleAbout() {
     "",
     "It treats the LLM as a creative compiler, I still edit the source.",
     "",
+    "Watch the video at https://youtu.be/vTG43yrjtUo",
+    "",
     "Have fun!",
     "",
     "Type LOOK to continue exploring.",
