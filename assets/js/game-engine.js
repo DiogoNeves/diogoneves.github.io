@@ -876,8 +876,20 @@ const VERB_SYNONYMS = {
   use: "use",
   activate: "use",
   press: "use",
+  push: "use",
+  pull: "use",
+  tug: "use",
+  ring: "use",
+  flip: "use",
+  switch: "use",
+  turn: "use",
+  touch: "use",
+  drink: "use",
+  sip: "use",
+  listen: "use",
   open: "open",
   close: "close",
+  shut: "close",
   talk: "talk",
   speak: "talk",
   chat: "talk",
@@ -895,7 +907,21 @@ const VERB_SYNONYMS = {
   save: "save",
   load: "load",
   restore: "load",
+  restart: "restart",
+  reset: "restart",
 };
+
+const DIRECTION_ALIASES = {
+  n: "north",
+  s: "south",
+  e: "east",
+  w: "west",
+  u: "up",
+  d: "down",
+};
+
+// Order in which exits are listed to the player
+const EXIT_DIRECTIONS = ["north", "south", "east", "west", "up", "down"];
 
 const DIRECTION_WORDS = [
   "north",
@@ -932,65 +958,86 @@ const FILLER_WORDS = [
 // PARSER
 // ================================================
 
+// Words that split "use X on Y" into two objects
+const SPLIT_WORDS = ["on", "with", "into", "onto", "in"];
+
+// Particles that belong to the verb ("pick UP coin", "put DOWN coin")
+const VERB_PARTICLES = {
+  take: ["up"],
+  drop: ["down"],
+  look: ["around"],
+};
+
+function stripFillers(tokens) {
+  return tokens.filter((t) => !FILLER_WORDS.includes(t));
+}
+
 /**
  * Parse user input into a command structure
  * @param {string} input - Raw user input
- * @returns {Object} Parsed command { verb, object, preposition, secondObject }
+ * @returns {Object} Parsed command { verb, object, preposition, secondObject, raw }
  */
 function parseCommand(input) {
-  // Normalise: lowercase and trim
-  let tokens = input.toLowerCase().trim().split(/\s+/);
-
-  // Remove filler words
-  tokens = tokens.filter((t) => !FILLER_WORDS.includes(t));
+  // Normalise: lowercase, trim and split
+  const tokens = input.toLowerCase().trim().split(/\s+/).filter(Boolean);
 
   if (tokens.length === 0) {
-    return { verb: null, object: null };
+    return { verb: null, object: null, raw: "" };
   }
 
-  // Get the first word as potential verb
-  let verbToken = tokens[0];
-  let verb = VERB_SYNONYMS[verbToken] || null;
+  const first = tokens[0];
 
-  // Handle direction shortcuts (n, s, e, w, etc.)
-  if (DIRECTION_WORDS.includes(verbToken)) {
-    if (["n", "s", "e", "w", "u", "d"].includes(verbToken)) {
-      verbToken = VERB_SYNONYMS[verbToken];
+  // Direction words ("n", "north", "in", "out") are moves in their own right.
+  // This runs before filler removal so that "in" is not thrown away.
+  if (DIRECTION_WORDS.includes(first)) {
+    const dir = DIRECTION_ALIASES[first] || first;
+    const rest = stripFillers(tokens.slice(1));
+    if (rest.length > 0 && ["in", "out", "up", "down"].includes(dir)) {
+      // "up stairs", "in shop": a named exit beats the bare direction
+      return { verb: "go", object: rest.join(" "), raw: rest.join(" ") };
     }
-    return { verb: "go", object: VERB_SYNONYMS[verbToken] || verbToken };
+    return { verb: "go", object: dir, raw: dir };
   }
 
-  // Single word command
-  if (tokens.length === 1) {
-    return { verb: verb, object: null };
+  const verb = VERB_SYNONYMS[first] || null;
+  let rest = tokens.slice(1);
+
+  const particles = VERB_PARTICLES[verb];
+  if (particles && particles.includes(rest[0])) {
+    rest = rest.slice(1);
   }
 
-  // Multi-word: verb + object(s)
-  const remaining = tokens.slice(1);
+  // "turn camera off" / "turn on camera": remember which way, then drop the word
+  let mode = null;
+  if (verb === "use") {
+    if (rest.includes("off")) mode = "off";
+    else if (rest.includes("on")) mode = "on";
+    rest = rest.filter((t) => t !== "off");
+  }
 
-  // Check for preposition pattern (use X on Y, put X in Y)
-  const prepositions = ["on", "in", "with", "to"];
-  let prepIndex = -1;
-  let preposition = null;
-
-  for (const prep of prepositions) {
-    const idx = remaining.indexOf(prep);
-    if (idx > 0 && idx < remaining.length - 1) {
-      prepIndex = idx;
-      preposition = prep;
-      break;
+  // "use X on Y", "open X with Y"
+  if (verb === "use" || verb === "open") {
+    const idx = rest.findIndex((t, i) => i > 0 && SPLIT_WORDS.includes(t));
+    if (idx > 0 && idx < rest.length - 1) {
+      return {
+        verb,
+        object: stripFillers(rest.slice(0, idx)).join(" ") || null,
+        preposition: rest[idx],
+        secondObject: stripFillers(rest.slice(idx + 1)).join(" ") || null,
+        mode,
+        raw: stripFillers(tokens).join(" "),
+      };
     }
   }
 
-  if (preposition && prepIndex > 0) {
-    const object = remaining.slice(0, prepIndex).join(" ");
-    const secondObject = remaining.slice(prepIndex + 1).join(" ");
-    return { verb, object, preposition, secondObject };
-  }
-
-  // Simple verb + object
-  const object = remaining.join(" ");
-  return { verb, object, preposition: null, secondObject: null };
+  return {
+    verb,
+    object: stripFillers(rest).join(" ") || null,
+    preposition: null,
+    secondObject: null,
+    mode,
+    raw: stripFillers(tokens).join(" "),
+  };
 }
 
 // ================================================
@@ -998,45 +1045,63 @@ function parseCommand(input) {
 // ================================================
 
 /**
+ * Score how well an object/NPC matches what the player typed.
+ * 3 = exact name, id or alias; 2 = whole word in the name; 1 = part of the name.
+ */
+function scoreMatch(entity, search) {
+  const name = entity.name.toLowerCase();
+
+  if (entity.id.toLowerCase() === search || name === search) return 3;
+  if ((entity.aliases || []).some((a) => a.toLowerCase() === search)) return 3;
+
+  const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  if (new RegExp(`\\b${escaped}\\b`).test(name)) return 2;
+  if (name.includes(search)) return 1;
+
+  return 0;
+}
+
+/**
+ * Find the best match for a name among the given ids.
+ * Earlier ids win ties, so room contents beat inventory.
+ */
+function findEntity(ids, collection, name) {
+  if (!name) return null;
+
+  const search = name.toLowerCase().trim();
+  let best = null;
+  let bestScore = 0;
+
+  for (const id of ids) {
+    const entity = collection[id];
+    if (!entity) continue;
+
+    const score = scoreMatch(entity, search);
+    if (score > bestScore) {
+      best = entity;
+      bestScore = score;
+      if (score === 3) break;
+    }
+  }
+
+  return best;
+}
+
+/**
  * Find an object by name/alias in the current context
  * @param {string} name - Object name to find
  * @returns {Object|null} The object definition or null
  */
 function findObject(name) {
-  if (!name) return null;
-
-  const searchName = name.toLowerCase();
   const currentRoom = gameState.rooms[gameState.player.roomId];
 
-  // Get visible objects (in room + in inventory)
+  // Visible objects: in the room, then in the inventory
   const visibleIds = [
     ...(currentRoom.objects || []),
     ...gameState.player.inventory,
   ];
 
-  for (const objId of visibleIds) {
-    const obj = gameState.objects[objId];
-    if (!obj) continue;
-
-    // Check main name
-    if (
-      obj.name.toLowerCase().includes(searchName) ||
-      obj.id.toLowerCase() === searchName
-    ) {
-      return obj;
-    }
-
-    // Check aliases
-    if (obj.aliases) {
-      for (const alias of obj.aliases) {
-        if (alias.toLowerCase() === searchName) {
-          return obj;
-        }
-      }
-    }
-  }
-
-  return null;
+  return findEntity(visibleIds, gameState.objects, name);
 }
 
 /**
@@ -1045,42 +1110,179 @@ function findObject(name) {
  * @returns {Object|null} The NPC definition or null
  */
 function findNPC(name) {
-  if (!name) return null;
+  const roomId = gameState.player.roomId;
+  const currentRoom = gameState.rooms[roomId];
 
-  const searchName = name.toLowerCase();
-  const currentRoom = gameState.rooms[gameState.player.roomId];
+  const npcIds = (currentRoom.npcs || []).filter((id) => {
+    const npc = gameState.npcs[id];
+    return npc && npc.location === `room:${roomId}`;
+  });
 
-  // Get NPCs in current room
-  const npcIds = currentRoom.npcs || [];
+  return findEntity(npcIds, gameState.npcs, name);
+}
 
-  for (const npcId of npcIds) {
-    const npc = gameState.npcs[npcId];
-    if (!npc) continue;
+// ================================================
+// PUZZLE STATE
+// ================================================
 
-    // Check main name
-    if (
-      npc.name.toLowerCase().includes(searchName) ||
-      npc.id.toLowerCase() === searchName
-    ) {
-      return npc;
+function hasKeycard() {
+  return gameState.player.inventory.includes("backdoor_key_1");
+}
+
+function isBackdoorUnlocked() {
+  return !!(
+    gameState.globals &&
+    gameState.globals.puzzleFlags &&
+    gameState.globals.puzzleFlags.backdoorUnlocked
+  );
+}
+
+/**
+ * Unlock the staff door behind the shop counter (and the stairwell beyond).
+ * @returns {boolean} true if this call changed anything
+ */
+function unlockBackdoor() {
+  if (isBackdoorUnlocked()) return false;
+
+  gameState.globals.puzzleFlags.backdoorUnlocked = true;
+
+  const shop = gameState.rooms["store"];
+  if (shop && shop.flags) shop.flags.backdoorUnlocked = true;
+
+  const entry = gameState.rooms["backrooms_entry"];
+  if (entry && entry.flags) entry.flags.sealed = false;
+
+  return true;
+}
+
+/**
+ * Take the keycard out of THE CITY (once).
+ * @returns {string} extra text to append, or "" if there was nothing to reveal
+ */
+function revealKeycard() {
+  const keyObj = gameState.objects["backdoor_key_1"];
+  if (!keyObj || keyObj.location !== "inside:city_book") return "";
+
+  gameState.player.inventory.push("backdoor_key_1");
+  keyObj.location = "player";
+
+  return " You slip the frayed keycard you find between the pages into your pocket.";
+}
+
+/**
+ * Thumb through THE CITY: hands over the keycard the first time only
+ */
+function useCityBook(obj) {
+  const extra = revealKeycard();
+  if (extra) return obj.onUse + extra;
+  return "You thumb through THE CITY again. Crossings-out, restarts, a story that keeps almost starting. Whatever it was hiding, it has already given up.";
+}
+
+/**
+ * Examining the personal AI box is enough to glimpse the future.
+ */
+function noteInspected(obj) {
+  if (obj.id === "personal_ai_box") {
+    gameState.player.flags.knowsTheFuture = true;
+  }
+}
+
+function markAllRoomsExplored() {
+  const rooms = Object.values(gameState.rooms);
+  if (rooms.every((r) => r.flags && r.flags.visited)) {
+    gameState.globals.puzzleFlags.exploredAllRooms = true;
+  }
+}
+
+/**
+ * Object description, aware of puzzle state
+ */
+function getObjectDescription(obj) {
+  if (
+    obj.id === "city_book" &&
+    gameState.objects["backdoor_key_1"].location !== "inside:city_book"
+  ) {
+    return "A hardback book rests on a lit pedestal. Embossed on the cover: THE CITY. Most pages are dense with crossings-out and fresh beginnings. The little pocket in the spine, where something once clinked, is empty.";
+  }
+  if (isBackdoorUnlocked()) {
+    if (obj.id === "sealed_stairs") {
+      return "A metal stairwell drops into shadow. The padlock hangs open on its chain, as if it never meant to keep anyone out.";
     }
-
-    // Check aliases
-    if (npc.aliases) {
-      for (const alias of npc.aliases) {
-        if (alias.toLowerCase() === searchName) {
-          return npc;
-        }
-      }
+    if (obj.id === "backroom_door") {
+      return "The staff door stands unlocked, paint chipped by impatient hands. The keyhole has stopped judging you. Mostly.";
     }
   }
+  return obj.description;
+}
 
-  return null;
+/**
+ * Room description, aware of what has changed since the player arrived
+ */
+function getRoomDescription(room) {
+  let text = room.description;
+
+  switch (room.id) {
+    case "outside":
+      if (gameState.objects["coin"].location !== "room:outside") {
+        text = text.replace("A faint metallic glint lurks near the threshold. ", "");
+      }
+      break;
+    case "store":
+      if (isBackdoorUnlocked()) {
+        text = text.replace(
+          "east a sealed back area dares you to earn entry",
+          "east the staff door stands unlocked"
+        );
+      }
+      break;
+    case "store_books":
+      if (gameState.objects["backdoor_key_1"].location !== "inside:city_book") {
+        text = text.replace(
+          "Something weighty shifts inside THE CITY when you tilt it, like a key that has been waiting for the right page.",
+          "THE CITY sits a little lighter than it did, its secret pocket empty."
+        );
+      }
+      break;
+    case "backrooms_deep":
+      if (isBackdoorUnlocked()) {
+        text = text.replace(
+          "The door back up is bolted with a neat coin-sized slot, testing whether you kept a certain coin.",
+          "The door back up stands unbolted now, its coin-sized slot gaping like a question you already answered."
+        );
+      }
+      break;
+    case "backrooms_entry":
+      if (isBackdoorUnlocked()) {
+        text = text.replace(
+          "For now the brighter SHOP waits behind you; deeper down is sealed until the right keycard makes a case.",
+          "The brighter SHOP waits behind you; the padlock on the stairwell hangs open now, the chain slack as a held breath."
+        );
+      }
+      break;
+  }
+
+  return text;
 }
 
 // ================================================
 // COMMAND HANDLERS
 // ================================================
+
+/**
+ * Work out which exit the player means. Tries the whole phrase first
+ * ("train station"), then each word ("walk back to the shop" -> "back").
+ */
+function resolveExit(exits, phrase) {
+  const dir = DIRECTION_ALIASES[phrase] || phrase;
+  if (exits[dir]) return exits[dir];
+
+  for (const word of String(phrase).split(/\s+/)) {
+    const w = DIRECTION_ALIASES[word] || word;
+    if (exits[w]) return exits[w];
+  }
+
+  return null;
+}
 
 /**
  * Handle movement commands
@@ -1089,76 +1291,59 @@ function handleMovement(direction) {
   const currentRoom = gameState.rooms[gameState.player.roomId];
   const exits = currentRoom.exits || {};
 
-  // Normalise direction
-  const dirMap = {
-    n: "north",
-    s: "south",
-    e: "east",
-    w: "west",
-    u: "up",
-    d: "down",
-  };
-  const dir = dirMap[direction] || direction;
-  const targetRoomId = exits[dir];
+  const targetRoomId = resolveExit(exits, direction);
+  if (!targetRoomId) {
+    return "You cannot go that way. The world, it seems, has boundaries.";
+  }
 
-  // Special movement rules for puzzles
-  if (targetRoomId) {
-    // Locked staff door from Tech Shop to Backrooms Entrance
-    if (currentRoom.id === "store" && targetRoomId === "backrooms_entry") {
-      const hasKey = gameState.player.inventory.includes("backdoor_key_1");
-      if (!hasKey) {
+  const preamble = [];
+
+  // Locked staff door from Tech Shop to Backrooms Entrance
+  if (currentRoom.id === "store" && targetRoomId === "backrooms_entry") {
+    if (!isBackdoorUnlocked()) {
+      if (!hasKeycard()) {
         return "You try the staff door, but the lock stares back, unimpressed. Whatever opens it isn't in your hands yet.";
       }
 
-      // First time opening: remember that the back area is unlocked
-      if (
-        gameState.globals &&
-        gameState.globals.puzzleFlags &&
-        !gameState.globals.puzzleFlags.backdoorUnlocked
-      ) {
-        gameState.globals.puzzleFlags.backdoorUnlocked = true;
-        if (currentRoom.flags) {
-          currentRoom.flags.backdoorUnlocked = true;
-        }
-        const entryRoom = gameState.rooms["backrooms_entry"];
-        if (entryRoom && entryRoom.flags) {
-          entryRoom.flags.sealed = false;
-        }
-      }
-    }
-
-    // Tunnel side of the Backrooms door – requires the keycard
-    if (currentRoom.id === "tunnel" && targetRoomId === "backrooms_deep") {
-      const hasKey = gameState.player.inventory.includes("backdoor_key_1");
-      if (!hasKey) {
-        return "Your hand finds a metal door in the gloom. It does not budge. Something small and precise is missing from the equation.";
-      }
-    }
-
-    // Backrooms Deep door back to the shop-side corridor only opens once unlocked from above
-    if (currentRoom.id === "backrooms_deep" && targetRoomId === "backrooms_entry") {
-      const backdoorUnlocked =
-        gameState.globals &&
-        gameState.globals.puzzleFlags &&
-        gameState.globals.puzzleFlags.backdoorUnlocked;
-      if (!backdoorUnlocked) {
-        return "You test the door back up, but the bolts on the shop side still hold. For now, the only way is deeper.";
-      }
+      // First time through: the keycard opens the back area for good
+      unlockBackdoor();
+      preamble.push({
+        text: "The keycard finds the reader on its own. Somewhere inside the wall a lock sighs, and the staff door swings open.",
+      });
     }
   }
 
-  if (targetRoomId) {
-    const newRoomId = targetRoomId;
-    gameState.player.roomId = newRoomId;
-
-    const newRoom = gameState.rooms[newRoomId];
-    const wasVisited = newRoom.flags.visited;
-    newRoom.flags.visited = true;
-
-    return describeRoom(newRoomId, wasVisited);
+  // Tunnel side of the Backrooms door: needs the keycard, or the door must
+  // already have been opened from the shop
+  if (currentRoom.id === "tunnel" && targetRoomId === "backrooms_deep") {
+    if (!hasKeycard() && !isBackdoorUnlocked()) {
+      return "Your hand finds a metal door in the gloom. It does not budge. Something small and precise is missing from the equation.";
+    }
   }
 
-  return "You cannot go that way. The world, it seems, has boundaries.";
+  // The door back up to the shop only opens if it was unlocked from above
+  if (currentRoom.id === "backrooms_deep" && targetRoomId === "backrooms_entry") {
+    if (!isBackdoorUnlocked()) {
+      return "You test the door back up, but the bolts on the shop side still hold. For now, the only way is deeper.";
+    }
+  }
+
+  gameState.player.roomId = targetRoomId;
+
+  const newRoom = gameState.rooms[targetRoomId];
+  const wasVisited = newRoom.flags.visited;
+  newRoom.flags.visited = true;
+  markAllRoomsExplored();
+
+  return [...preamble, ...describeRoom(targetRoomId, wasVisited)];
+}
+
+/**
+ * First sentence of a block of text
+ */
+function firstSentence(text) {
+  const match = text.match(/^[^.!?]*[.!?]/);
+  return match ? match[0] : text;
 }
 
 /**
@@ -1166,21 +1351,16 @@ function handleMovement(direction) {
  */
 function describeRoom(roomId, shortForm = false) {
   const room = gameState.rooms[roomId];
-  if (!room) return "You are nowhere. This is concerning.";
+  if (!room) return [{ text: "You are nowhere. This is concerning." }];
 
-  let output = [];
+  const output = [];
 
   // Room name
   output.push({ text: room.name, className: "room-name" });
 
   // Description (shorter on revisits)
-  if (shortForm && room.flags.visited) {
-    // Just show first sentence for revisits
-    const firstSentence = room.description.split(".")[0] + ".";
-    output.push({ text: firstSentence });
-  } else {
-    output.push({ text: room.description });
-  }
+  const description = getRoomDescription(room);
+  output.push({ text: shortForm ? firstSentence(description) : description });
 
   // List NPCs in room
   const roomNPCs = (room.npcs || [])
@@ -1190,7 +1370,7 @@ function describeRoom(roomId, shortForm = false) {
   if (roomNPCs.length > 0) {
     const npcNames = roomNPCs.map((n) => n.name).join(", ");
     output.push({
-      text: `\nPresent: ${npcNames}.`,
+      text: `Present: ${npcNames}.`,
       className: "system",
     });
   }
@@ -1205,10 +1385,14 @@ function describeRoom(roomId, shortForm = false) {
     output.push({ text: `You can see: ${objNames}.`, className: "system" });
   }
 
-  // List exits
-  const exits = Object.keys(room.exits || {});
-  if (exits.length > 0) {
-    const exitStr = exits.map((e) => e.toUpperCase()).join(", ");
+  // List exits: just the directions, not every word that happens to work
+  const exits = room.exits || {};
+  const listed = EXIT_DIRECTIONS.filter((d) => exits[d]);
+  if (listed.length === 0) {
+    listed.push(...["in", "out"].filter((d) => exits[d]));
+  }
+  if (listed.length > 0) {
+    const exitStr = listed.map((e) => e.toUpperCase()).join(", ");
     output.push({ text: `Obvious exits: ${exitStr}`, className: "system" });
   }
 
@@ -1225,27 +1409,29 @@ function handleLook(object) {
   }
 
   // Look in a direction
-  const dirMap = {
-    north: "north",
-    n: "north",
-    south: "south",
-    s: "south",
-    east: "east",
-    e: "east",
-    west: "west",
-    w: "west",
+  const dir = DIRECTION_ALIASES[object] || object;
+  const lookPhrases = {
+    north: "to the north",
+    south: "to the south",
+    east: "to the east",
+    west: "to the west",
+    up: "above you",
+    down: "below you",
+    in: "inside",
+    out: "outside",
   };
 
-  if (dirMap[object]) {
+  if (lookPhrases[dir]) {
     const currentRoom = gameState.rooms[gameState.player.roomId];
-    const dir = dirMap[object];
-    if (currentRoom.exits && currentRoom.exits[dir]) {
-      const nextRoom = gameState.rooms[currentRoom.exits[dir]];
-      return `Looking ${dir.toUpperCase()}, you see the way to ${
-        nextRoom.name
-      }.`;
+    const nextRoomId = currentRoom.exits && currentRoom.exits[dir];
+    if (nextRoomId) {
+      const nextRoom = gameState.rooms[nextRoomId];
+      if (nextRoom.flags.visited) {
+        return `Looking ${dir.toUpperCase()}, you see the way to ${nextRoom.name}.`;
+      }
+      return `Looking ${dir.toUpperCase()}, you see a way onward. Where it leads is a question for your feet.`;
     }
-    return `There's nothing particularly interesting to the ${dir}.`;
+    return `There's nothing particularly interesting ${lookPhrases[dir]}.`;
   }
 
   // Look at an object - delegate to examine
@@ -1263,7 +1449,8 @@ function handleExamine(objectName) {
   // Try to find an object first
   const obj = findObject(objectName);
   if (obj) {
-    return obj.description;
+    noteInspected(obj);
+    return getObjectDescription(obj);
   }
 
   // Try to find an NPC
@@ -1350,7 +1537,10 @@ function handleDrop(objectName) {
     return "Drop what? Being specific helps.";
   }
 
-  const obj = findObject(objectName);
+  // Prefer what you are carrying: "drop book" means the one in your hands
+  const obj =
+    findEntity(gameState.player.inventory, gameState.objects, objectName) ||
+    findObject(objectName);
   if (!obj) {
     return `You don't have any "${objectName}".`;
   }
@@ -1372,9 +1562,19 @@ function handleDrop(objectName) {
 }
 
 /**
+ * Hold the keycard to the staff door (or the stairwell padlock)
+ */
+function useKeycardOnBackdoor() {
+  if (unlockBackdoor()) {
+    return "You hold the keycard to the reader. Somewhere behind the wall a lock sighs and gives up.";
+  }
+  return "The way is already open. The keycard looks a little smug about it.";
+}
+
+/**
  * Handle USE command
  */
-function handleUse(objectName) {
+function handleUse(objectName, secondName, mode) {
   if (!objectName) {
     return "Use what? The parser requires slightly more information.";
   }
@@ -1384,39 +1584,55 @@ function handleUse(objectName) {
     return `You cannot see any "${objectName}" here.`;
   }
 
+  // USE X ON Y
+  if (secondName) {
+    const target = findObject(secondName);
+    if (!target) {
+      return `You cannot see any "${secondName}" here.`;
+    }
+
+    const pair = [obj.id, target.id];
+    if (
+      pair.includes("backdoor_key_1") &&
+      (pair.includes("backroom_door") || pair.includes("sealed_stairs"))
+    ) {
+      return useKeycardOnBackdoor();
+    }
+
+    return `You try the ${obj.name} on the ${target.name}. Nothing happens, which is its own kind of answer.`;
+  }
+
+  noteInspected(obj);
+
+  // The plate in the office floor only does one thing
+  if (obj.id === "trapdoor_plate") {
+    return handleMovement("down");
+  }
+
   // Personal AI box grants a glimpse of the future
-  if (obj.id === "personal_ai_box") {
-    if (gameState.player && gameState.player.flags) {
-      gameState.player.flags.knowsTheFuture = true;
-    }
-    if (obj.onUse) {
-      return obj.onUse;
-    }
+  if (obj.id === "personal_ai_box" && obj.onUse) {
+    return obj.onUse;
   }
 
   // THE CITY pedestal book reveals the hidden keycard
   if (obj.id === "city_book") {
-    const keyObj = gameState.objects["backdoor_key_1"];
-    let extraText = "";
+    return useCityBook(obj);
+  }
 
-    if (keyObj && !gameState.player.inventory.includes("backdoor_key_1")) {
-      gameState.player.inventory.push("backdoor_key_1");
-      keyObj.location = "player";
+  // The keycard opens the staff door when you are standing at it
+  if (obj.id === "backdoor_key_1" && gameState.player.roomId === "store") {
+    return useKeycardOnBackdoor();
+  }
 
-      const booksRoom = gameState.rooms["store_books"];
-      if (booksRoom && Array.isArray(booksRoom.objects)) {
-        const keyIndex = booksRoom.objects.indexOf("backdoor_key_1");
-        if (keyIndex !== -1) {
-          booksRoom.objects.splice(keyIndex, 1);
-        }
-      }
-
-      extraText =
-        " You slip the frayed keycard you find between the pages into your pocket.";
+  // The staff door and the stairwell padlock answer to the keycard
+  if (obj.id === "backroom_door" || obj.id === "sealed_stairs") {
+    if (isBackdoorUnlocked()) {
+      return obj.id === "backroom_door"
+        ? "The staff door is already unlocked. It swings with the confidence of something that has made up its mind."
+        : "You nudge the open padlock. It swings, harmless. The way down is yours.";
     }
-
-    if (obj.onUse) {
-      return obj.onUse + extraText;
+    if (hasKeycard() && obj.id === "backroom_door") {
+      return useKeycardOnBackdoor();
     }
   }
 
@@ -1426,6 +1642,13 @@ function handleUse(objectName) {
       obj.state = { isOn: true };
     }
 
+    // "turn it on" / "turn it off" ask for a state; a plain USE flips it
+    if (mode === "on" && obj.state.isOn) {
+      return "The tally light is already glowing. The camera, as ever, is ahead of you.";
+    }
+    if (mode === "off" && !obj.state.isOn) {
+      return "It's already off. The lens regards you with the serenity of the unplugged.";
+    }
     obj.state.isOn = !obj.state.isOn;
 
     if (obj.state.isOn) {
@@ -1460,8 +1683,15 @@ function handleRead(objectName) {
     return `You cannot see any "${objectName}" here.`;
   }
 
-  // For now, reading is like examining
-  return `You read the ${obj.name}.\n\n${obj.description}`;
+  // THE CITY gives up its secret to anyone who reads it
+  if (obj.id === "city_book") {
+    return useCityBook(obj);
+  }
+
+  noteInspected(obj);
+
+  // Otherwise reading is like examining
+  return `You read the ${obj.name}.\n\n${getObjectDescription(obj)}`;
 }
 
 /**
@@ -1486,6 +1716,11 @@ function handleTalk(npcName) {
     return npc.dialogue(gameState, npc);
   }
 
+  if (npc.id === "friendly_lookout") {
+    gameState.player.flags.stormNoticed = true;
+    gameState.globals.puzzleFlags.stormWarningReceived = true;
+  }
+
   const baseLines = Array.isArray(npc.dialogue)
     ? npc.dialogue.slice()
     : [String(npc.dialogue)];
@@ -1494,12 +1729,7 @@ function handleTalk(npcName) {
 
   // Home daughters react to the coin pickup
   if (npc.id === "lilah" || npc.id === "olivia") {
-    const hasCoin =
-      !!(
-        gameState.player &&
-        gameState.player.flags &&
-        gameState.player.flags.foundCoin
-      );
+    const hasCoin = gameState.player.inventory.includes("coin");
     const luckyFlagKey = "familyLuckyRemarkHeard";
     const luckyHeard =
       !!(
@@ -1542,8 +1772,10 @@ function handleTalk(npcName) {
     return `The ${npc.name} seems disinclined to conversation at the moment.`;
   }
 
-  let line =
-    candidates[Math.floor(Math.random() * candidates.length)];
+  // Don't repeat the line this NPC said last time, if there is a choice
+  const fresh = candidates.filter((l) => l !== npc.lastLine);
+  const pool = fresh.length > 0 ? fresh : candidates;
+  let line = pool[Math.floor(Math.random() * pool.length)];
 
   // Tunnel NPCs occasionally thank the player after the back door is opened
   const tunnelNpcIds = [
@@ -1568,6 +1800,7 @@ function handleTalk(npcName) {
     line = thanksLines[Math.floor(Math.random() * thanksLines.length)];
   }
 
+  npc.lastLine = line;
   return line;
 }
 
@@ -1595,6 +1828,8 @@ function handleHelp() {
     "  HELP    — You're reading it",
     "  ABOUT   — Learn more about this place",
     "  CLEAR   — Clear the screen",
+    "  SAVE / LOAD — Keep your place, or return to it",
+    "  RESTART — Begin again",
     "  QUIT    — A polite farewell",
     "",
     "Some objects here lead to real content — posts, videos, documentation.",
@@ -1667,13 +1902,48 @@ function handleUnknown() {
 // COMMAND DISPATCHER
 // ================================================
 
+// Commands that talk to the machine rather than the world: they don't use up a turn
+const FREE_VERBS = [
+  "help",
+  "about",
+  "clear",
+  "quit",
+  "save",
+  "load",
+  "restart",
+  "inventory",
+];
+
+/**
+ * Start the game again from the beginning
+ */
+function restartGame() {
+  gameState = createInitialState();
+  gameState.globals.gameStarted = true;
+  gameState.player.flags.hasStarted = true;
+  gameState.rooms[gameState.player.roomId].flags.visited = true;
+
+  clearOutput();
+  return [
+    { text: "[ REWINDING THE TAPE... ]", className: "system" },
+    ...describeRoom(gameState.player.roomId),
+  ];
+}
+
 /**
  * Process a parsed command and return the result
  */
 function executeCommand(parsed) {
-  const { verb, object, preposition, secondObject } = parsed;
+  const { verb, object, secondObject } = parsed;
 
   if (!verb) {
+    // A bare exit word ("back", "home", "stairs") still counts as a move
+    const room = gameState.rooms[gameState.player.roomId];
+    if (parsed.raw && resolveExit(room.exits || {}, parsed.raw)) {
+      parsed.verb = "go";
+      parsed.object = parsed.raw;
+      return handleMovement(parsed.raw);
+    }
     return handleUnknown();
   }
 
@@ -1710,7 +1980,11 @@ function executeCommand(parsed) {
 
     // Interaction
     case "use":
-      return handleUse(object);
+      return handleUse(object, secondObject, parsed.mode);
+    case "open":
+      return handleOpen(object, secondObject);
+    case "close":
+      return "You consider closing it. Nothing here stays shut for long, so you don't bother.";
     case "talk":
       return handleTalk(object);
 
@@ -1723,9 +1997,12 @@ function executeCommand(parsed) {
       return handleClear();
     case "quit":
       return handleQuit();
+    case "restart":
+      return restartGame();
     case "save":
-      saveGame();
-      return "Game saved. Your progress is preserved in the browser's memory.";
+      return saveGame()
+        ? "Game saved. Your progress is preserved in the browser's memory."
+        : "The save slipped through your fingers. This browser won't let me keep it.";
     case "load":
       if (loadGame()) {
         return [
@@ -1740,18 +2017,134 @@ function executeCommand(parsed) {
   }
 }
 
+/**
+ * Handle OPEN command: doors and books open by being used, trapdoors by going through
+ */
+function handleOpen(objectName, secondName) {
+  if (!objectName) {
+    return "Open what? The air offers no hinges.";
+  }
+
+  const obj = findObject(objectName);
+  if (!obj) {
+    return `You cannot see any "${objectName}" here.`;
+  }
+
+  return handleUse(objectName, secondName);
+}
+
 // ================================================
 // PERSISTENCE
 // ================================================
 
 const SAVE_KEY = "neurolink_adventure_save";
+const SAVE_VERSION = 2;
+
+/**
+ * Copy matching, same-typed values from source into target (known keys only)
+ */
+function mergeKnown(target, source) {
+  if (!source || typeof source !== "object") return;
+  for (const key of Object.keys(target)) {
+    if (key in source && typeof source[key] === typeof target[key]) {
+      target[key] = source[key];
+    }
+  }
+}
+
+/**
+ * Everything that can change during play. Static text (descriptions, dialogue,
+ * exits) is never saved, so content updates reach returning players.
+ */
+function snapshotState() {
+  const snap = {
+    version: SAVE_VERSION,
+    player: gameState.player,
+    globals: gameState.globals,
+    rooms: {},
+    objects: {},
+    npcs: {},
+  };
+
+  for (const [id, room] of Object.entries(gameState.rooms)) {
+    snap.rooms[id] = { objects: room.objects, flags: room.flags };
+  }
+  for (const [id, obj] of Object.entries(gameState.objects)) {
+    snap.objects[id] = { location: obj.location };
+    if (obj.state) {
+      snap.objects[id].state = obj.state;
+      snap.objects[id].description = obj.description;
+    }
+  }
+  for (const [id, npc] of Object.entries(gameState.npcs)) {
+    snap.npcs[id] = { location: npc.location };
+  }
+
+  return snap;
+}
+
+/**
+ * Rebuild a game state from a saved snapshot, on top of fresh content.
+ * @returns {Object|null} the restored state, or null if the save is unusable
+ */
+function applySnapshot(snap) {
+  if (!snap || !snap.player || !snap.rooms || !snap.objects || !snap.globals) {
+    return null;
+  }
+
+  const state = createInitialState();
+  if (!state.rooms[snap.player.roomId]) return null;
+
+  state.player.roomId = snap.player.roomId;
+  if (Array.isArray(snap.player.inventory)) {
+    state.player.inventory = snap.player.inventory.filter((id) => state.objects[id]);
+  }
+  mergeKnown(state.player.flags, snap.player.flags);
+
+  for (const [id, room] of Object.entries(state.rooms)) {
+    const saved = snap.rooms[id];
+    if (!saved) continue;
+    if (Array.isArray(saved.objects)) {
+      room.objects = saved.objects.filter((oid) => state.objects[oid]);
+    }
+    mergeKnown(room.flags, saved.flags);
+  }
+
+  for (const [id, obj] of Object.entries(state.objects)) {
+    const saved = snap.objects[id];
+    if (!saved) continue;
+    if (typeof saved.location === "string") obj.location = saved.location;
+    if (saved.state && typeof saved.state === "object") {
+      obj.state = saved.state;
+      if (typeof saved.description === "string") obj.description = saved.description;
+    }
+  }
+
+  for (const [id, npc] of Object.entries(state.npcs)) {
+    const saved = snap.npcs && snap.npcs[id];
+    if (saved && typeof saved.location === "string") npc.location = saved.location;
+  }
+
+  mergeKnown(state.globals, snap.globals);
+  mergeKnown(state.globals.puzzleFlags, snap.globals.puzzleFlags);
+
+  return state;
+}
 
 function saveGame() {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
+    localStorage.setItem(SAVE_KEY, JSON.stringify(snapshotState()));
     return true;
   } catch (e) {
     console.error("Failed to save game:", e);
+    return false;
+  }
+}
+
+function hasSavedGame() {
+  try {
+    return !!localStorage.getItem(SAVE_KEY);
+  } catch (e) {
     return false;
   }
 }
@@ -1760,8 +2153,11 @@ function loadGame() {
   try {
     const saved = localStorage.getItem(SAVE_KEY);
     if (saved) {
-      gameState = JSON.parse(saved);
-      return true;
+      const restored = applySnapshot(JSON.parse(saved));
+      if (restored) {
+        gameState = restored;
+        return true;
+      }
     }
   } catch (e) {
     console.error("Failed to load game:", e);
@@ -1775,11 +2171,26 @@ function loadGame() {
 
 let outputElement = null;
 let inputElement = null;
+let formElement = null;
 let statusLocationElement = null;
 let statusTurnsElement = null;
 let scrollUpIndicator = null;
 let scrollDownIndicator = null;
+let quickActionsElement = null;
+let currentBlock = null;
 let isShowingTitle = true;
+
+// Previously entered commands (up/down arrows)
+const commandHistory = [];
+let historyIndex = -1;
+let historyDraft = "";
+
+/**
+ * True on phones and tablets, where the on-screen keyboard is a cost
+ */
+function isTouchDevice() {
+  return !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+}
 
 /**
  * Initialise the game UI
@@ -1787,25 +2198,47 @@ let isShowingTitle = true;
 function initGame() {
   outputElement = document.getElementById("text-output");
   inputElement = document.getElementById("command-input");
+  formElement = document.getElementById("command-form");
   statusLocationElement = document.getElementById("status-location");
   statusTurnsElement = document.getElementById("status-turns");
   scrollUpIndicator = document.getElementById("scroll-up");
   scrollDownIndicator = document.getElementById("scroll-down");
+  quickActionsElement = document.getElementById("quick-actions");
 
-  // Set up input handler
+  // Commands come in through the form so that Enter / Go works on every keyboard
+  if (formElement) {
+    formElement.addEventListener("submit", (event) => {
+      event.preventDefault();
+      submitFromInput();
+    });
+  }
+
   if (inputElement) {
-    inputElement.addEventListener("keydown", handleInput);
-    inputElement.focus();
+    inputElement.addEventListener("keydown", handleHistoryKeys);
+    // On touch devices, focusing on load would throw the keyboard over the story
+    if (!isTouchDevice()) {
+      inputElement.focus();
+    }
+  }
+
+  // Clicking the screen (but not selecting text) returns focus to the prompt
+  const screen = document.querySelector(".screen-container");
+  if (screen && !isTouchDevice()) {
+    screen.addEventListener("click", () => {
+      const selection = window.getSelection && window.getSelection().toString();
+      if (!selection && inputElement) inputElement.focus();
+    });
   }
 
   // Set up scroll indicator handlers
   if (outputElement) {
     outputElement.addEventListener("scroll", updateScrollIndicators);
-    // Also update on resize
-    window.addEventListener("resize", updateScrollIndicators);
   }
+  window.addEventListener("resize", () => {
+    fitBanner();
+    updateScrollIndicators();
+  });
 
-  // Set up click handlers for scroll indicators
   if (scrollUpIndicator) {
     scrollUpIndicator.addEventListener("click", () => {
       if (outputElement) {
@@ -1822,11 +2255,47 @@ function initGame() {
     });
   }
 
+  // Quick-command buttons (shown on small / touch screens)
+  if (quickActionsElement) {
+    quickActionsElement.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-cmd]");
+      if (button) processInput(button.dataset.cmd);
+    });
+  }
+
+  trackViewport();
+
   // Create fresh game state
   gameState = createInitialState();
 
   // Show title screen
   showTitleScreen();
+  renderQuickActions();
+}
+
+/**
+ * Keep the layout inside the visible area when the on-screen keyboard opens
+ */
+function trackViewport() {
+  const root = document.documentElement;
+  const vv = window.visualViewport;
+
+  const update = () => {
+    const height = vv ? vv.height : window.innerHeight;
+    root.style.setProperty("--app-height", `${Math.round(height)}px`);
+    root.style.setProperty("--app-offset-top", `${Math.round(vv ? vv.offsetTop : 0)}px`);
+    // With the keyboard up (or in landscape) the buttons would eat the story
+    root.classList.toggle("short-viewport", height < 480);
+    root.classList.toggle("tiny-viewport", height < 340);
+    updateScrollIndicators();
+  };
+
+  update();
+  if (vv) {
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+  }
+  window.addEventListener("orientationchange", () => setTimeout(update, 200));
 }
 
 /**
@@ -1854,7 +2323,8 @@ function showTitleScreen() {
 
   clearOutput();
 
-  // Add banner with clickable YouTube link
+  // Add banner with clickable YouTube link. Wide screens get the ASCII art;
+  // narrow ones get a compact version because the art would be unreadably small.
   const bannerDiv = document.createElement("div");
   bannerDiv.className = "ascii-banner";
   const bannerLink = document.createElement("a");
@@ -1862,16 +2332,29 @@ function showTitleScreen() {
   bannerLink.target = "_blank";
   bannerLink.rel = "noopener noreferrer";
   bannerLink.className = "youtube-link";
-  bannerLink.textContent = banner;
-  bannerLink.setAttribute("aria-label", "Visit Diogo on YouTube");
+  bannerLink.setAttribute("aria-label", "Diogo is building on YouTube – visit the channel");
+
+  const bannerArt = document.createElement("span");
+  bannerArt.className = "banner-art";
+  bannerArt.setAttribute("aria-hidden", "true");
+  bannerArt.textContent = banner;
+
+  const bannerCompact = document.createElement("span");
+  bannerCompact.className = "banner-compact";
+  bannerCompact.setAttribute("aria-hidden", "true");
+  bannerCompact.textContent = "DIOGO IS\nBUILDING\nON YOUTUBE";
+
+  bannerLink.appendChild(bannerArt);
+  bannerLink.appendChild(bannerCompact);
   bannerDiv.appendChild(bannerLink);
   outputElement.appendChild(bannerDiv);
+  fitBanner();
 
   // System info
   addOutput("");
   addOutput(
     "═══════════════════════════════════════════════════════════════",
-    "system"
+    "system rule"
   );
   addOutput("");
   addOutput(
@@ -1886,7 +2369,7 @@ function showTitleScreen() {
   addOutput("");
   addOutput(
     "═══════════════════════════════════════════════════════════════",
-    "system"
+    "system rule"
   );
   addOutput("");
   addOutput(
@@ -1898,48 +2381,139 @@ function showTitleScreen() {
   addOutput("You explore it by typing, and it pretends it was expecting you.");
   addOutput("");
   addOutput("Type HELP for commands. Type LOOK to begin.");
+  if (hasSavedGame()) {
+    addOutput("You've been here before. Type LOAD to pick up where you left off.", "system");
+  }
   addOutput("");
 
-  scrollToBottom();
+  // Desktop lands on the prompt; phones start at the banner (the quick buttons
+  // already cover the prompt, and the title is the first thing worth seeing)
+  if (isTouchDevice()) {
+    outputElement.scrollTop = 0;
+  } else {
+    scrollToBottom();
+  }
   // Initial check for scroll indicators
   setTimeout(updateScrollIndicators, 100);
 }
 
 /**
- * Handle keyboard input
+ * Pick the banner that fits: shrink the ASCII art to the available width,
+ * and fall back to the compact version when it would be too small to read.
  */
-function handleInput(event) {
-  if (event.key !== "Enter") return;
+function fitBanner() {
+  if (!outputElement) return;
+  const banner = outputElement.querySelector(".ascii-banner");
+  const art = banner && banner.querySelector(".banner-art");
+  if (!art) return;
 
-  const input = inputElement.value.trim();
+  const columns = Math.max(...art.textContent.split("\n").map((l) => l.length));
+  const available = outputElement.clientWidth - 8;
+  // Monospace glyphs are about 0.6em wide
+  const fontSize = Math.min(12, available / (columns * 0.6));
+
+  if (fontSize < 6.5) {
+    banner.classList.add("compact");
+  } else {
+    banner.classList.remove("compact");
+    art.style.fontSize = `${fontSize.toFixed(2)}px`;
+  }
+}
+
+/**
+ * Read the command line and run it
+ */
+function submitFromInput() {
+  if (!inputElement) return;
+  const value = inputElement.value;
+  inputElement.value = "";
+  processInput(value);
+}
+
+/**
+ * Up/down arrows walk through earlier commands
+ */
+function handleHistoryKeys(event) {
+  if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
+  if (commandHistory.length === 0) return;
+  event.preventDefault();
+
+  if (event.key === "ArrowUp") {
+    if (historyIndex === -1) {
+      historyDraft = inputElement.value;
+      historyIndex = commandHistory.length - 1;
+    } else if (historyIndex > 0) {
+      historyIndex--;
+    }
+    inputElement.value = commandHistory[historyIndex];
+  } else {
+    if (historyIndex === -1) return;
+    if (historyIndex < commandHistory.length - 1) {
+      historyIndex++;
+      inputElement.value = commandHistory[historyIndex];
+    } else {
+      historyIndex = -1;
+      inputElement.value = historyDraft;
+    }
+  }
+}
+
+/**
+ * Begin the adventure from the title screen (or resume a saved one)
+ */
+function startFromTitle(input) {
+  const parsed = parseCommand(input);
+
+  if (parsed.verb === "load") {
+    if (loadGame()) {
+      isShowingTitle = false;
+      displayOutput([
+        { text: "Game loaded.", className: "system" },
+        ...describeRoom(gameState.player.roomId),
+      ]);
+    } else {
+      addOutput("No saved game found. Perhaps you haven't been here before.");
+    }
+    return;
+  }
+
+  isShowingTitle = false;
+  gameState.globals.gameStarted = true;
+  gameState.player.flags.hasStarted = true;
+  gameState.rooms[gameState.player.roomId].flags.visited = true;
+
+  // Check if they typed a command or just pressed enter
+  if (parsed.verb === "help") {
+    displayOutput(handleHelp());
+  } else if (parsed.verb === "about") {
+    displayOutput(handleAbout());
+  } else {
+    // Show starting room
+    addOutput("[ INITIATING ADVENTURE SEQUENCE... ]", "system");
+    displayOutput(describeRoom(gameState.player.roomId));
+  }
+}
+
+/**
+ * Run one line of player input (typed or tapped)
+ */
+function processInput(raw) {
+  const input = String(raw || "").trim();
   if (!input) return;
 
-  // Echo user input
+  // Each command and its response live in one block, so they scroll together
+  currentBlock = null;
+  const block = ensureBlock();
   addOutput(input, "user-input");
 
-  // Clear input
-  inputElement.value = "";
+  if (commandHistory[commandHistory.length - 1] !== input) {
+    commandHistory.push(input);
+    if (commandHistory.length > 50) commandHistory.shift();
+  }
+  historyIndex = -1;
 
-  // If showing title, first command starts the game
   if (isShowingTitle) {
-    isShowingTitle = false;
-    gameState.globals.gameStarted = true;
-    gameState.rooms[gameState.player.roomId].flags.visited = true;
-
-    // Check if they typed a command or just pressed enter
-    const parsed = parseCommand(input);
-    if (parsed.verb === "help") {
-      displayOutput(handleHelp());
-    } else if (parsed.verb === "about") {
-      displayOutput(handleAbout());
-    } else {
-      // Show starting room
-      const roomOutput = describeRoom(gameState.player.roomId);
-      addOutput("");
-      addOutput("[ INITIATING ADVENTURE SEQUENCE... ]", "system");
-      addOutput("");
-      displayOutput(roomOutput);
-    }
+    startFromTitle(input);
   } else {
     // Parse and execute command
     const parsed = parseCommand(input);
@@ -1947,19 +2521,23 @@ function handleInput(event) {
 
     // Display result
     if (result) {
-      addOutput("");
       displayOutput(result);
     }
 
-    // Increment turn counter
-    gameState.globals.turn++;
-    updateStatus();
+    // Only commands that act on the world use up a turn
+    if (parsed.verb && !FREE_VERBS.includes(parsed.verb)) {
+      gameState.globals.turn++;
+    }
 
     // Auto-save
     saveGame();
   }
 
-  scrollToBottom();
+  if (!isShowingTitle) {
+    updateStatus();
+  }
+  renderQuickActions();
+  scrollToBlock(currentBlock || block);
 }
 
 /**
@@ -1967,6 +2545,11 @@ function handleInput(event) {
  */
 function displayOutput(output) {
   if (Array.isArray(output)) {
+    if (output.every((item) => typeof item === "string")) {
+      // A sheet of plain lines (help, about...): keep spacing and alignment together
+      addOutput(output.join("\n"), "sheet");
+      return;
+    }
     output.forEach((item) => {
       if (typeof item === "object") {
         addOutput(item.text, item.className);
@@ -1980,13 +2563,35 @@ function displayOutput(output) {
 }
 
 /**
+ * The block that output is currently being added to
+ */
+function ensureBlock() {
+  if (!currentBlock || !currentBlock.isConnected) {
+    currentBlock = document.createElement("div");
+    currentBlock.className = "output-block";
+    outputElement.appendChild(currentBlock);
+  }
+  return currentBlock;
+}
+
+/**
  * Add a line to the output
  */
 function addOutput(text, className = "") {
   const line = document.createElement("div");
-  line.className = "output-line" + (className ? " " + className : "");
-  line.textContent = text;
-  outputElement.appendChild(line);
+
+  if (text === "") {
+    // Blank lines are spacing, not content
+    line.className = "output-spacer";
+    line.setAttribute("aria-hidden", "true");
+  } else {
+    line.className = "output-line" + (className ? " " + className : "");
+    line.textContent = text;
+  }
+
+  // The title screen is not part of a command block
+  const target = isShowingTitle && !currentBlock ? outputElement : ensureBlock();
+  target.appendChild(line);
 }
 
 /**
@@ -1996,6 +2601,7 @@ function clearOutput() {
   if (outputElement) {
     outputElement.innerHTML = "";
   }
+  currentBlock = null;
 }
 
 /**
@@ -2007,6 +2613,82 @@ function scrollToBottom() {
     // Update indicators after scroll
     setTimeout(updateScrollIndicators, 50);
   }
+}
+
+/**
+ * Show the newest response from its start. Short ones end up at the bottom as
+ * usual; a long room description starts at the top of the screen instead of
+ * having its first lines scrolled out of view.
+ */
+function scrollToBlock(block) {
+  if (!outputElement || !block || !block.isConnected) {
+    scrollToBottom();
+    return;
+  }
+
+  const blockTop =
+    block.getBoundingClientRect().top - outputElement.getBoundingClientRect().top;
+  const overflow = block.offsetHeight > outputElement.clientHeight;
+
+  if (overflow) {
+    outputElement.scrollTop += blockTop;
+  } else {
+    outputElement.scrollTop = outputElement.scrollHeight;
+  }
+
+  setTimeout(updateScrollIndicators, 50);
+}
+
+/**
+ * Rebuild the quick-command buttons for the current room
+ */
+function renderQuickActions() {
+  if (!quickActionsElement || !gameState) return;
+
+  const moves = [];
+  const things = [];
+
+  if (isShowingTitle) {
+    moves.push(["Look", "look"], ["Help", "help"]);
+    if (hasSavedGame()) moves.push(["Load", "load"]);
+  } else {
+    const roomId = gameState.player.roomId;
+    const room = gameState.rooms[roomId];
+
+    EXIT_DIRECTIONS.filter((d) => room.exits && room.exits[d]).forEach((d) =>
+      moves.push([d, d])
+    );
+    moves.push(["Look", "look"], ["Inventory", "inventory"], ["Help", "help"]);
+
+    (room.npcs || [])
+      .map((id) => gameState.npcs[id])
+      .filter((npc) => npc && npc.location === `room:${roomId}`)
+      .forEach((npc) => things.push([`Talk: ${npc.name}`, `talk ${npc.name.toLowerCase()}`]));
+
+    (room.objects || [])
+      .map((id) => gameState.objects[id])
+      .filter((obj) => obj && obj.location === `room:${roomId}`)
+      .forEach((obj) => {
+        const handle = (obj.aliases && obj.aliases[0]) || obj.name.toLowerCase();
+        things.push([`Look: ${handle}`, `examine ${handle}`]);
+        if (obj.portable) things.push([`Take: ${handle}`, `take ${handle}`]);
+      });
+  }
+
+  quickActionsElement.textContent = "";
+  [moves, things].forEach((row, i) => {
+    if (row.length === 0) return;
+    const rowEl = document.createElement("div");
+    rowEl.className = "quick-row" + (i === 1 ? " quick-row-things" : "");
+    row.forEach(([label, cmd]) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = label;
+      button.dataset.cmd = cmd;
+      rowEl.appendChild(button);
+    });
+    quickActionsElement.appendChild(rowEl);
+  });
 }
 
 /**

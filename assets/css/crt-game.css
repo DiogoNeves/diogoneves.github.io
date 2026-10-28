@@ -42,6 +42,9 @@ html, body {
   padding: 0;
   height: 100%;
   overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body.game-page {
@@ -51,8 +54,24 @@ body.game-page {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 0;
   overflow: hidden;
+}
+
+.noscript {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #050505;
+  color: var(--crt-green);
+  font-family: var(--font-mono);
 }
 
 /* ================================================
@@ -60,9 +79,17 @@ body.game-page {
    ================================================ */
 
 .room-environment {
-  position: relative;
-  width: 100vw;
+  /* Fixed, so the body's centring cannot push it off the visible area when
+     --app-height shrinks (on-screen keyboard) */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
+  /* --app-height / --app-offset-top are kept up to date by the game script so
+     the layout follows the visible area (browser bars, on-screen keyboard) */
+  height: var(--app-height, 100dvh);
+  transform: translateY(var(--app-offset-top, 0px));
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -234,10 +261,11 @@ body.game-page {
   position: relative;
   width: min(95vw, 1000px);
   /* Allow taller monitor to fit initial content - use more of the available height */
-  height: min(calc(100vh - 14vh), 800px);
+  height: min(calc(var(--app-height, 100vh) * 0.86), 800px);
   background: linear-gradient(145deg, var(--monitor-bezel-light), var(--monitor-bezel-dark));
   border-radius: 20px;
-  padding: var(--monitor-padding);
+  /* Extra room underneath for the model name and power LED, so they sit on the bezel */
+  padding: var(--monitor-padding) var(--monitor-padding) calc(var(--monitor-padding) + 20px);
   box-shadow: 
     0 0 0 3px var(--monitor-bezel-dark),
     0 20px 60px rgba(0, 0, 0, 0.8),
@@ -289,6 +317,9 @@ body.game-page {
   height: 100%;
   background: var(--screen-bg-gradient);
   overflow: hidden;
+  /* "clip" cannot be scrolled programmatically, so focusing the input can
+     never shove the screen's contents sideways (the glass overlays overhang) */
+  overflow: clip;
   
   /* The classic CRT bulge - convex screen effect */
   border-radius: 50px / 40px;
@@ -761,6 +792,32 @@ body.game-page {
   }
 }
 
+/* One command and its response */
+.output-block {
+  margin-bottom: 0.9em;
+}
+
+.output-block > .user-input {
+  margin-bottom: 0.4em;
+}
+
+/* Blank lines in the script are spacing, not content */
+.output-spacer {
+  height: 0.6em;
+}
+
+/* Lists such as HELP: one block, lines kept together and aligned */
+.output-line.sheet {
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+
+.output-line.rule {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+
 /* Room name styling */
 .output-line.room-name {
   font-weight: 700;
@@ -821,7 +878,6 @@ body.game-page {
 
 .ascii-banner {
   font-family: var(--font-mono);
-  font-size: clamp(6px, 1.2vw, 12px);
   line-height: 1.1;
   white-space: pre;
   color: var(--crt-green);
@@ -835,6 +891,31 @@ body.game-page {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+/* The art is sized to its container by the game script */
+.ascii-banner .banner-art {
+  display: block;
+  white-space: pre;
+  line-height: 1.1;
+}
+
+/* Small screens get a compact title instead of unreadably tiny art */
+.ascii-banner .banner-compact {
+  display: none;
+  white-space: pre;
+  font-weight: 700;
+  font-size: clamp(22px, 9vw, 40px);
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+}
+
+.ascii-banner.compact .banner-art {
+  display: none;
+}
+
+.ascii-banner.compact .banner-compact {
+  display: block;
 }
 
 .ascii-banner .youtube-link:hover,
@@ -856,8 +937,64 @@ body.game-page {
   display: flex;
   align-items: center;
   padding-top: 12px;
-  margin-top: 8px;
+  margin: 8px 0 0;
   border-top: 1px solid var(--crt-green-dim);
+}
+
+.command-input {
+  min-width: 0;
+}
+
+/* Quick commands: hidden on desktop, shown for small / touch screens below */
+.quick-actions {
+  display: none;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.quick-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.quick-row::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-row button {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 14px;
+  background: var(--crt-green-subtle);
+  border: 1px solid var(--crt-green-dim);
+  border-radius: 6px;
+  color: var(--crt-green);
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px var(--crt-green-glow);
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.quick-row button:active {
+  background: var(--crt-green-glow);
+}
+
+.quick-row-things button {
+  min-height: 34px;
+  font-size: 12px;
+  text-transform: none;
+  border-style: dashed;
+  opacity: 0.85;
 }
 
 .input-prompt {
@@ -883,6 +1020,11 @@ body.game-page {
 .command-input::placeholder {
   color: var(--crt-green-dim);
   opacity: 0.5;
+}
+
+/* The prompt is always the focus; the blinking caret is indicator enough */
+.command-input:focus-visible {
+  outline: none;
 }
 
 /* Blinking cursor effect */
@@ -941,7 +1083,7 @@ body.game-page {
 /* Large screens - maximize monitor height */
 @media (min-height: 800px) {
   .crt-monitor {
-    height: min(calc(100vh - 12vh), 850px);
+    height: min(calc(var(--app-height, 100vh) * 0.88), 850px);
   }
   
   .desk-surface {
@@ -965,19 +1107,9 @@ body.game-page {
   
   .crt-monitor {
     width: 95vw;
-    height: calc(100vh - 12vh);
+    height: calc(var(--app-height, 100vh) * 0.88);
     max-height: 600px;
     border-radius: 12px;
-  }
-  
-  .ascii-banner {
-    font-size: clamp(4px, 2vw, 8px);
-  }
-  
-  .status-bar {
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
   }
   
   /* Simplify desk items on mobile */
@@ -1003,15 +1135,11 @@ body.game-page {
   
   .crt-monitor {
     width: 98vw;
-    height: calc(100vh - 10vh);
+    height: calc(var(--app-height, 100vh) * 0.9);
     max-height: none;
     border-radius: 10px;
   }
   
-  .ascii-banner {
-    font-size: 4px;
-    overflow-x: auto;
-  }
 }
 
 /* Very short screens - minimize desk to maximize monitor */
@@ -1025,7 +1153,167 @@ body.game-page {
   }
   
   .crt-monitor {
-    height: calc(100vh - 8vh);
+    height: calc(var(--app-height, 100vh) * 0.92);
+  }
+}
+
+/* ================================================
+   PHONES AND TOUCH SCREENS
+   The desk scene is charming on a desktop and a waste of space on a phone:
+   the terminal takes the whole screen, quick-command buttons appear, and
+   the effects that cost battery are switched off.
+   ================================================ */
+
+@media (max-width: 768px), (pointer: coarse) and (max-height: 520px) {
+  :root {
+    --font-size-base: 15px;
+    --screen-padding: 14px;
+    --line-height: 1.55;
+  }
+
+  .room-environment {
+    align-items: stretch;
+  }
+
+  .room-environment::before,
+  .room-environment::after,
+  .desk-surface {
+    display: none;
+  }
+
+  .monitor-wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    filter: none;
+  }
+
+  .crt-monitor {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding:
+      max(env(safe-area-inset-top), 6px)
+      max(env(safe-area-inset-right), 6px)
+      max(env(safe-area-inset-bottom), 6px)
+      max(env(safe-area-inset-left), 6px);
+  }
+
+  /* No room for the model name and power LED on the bezel */
+  .crt-monitor::before,
+  .crt-monitor::after {
+    display: none;
+  }
+
+  .screen-container {
+    border-radius: 16px / 14px;
+    box-shadow:
+      inset 0 0 50px 10px rgba(0, 0, 0, 0.55),
+      inset 0 0 14px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Constant full-screen animation is a battery and legibility cost */
+  .screen-rain,
+  .screen-static,
+  .screen-glitch,
+  .screen-glow {
+    display: none;
+  }
+
+  .screen-container::after {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+  }
+
+  .status-bar {
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .status-location {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .status-turns {
+    flex-shrink: 0;
+  }
+
+  .text-output {
+    padding-right: 4px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-indicator {
+    width: 36px;
+    height: 36px;
+  }
+
+  .quick-actions {
+    display: flex;
+  }
+
+  .input-container {
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+
+  /* 16px keeps iOS from zooming the page when the field is focused */
+  .command-input {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .input-prompt {
+    font-size: 16px;
+  }
+
+  .command-input::placeholder {
+    opacity: 0.7;
+  }
+}
+
+/* Keyboard up or very short screens: keep the story visible */
+.short-viewport .quick-row-things {
+  display: none;
+}
+
+.tiny-viewport .quick-actions {
+  display: none;
+}
+
+/* Landscape phones: every line counts, so the buttons give way to the story */
+@media (pointer: coarse) and (max-height: 520px) {
+  .game-wrapper {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .status-bar {
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
+
+  .quick-row-things {
+    display: none;
+  }
+
+  .quick-row button {
+    min-height: 34px;
+  }
+
+  .command-input {
+    min-height: 36px;
   }
 }
 
