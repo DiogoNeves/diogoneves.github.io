@@ -1355,195 +1355,107 @@ body.game-page {
 
 
 /* ================================================
-   DESKTOP 3D SCENE
-   Added by scene-3d.js on large screens with a mouse (class "scene-3d").
-   A dark room, a real CRT with a tube housing, and a camera that follows the
-   pointer. Everything but the glowing screen fades into the vignette.
-   Phones and touch screens never get this class and are unchanged.
+   3D SCENE (scene-3d.js, class "crt-scene")
+   A three.js desk, CRT and keyboard fill the window; the game's screen sits on
+   the tube. Everything outside the monitor fades into the vignette.
+   Without WebGL the class never appears and the flat layout above is used.
    ================================================ */
 
-.scene3d {
+.crt-scene .room-environment {
   display: none;
 }
 
-.scene-3d .room-environment {
-  perspective: 2000px;
-  perspective-origin: 50% 46%;
-  align-items: center;
+#scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
   background: #010201;
 }
 
-.scene-3d .room-environment::before,
-.scene-3d .desk-surface {
-  display: none;
-}
-
-/* Vignette: only the monitor is lit, the rest of the room falls away */
-.scene-3d .room-environment::after {
-  content: '';
+#scene .scene-canvas {
   position: absolute;
   inset: 0;
-  left: 0;
-  top: 0;
-  width: auto;
-  height: auto;
-  transform: none;
-  z-index: 30;
+  display: block;
+  touch-action: none;
+}
+
+/* Desktop: the room can be dragged to orbit the monitor */
+.crt-scene:not(.crt-scene-mobile) #scene .scene-canvas {
+  cursor: grab;
+}
+
+.scene-dragging #scene .scene-canvas {
+  cursor: grabbing;
+}
+
+.scene-dragging .screen-container {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Only the screen is lit: the room falls away towards the edges */
+#scene .scene-vignette {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
   background: radial-gradient(
-    ellipse 70% 76% at 50% 47%,
+    ellipse 72% 78% at 50% 44%,
     transparent 0%,
-    transparent 48%,
-    rgba(0, 0, 0, 0.42) 74%,
-    rgba(0, 0, 0, 0.94) 100%
+    transparent 46%,
+    rgba(0, 0, 0, 0.45) 72%,
+    rgba(0, 0, 0, 0.92) 100%
   );
 }
 
-.scene-3d .monitor-wrapper {
-  margin: 0;
-  top: -1vh;
-  filter: none;
-  transform-style: preserve-3d;
-  will-change: transform;
+#scene .scene-css {
+  position: absolute !important;
+  inset: 0;
+  pointer-events: none;
 }
 
-.scene-3d .crt-monitor {
-  width: min(76vw, 1000px);
-  height: min(calc(var(--app-height, 100vh) * 0.68), 740px);
-  transform-style: preserve-3d;
-  background: linear-gradient(150deg, #262828, #0c0d0d 70%);
-  box-shadow:
-    inset 0 2px 3px rgba(255, 255, 255, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 0 0 2px #050505,
-    0 0 170px 30px rgba(51, 255, 51, 0.07);
-}
-
-/* The tube face sits slightly proud of the bezel, so the camera can see it move */
-.scene-3d .screen-container {
-  transform: translateZ(14px);
+.crt-scene .screen-container {
+  position: absolute;
+  border-radius: 14px;
   animation: crt-power-on 0.8s ease-out 1;
+  box-shadow:
+    inset 0 0 80px 18px rgba(0, 0, 0, 0.6),
+    inset 0 0 18px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(51, 255, 51, 0.12);
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.crt-scene .screen-container .screen-reflection {
+  border-radius: 40% 40% 0 0 / 22% 22% 0 0;
 }
 
 @keyframes crt-power-on {
   0% {
-    transform: translateZ(14px) scale(0.04, 0.006);
+    clip-path: inset(49.6% 48% 49.6% 48%);
     filter: brightness(8);
   }
   35% {
-    transform: translateZ(14px) scale(1, 0.006);
+    clip-path: inset(49.6% 0 49.6% 0);
     filter: brightness(5);
   }
   100% {
-    transform: translateZ(14px) scale(1, 1);
+    clip-path: inset(0 0 0 0);
     filter: brightness(1);
   }
 }
 
-.scene-3d .scene3d {
-  display: block;
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  pointer-events: none;
+/* Phones: the screen is laid flat over the tube, never transformed */
+.crt-scene-mobile #scene .scene-vignette {
+  background: radial-gradient(
+    ellipse 90% 70% at 50% 45%,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
 }
 
-.scene3d > div {
-  position: absolute;
-}
-
-/* Back wall: black, with the monitor's glow bleeding onto it */
-.scene-wall {
-  width: 6400px;
-  height: 4200px;
-  left: calc(50% - 3200px);
-  top: calc(50% + var(--mh) / 2 + 16px - 4200px);
-  background:
-    radial-gradient(
-      ellipse 1300px 900px at 50% calc(4200px - var(--mh) / 2 - 16px),
-      rgba(51, 255, 51, 0.13),
-      rgba(51, 255, 51, 0.035) 45%,
-      transparent 75%
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 119px,
-      rgba(255, 255, 255, 0.012) 119px,
-      rgba(255, 255, 255, 0.012) 120px
-    ),
-    linear-gradient(#010201, #040604);
-}
-
-/* Desk: glossy dark top lit by the screen, fading into nothing */
-.scene-desk {
-  width: 4400px;
-  height: 2700px;
-  left: calc(50% - 2200px);
-  top: calc(50% + var(--mh) / 2 + 16px - 1350px);
-  transform: translateZ(-250px) rotateX(90deg);
-  background:
-    radial-gradient(ellipse 780px 480px at 50% 1930px, rgba(51, 255, 51, 0.22), rgba(51, 255, 51, 0.06) 55%, transparent 76%),
-    radial-gradient(ellipse 640px 320px at 50% 1350px, rgba(0, 0, 0, 0.95), transparent 72%),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.014) 0, rgba(255, 255, 255, 0.014) 2px, transparent 2px, transparent 58px),
-    linear-gradient(#0c0d0c, #050605);
-  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 59%, #000 10%, transparent 62%);
-  mask-image: radial-gradient(ellipse 50% 50% at 50% 59%, #000 10%, transparent 62%);
-}
-
-/* Keyboard lying on the desk in front of the monitor */
-.scene-keyboard {
-  width: calc(var(--mw) * 0.56);
-  height: 270px;
-  left: calc(50% - var(--mw) * 0.28);
-  top: calc(50% + var(--mh) / 2 + 15px - 135px);
-  border-radius: 10px;
-  transform: translateZ(250px) rotateX(90deg);
-  background:
-    repeating-linear-gradient(90deg, transparent 0, transparent 26px, rgba(0, 0, 0, 0.9) 26px, rgba(0, 0, 0, 0.9) 30px),
-    repeating-linear-gradient(0deg, transparent 0, transparent 26px, rgba(0, 0, 0, 0.9) 26px, rgba(0, 0, 0, 0.9) 30px),
-    radial-gradient(ellipse at 50% 0%, rgba(51, 255, 51, 0.2), transparent 72%),
-    linear-gradient(#1a1c1b, #0d0e0e);
-  box-shadow:
-    inset 0 0 0 2px #070707,
-    0 0 50px rgba(51, 255, 51, 0.07);
-}
-
-/* The CRT housing: plastic, with a green rim light from the screen */
-.shell {
-  background: linear-gradient(#2a2c2c, #151616);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-.shell.f-top {
-  background:
-    linear-gradient(180deg, rgba(51, 255, 51, 0.24), transparent 45%),
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0, rgba(0, 0, 0, 0.55) 3px, transparent 3px, transparent 16px),
-    linear-gradient(180deg, #343737, #1a1b1b);
-}
-
-.shell.f-bottom {
-  background: linear-gradient(180deg, #0a0b0b, #040404);
-}
-
-.shell.f-left {
-  background:
-    linear-gradient(90deg, rgba(51, 255, 51, 0.26), transparent 50%),
-    linear-gradient(90deg, #2b2d2d, #131414);
-}
-
-.shell.f-right {
-  background:
-    linear-gradient(270deg, rgba(51, 255, 51, 0.26), transparent 50%),
-    linear-gradient(270deg, #2b2d2d, #131414);
-}
-
-.shell-back {
-  background: linear-gradient(#0c0d0d, #060707);
-}
-
-.shell-foot {
-  height: 16px;
-  background: linear-gradient(#1b1c1c, #070808);
-  border-radius: 0 0 8px 8px;
+.crt-scene-mobile .screen-container {
+  border-radius: 12px;
 }
