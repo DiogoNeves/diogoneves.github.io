@@ -36,7 +36,7 @@ footer-links:
 # disqus: diogosnows
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: UA-5673204-6
+cloudflare_analytics: ace4a2af8fdb4c36abcdb34ccff0cd4c
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
