@@ -20,8 +20,6 @@ const createInitialState = () => ({
       knowsTheFuture: false,
       foundCoin: false,
       familyLuckyRemarkHeard: false,
-      lilahLuckyHeard: false,
-      oliviaLuckyHeard: false,
     },
   },
   rooms: {
@@ -29,7 +27,7 @@ const createInitialState = () => ({
       id: "outside",
       name: "Outside the Shopfront",
       description:
-        "You stand on damp pavement outside a narrow tech shop. Retro kit fogs the window, LEDs blinking like polite fireflies beneath a neon sign that can't decide on its name. The air tastes of solder, wet concrete, and the faint promise of weather.\n\nA faint metallic glint lurks near the threshold. Across the road a warm HOUSE window glows; east the SHOP door waits; north a station sign blinks DELAYED; south the coast breathes salt.",
+        "You stand on damp pavement outside a narrow tech shop. Retro kit fogs the window, LEDs blinking like polite fireflies beneath a neon sign that can't decide on its name. The air tastes of solder, wet concrete, and the rumour of a storm rehearsing just out of sight.\n\nA faint metallic glint lurks near the threshold. Across the road a warm HOUSE window glows; east the SHOP door waits; north a station sign blinks DELAYED; south the coast breathes salt.",
       exits: {
         east: "store",
         in: "store",
@@ -58,13 +56,12 @@ const createInitialState = () => ({
       id: "store",
       name: "Tech Shop",
       description:
-        "A shop paused mid-thought. Shelves of prepaid AI cards stand to attention. Stacks of personal AI boxes sit mid-restock, one sporting a post-it that flaps like a prophecy. Someone left in a hurry and forgot to tidy their future.\n\nThe counter faces you, a brass bell on its top and a staff door behind it. North the aisles lean into retro games; south the video rigs wait; east, behind the counter, the staff door; west the street keeps breathing rain.",
+        "You slip into a shop paused mid-thought. Shelves of prepaid AI cards stand to attention. Stacks of personal AI boxes sit mid-restock, one sporting a post-it that flaps like a prophecy while another box shouts a double-negative warning. Someone left in a hurry and forgot to tidy their future.\n\nThe counter faces you, a brass bell guarding a staff door with a judging keyhole. North the aisles lean into retro games; south the video rigs wait; east a sealed back area dares you to earn entry; west the street keeps breathing rain.",
       exits: {
         west: "outside",
         out: "outside",
         outside: "outside",
         exit: "outside",
-        back: "outside",
         north: "store_games",
         left: "store_games",
         games: "store_games",
@@ -72,7 +69,7 @@ const createInitialState = () => ({
         right: "store_content",
         content: "store_content",
         east: "backrooms_entry",
-        behind: "backrooms_entry",
+        back: "backrooms_entry",
         counter: "backrooms_entry",
         door: "backrooms_entry",
       },
@@ -93,13 +90,13 @@ const createInitialState = () => ({
       id: "store_content",
       name: "Media Room",
       description:
-        "Tripods and ring lights stand like polite sentries around a long edit bench, cameras and editing software racked beside them with price tags. A banner above the racks whispers: 'Don't forget to check my YouTube channel!' Shelves labelled UNFINISHED IDEAS sag under tangled piles of printed QR codes.\n\nIn one corner a greenscreen sags slightly while a camera glows its red tally light, still recording as if the take never ended. The murmur from the shop floor drifts in with the smell of hot cables. A doorway leads on, south, into the books and music section.",
+        "Tripods and ring lights stand like polite sentries around a long edit bench. A banner above the racks whispers: 'Don't forget to check my YouTube channel!' Shelves labelled UNFINISHED IDEAS sag under tangled piles of printed QR codes.\n\nIn one corner a greenscreen sags slightly while a camera blinks its tally light, still recording as if the take never ended. The murmur from the shop floor drifts in with the smell of hot cables. A doorway leads deeper into the books and music section.",
       exits: {
         north: "store",
         back: "store",
         out: "store",
         shop: "store",
-        south: "store_books",
+        east: "store_books",
         forward: "store_books",
         books: "store_books",
       },
@@ -112,9 +109,9 @@ const createInitialState = () => ({
       id: "store_books",
       name: "Books and Music Section",
       description:
-        "This quieter corner smells of paper, dust, and half-finished melodies. A pedestal book titled THE CITY glows from below with a small LED, pages thick with crossings-out and restarts. Nearby, a radio plays songs that cut off just before the chorus, as if the world keeps changing stations mid-sentence.\n\nPost-it notes cling to a crooked music shelf; one reads 'misguided', underlined twice. Something about THE CITY feels heavier than its pages should allow.",
+        "This quieter corner smells of paper, dust, and half-finished melodies. A pedestal book titled THE CITY glows from below with a small LED, pages thick with crossings-out and restarts. Nearby, a radio plays songs that cut off just before the chorus, as if the world keeps changing stations mid-sentence.\n\nPost-it notes cling to a crooked music shelf; one reads 'misguided' in affectionate frustration. Something weighty shifts inside THE CITY when you tilt it, like a key that has been waiting for the right page.",
       exits: {
-        north: "store_content",
+        west: "store_content",
         back: "store_content",
         out: "store_content",
       },
@@ -127,7 +124,7 @@ const createInitialState = () => ({
       id: "store_games",
       name: "Retro Video-Games Aisle",
       description:
-        "This corner smells of cardboard ink and joystick plastic. Posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil cling to the wall like relics. A towering LittleBigPlanet standee beams in oversized colour, dusty but proud.\n\nShelves overflow with duplicates, LittleBigPlanet most of all, as though someone refused to stop believing in play.",
+        "This corner smells of cardboard ink and joystick plastic. Posters for Tomb Raider, Final Fantasy VII, Crash Bandicoot, and MediEvil cling to the wall like relics. A towering LittleBigPlanet standee beams in oversized colour, BAFTA laurels taped on as if to reassure you you're still in a shop.\n\nOne battered copy of LittleBigPlanet has been turned around, a handwritten note visible through cracked plastic. Shelves overflow with duplicates, as though someone refused to stop believing in play.",
       exits: {
         south: "store",
         back: "store",
@@ -148,7 +145,7 @@ const createInitialState = () => ({
       id: "backrooms_entry",
       name: "Backrooms Entrance",
       description:
-        "The air thickens into ozone and dust. Notebooks and loose pages carpet every surface, most of them full of half-started sentences, some bleeding into their neighbours as if sharing one very crowded brain. Above them, scratched into the wall: 'Never there!'\n\nA stairwell drops away into the dark, its padlock hanging open on a slack chain. The brighter SHOP waits behind you.",
+        "The air thickens into ozone and dust. Metal shelving hugs the walls, holding abandoned prototypes and ghost cables. Marker arrows on a battered clipboard all converge on a stairwell wrapped in chain; the padlock watches you the way bureaucracy watches form letters.\n\nFor now the brighter SHOP waits behind you; deeper down is sealed until the right keycard makes a case.",
       exits: {
         west: "store",
         back: "store",
@@ -159,7 +156,7 @@ const createInitialState = () => ({
         forward: "backrooms_deep",
         stairs: "backrooms_deep",
       },
-      objects: ["sealed_stairs", "scattered_notebooks", "merging_notebook", "wall_scratch"],
+      objects: ["sealed_stairs", "scattered_notebooks", "merging_notebook"],
       flags: {
         visited: false,
         sealed: true,
@@ -169,12 +166,12 @@ const createInitialState = () => ({
       id: "backrooms_deep",
       name: "Backrooms - Deep Down",
       description:
-        "Concrete squeezes tight and the lights flicker in a rhythm that might be Morse or your pulse. The door back up is bolted on the shop side, which the walls have strong opinions about. Condensation beads taste of static and overheated daydreams.\n\nTo the north a low opening breathes towards a murky tunnel where the storm sounds like someone shuffling note cards.",
+        "Concrete squeezes tight and the lights flicker in a rhythm that might be Morse or your pulse. The door back up is bolted with a neat coin-sized slot, testing whether you kept a certain coin. Condensation beads taste of static and overheated daydreams.\n\nA low opening breathes towards a murky tunnel where the storm sounds like someone shuffling note cards.",
       exits: {
         west: "backrooms_entry",
         up: "backrooms_entry",
         back: "backrooms_entry",
-        north: "tunnel",
+        east: "tunnel",
         forward: "tunnel",
         tunnel: "tunnel",
       },
@@ -182,13 +179,14 @@ const createInitialState = () => ({
       npcs: ["backroom_bot"],
       flags: {
         visited: false,
+        requiresCoin: true,
       },
     },
     home: {
       id: "home",
       name: "Home",
       description:
-        "A small home that feels lived-in rather than staged. Shoes pile hopefully by the door. Children's drawings and family photos climb the hallway, charting a move from Portugal to the UK and onward into cheerful chaos. In the lounge a TV plays silly children's music videos while the family sprawls across the floor with UNO cards scattering under small hands.\n\nWarmth presses against the rain outside. The street lies east; a doorway towards the office stands invitingly open.",
+        "A small home that feels lived-in rather than staged. Shoes pile hopefully by the door. Children's drawings and family photos climb the hallway, charting a move from Portugal to the UK and onward into cheerful chaos. In the lounge a TV plays silly music while UNO cards scatter under small hands.\n\nWarmth presses against the rain outside. The street lies east; a doorway towards the office stands invitingly open.",
       exits: {
         east: "outside",
         out: "outside",
@@ -208,7 +206,7 @@ const createInitialState = () => ({
       id: "home_office",
       name: "Home Office",
       description:
-        "A small, messy home office humming with ambition. Coding and sci-fi books lean on shelves beside games and tangled VR headsets. A wide monitor glows with half-written code; headphones rest like a coiled thought, and notes cover every inch of the desk. A tripod-mounted camera swivels with your movement, red light quietly recording. In the corner a metal trapdoor crouches beneath cables, pretending to be shy.",
+        "A small, messy home office humming with ambition. Coding and sci-fi books lean on shelves beside tangled VR headsets. A wide monitor glows with half-written code; headphones rest like a coiled thought. A tripod-mounted camera swivels with your movement, red light quietly recording. In the corner a metal trapdoor crouches beneath cables, pretending to be shy.",
       exits: {
         south: "home",
         back: "home",
@@ -216,7 +214,7 @@ const createInitialState = () => ({
         down: "tunnel",
         trapdoor: "tunnel",
       },
-      objects: ["monitor_notes", "blueprints", "todo_list", "project_notebook", "tracking_camera", "trapdoor_plate"],
+      objects: ["monitor_notes", "tracking_camera", "trapdoor_plate"],
       npcs: ["desk_bot"],
       flags: {
         visited: false,
@@ -226,9 +224,9 @@ const createInitialState = () => ({
       id: "tunnel",
       name: "The Tunnel",
       description:
-        "Dark and cold. The tunnel tastes of damp concrete and bottled thunder. Rusted pipes breathe in time with your pulse, and somewhere near your feet something ticks at triple speed, trying to outrun the storm. Voices drift in the gloom, each convinced the world is about to fold in a different direction.",
+        "The tunnel tastes of damp concrete and bottled thunder. Rusted pipes breathe in time with your pulse. A wristwatch ticks on the floor at triple speed, trying to outrun the storm. Voices drift in the gloom, each convinced the world is about to fold in a different direction.",
       exits: {
-        south: "backrooms_deep",
+        west: "backrooms_deep",
         back: "backrooms_deep",
         opening: "backrooms_deep",
       },
@@ -247,7 +245,7 @@ const createInitialState = () => ({
       id: "train_station",
       name: "Train Station",
       description:
-        "A small, clean platform, and somehow the distance across it is longer than it looks. The display insists the next train is delayed, ETA: UNKNOWN. Old adverts for the trip from Portugal to the UK peel at the edges, fresh marker scribbles biting through the nostalgia. The air hisses like a train that may or may not ever arrive.",
+        "A compact, clean platform stretches further than physics promised. The display insists the next train is delayed, ETA: UNKNOWN. A Portugal-to-UK poster peels at the edges, fresh marker scribbles biting through the nostalgia. The air hisses like a train that may or may not ever arrive.",
       exits: {
         south: "outside",
         back: "outside",
@@ -264,7 +262,7 @@ const createInitialState = () => ({
       id: "coast_line",
       name: "Coast Line",
       description:
-        "A ragged coastline unfurls. Waves hammer the rocks with patient fury, spray mixing with fog. Far across the water a blurry, faint coastline hangs on the horizon, and a red flash pulses from a lighthouse you can't quite see. Wind builds and tastes of salt and static, as though the ocean is tuning a radio to someone else's life.\n\nA glass bottle lies near a bench where two figures study the horizon from opposite philosophies.",
+        "A ragged coastline unfurls. Waves hammer the rocks with patient fury, spray mixing with fog. A blurry red flash pulses from an unseen lighthouse across the water. Wind builds and tastes of salt and static, as though the ocean is tuning a radio to someone else's life.\n\nA glass bottle lies near a bench where two figures study the horizon from opposite philosophies.",
       exits: {
         north: "outside",
         back: "outside",
@@ -282,8 +280,7 @@ const createInitialState = () => ({
     coin: {
       id: "coin",
       name: "tarnished coin",
-      hidden: true,
-      aliases: ["coin", "money", "glint", "metal", "pavement", "threshold"],
+      aliases: ["coin", "coin", "money"],
       description:
         "A tarnished coin from 1984, edges smoothed by anxious flipping. Someone scratched D.N. into the metal. It's warmer than it ought to be, as if memory keeps its own heat.",
       location: "room:outside",
@@ -321,7 +318,7 @@ const createInitialState = () => ({
     personal_ai_box: {
       id: "personal_ai_box",
       name: "personal AI box",
-      aliases: ["ai box", "box", "boxes", "ai boxes", "personal box", "personal boxes", "personal ai boxes"],
+      aliases: ["ai box", "box", "personal box"],
       description:
         "Cardboard towers of personal AI units lean like they're gossiping. Shipping labels mark destinations that never happened. A flap hangs open, begging to be peered into.",
       location: "room:store",
@@ -341,7 +338,6 @@ const createInitialState = () => ({
     ai_box_warning: {
       id: "ai_box_warning",
       name: "warning label",
-      hidden: true,
       aliases: ["warning", "label", "box warning"],
       description:
         "One box is stamped: 'Don't use at your own risk!' The double negative makes it either a dare or a plea.",
@@ -364,11 +360,11 @@ const createInitialState = () => ({
       name: "staff door",
       aliases: ["door", "back door", "counter door"],
       description:
-        "A heavy door hides behind the counter, paint chipped by impatient hands. Whoever wanted in here has been trying for a while.",
+        "A heavy door hides behind the counter, paint chipped by impatient hands. The keyhole peers back with faint judgement.",
       location: "room:store",
       portable: false,
       onUse:
-        "The handle refuses to budge. A tiny engraving beside the keyhole reads STAFF ONLY. KEYCARD REQUIRED, as if the door expects you to have read the manual.",
+        "The handle refuses to budge. A tiny engraving reads BACKDOOR-KEY-1, as if the door expects you to have read the manual.",
     },
     nostalgia_posters: {
       id: "nostalgia_posters",
@@ -384,17 +380,16 @@ const createInitialState = () => ({
       name: "LittleBigPlanet standee",
       aliases: ["standee", "little big planet", "lbp", "cardboard hero"],
       description:
-        "A large, dusty cardboard Sackboy beams in oversized colour. Look closer and the small print along its base reads: 'BAFTA award winning game'. A sticker tucked under its foot says 'build loudly / truthfully'.",
+        "A large cardboard Sackboy beams in oversized colour. BAFTA laurels are taped to the corner, proud and slightly peeled. A sticker tucked under its foot reads 'build loudly / truthfully'.",
       location: "room:store_games",
       portable: false,
     },
     lbp_box: {
       id: "lbp_box",
       name: "battered LittleBigPlanet box",
-      aliases: ["box", "game", "copy", "lbp game", "little big planet box"],
-      state: { turned: false },
+      aliases: ["box", "lbp game", "little big planet box"],
       description:
-        "A battered copy of LittleBigPlanet, one of many, lying face up with its cracked case. The back looks like it has something to say.",
+        "The cracked case has been turned backwards. Scrawled on the plastic: 'once a masterpiece, left in the few who remember'. When you tilt it, the faded insert whispers about co-creation and play.",
       location: "room:store_games",
       portable: false,
     },
@@ -403,7 +398,7 @@ const createInitialState = () => ({
       name: "YouTube channel banner",
       aliases: ["banner", "youtube", "sign"],
       description:
-        "A large banner stretches above the racks: 'Don't forget to check my YouTube channel!' Someone has underlined 'YouTube' three times, then added a shy smiley face.",
+        "A large banner stretches above the demo rigs: 'Don't forget to check my YouTube channel!' Someone has underlined the handle three times, then added a shy smiley face.",
       location: "room:store_content",
       portable: false,
     },
@@ -448,7 +443,7 @@ const createInitialState = () => ({
     misguided_postit: {
       id: "misguided_postit",
       name: "post-it marked 'misguided'",
-      aliases: ["post-it", "note", "misguided", "shelf", "music shelf"],
+      aliases: ["post-it", "note", "misguided"],
       description:
         "A yellow post-it clings to the music shelf. In quick handwriting: 'misguided'. The arrow it once pointed to has been smudged away.",
       location: "room:store_books",
@@ -459,7 +454,7 @@ const createInitialState = () => ({
       name: "frayed keycard",
       aliases: ["key", "keycard", "backdoor key", "lanyard"],
       description:
-        "A plastic keycard on a tired lanyard. Along one edge someone printed STAFF in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
+        "A plastic keycard on a tired lanyard. Along one edge someone printed BACKDOOR-KEY-1 in tiny capitals. It smells faintly of popcorn and old carpet, as if it loitered by arcade machines for years.",
       location: "inside:city_book",
       portable: true,
       onUse:
@@ -467,20 +462,19 @@ const createInitialState = () => ({
     },
     sealed_stairs: {
       id: "sealed_stairs",
-      name: "stairwell",
+      name: "sealed stairwell",
       aliases: ["stairs", "stairwell", "padlock", "chain"],
       description:
-        "A metal stairwell drops into shadow. The padlock hangs open on its chain; dust outlines the shape of keys that visited in the past.",
+        "A metal stairwell drops into shadow, chained and padlocked. Dust outlines the shape of keys that visited in the past.",
       location: "room:backrooms_entry",
       portable: false,
       onUse:
-        "You tug the chain. It rattles and waits for a keycard with the patience of bureaucracy.",
+        "You tug the chain. It rattles and waits for whatever was labelled BACKDOOR-KEY-1 with the patience of bureaucracy.",
     },
     fast_watch: {
       id: "fast_watch",
       name: "hurrying watch",
-      hidden: true,
-      aliases: ["watch", "clock", "timepiece", "floor", "ground", "ticking"],
+      aliases: ["watch", "clock", "timepiece"],
       description:
         "A wristwatch ticks at triple speed, hands stuttering forward like they're late for something. The crystal fogs as if breathing.",
       location: "room:tunnel",
@@ -491,7 +485,6 @@ const createInitialState = () => ({
     sealed_trapdoor: {
       id: "sealed_trapdoor",
       name: "ceiling trapdoor",
-      hidden: true,
       aliases: ["trapdoor", "hatch", "ceiling hatch"],
       description:
         "A square outline in the ceiling, damp around the edges. It looks recently shut, with scrape marks where others tried their luck.",
@@ -514,7 +507,7 @@ const createInitialState = () => ({
       name: "notebook titled 'All the memories that weren't'",
       aliases: ["notebook", "journal", "book"],
       description:
-        "A small notebook lies on the floor, open. The first page reads: 'You can feel nostalgic for stuff that never happened!' Pages afterwards are blank, inviting you to improvise history.",
+        "A small notebook lies open. The first page reads: 'You can feel nostalgic for stuff that never happened!' Pages afterwards are blank, inviting you to improvise history.",
       location: "room:train_station",
       portable: true,
     },
@@ -534,7 +527,7 @@ const createInitialState = () => ({
       name: "family photo",
       aliases: ["photo", "picture", "family photo"],
       description:
-        "A framed photograph hangs slightly askew: two adults, three boys, and a little girl in the Portuguese sun, every one of them smiling. It looks like a moment that never expected to be left behind on a station wall.",
+        "A framed photograph hangs slightly askew: two adults, three boys, and a little girl in the Portuguese sun, all squinting and grinning at something just beyond the camera. It looks like a moment that never expected to be left behind on a station wall.",
       location: "room:train_station",
       portable: false,
     },
@@ -543,7 +536,7 @@ const createInitialState = () => ({
       name: "bottle with a note",
       aliases: ["bottle", "message", "note"],
       description:
-        "A clear bottle rests on the rocks. Inside, a rolled scrap of paper waits. Unrolled, it reads: 'From a life not yet lived. The grass did look greener!' The ink has bled slightly, salt pulling at the letters.",
+        "A clear bottle rests on the rocks. Inside, a rolled scrap of paper waits. The ink has bled slightly, salt pulling at the letters.",
       location: "room:coast_line",
       portable: true,
       onUse:
@@ -554,7 +547,7 @@ const createInitialState = () => ({
       name: "notebook marked 'PLEASE FINISH!'",
       aliases: ["notebook", "please finish", "game notebook", "designs"],
       description:
-        "A dog-eared notebook lies on the floor. On the cover, in all caps, someone wrote 'PLEASE FINISH!'. Inside are designs for a game: a giant black tower at the centre, and a lost city, now desert, circling around it, mechanics half-scribbled between coffee stains.",
+        "A dog-eared notebook lies by the game shelf. On the cover, in all caps, someone wrote 'PLEASE FINISH!'. Inside are sketches of a vast black tower and a lost city swallowed by desert, mechanics half-scribbled between coffee stains.",
       location: "room:store_games",
       portable: true,
     },
@@ -564,15 +557,6 @@ const createInitialState = () => ({
       aliases: ["notebooks", "pages", "paper", "notes"],
       description:
         "Piles of notebooks and loose pages carpet the floor. Most hold half-started sentences and abandoned ideas, merging into one another like a brain with too many tabs open. On the wall above, someone has scratched 'Never there!' as if arguing with reality.",
-      location: "room:backrooms_entry",
-      portable: false,
-    },
-    wall_scratch: {
-      id: "wall_scratch",
-      name: "scratched wall",
-      aliases: ["wall", "writing", "scratches", "never there"],
-      description:
-        "Scratched into the plaster, then gone over until the letters are almost trenches: 'Never there!' Whoever wrote it was arguing with someone who wasn't in the room.",
       location: "room:backrooms_entry",
       portable: false,
     },
@@ -588,7 +572,7 @@ const createInitialState = () => ({
     deep_notebook: {
       id: "deep_notebook",
       name: "notebook on the tiny table",
-      aliases: ["notebook", "journal", "pen"],
+      aliases: ["notebook", "journal", "pen", "table"],
       description:
         "A tiny table holds a notebook and pen. The pages are thick with half-sentences, restarted thoughts, and joke setups abandoned before the punchline, as if someone tried to debug their own brain.",
       location: "room:backrooms_deep",
@@ -599,7 +583,7 @@ const createInitialState = () => ({
       name: "wall scribbles",
       aliases: ["writing", "scribbles", "walls", "text"],
       description:
-        "Every scrap of conversation seems to have migrated onto the concrete. 'SORRY ABOUT TUESDAY.' 'SORRY ABOUT 2009.' 'WHAT IF I HAD SAID YES?' Directly beneath it: 'WHAT IF I HAD SAID NO?' Arrows connect arguments to their conclusions, then to each other, then to themselves, and one line in the corner just says 'IN HINDSIGHT (FUNNY)'.",
+        "Every scrap of conversation seems to have migrated onto the concrete: apologies with no recipients, arguments missing their context, and 'what if' scenarios that never quite agree on the ending. Some of it is painfully funny, in the way old notebooks can be.",
       location: "room:backrooms_deep",
       portable: false,
     },
@@ -617,7 +601,7 @@ const createInitialState = () => ({
       name: "wall of family photos",
       aliases: ["photos", "photographs", "pictures", "frames"],
       description:
-        "Frames climb the hallway wall, charting a journey: two young faces together in Portugal, then a rainy British street, then a family growing taller and sillier in each shot, two girls in the middle of it. Every photo looks unapologetically happy.",
+        "Frames climb the hallway wall, charting a journey from Portugal to the UK: awkward first selfies, wedding smiles, newborn squints, two girls growing taller and sillier in each shot. Every photo looks unapologetically happy.",
       location: "room:home",
       portable: false,
     },
@@ -629,33 +613,6 @@ const createInitialState = () => ({
         "The wide monitor shows code paused mid-thought. Sticky notes around it read: 'ship something small', 'call mum', 'remember the storm is weather, not fate'.",
       location: "room:home_office",
       portable: false,
-    },
-    blueprints: {
-      id: "blueprints",
-      name: "pile of blueprints",
-      aliases: ["blueprints", "plans", "designs", "papers", "sketches"],
-      description:
-        "Sheets of ambitious paper: architectures for AI systems that don't exist yet, game designs with arrows pointing at other game designs, and a website layout annotated 'this time properly'.",
-      location: "room:home_office",
-      portable: false,
-    },
-    todo_list: {
-      id: "todo_list",
-      name: "very long list of todos",
-      aliases: ["todo", "todos", "list", "to-do", "to-do list"],
-      description:
-        "A todo list that has outgrown its page and started on the wall. The top item reads 'finish something'. It has been there longer than the tape holding it up.",
-      location: "room:home_office",
-      portable: false,
-    },
-    project_notebook: {
-      id: "project_notebook",
-      name: "notebook of the current project",
-      aliases: ["notebook", "journal", "project", "current project"],
-      description:
-        "A neat notebook, for once. The pages hold careful notes about a project you cannot quite make out. It seems to be called 'the current thing', which is either very modest or very evasive.",
-      location: "room:home_office",
-      portable: true,
     },
     tracking_camera: {
       id: "tracking_camera",
@@ -671,7 +628,7 @@ const createInitialState = () => ({
       name: "trapdoor plate",
       aliases: ["trapdoor", "hatch", "floor plate"],
       description:
-        "A square metal plate set into the floor. A faint, cool draft seeps around its edges, smelling of secrets.",
+        "A square metal plate set into the floor. A faint draft seeps around its edges, smelling of damp concrete and secrets.",
       location: "room:home_office",
       portable: false,
     },
@@ -732,7 +689,6 @@ const createInitialState = () => ({
         "Uno means one. I have two snacks. That's strategy.",
         "The storm outside sounds like the train in my head. Choo-choo dramatic!",
         "Do you think we'll actually get going before the clouds get bored?",
-        "We're so lucky, Daddy! Two Draw Fours, and I didn't even cheat. Much.",
       ],
     },
     desk_bot: {
@@ -772,8 +728,7 @@ const createInitialState = () => ({
         "You've seen it, haven't you? The boxes upstairs-the future humming inside them?",
         "If you know how this ends, whisper it. I'll trade you my last certainty.",
         "You've seen it! Please tell me! You've seen the box! Please tell me how it works! Was it a success?",
-        "Tomorrow keeps arriving early. I keep trying to read it through the wall.",
-        "Every door down here opens onto a maybe.",
+        "What if the storm is just the compile finishing?",
       ],
     },
     lost_wanderer: {
@@ -799,7 +754,7 @@ const createInitialState = () => ({
       dialogue: [
         "What if this all compiles away next build? Will we remember any of it?",
         "Every run is a new draft. Try to leave something sticky this time.",
-        "When things get loud, save often. Reality has a habit of resetting.",
+        "When the storm hits, save often. Reality has a habit of resetting.",
       ],
     },
     coffee_vendor: {
@@ -826,7 +781,6 @@ const createInitialState = () => ({
         "See that glow across the water? I want to know what stories live there.",
         "If the storm hits, I'd still cross. What's the point of a shoreline if you never test it?",
         "Do you think the lighthouse blinks in Morse or is it just bored?",
-        "It doesn't matter, this will all be gone soon.",
       ],
     },
     cautious_twin: {
@@ -840,7 +794,6 @@ const createInitialState = () => ({
         "Waves can swallow more than feet. We should stay where the ground remembers us.",
         "A storm's building. Exploration can wait until the map stops shaking.",
         "Sometimes not moving is its own adventure. Boring, but survivable.",
-        "It doesn't matter, this will all be gone soon.",
       ],
     },
     backroom_bot: {
@@ -923,20 +876,8 @@ const VERB_SYNONYMS = {
   use: "use",
   activate: "use",
   press: "use",
-  push: "use",
-  pull: "use",
-  tug: "use",
-  ring: "use",
-  flip: "use",
-  switch: "use",
-  turn: "use",
-  touch: "use",
-  drink: "use",
-  sip: "use",
-  listen: "use",
   open: "open",
   close: "close",
-  shut: "close",
   talk: "talk",
   speak: "talk",
   chat: "talk",
@@ -954,21 +895,7 @@ const VERB_SYNONYMS = {
   save: "save",
   load: "load",
   restore: "load",
-  restart: "restart",
-  reset: "restart",
 };
-
-const DIRECTION_ALIASES = {
-  n: "north",
-  s: "south",
-  e: "east",
-  w: "west",
-  u: "up",
-  d: "down",
-};
-
-// Order in which exits are listed to the player
-const EXIT_DIRECTIONS = ["north", "south", "east", "west", "up", "down"];
 
 const DIRECTION_WORDS = [
   "north",
@@ -1005,86 +932,65 @@ const FILLER_WORDS = [
 // PARSER
 // ================================================
 
-// Words that split "use X on Y" into two objects
-const SPLIT_WORDS = ["on", "with", "into", "onto", "in"];
-
-// Particles that belong to the verb ("pick UP coin", "put DOWN coin")
-const VERB_PARTICLES = {
-  take: ["up"],
-  drop: ["down"],
-  look: ["around"],
-};
-
-function stripFillers(tokens) {
-  return tokens.filter((t) => !FILLER_WORDS.includes(t));
-}
-
 /**
  * Parse user input into a command structure
  * @param {string} input - Raw user input
- * @returns {Object} Parsed command { verb, object, preposition, secondObject, raw }
+ * @returns {Object} Parsed command { verb, object, preposition, secondObject }
  */
 function parseCommand(input) {
-  // Normalise: lowercase, trim and split
-  const tokens = input.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  // Normalise: lowercase and trim
+  let tokens = input.toLowerCase().trim().split(/\s+/);
+
+  // Remove filler words
+  tokens = tokens.filter((t) => !FILLER_WORDS.includes(t));
 
   if (tokens.length === 0) {
-    return { verb: null, object: null, raw: "" };
+    return { verb: null, object: null };
   }
 
-  const first = tokens[0];
+  // Get the first word as potential verb
+  let verbToken = tokens[0];
+  let verb = VERB_SYNONYMS[verbToken] || null;
 
-  // Direction words ("n", "north", "in", "out") are moves in their own right.
-  // This runs before filler removal so that "in" is not thrown away.
-  if (DIRECTION_WORDS.includes(first)) {
-    const dir = DIRECTION_ALIASES[first] || first;
-    const rest = stripFillers(tokens.slice(1));
-    if (rest.length > 0 && ["in", "out", "up", "down"].includes(dir)) {
-      // "up stairs", "in shop": a named exit beats the bare direction
-      return { verb: "go", object: rest.join(" "), raw: rest.join(" ") };
+  // Handle direction shortcuts (n, s, e, w, etc.)
+  if (DIRECTION_WORDS.includes(verbToken)) {
+    if (["n", "s", "e", "w", "u", "d"].includes(verbToken)) {
+      verbToken = VERB_SYNONYMS[verbToken];
     }
-    return { verb: "go", object: dir, raw: dir };
+    return { verb: "go", object: VERB_SYNONYMS[verbToken] || verbToken };
   }
 
-  const verb = VERB_SYNONYMS[first] || null;
-  let rest = tokens.slice(1);
-
-  const particles = VERB_PARTICLES[verb];
-  if (particles && particles.includes(rest[0])) {
-    rest = rest.slice(1);
+  // Single word command
+  if (tokens.length === 1) {
+    return { verb: verb, object: null };
   }
 
-  // "turn camera off" / "turn on camera": remember which way, then drop the word
-  let mode = null;
-  if (verb === "use") {
-    if (rest.includes("off")) mode = "off";
-    else if (rest.includes("on")) mode = "on";
-    rest = rest.filter((t) => t !== "off");
-  }
+  // Multi-word: verb + object(s)
+  const remaining = tokens.slice(1);
 
-  // "use X on Y", "open X with Y"
-  if (verb === "use" || verb === "open") {
-    const idx = rest.findIndex((t, i) => i > 0 && SPLIT_WORDS.includes(t));
-    if (idx > 0 && idx < rest.length - 1) {
-      return {
-        verb,
-        object: stripFillers(rest.slice(0, idx)).join(" ") || null,
-        preposition: rest[idx],
-        secondObject: stripFillers(rest.slice(idx + 1)).join(" ") || null,
-        mode,
-        raw: stripFillers(tokens).join(" "),
-      };
+  // Check for preposition pattern (use X on Y, put X in Y)
+  const prepositions = ["on", "in", "with", "to"];
+  let prepIndex = -1;
+  let preposition = null;
+
+  for (const prep of prepositions) {
+    const idx = remaining.indexOf(prep);
+    if (idx > 0 && idx < remaining.length - 1) {
+      prepIndex = idx;
+      preposition = prep;
+      break;
     }
   }
 
-  return {
-    verb,
-    object: stripFillers(rest).join(" ") || null,
-    preposition: null,
-    secondObject: null,
-    mode,
-    raw: stripFillers(tokens).join(" "),
-  };
+  if (preposition && prepIndex > 0) {
+    const object = remaining.slice(0, prepIndex).join(" ");
+    const secondObject = remaining.slice(prepIndex + 1).join(" ");
+    return { verb, object, preposition, secondObject };
+  }
+
+  // Simple verb + object
+  const object = remaining.join(" ");
+  return { verb, object, preposition: null, secondObject: null };
 }
 
 // ================================================
@@ -1092,66 +998,45 @@ function parseCommand(input) {
 // ================================================
 
 /**
- * Score how well an object/NPC matches what the player typed.
- * 3 = exact name, id or alias; 2 = whole word in the name; 1 = part of the name.
- */
-function scoreMatch(entity, search) {
-  const name = entity.name.toLowerCase();
-
-  if (entity.id.toLowerCase() === search || name === search) return 3;
-  if ((entity.aliases || []).some((a) => a.toLowerCase() === search)) return 3;
-
-  const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  if (new RegExp(`\\b${escaped}\\b`).test(name)) return 2;
-  if (name.includes(search)) return 1;
-
-  return 0;
-}
-
-/**
- * Find the best match for a name among the given ids.
- * Earlier ids win ties, so room contents beat inventory.
- */
-function findEntity(ids, collection, name) {
-  if (!name) return null;
-
-  const search = name.toLowerCase().trim();
-  let best = null;
-  let bestScore = 0;
-
-  for (const id of ids) {
-    const entity = collection[id];
-    if (!entity) continue;
-
-    const score = scoreMatch(entity, search);
-    if (score > bestScore) {
-      best = entity;
-      bestScore = score;
-      if (score === 3) break;
-    }
-  }
-
-  return best;
-}
-
-/**
  * Find an object by name/alias in the current context
  * @param {string} name - Object name to find
  * @returns {Object|null} The object definition or null
  */
 function findObject(name) {
+  if (!name) return null;
+
+  const searchName = name.toLowerCase();
   const currentRoom = gameState.rooms[gameState.player.roomId];
 
-  // Visible objects: in the room, then in the inventory
+  // Get visible objects (in room + in inventory)
   const visibleIds = [
     ...(currentRoom.objects || []),
     ...gameState.player.inventory,
   ];
 
-  const found = findEntity(visibleIds, gameState.objects, name);
-  // Things that were hard to spot are noticed once the player goes looking
-  if (found && found.hidden) found.hidden = false;
-  return found;
+  for (const objId of visibleIds) {
+    const obj = gameState.objects[objId];
+    if (!obj) continue;
+
+    // Check main name
+    if (
+      obj.name.toLowerCase().includes(searchName) ||
+      obj.id.toLowerCase() === searchName
+    ) {
+      return obj;
+    }
+
+    // Check aliases
+    if (obj.aliases) {
+      for (const alias of obj.aliases) {
+        if (alias.toLowerCase() === searchName) {
+          return obj;
+        }
+      }
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -1160,211 +1045,42 @@ function findObject(name) {
  * @returns {Object|null} The NPC definition or null
  */
 function findNPC(name) {
-  const roomId = gameState.player.roomId;
-  const currentRoom = gameState.rooms[roomId];
+  if (!name) return null;
 
-  const npcIds = (currentRoom.npcs || []).filter((id) => {
-    const npc = gameState.npcs[id];
-    return npc && npc.location === `room:${roomId}`;
-  });
+  const searchName = name.toLowerCase();
+  const currentRoom = gameState.rooms[gameState.player.roomId];
 
-  return findEntity(npcIds, gameState.npcs, name);
-}
+  // Get NPCs in current room
+  const npcIds = currentRoom.npcs || [];
 
-// ================================================
-// PUZZLE STATE
-// ================================================
+  for (const npcId of npcIds) {
+    const npc = gameState.npcs[npcId];
+    if (!npc) continue;
 
-function hasKeycard() {
-  return gameState.player.inventory.includes("backdoor_key_1");
-}
+    // Check main name
+    if (
+      npc.name.toLowerCase().includes(searchName) ||
+      npc.id.toLowerCase() === searchName
+    ) {
+      return npc;
+    }
 
-function isBackdoorUnlocked() {
-  return !!(
-    gameState.globals &&
-    gameState.globals.puzzleFlags &&
-    gameState.globals.puzzleFlags.backdoorUnlocked
-  );
-}
-
-/**
- * Unlock the staff door behind the shop counter (and the stairwell beyond).
- * @returns {boolean} true if this call changed anything
- */
-function unlockBackdoor() {
-  if (isBackdoorUnlocked()) return false;
-
-  gameState.globals.puzzleFlags.backdoorUnlocked = true;
-
-  const shop = gameState.rooms["store"];
-  if (shop && shop.flags) shop.flags.backdoorUnlocked = true;
-
-  const entry = gameState.rooms["backrooms_entry"];
-  if (entry && entry.flags) entry.flags.sealed = false;
-
-  return true;
-}
-
-/**
- * Take the keycard out of THE CITY (once).
- * @returns {string} extra text to append, or "" if there was nothing to reveal
- */
-function revealKeycard() {
-  const keyObj = gameState.objects["backdoor_key_1"];
-  if (!keyObj || keyObj.location !== "inside:city_book") return "";
-
-  gameState.player.inventory.push("backdoor_key_1");
-  keyObj.location = "player";
-
-  return " You slip the frayed keycard you find between the pages into your pocket.";
-}
-
-/**
- * Thumb through THE CITY: hands over the keycard the first time only
- */
-function useCityBook(obj) {
-  const extra = revealKeycard();
-  if (extra) return obj.onUse + extra;
-  return "You thumb through THE CITY again. Crossings-out, restarts, a story that keeps almost starting. Whatever it was hiding, it has already given up.";
-}
-
-/**
- * Examining the personal AI box is enough to glimpse the future.
- */
-function noteInspected(obj) {
-  if (obj.id === "personal_ai_box") {
-    gameState.player.flags.knowsTheFuture = true;
-    // Looking closely turns up the label on the floor
-    gameState.objects["ai_box_warning"].hidden = false;
-  }
-}
-
-/**
- * Exits to show the player: one direction per destination, compass first
- */
-function listedExits(room) {
-  const exits = room.exits || {};
-  const seen = new Set();
-  const listed = [];
-
-  for (const dir of EXIT_DIRECTIONS) {
-    const target = exits[dir];
-    if (target && !seen.has(target)) {
-      seen.add(target);
-      listed.push(dir);
+    // Check aliases
+    if (npc.aliases) {
+      for (const alias of npc.aliases) {
+        if (alias.toLowerCase() === searchName) {
+          return npc;
+        }
+      }
     }
   }
 
-  if (listed.length === 0) {
-    listed.push(...["in", "out"].filter((d) => exits[d]));
-  }
-  return listed;
-}
-
-function markAllRoomsExplored() {
-  const rooms = Object.values(gameState.rooms);
-  if (rooms.every((r) => r.flags && r.flags.visited)) {
-    gameState.globals.puzzleFlags.exploredAllRooms = true;
-  }
-}
-
-/**
- * Object description, aware of puzzle state
- */
-function getObjectDescription(obj) {
-  if (
-    obj.id === "city_book" &&
-    gameState.objects["backdoor_key_1"].location !== "inside:city_book"
-  ) {
-    return "A hardback book rests on a lit pedestal. Embossed on the cover: THE CITY. Most pages are dense with crossings-out and fresh beginnings. The little pocket in the spine, where something once clinked, is empty.";
-  }
-  if (isBackdoorUnlocked()) {
-    if (obj.id === "sealed_stairs") {
-      return "A metal stairwell drops into shadow. The padlock hangs open on its chain, as if it never meant to keep anyone out.";
-    }
-    if (obj.id === "backroom_door") {
-      return "The staff door stands unlocked, paint chipped by impatient hands. The keyhole has stopped judging you. Mostly.";
-    }
-  }
-  return obj.description;
-}
-
-/**
- * Room description, aware of what has changed since the player arrived
- */
-function getRoomDescription(room) {
-  let text = room.description;
-
-  switch (room.id) {
-    case "outside":
-      if (gameState.objects["coin"].location !== "room:outside") {
-        text = text.replace("A faint metallic glint lurks near the threshold. ", "");
-      }
-      break;
-    case "store":
-      if (isBackdoorUnlocked()) {
-        text = text.replace(
-          "east, behind the counter, the staff door",
-          "east, behind the counter, the staff door that now stands unlocked"
-        );
-      }
-      break;
-    case "store_content":
-      if (gameState.objects["recording_camera"].state && !gameState.objects["recording_camera"].state.isOn) {
-        text = text.replace(
-          "a camera glows its red tally light, still recording as if the take never ended",
-          "a camera sits dark, its tally light finally off"
-        );
-      }
-      break;
-    case "coast_line":
-      if (gameState.objects["message_bottle"].location !== "room:coast_line") {
-        text = text.replace(
-          "A glass bottle lies near a bench where two figures study the horizon from opposite philosophies.",
-          "Two figures sit on a bench, studying the horizon from opposite philosophies."
-        );
-      }
-      break;
-    case "store_books":
-      if (gameState.objects["backdoor_key_1"].location !== "inside:city_book") {
-        text = text.replace(
-          "Something about THE CITY feels heavier than its pages should allow.",
-          "THE CITY sits a little lighter than it did, its secret pocket empty."
-        );
-      }
-      break;
-    case "backrooms_deep":
-      if (isBackdoorUnlocked()) {
-        text = text.replace(
-          "The door back up is bolted on the shop side, which the walls have strong opinions about.",
-          "The door back up stands unbolted now, which the walls have strong opinions about."
-        );
-      }
-      break;
-  }
-
-  return text;
+  return null;
 }
 
 // ================================================
 // COMMAND HANDLERS
 // ================================================
-
-/**
- * Work out which exit the player means. Tries the whole phrase first
- * ("train station"), then each word ("walk back to the shop" -> "back").
- */
-function resolveExit(exits, phrase) {
-  const dir = DIRECTION_ALIASES[phrase] || phrase;
-  if (exits[dir]) return exits[dir];
-
-  for (const word of String(phrase).split(/\s+/)) {
-    const w = DIRECTION_ALIASES[word] || word;
-    if (exits[w]) return exits[w];
-  }
-
-  return null;
-}
 
 /**
  * Handle movement commands
@@ -1373,69 +1089,76 @@ function handleMovement(direction) {
   const currentRoom = gameState.rooms[gameState.player.roomId];
   const exits = currentRoom.exits || {};
 
-  // The hatch back up: you can try it, it never gives
-  if (
-    currentRoom.id === "tunnel" &&
-    /^(up|trapdoor|hatch|ceiling)$/.test(String(direction))
-  ) {
-    const hatch = gameState.objects["sealed_trapdoor"];
-    hatch.hidden = false;
-    return hatch.onUse;
-  }
+  // Normalise direction
+  const dirMap = {
+    n: "north",
+    s: "south",
+    e: "east",
+    w: "west",
+    u: "up",
+    d: "down",
+  };
+  const dir = dirMap[direction] || direction;
+  const targetRoomId = exits[dir];
 
-  const targetRoomId = resolveExit(exits, direction);
-  if (!targetRoomId) {
-    return "You cannot go that way. The world, it seems, has boundaries.";
-  }
-
-  const preamble = [];
-
-  // Locked staff door from Tech Shop to Backrooms Entrance
-  if (currentRoom.id === "store" && targetRoomId === "backrooms_entry") {
-    if (!isBackdoorUnlocked()) {
-      if (!hasKeycard()) {
+  // Special movement rules for puzzles
+  if (targetRoomId) {
+    // Locked staff door from Tech Shop to Backrooms Entrance
+    if (currentRoom.id === "store" && targetRoomId === "backrooms_entry") {
+      const hasKey = gameState.player.inventory.includes("backdoor_key_1");
+      if (!hasKey) {
         return "You try the staff door, but the lock stares back, unimpressed. Whatever opens it isn't in your hands yet.";
       }
 
-      // First time through: the keycard opens the back area for good
-      unlockBackdoor();
-      preamble.push({
-        text: "The keyhole takes one look at the keycard and gives in. Somewhere inside the wall a lock sighs, and the staff door swings open.",
-      });
+      // First time opening: remember that the back area is unlocked
+      if (
+        gameState.globals &&
+        gameState.globals.puzzleFlags &&
+        !gameState.globals.puzzleFlags.backdoorUnlocked
+      ) {
+        gameState.globals.puzzleFlags.backdoorUnlocked = true;
+        if (currentRoom.flags) {
+          currentRoom.flags.backdoorUnlocked = true;
+        }
+        const entryRoom = gameState.rooms["backrooms_entry"];
+        if (entryRoom && entryRoom.flags) {
+          entryRoom.flags.sealed = false;
+        }
+      }
+    }
+
+    // Tunnel side of the Backrooms door – requires the keycard
+    if (currentRoom.id === "tunnel" && targetRoomId === "backrooms_deep") {
+      const hasKey = gameState.player.inventory.includes("backdoor_key_1");
+      if (!hasKey) {
+        return "Your hand finds a metal door in the gloom. It does not budge. Something small and precise is missing from the equation.";
+      }
+    }
+
+    // Backrooms Deep door back to the shop-side corridor only opens once unlocked from above
+    if (currentRoom.id === "backrooms_deep" && targetRoomId === "backrooms_entry") {
+      const backdoorUnlocked =
+        gameState.globals &&
+        gameState.globals.puzzleFlags &&
+        gameState.globals.puzzleFlags.backdoorUnlocked;
+      if (!backdoorUnlocked) {
+        return "You test the door back up, but the bolts on the shop side still hold. For now, the only way is deeper.";
+      }
     }
   }
 
-  // Tunnel side of the Backrooms door: needs the keycard, or the door must
-  // already have been opened from the shop
-  if (currentRoom.id === "tunnel" && targetRoomId === "backrooms_deep") {
-    if (!hasKeycard() && !isBackdoorUnlocked()) {
-      return "Your hand finds a metal door in the gloom. It does not budge. Something small and precise is missing from the equation.";
-    }
+  if (targetRoomId) {
+    const newRoomId = targetRoomId;
+    gameState.player.roomId = newRoomId;
+
+    const newRoom = gameState.rooms[newRoomId];
+    const wasVisited = newRoom.flags.visited;
+    newRoom.flags.visited = true;
+
+    return describeRoom(newRoomId, wasVisited);
   }
 
-  // The door back up to the shop only opens if it was unlocked from above
-  if (currentRoom.id === "backrooms_deep" && targetRoomId === "backrooms_entry") {
-    if (!isBackdoorUnlocked()) {
-      return "You test the door back up, but the bolts on the shop side still hold. For now, the only way is deeper.";
-    }
-  }
-
-  gameState.player.roomId = targetRoomId;
-
-  const newRoom = gameState.rooms[targetRoomId];
-  const wasVisited = newRoom.flags.visited;
-  newRoom.flags.visited = true;
-  markAllRoomsExplored();
-
-  return [...preamble, ...describeRoom(targetRoomId, wasVisited)];
-}
-
-/**
- * First sentence of a block of text
- */
-function firstSentence(text) {
-  const match = text.match(/^[^.!?]*[.!?]/);
-  return match ? match[0] : text;
+  return "You cannot go that way. The world, it seems, has boundaries.";
 }
 
 /**
@@ -1443,16 +1166,21 @@ function firstSentence(text) {
  */
 function describeRoom(roomId, shortForm = false) {
   const room = gameState.rooms[roomId];
-  if (!room) return [{ text: "You are nowhere. This is concerning." }];
+  if (!room) return "You are nowhere. This is concerning.";
 
-  const output = [];
+  let output = [];
 
   // Room name
   output.push({ text: room.name, className: "room-name" });
 
   // Description (shorter on revisits)
-  const description = getRoomDescription(room);
-  output.push({ text: shortForm ? firstSentence(description) : description });
+  if (shortForm && room.flags.visited) {
+    // Just show first sentence for revisits
+    const firstSentence = room.description.split(".")[0] + ".";
+    output.push({ text: firstSentence });
+  } else {
+    output.push({ text: room.description });
+  }
 
   // List NPCs in room
   const roomNPCs = (room.npcs || [])
@@ -1462,7 +1190,7 @@ function describeRoom(roomId, shortForm = false) {
   if (roomNPCs.length > 0) {
     const npcNames = roomNPCs.map((n) => n.name).join(", ");
     output.push({
-      text: `Present: ${npcNames}.`,
+      text: `\nPresent: ${npcNames}.`,
       className: "system",
     });
   }
@@ -1470,17 +1198,17 @@ function describeRoom(roomId, shortForm = false) {
   // List objects in room
   const roomObjects = (room.objects || [])
     .map((id) => gameState.objects[id])
-    .filter((obj) => obj && !obj.hidden && obj.location === `room:${roomId}`);
+    .filter((obj) => obj && obj.location === `room:${roomId}`);
 
   if (roomObjects.length > 0) {
     const objNames = roomObjects.map((o) => o.name).join(", ");
     output.push({ text: `You can see: ${objNames}.`, className: "system" });
   }
 
-  // List exits: just the directions, not every word that happens to work
-  const listed = listedExits(room);
-  if (listed.length > 0) {
-    const exitStr = listed.map((e) => e.toUpperCase()).join(", ");
+  // List exits
+  const exits = Object.keys(room.exits || {});
+  if (exits.length > 0) {
+    const exitStr = exits.map((e) => e.toUpperCase()).join(", ");
     output.push({ text: `Obvious exits: ${exitStr}`, className: "system" });
   }
 
@@ -1497,29 +1225,27 @@ function handleLook(object) {
   }
 
   // Look in a direction
-  const dir = DIRECTION_ALIASES[object] || object;
-  const lookPhrases = {
-    north: "to the north",
-    south: "to the south",
-    east: "to the east",
-    west: "to the west",
-    up: "above you",
-    down: "below you",
-    in: "inside",
-    out: "outside",
+  const dirMap = {
+    north: "north",
+    n: "north",
+    south: "south",
+    s: "south",
+    east: "east",
+    e: "east",
+    west: "west",
+    w: "west",
   };
 
-  if (lookPhrases[dir]) {
+  if (dirMap[object]) {
     const currentRoom = gameState.rooms[gameState.player.roomId];
-    const nextRoomId = currentRoom.exits && currentRoom.exits[dir];
-    if (nextRoomId) {
-      const nextRoom = gameState.rooms[nextRoomId];
-      if (nextRoom.flags.visited) {
-        return `Looking ${dir.toUpperCase()}, you see the way to ${nextRoom.name}.`;
-      }
-      return `Looking ${dir.toUpperCase()}, you see a way onward. Where it leads is a question for your feet.`;
+    const dir = dirMap[object];
+    if (currentRoom.exits && currentRoom.exits[dir]) {
+      const nextRoom = gameState.rooms[currentRoom.exits[dir]];
+      return `Looking ${dir.toUpperCase()}, you see the way to ${
+        nextRoom.name
+      }.`;
     }
-    return `There's nothing particularly interesting ${lookPhrases[dir]}.`;
+    return `There's nothing particularly interesting to the ${dir}.`;
   }
 
   // Look at an object - delegate to examine
@@ -1537,8 +1263,7 @@ function handleExamine(objectName) {
   // Try to find an object first
   const obj = findObject(objectName);
   if (obj) {
-    noteInspected(obj);
-    return getObjectDescription(obj);
+    return obj.description;
   }
 
   // Try to find an NPC
@@ -1588,11 +1313,6 @@ function handleTake(objectName) {
     return "You already have that. Excellent memory, that.";
   }
 
-  // Picking up THE CITY is as good as opening it
-  if (obj.id === "city_book") {
-    return useCityBook(obj);
-  }
-
   // Check if portable
   if (!obj.portable) {
     return `The ${obj.name} cannot be taken. It's either too heavy, bolted down, or simply not interested in being picked up.`;
@@ -1630,10 +1350,7 @@ function handleDrop(objectName) {
     return "Drop what? Being specific helps.";
   }
 
-  // Prefer what you are carrying: "drop book" means the one in your hands
-  const obj =
-    findEntity(gameState.player.inventory, gameState.objects, objectName) ||
-    findObject(objectName);
+  const obj = findObject(objectName);
   if (!obj) {
     return `You don't have any "${objectName}".`;
   }
@@ -1655,19 +1372,9 @@ function handleDrop(objectName) {
 }
 
 /**
- * Hold the keycard to the staff door (or the stairwell padlock)
- */
-function useKeycardOnBackdoor() {
-  if (unlockBackdoor()) {
-    return "You hold the keycard to the keyhole. Somewhere behind the wall a lock sighs and gives up.";
-  }
-  return "The way is already open. The keycard looks a little smug about it.";
-}
-
-/**
  * Handle USE command
  */
-function handleUse(objectName, secondName, mode) {
+function handleUse(objectName) {
   if (!objectName) {
     return "Use what? The parser requires slightly more information.";
   }
@@ -1677,55 +1384,39 @@ function handleUse(objectName, secondName, mode) {
     return `You cannot see any "${objectName}" here.`;
   }
 
-  // USE X ON Y
-  if (secondName) {
-    const target = findObject(secondName);
-    if (!target) {
-      return `You cannot see any "${secondName}" here.`;
-    }
-
-    const pair = [obj.id, target.id];
-    if (
-      pair.includes("backdoor_key_1") &&
-      (pair.includes("backroom_door") || pair.includes("sealed_stairs"))
-    ) {
-      return useKeycardOnBackdoor();
-    }
-
-    return `You try the ${obj.name} on the ${target.name}. Nothing happens, which is its own kind of answer.`;
-  }
-
-  noteInspected(obj);
-
-  // The plate in the office floor only does one thing
-  if (obj.id === "trapdoor_plate") {
-    return handleMovement("down");
-  }
-
   // Personal AI box grants a glimpse of the future
-  if (obj.id === "personal_ai_box" && obj.onUse) {
-    return obj.onUse;
+  if (obj.id === "personal_ai_box") {
+    if (gameState.player && gameState.player.flags) {
+      gameState.player.flags.knowsTheFuture = true;
+    }
+    if (obj.onUse) {
+      return obj.onUse;
+    }
   }
 
   // THE CITY pedestal book reveals the hidden keycard
   if (obj.id === "city_book") {
-    return useCityBook(obj);
-  }
+    const keyObj = gameState.objects["backdoor_key_1"];
+    let extraText = "";
 
-  // The keycard opens the staff door when you are standing at it
-  if (obj.id === "backdoor_key_1" && gameState.player.roomId === "store") {
-    return useKeycardOnBackdoor();
-  }
+    if (keyObj && !gameState.player.inventory.includes("backdoor_key_1")) {
+      gameState.player.inventory.push("backdoor_key_1");
+      keyObj.location = "player";
 
-  // The staff door and the stairwell padlock answer to the keycard
-  if (obj.id === "backroom_door" || obj.id === "sealed_stairs") {
-    if (isBackdoorUnlocked()) {
-      return obj.id === "backroom_door"
-        ? "The staff door is already unlocked. It swings with the confidence of something that has made up its mind."
-        : "You nudge the open padlock. It swings, harmless. The way down is yours.";
+      const booksRoom = gameState.rooms["store_books"];
+      if (booksRoom && Array.isArray(booksRoom.objects)) {
+        const keyIndex = booksRoom.objects.indexOf("backdoor_key_1");
+        if (keyIndex !== -1) {
+          booksRoom.objects.splice(keyIndex, 1);
+        }
+      }
+
+      extraText =
+        " You slip the frayed keycard you find between the pages into your pocket.";
     }
-    if (hasKeycard() && obj.id === "backroom_door") {
-      return useKeycardOnBackdoor();
+
+    if (obj.onUse) {
+      return obj.onUse + extraText;
     }
   }
 
@@ -1735,13 +1426,6 @@ function handleUse(objectName, secondName, mode) {
       obj.state = { isOn: true };
     }
 
-    // "turn it on" / "turn it off" ask for a state; a plain USE flips it
-    if (mode === "on" && obj.state.isOn) {
-      return "The tally light is already glowing. The camera, as ever, is ahead of you.";
-    }
-    if (mode === "off" && !obj.state.isOn) {
-      return "It's already off. The lens regards you with the serenity of the unplugged.";
-    }
     obj.state.isOn = !obj.state.isOn;
 
     if (obj.state.isOn) {
@@ -1753,17 +1437,6 @@ function handleUse(objectName, secondName, mode) {
     obj.description =
       "A camera on a tripod faces a sagging greenscreen. The tally light is dark now, the lens an unrecording glass eye.";
     return "You reach over and switch the camera off. The room feels quieter, as if the world briefly forgot to log you.";
-  }
-
-  // Turning the battered LittleBigPlanet copy around shows the note
-  if (obj.id === "lbp_box") {
-    if (obj.state && obj.state.turned) {
-      return "It's still turned around, the note still there, still quietly devastating.";
-    }
-    obj.state = { turned: true };
-    obj.description =
-      "The cracked case has been turned backwards. Scrawled on the plastic: 'once a masterpiece, left in the few who remember'. When you tilt it, the faded insert whispers about co-creation and play.";
-    return "You turn the case around. Scrawled across the plastic in biro: 'once a masterpiece, left in the few who remember'.";
   }
 
   // Check for custom onUse handler
@@ -1787,15 +1460,8 @@ function handleRead(objectName) {
     return `You cannot see any "${objectName}" here.`;
   }
 
-  // THE CITY gives up its secret to anyone who reads it
-  if (obj.id === "city_book") {
-    return useCityBook(obj);
-  }
-
-  noteInspected(obj);
-
-  // Otherwise reading is like examining
-  return `You read the ${obj.name}.\n\n${getObjectDescription(obj)}`;
+  // For now, reading is like examining
+  return `You read the ${obj.name}.\n\n${obj.description}`;
 }
 
 /**
@@ -1820,31 +1486,21 @@ function handleTalk(npcName) {
     return npc.dialogue(gameState, npc);
   }
 
-  // The Lookout's whole job is the warning, so the first chat always delivers it
-  if (
-    npc.id === "friendly_lookout" &&
-    !gameState.globals.puzzleFlags.stormWarningReceived
-  ) {
-    gameState.player.flags.stormNoticed = true;
-    gameState.globals.puzzleFlags.stormWarningReceived = true;
-    return "Oh! Hello! You picked a day, didn't you? There's a storm coming, a proper one, and strange things have been happening in this town lately. Doors that weren't there, signs that won't hold still. Isn't it marvellous? Slightly terrifying, but marvellous!";
-  }
-
   const baseLines = Array.isArray(npc.dialogue)
     ? npc.dialogue.slice()
     : [String(npc.dialogue)];
 
   let candidates = baseLines;
 
-  // The Lookout can't point out a glint that is already in your pocket
-  if (npc.id === "friendly_lookout" && gameState.objects["coin"].location !== "room:outside") {
-    candidates = baseLines.filter((l) => !l.includes("That glint near the door?"));
-  }
-
   // Home daughters react to the coin pickup
   if (npc.id === "lilah" || npc.id === "olivia") {
-    const hasCoin = gameState.player.inventory.includes("coin");
-    const luckyFlagKey = `${npc.id}LuckyHeard`;
+    const hasCoin =
+      !!(
+        gameState.player &&
+        gameState.player.flags &&
+        gameState.player.flags.foundCoin
+      );
+    const luckyFlagKey = "familyLuckyRemarkHeard";
     const luckyHeard =
       !!(
         gameState.player &&
@@ -1882,21 +1538,12 @@ function handleTalk(npcName) {
     }
   }
 
-  // Until the player has seen the box, the Future can't ask about it
-  if (npc.id === "future_paranoid" && !(gameState.player.flags.knowsTheFuture)) {
-    candidates = candidates.filter(
-      (l) => !l.includes("boxes upstairs") && !l.includes("If you know how this ends")
-    );
-  }
-
   if (candidates.length === 0) {
     return `The ${npc.name} seems disinclined to conversation at the moment.`;
   }
 
-  // Don't repeat the line this NPC said last time, if there is a choice
-  const fresh = candidates.filter((l) => l !== npc.lastLine);
-  const pool = fresh.length > 0 ? fresh : candidates;
-  let line = pool[Math.floor(Math.random() * pool.length)];
+  let line =
+    candidates[Math.floor(Math.random() * candidates.length)];
 
   // Tunnel NPCs occasionally thank the player after the back door is opened
   const tunnelNpcIds = [
@@ -1921,7 +1568,6 @@ function handleTalk(npcName) {
     line = thanksLines[Math.floor(Math.random() * thanksLines.length)];
   }
 
-  npc.lastLine = line;
   return line;
 }
 
@@ -1949,8 +1595,6 @@ function handleHelp() {
     "  HELP    — You're reading it",
     "  ABOUT   — Learn more about this place",
     "  CLEAR   — Clear the screen",
-    "  SAVE / LOAD — Keep your place, or return to it",
-    "  RESTART — Begin again",
     "  QUIT    — A polite farewell",
     "",
     "Some objects here lead to real content — posts, videos, documentation.",
@@ -2023,48 +1667,13 @@ function handleUnknown() {
 // COMMAND DISPATCHER
 // ================================================
 
-// Commands that talk to the machine rather than the world: they don't use up a turn
-const FREE_VERBS = [
-  "help",
-  "about",
-  "clear",
-  "quit",
-  "save",
-  "load",
-  "restart",
-  "inventory",
-];
-
-/**
- * Start the game again from the beginning
- */
-function restartGame() {
-  gameState = createInitialState();
-  gameState.globals.gameStarted = true;
-  gameState.player.flags.hasStarted = true;
-  gameState.rooms[gameState.player.roomId].flags.visited = true;
-
-  clearOutput();
-  return [
-    { text: "[ REWINDING THE TAPE... ]", className: "system" },
-    ...describeRoom(gameState.player.roomId),
-  ];
-}
-
 /**
  * Process a parsed command and return the result
  */
 function executeCommand(parsed) {
-  const { verb, object, secondObject } = parsed;
+  const { verb, object, preposition, secondObject } = parsed;
 
   if (!verb) {
-    // A bare exit word ("back", "home", "stairs") still counts as a move
-    const room = gameState.rooms[gameState.player.roomId];
-    if (parsed.raw && resolveExit(room.exits || {}, parsed.raw)) {
-      parsed.verb = "go";
-      parsed.object = parsed.raw;
-      return handleMovement(parsed.raw);
-    }
     return handleUnknown();
   }
 
@@ -2101,11 +1710,7 @@ function executeCommand(parsed) {
 
     // Interaction
     case "use":
-      return handleUse(object, secondObject, parsed.mode);
-    case "open":
-      return handleOpen(object, secondObject);
-    case "close":
-      return "You consider closing it. Nothing here stays shut for long, so you don't bother.";
+      return handleUse(object);
     case "talk":
       return handleTalk(object);
 
@@ -2118,12 +1723,9 @@ function executeCommand(parsed) {
       return handleClear();
     case "quit":
       return handleQuit();
-    case "restart":
-      return restartGame();
     case "save":
-      return saveGame()
-        ? "Game saved. Your progress is preserved in the browser's memory."
-        : "The save slipped through your fingers. This browser won't let me keep it.";
+      saveGame();
+      return "Game saved. Your progress is preserved in the browser's memory.";
     case "load":
       if (loadGame()) {
         return [
@@ -2138,142 +1740,18 @@ function executeCommand(parsed) {
   }
 }
 
-/**
- * Handle OPEN command: doors and books open by being used, trapdoors by going through
- */
-function handleOpen(objectName, secondName) {
-  if (!objectName) {
-    return "Open what? The air offers no hinges.";
-  }
-
-  const obj = findObject(objectName);
-  if (!obj) {
-    return `You cannot see any "${objectName}" here.`;
-  }
-
-  return handleUse(objectName, secondName);
-}
-
 // ================================================
 // PERSISTENCE
 // ================================================
 
 const SAVE_KEY = "neurolink_adventure_save";
-const SAVE_VERSION = 3;
-
-/**
- * Copy matching, same-typed values from source into target (known keys only)
- */
-function mergeKnown(target, source) {
-  if (!source || typeof source !== "object") return;
-  for (const key of Object.keys(target)) {
-    if (key in source && typeof source[key] === typeof target[key]) {
-      target[key] = source[key];
-    }
-  }
-}
-
-/**
- * Everything that can change during play. Static text (descriptions, dialogue,
- * exits) is never saved, so content updates reach returning players.
- */
-function snapshotState() {
-  const snap = {
-    version: SAVE_VERSION,
-    player: gameState.player,
-    globals: gameState.globals,
-    rooms: {},
-    objects: {},
-    npcs: {},
-  };
-
-  for (const [id, room] of Object.entries(gameState.rooms)) {
-    snap.rooms[id] = { objects: room.objects, flags: room.flags };
-  }
-  for (const [id, obj] of Object.entries(gameState.objects)) {
-    snap.objects[id] = { location: obj.location, hidden: !!obj.hidden };
-    if (obj.state) {
-      snap.objects[id].state = obj.state;
-      snap.objects[id].description = obj.description;
-    }
-  }
-  for (const [id, npc] of Object.entries(gameState.npcs)) {
-    snap.npcs[id] = { location: npc.location };
-  }
-
-  return snap;
-}
-
-/**
- * Rebuild a game state from a saved snapshot, on top of fresh content.
- * @returns {Object|null} the restored state, or null if the save is unusable
- */
-function applySnapshot(snap) {
-  if (
-    !snap ||
-    snap.version !== SAVE_VERSION ||
-    !snap.player ||
-    !snap.rooms ||
-    !snap.objects ||
-    !snap.globals
-  ) {
-    return null;
-  }
-
-  const state = createInitialState();
-  if (!state.rooms[snap.player.roomId]) return null;
-
-  state.player.roomId = snap.player.roomId;
-  if (Array.isArray(snap.player.inventory)) {
-    state.player.inventory = snap.player.inventory.filter((id) => state.objects[id]);
-  }
-  mergeKnown(state.player.flags, snap.player.flags);
-
-  for (const [id, room] of Object.entries(state.rooms)) {
-    const saved = snap.rooms[id];
-    if (!saved) continue;
-    if (Array.isArray(saved.objects)) {
-      room.objects = saved.objects.filter((oid) => state.objects[oid]);
-    }
-    mergeKnown(room.flags, saved.flags);
-  }
-
-  for (const [id, obj] of Object.entries(state.objects)) {
-    const saved = snap.objects[id];
-    if (!saved) continue;
-    if (typeof saved.location === "string") obj.location = saved.location;
-    if (typeof saved.hidden === "boolean") obj.hidden = saved.hidden;
-    if (saved.state && typeof saved.state === "object") {
-      obj.state = saved.state;
-      if (typeof saved.description === "string") obj.description = saved.description;
-    }
-  }
-
-  for (const [id, npc] of Object.entries(state.npcs)) {
-    const saved = snap.npcs && snap.npcs[id];
-    if (saved && typeof saved.location === "string") npc.location = saved.location;
-  }
-
-  mergeKnown(state.globals, snap.globals);
-  mergeKnown(state.globals.puzzleFlags, snap.globals.puzzleFlags);
-
-  return state;
-}
 
 function saveGame() {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify(snapshotState()));
+    localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
     return true;
   } catch (e) {
     console.error("Failed to save game:", e);
-    return false;
-  }
-}
-
-function hasSavedGame() {
-  try {
-    return !!localStorage.getItem(SAVE_KEY);
-  } catch (e) {
     return false;
   }
 }
@@ -2282,11 +1760,8 @@ function loadGame() {
   try {
     const saved = localStorage.getItem(SAVE_KEY);
     if (saved) {
-      const restored = applySnapshot(JSON.parse(saved));
-      if (restored) {
-        gameState = restored;
-        return true;
-      }
+      gameState = JSON.parse(saved);
+      return true;
     }
   } catch (e) {
     console.error("Failed to load game:", e);
@@ -2300,26 +1775,11 @@ function loadGame() {
 
 let outputElement = null;
 let inputElement = null;
-let formElement = null;
 let statusLocationElement = null;
 let statusTurnsElement = null;
 let scrollUpIndicator = null;
 let scrollDownIndicator = null;
-let quickActionsElement = null;
-let currentBlock = null;
 let isShowingTitle = true;
-
-// Previously entered commands (up/down arrows)
-const commandHistory = [];
-let historyIndex = -1;
-let historyDraft = "";
-
-/**
- * True on phones and tablets, where the on-screen keyboard is a cost
- */
-function isTouchDevice() {
-  return !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
-}
 
 /**
  * Initialise the game UI
@@ -2327,47 +1787,25 @@ function isTouchDevice() {
 function initGame() {
   outputElement = document.getElementById("text-output");
   inputElement = document.getElementById("command-input");
-  formElement = document.getElementById("command-form");
   statusLocationElement = document.getElementById("status-location");
   statusTurnsElement = document.getElementById("status-turns");
   scrollUpIndicator = document.getElementById("scroll-up");
   scrollDownIndicator = document.getElementById("scroll-down");
-  quickActionsElement = document.getElementById("quick-actions");
 
-  // Commands come in through the form so that Enter / Go works on every keyboard
-  if (formElement) {
-    formElement.addEventListener("submit", (event) => {
-      event.preventDefault();
-      submitFromInput();
-    });
-  }
-
+  // Set up input handler
   if (inputElement) {
-    inputElement.addEventListener("keydown", handleHistoryKeys);
-    // On touch devices, focusing on load would throw the keyboard over the story
-    if (!isTouchDevice()) {
-      inputElement.focus();
-    }
-  }
-
-  // Clicking the screen (but not selecting text) returns focus to the prompt
-  const screen = document.querySelector(".screen-container");
-  if (screen && !isTouchDevice()) {
-    screen.addEventListener("click", () => {
-      const selection = window.getSelection && window.getSelection().toString();
-      if (!selection && inputElement) inputElement.focus();
-    });
+    inputElement.addEventListener("keydown", handleInput);
+    inputElement.focus();
   }
 
   // Set up scroll indicator handlers
   if (outputElement) {
     outputElement.addEventListener("scroll", updateScrollIndicators);
+    // Also update on resize
+    window.addEventListener("resize", updateScrollIndicators);
   }
-  window.addEventListener("resize", () => {
-    fitBanner();
-    updateScrollIndicators();
-  });
 
+  // Set up click handlers for scroll indicators
   if (scrollUpIndicator) {
     scrollUpIndicator.addEventListener("click", () => {
       if (outputElement) {
@@ -2384,47 +1822,11 @@ function initGame() {
     });
   }
 
-  // Quick-command buttons (shown on small / touch screens)
-  if (quickActionsElement) {
-    quickActionsElement.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-cmd]");
-      if (button) processInput(button.dataset.cmd);
-    });
-  }
-
-  trackViewport();
-
   // Create fresh game state
   gameState = createInitialState();
 
   // Show title screen
   showTitleScreen();
-  renderQuickActions();
-}
-
-/**
- * Keep the layout inside the visible area when the on-screen keyboard opens
- */
-function trackViewport() {
-  const root = document.documentElement;
-  const vv = window.visualViewport;
-
-  const update = () => {
-    const height = vv ? vv.height : window.innerHeight;
-    root.style.setProperty("--app-height", `${Math.round(height)}px`);
-    root.style.setProperty("--app-offset-top", `${Math.round(vv ? vv.offsetTop : 0)}px`);
-    // With the keyboard up (or in landscape) the buttons would eat the story
-    root.classList.toggle("short-viewport", height < 480);
-    root.classList.toggle("tiny-viewport", height < 340);
-    updateScrollIndicators();
-  };
-
-  update();
-  if (vv) {
-    vv.addEventListener("resize", update);
-    vv.addEventListener("scroll", update);
-  }
-  window.addEventListener("orientationchange", () => setTimeout(update, 200));
 }
 
 /**
@@ -2452,8 +1854,7 @@ function showTitleScreen() {
 
   clearOutput();
 
-  // Add banner with clickable YouTube link. Wide screens get the ASCII art;
-  // narrow ones get a compact version because the art would be unreadably small.
+  // Add banner with clickable YouTube link
   const bannerDiv = document.createElement("div");
   bannerDiv.className = "ascii-banner";
   const bannerLink = document.createElement("a");
@@ -2461,29 +1862,16 @@ function showTitleScreen() {
   bannerLink.target = "_blank";
   bannerLink.rel = "noopener noreferrer";
   bannerLink.className = "youtube-link";
-  bannerLink.setAttribute("aria-label", "Diogo is building on YouTube – visit the channel");
-
-  const bannerArt = document.createElement("span");
-  bannerArt.className = "banner-art";
-  bannerArt.setAttribute("aria-hidden", "true");
-  bannerArt.textContent = banner;
-
-  const bannerCompact = document.createElement("span");
-  bannerCompact.className = "banner-compact";
-  bannerCompact.setAttribute("aria-hidden", "true");
-  bannerCompact.textContent = "DIOGO IS\nBUILDING\nON YOUTUBE";
-
-  bannerLink.appendChild(bannerArt);
-  bannerLink.appendChild(bannerCompact);
+  bannerLink.textContent = banner;
+  bannerLink.setAttribute("aria-label", "Visit Diogo on YouTube");
   bannerDiv.appendChild(bannerLink);
   outputElement.appendChild(bannerDiv);
-  fitBanner();
 
   // System info
   addOutput("");
   addOutput(
     "═══════════════════════════════════════════════════════════════",
-    "system rule"
+    "system"
   );
   addOutput("");
   addOutput(
@@ -2498,7 +1886,7 @@ function showTitleScreen() {
   addOutput("");
   addOutput(
     "═══════════════════════════════════════════════════════════════",
-    "system rule"
+    "system"
   );
   addOutput("");
   addOutput(
@@ -2510,139 +1898,48 @@ function showTitleScreen() {
   addOutput("You explore it by typing, and it pretends it was expecting you.");
   addOutput("");
   addOutput("Type HELP for commands. Type LOOK to begin.");
-  if (hasSavedGame()) {
-    addOutput("You've been here before. Type LOAD to pick up where you left off.", "system");
-  }
   addOutput("");
 
-  // Desktop lands on the prompt; phones start at the banner (the quick buttons
-  // already cover the prompt, and the title is the first thing worth seeing)
-  if (isTouchDevice()) {
-    outputElement.scrollTop = 0;
-  } else {
-    scrollToBottom();
-  }
+  scrollToBottom();
   // Initial check for scroll indicators
   setTimeout(updateScrollIndicators, 100);
 }
 
 /**
- * Pick the banner that fits: shrink the ASCII art to the available width,
- * and fall back to the compact version when it would be too small to read.
+ * Handle keyboard input
  */
-function fitBanner() {
-  if (!outputElement) return;
-  const banner = outputElement.querySelector(".ascii-banner");
-  const art = banner && banner.querySelector(".banner-art");
-  if (!art) return;
+function handleInput(event) {
+  if (event.key !== "Enter") return;
 
-  const columns = Math.max(...art.textContent.split("\n").map((l) => l.length));
-  const available = outputElement.clientWidth - 8;
-  // Monospace glyphs are about 0.6em wide
-  const fontSize = Math.min(12, available / (columns * 0.6));
-
-  if (fontSize < 6.5) {
-    banner.classList.add("compact");
-  } else {
-    banner.classList.remove("compact");
-    art.style.fontSize = `${fontSize.toFixed(2)}px`;
-  }
-}
-
-/**
- * Read the command line and run it
- */
-function submitFromInput() {
-  if (!inputElement) return;
-  const value = inputElement.value;
-  inputElement.value = "";
-  processInput(value);
-}
-
-/**
- * Up/down arrows walk through earlier commands
- */
-function handleHistoryKeys(event) {
-  if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
-  if (commandHistory.length === 0) return;
-  event.preventDefault();
-
-  if (event.key === "ArrowUp") {
-    if (historyIndex === -1) {
-      historyDraft = inputElement.value;
-      historyIndex = commandHistory.length - 1;
-    } else if (historyIndex > 0) {
-      historyIndex--;
-    }
-    inputElement.value = commandHistory[historyIndex];
-  } else {
-    if (historyIndex === -1) return;
-    if (historyIndex < commandHistory.length - 1) {
-      historyIndex++;
-      inputElement.value = commandHistory[historyIndex];
-    } else {
-      historyIndex = -1;
-      inputElement.value = historyDraft;
-    }
-  }
-}
-
-/**
- * Begin the adventure from the title screen (or resume a saved one)
- */
-function startFromTitle(input) {
-  const parsed = parseCommand(input);
-
-  if (parsed.verb === "load") {
-    if (loadGame()) {
-      isShowingTitle = false;
-      displayOutput([
-        { text: "Game loaded.", className: "system" },
-        ...describeRoom(gameState.player.roomId),
-      ]);
-    } else {
-      addOutput("No saved game found. Perhaps you haven't been here before.");
-    }
-    return;
-  }
-
-  isShowingTitle = false;
-  gameState.globals.gameStarted = true;
-  gameState.player.flags.hasStarted = true;
-  gameState.rooms[gameState.player.roomId].flags.visited = true;
-
-  // Check if they typed a command or just pressed enter
-  if (parsed.verb === "help") {
-    displayOutput(handleHelp());
-  } else if (parsed.verb === "about") {
-    displayOutput(handleAbout());
-  } else {
-    // Show starting room
-    addOutput("[ INITIATING ADVENTURE SEQUENCE... ]", "system");
-    displayOutput(describeRoom(gameState.player.roomId));
-  }
-}
-
-/**
- * Run one line of player input (typed or tapped)
- */
-function processInput(raw) {
-  const input = String(raw || "").trim();
+  const input = inputElement.value.trim();
   if (!input) return;
 
-  // Each command and its response live in one block, so they scroll together
-  currentBlock = null;
-  const block = ensureBlock();
+  // Echo user input
   addOutput(input, "user-input");
 
-  if (commandHistory[commandHistory.length - 1] !== input) {
-    commandHistory.push(input);
-    if (commandHistory.length > 50) commandHistory.shift();
-  }
-  historyIndex = -1;
+  // Clear input
+  inputElement.value = "";
 
+  // If showing title, first command starts the game
   if (isShowingTitle) {
-    startFromTitle(input);
+    isShowingTitle = false;
+    gameState.globals.gameStarted = true;
+    gameState.rooms[gameState.player.roomId].flags.visited = true;
+
+    // Check if they typed a command or just pressed enter
+    const parsed = parseCommand(input);
+    if (parsed.verb === "help") {
+      displayOutput(handleHelp());
+    } else if (parsed.verb === "about") {
+      displayOutput(handleAbout());
+    } else {
+      // Show starting room
+      const roomOutput = describeRoom(gameState.player.roomId);
+      addOutput("");
+      addOutput("[ INITIATING ADVENTURE SEQUENCE... ]", "system");
+      addOutput("");
+      displayOutput(roomOutput);
+    }
   } else {
     // Parse and execute command
     const parsed = parseCommand(input);
@@ -2650,23 +1947,19 @@ function processInput(raw) {
 
     // Display result
     if (result) {
+      addOutput("");
       displayOutput(result);
     }
 
-    // Only commands that act on the world use up a turn
-    if (parsed.verb && !FREE_VERBS.includes(parsed.verb)) {
-      gameState.globals.turn++;
-    }
+    // Increment turn counter
+    gameState.globals.turn++;
+    updateStatus();
 
     // Auto-save
     saveGame();
   }
 
-  if (!isShowingTitle) {
-    updateStatus();
-  }
-  renderQuickActions();
-  scrollToBlock(currentBlock || block);
+  scrollToBottom();
 }
 
 /**
@@ -2674,11 +1967,6 @@ function processInput(raw) {
  */
 function displayOutput(output) {
   if (Array.isArray(output)) {
-    if (output.every((item) => typeof item === "string")) {
-      // A sheet of plain lines (help, about...): keep spacing and alignment together
-      addOutput(output.join("\n"), "sheet");
-      return;
-    }
     output.forEach((item) => {
       if (typeof item === "object") {
         addOutput(item.text, item.className);
@@ -2692,35 +1980,13 @@ function displayOutput(output) {
 }
 
 /**
- * The block that output is currently being added to
- */
-function ensureBlock() {
-  if (!currentBlock || !currentBlock.isConnected) {
-    currentBlock = document.createElement("div");
-    currentBlock.className = "output-block";
-    outputElement.appendChild(currentBlock);
-  }
-  return currentBlock;
-}
-
-/**
  * Add a line to the output
  */
 function addOutput(text, className = "") {
   const line = document.createElement("div");
-
-  if (text === "") {
-    // Blank lines are spacing, not content
-    line.className = "output-spacer";
-    line.setAttribute("aria-hidden", "true");
-  } else {
-    line.className = "output-line" + (className ? " " + className : "");
-    line.textContent = text;
-  }
-
-  // The title screen is not part of a command block
-  const target = isShowingTitle && !currentBlock ? outputElement : ensureBlock();
-  target.appendChild(line);
+  line.className = "output-line" + (className ? " " + className : "");
+  line.textContent = text;
+  outputElement.appendChild(line);
 }
 
 /**
@@ -2730,7 +1996,6 @@ function clearOutput() {
   if (outputElement) {
     outputElement.innerHTML = "";
   }
-  currentBlock = null;
 }
 
 /**
@@ -2742,81 +2007,6 @@ function scrollToBottom() {
     // Update indicators after scroll
     setTimeout(updateScrollIndicators, 50);
   }
-}
-
-/**
- * Show the newest response from its start. Short ones end up at the bottom as
- * usual; a long room description starts at the top of the screen instead of
- * having its first lines scrolled out of view.
- */
-function scrollToBlock(block) {
-  if (!outputElement || !block || !block.isConnected) {
-    scrollToBottom();
-    return;
-  }
-
-  // Layout offsets, not bounding rects: the desktop scene tilts the whole page in 3D,
-  // which distorts getBoundingClientRect
-  const blockTop = block.offsetTop - outputElement.offsetTop;
-  const overflow = block.offsetHeight > outputElement.clientHeight;
-
-  if (overflow) {
-    outputElement.scrollTop = blockTop;
-  } else {
-    outputElement.scrollTop = outputElement.scrollHeight;
-  }
-
-  setTimeout(updateScrollIndicators, 50);
-}
-
-/**
- * Rebuild the quick-command buttons for the current room
- */
-function renderQuickActions() {
-  if (!quickActionsElement || !gameState) return;
-
-  const moves = [];
-  const things = [];
-
-  if (isShowingTitle) {
-    moves.push(["Look", "look"], ["Help", "help"]);
-    if (hasSavedGame()) moves.push(["Load", "load"]);
-  } else {
-    const roomId = gameState.player.roomId;
-    const room = gameState.rooms[roomId];
-
-    listedExits(room).forEach((d) => moves.push([d, d]));
-    moves.push(["Look", "look"], ["Inventory", "inventory"], ["Help", "help"]);
-
-    (room.npcs || [])
-      .map((id) => gameState.npcs[id])
-      .filter((npc) => npc && npc.location === `room:${roomId}`)
-      .forEach((npc) => things.push([`Talk: ${npc.name}`, `talk ${npc.name.toLowerCase()}`]));
-
-    (room.objects || [])
-      .map((id) => gameState.objects[id])
-      .filter((obj) => obj && !obj.hidden && obj.location === `room:${roomId}`)
-      .forEach((obj) => {
-        const handle = (obj.aliases && obj.aliases[0]) || obj.name.toLowerCase();
-        things.push([`Look: ${handle}`, `examine ${handle}`]);
-        if (obj.portable) things.push([`Take: ${handle}`, `take ${handle}`]);
-      });
-  }
-
-  quickActionsElement.textContent = "";
-  [moves, things].forEach((row, i) => {
-    if (row.length === 0) return;
-    const rowEl = document.createElement("div");
-    rowEl.className = "quick-row" + (i === 1 ? " quick-row-things" : "");
-    row.forEach(([label, cmd]) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.textContent = label;
-      button.dataset.cmd = cmd;
-      rowEl.appendChild(button);
-    });
-    quickActionsElement.appendChild(rowEl);
-  });
 }
 
 /**

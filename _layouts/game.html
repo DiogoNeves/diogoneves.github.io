@@ -3,17 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
 
     <meta name="author" content="{{ site.name }}" />
     <meta name="description" content="A text adventure experience - Explore Diogo's digital realm through an interactive terminal interface">
-    <meta name="theme-color" content="#050505">
-    <meta name="color-scheme" content="dark">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0f0a">
     
     <!-- Open Graph / Social -->
     <meta property="og:title" content="{{ page.title | default: site.name }}">
@@ -30,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Game Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/crt-game.css?v=12" />
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/crt-game.css" />
 
     {% include analytics.html %}
   </head>
@@ -74,25 +70,21 @@
             <div class="scroll-indicator scroll-indicator-down" id="scroll-down" aria-hidden="true" title="Scroll down"></div>
           </div>
               
-              <!-- Quick commands (small / touch screens) -->
-              <div class="quick-actions" id="quick-actions" role="toolbar" aria-label="Quick commands"></div>
-
               <!-- Input area -->
-              <form class="input-container" id="command-form" action="#" autocomplete="off">
-                <label class="input-prompt" for="command-input" aria-hidden="true">&gt;</label>
-                <input
-                  type="text"
-                  id="command-input"
-                  class="command-input"
+              <div class="input-container">
+                <span class="input-prompt" aria-hidden="true">&gt;</span>
+                <input 
+                  type="text" 
+                  id="command-input" 
+                  class="command-input" 
                   placeholder="Type a command..."
                   autocomplete="off"
                   autocapitalize="off"
                   autocorrect="off"
                   spellcheck="false"
-                  enterkeyhint="go"
                   aria-label="Command input. Type commands like LOOK, HELP, or directions like NORTH."
                 />
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -100,18 +92,6 @@
     </div>
 
     <!-- Game Engine -->
-    <script src="{{ site.baseurl }}/assets/js/game-engine.js?v=12"></script>
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-        }
-      }
-    </script>
-    <script type="module" src="{{ site.baseurl }}/assets/js/scene-3d.js?v=2"></script>
-    <noscript>
-      <p class="noscript">NEUROLINK-7800 needs JavaScript to run. Without it this is just a very dark room.</p>
-    </noscript>
+    <script src="{{ site.baseurl }}/assets/js/game-engine.js?v=9"></script>
   </body>
 </html>
